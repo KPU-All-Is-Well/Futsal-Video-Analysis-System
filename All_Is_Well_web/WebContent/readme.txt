@@ -1,7 +1,7 @@
 Hello This is web project for our Futsa-Video_Analysis-System. 
 We are students of Korea Polytechnic University.
 
-Programming Language: Java, HTML, CSS, Javascript. 
+Programming Language: JSP, HTML, CSS, Javascript. 
 Server: Apache Tomcat
 Database: MySQL
 
