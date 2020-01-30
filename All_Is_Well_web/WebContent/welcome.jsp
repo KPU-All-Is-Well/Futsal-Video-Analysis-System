@@ -50,7 +50,7 @@
                     <p>Welcome to All Is Well</p>
                     <div class="btn-wrapper">
                         <div class="text-center">
-                            <a href="signIn.jsp" class="btn btn-primary">Sign In</a> &nbsp;<a href="signUp.jsp" class="btn btn-default">Sign Up</a>
+                            <a href="signIn.jsp" class="btn btn-primary">Sign In</a> &nbsp;<a href="coachOrPlayer.jsp" class="btn btn-default">Sign Up</a>
                            
                         </div>
                     </div><!-- end row -->
