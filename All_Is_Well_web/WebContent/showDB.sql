@@ -2,7 +2,7 @@
 
 CREATE TABLE PlayerSignUpInfo(  /*선수 모드*/
  
-	id int NOT NULL AUTO_INCREMENT, /*아이디*/
+	id VARCHAR(15) NOT NULL , /*아이디*/
 	
 	name VARCHAR(10) not null, /*이름*/
 	passwd VARCHAR(15) not null, /*비밀번호*/
@@ -21,7 +21,7 @@ CREATE TABLE PlayerSignUpInfo(  /*선수 모드*/
 CREATE TABLE CoachSignUpInfo( /*감독 모드*/
 
 	/*회원가입시 필요한 정보들-선수 모드*/ 
-	id VARCHAR(15) NOT NULL AUTO_INCREMENT, /*아이디*/
+	id VARCHAR(15) NOT NULL , /*아이디*/
 	
 	name VARCHAR(10) not null, /*이름*/
 	passwd VARCHAR(15) not null, /*비밀번호*/
@@ -32,12 +32,11 @@ CREATE TABLE CoachSignUpInfo( /*감독 모드*/
 	
 );
 
-/*테이블 전체 데이터 보기 */
+/*테이블 전체 데이터 보기 원할 때*/
 SELECT * FROM CoachSignUpInfo;
 
-/*데이터 전체 삭제 */
+/*데이터 전체 삭제 원할 때*/
 delete from CoachSignUpInfo;
-
 
 
 

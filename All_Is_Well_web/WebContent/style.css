@@ -2175,7 +2175,7 @@ a{
 	
 	/* (1) */
 	background: url("images/H.jpg") no-repeat;
-	background: linear-gradient( rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) ), url('images/H.jpg');
+	background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('images/H.jpg');
 	
 	
 	
@@ -2223,6 +2223,26 @@ a{
 }
 
 #E{
+	padding: 10;
+}
+
+#F{
+	padding: 10;
+}
+
+#G{
+	padding: 10;
+}
+
+#H{
+	padding: 10;
+}
+
+#I{
+	padding: 10;
+}
+
+#J{
 	padding: 10;
 }
 
