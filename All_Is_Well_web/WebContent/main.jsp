@@ -61,7 +61,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="fa fa-angle-down"></span></a>
+                                <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="fa fa-angle-down"></span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Menu Example 01</a></li>
                                     <li><a href="#">Menu Example 02</a></li>
@@ -154,8 +154,8 @@
                         <li class="child-menu"><a href="#">My Data <i class="fa fa-angle-right"></i></a>
                             <div class="sub-menu-wrapper">
                                 <ul class="sub-menu center-content">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
+                                    <li><a href="chartjs_line_page.jsp">선수 체력 </a></li>
+                                    <li><a href="chartjs_radar.html">선수 스텟 </a></li>
                                     <li><a href="#">Menu Example 03</a></li>
                                     <li><a href="#">Menu Example 04</a></li>
                                     <li><a href="#">Menu Example 05</a></li>
@@ -285,43 +285,15 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tagline-message" >
-                            <h3><mark class="rotate">안녕하세요, Bonjour, Hello</mark> we are All Is Well, we have brought together the best quality services, offers, projects for you!</h3>
+                            <h3><mark class="rotate">안녕하세요  &nbsp;, Bonjour&nbsp;&nbsp;, Hello&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</mark>   we are All Is Well, we have brought together the best quality services, offers, projects for you!</h3>
                         </div>
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div><!-- end container -->
         </div><!-- end section -->
 
-        <section class="section lb nopadtop noover">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="service-box m30">
-                            <i class="flaticon-monitor"></i>
-                            <h3>Outstanding design</h3>
-                            <p>Designed to be flexible according to all your needs. Create your site with all module position.</p>
-                        </div>
-                    </div><!-- end col -->
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="service-box m30">
-                            <i class="flaticon-technology"></i>
-                            <h3>Responsive Layout</h3>
-                            <p>Genius template can be easily viewed on any mobile device. Smoothly responsive.</p>
-                        </div>
-                    </div><!-- end col -->
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="service-box m30">
-                            <i class="flaticon-gears"></i>
-                            <h3>Easy to use</h3>
-                            <p>The modules we have prepared are simple to use. No code information is needed.</p>
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
-
+      
+<!-- 
         <section class="section">
             <div class="container">
                 <div class="row">
@@ -341,8 +313,8 @@
                                         <li>Unlimited Shortcodes</li>
                                         <li>Responsive Theme</li>
                                         <li>Tons of Layouts</li>
-                                    </ul><!-- end check -->
-                                </div><!-- end col-lg-4 -->
+                                    </ul>end check
+                                </div>end col-lg-4
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <ul class="check">
                                         <li>Font Awesome Icons</li>
@@ -350,8 +322,8 @@
                                         <li>AJAX Transitions</li>
                                         <li>High Quality Support</li>
                                         <li>Unlimited Options</li>
-                                    </ul><!-- end check -->    
-                                </div><!-- end col-lg-4 -->
+                                    </ul>end check    
+                                </div>end col-lg-4
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 last">
                                     <ul class="check">
                                         <li>Shopping Layouts</li>
@@ -359,271 +331,58 @@
                                         <li>Changers</li>
                                         <li>Footer Styles</li>
                                         <li>Header Styles</li>
-                                    </ul><!-- end check -->
-                                </div><!-- end col-lg-4 --> 
-                            </div><!-- end row -->      
-                        </div><!-- end widget -->
-                    </div><!-- end col-lg-6 -->
-                </div><!-- end row -->
-            </div><!-- end container -->
+                                    </ul>end check
+                                </div>end col-lg-4 
+                            </div>end row      
+                        </div>end widget
+                    </div>end col-lg-6
+                </div>end row
+            </div>end container
             <div class="perspective-image hidden-sm hidden-xs hidden-md"> 
                 <img src="images/upload/p1.jpg" alt="" class="img-responsive">
             </div>
         </section>
 
-        <section class="section lb">
-            <div class="container">
-                <div class="section-title text-center">
-                    <h3>Recent Works</h3>
-                    <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
-                </div><!-- end title -->
-
-                <div class="case-top clearfix">
-                    <div class="pull-left hidden-xs">
-                        <p>Showing 1â12 of 24 results</p>
-                    </div><!-- end col -->
-
-                    <div class="pull-right">
-                        <div class="dropdown portfolio-filter">
-                            <button class="btn btn-custom dropdown-toggle" type="button" data-toggle="dropdown">Product Filter
-                            <span class="fa fa-angle-down"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a class="active" href="#" data-filter="*">All Projects</a></li>
-                                <li><a class="" href="#" data-filter=".cat1">Web Design</a></li>
-                                <li><a class="" href="#" data-filter=".cat2">Motion Design</a></li>
-                                <li><a class="" href="#" data-filter=".cat3">Graphic Design</a></li>
-                                <li><a class="" href="#" data-filter=".cat4">Development</a></li>
-                            </ul>
-                        </div><!-- end dropdown -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="portfolio row with-desc">
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_01.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Plumeria Logo Design</a></h4>
-                                    <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed sed. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat2">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_02.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Back to Life</a></h4>
-                                    <p>Aliquam erat volutpat. Donec pharetra imperdiet metus, eget cras.</p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat3">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_03.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Creative Share App</a></h4>
-                                    <p>Aenean consectetur semper lorem, sit amet volutpat. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat4">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_04.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Luana 3D Max</a></h4>
-                                    <p>Nunc vitae metus sagittis, pharetra risus non, luctus ligula volutpat. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_05.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Custom M Logo</a></h4>
-                                    <p>Proin non mollis orci, quis maximus nisi. In imperdiet neque eu metus. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat2">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_06.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Internal App Project</a></h4>
-                                    <p>Etiam fermentum, urna sed varius aliquet, sem enim ultrices arcu amet. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat3">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_07.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Audio Player App</a></h4>
-                                    <p>Ut convallis mollis est, eu tincidunt magna varius dignissim. Sed sed.</p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat4">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_08.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Geek Vector Design</a></h4>
-                                    <p>Ut porttitor aliquet auctor. Donec pellentesque libero et mattis amet. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_09.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Sweet Admin Dashboard</a></h4>
-                                    <p>Aliquam quis euismod metus, vitae iaculis ipsum. Aliquam non enim sed.</p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_10.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Smooth Keyboard Design</a></h4>
-                                    <p>Nunc aliquet mi ante. Nulla magna ante, porttitor in sagittis posuere. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat2">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_11.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Click Smart App</a></h4>
-                                    <p>Vivamus mattis sit amet ipsum vitae pretium. Proin vitae nulla nullam. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat3">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_12.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Gabfire Vector Logo</a></h4>
-                                    <p>Maecenas nisl magna, ultricies lobortis tortor vel, dapibus cras amet. </p>
-                                </div>
-                            </div><!-- end post-media -->
-                        </div><!-- end row -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
-
-        <div class="section bgcolor noover">
+ -->
+      <!--   <div class="section bgcolor noover">
             <div class="container-fluid">
                 <div class="client-box">
                     <img src="images/upload/client_01.png" alt="" class="img-responsive">
-                </div><!-- end col -->
+                </div>end col
 
                 <div class="client-box">
                     <img src="images/upload/client_02.png" alt="" class="img-responsive">
-                </div><!-- end col -->
+                </div>end col
 
                 <div class="client-box">
                     <img src="images/upload/client_03.png" alt="" class="img-responsive">
-                </div><!-- end col -->
+                </div>end col
 
                 <div class="client-box">
                     <img src="images/upload/client_04.png" alt="" class="img-responsive">
-                </div><!-- end col -->
+                </div>end col
 
                 <div class="client-box">
                     <img src="images/upload/client_05.png" alt="" class="img-responsive">
-                </div><!-- end col -->
-            </div><!-- end container -->
-        </div><!-- end section -->
+                </div>end col
+            </div>end container
+        </div>end section
+ -->
 
         <section class="section">
             <div class="container">
                 <div class="section-title text-center">
-                    <h3>Case Studies</h3>
-                    <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
+                    <h3>Summary</h3>
+                    <p>자신의 스텟을 확인해보세요 </p>
                 </div><!-- end title -->
 
                 <div id="owl-01" class="owl-carousel owl-theme owl-theme-01">
                     <div class="item">
-                        <img src="images/upload/work_03.jpg" alt="" class="img-responsive">
+                        <img src="images/upload/linegragh.png" alt="" class="img-responsive">
                         <div class="magnifier">
                             <div class="magni-desc">
                                 <h4>
-                                    <a href="#">Website Template</a>
+                                    <a href="chartjs_line.html">Detail </a>
                                     <small>in: websites</small>
                                 </h4>
                                 <a class="goitem" href="#"><i class="fa fa-link"></i></a>
@@ -673,7 +432,37 @@
             </div><!-- end container -->
         </section>
 
-        <section class="section parallax" data-stellar-background-ratio="0.6" style="background-image:url('images/upload/parallax_01.jpg');">
+  <section class="section lb nopadtop noover">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="service-box m30">
+                            <i class="flaticon-monitor"></i>
+                            <h3>Outstanding design</h3>
+                            <p>Designed to be flexible according to all your needs. Create your site with all module position.</p>
+                        </div>
+                    </div><!-- end col -->
+
+                    <div class="col-lg-4 col-md-12">
+                        <div class="service-box m30">
+                            <i class="flaticon-technology"></i>
+                            <h3>Responsive Layout</h3>
+                            <p>Genius template can be easily viewed on any mobile device. Smoothly responsive.</p>
+                        </div>
+                    </div><!-- end col -->
+
+                    <div class="col-lg-4 col-md-12">
+                        <div class="service-box m30">
+                            <i class="flaticon-gears"></i>
+                            <h3>Easy to use</h3>
+                            <p>The modules we have prepared are simple to use. No code information is needed.</p>
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section><!-- end section -->
+
+        <section class="section parallax" data-stellar-background-ratio="0.6" style="background-image:url('images/upload/1920_1080.jpg');">
             <div class="container">
                 <div class="section-title light-color text-center">
                     <h3>Working Process</h3>
