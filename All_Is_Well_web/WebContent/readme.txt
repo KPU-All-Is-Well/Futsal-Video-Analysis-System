@@ -1,13 +1,10 @@
-Item name : Genius
-Item designer : HTML.Design
-Item published on : http://html.design 
-License : Creative Common 3.0
+Hello This is web project for our Futsa-Video_Analysis-System. 
+We are students of Kore Polytechnic University.
 
-Thanks for download our template. 
-Its 100% free for personal or commercial usage. 
-Stock photos not included!
+Programming Language: Java, HTML, CSS, Javascript. 
+Server: Apache Tomcat
+Database: MySQL
 
-If you have any questions please leave a message : hello@html.design 
+If you have any questions, please contact our email.
 
-Thanks.
-HTML.Design
+: )
