@@ -5,7 +5,11 @@ import os								# 운영체제 기능을 파이썬에서 사용 ex 파일입출
 import sys								# 환경변수같은 인수를 입력받는 모듈
 import random							# 난수 생성할때 사용하는 모듈
 import imutils                          # image utils 이미지 관련된 유틸리티 - opencv와 관련된 라이브러리
+
 #import pycuda
+import math
+import collections
+
 
 # 여러 트레커를 사용할 수 있게 트레커들의 이름을 저장한 준비리스트 - 엘레먼트를 계속 추가할 수 있음
 # 튜플은 변경이 불가
@@ -132,8 +136,12 @@ if __name__ == '__main__':
 	# Initialize MultiTracker 
 	for bbox in bboxes:
 		multiTracker.add(createTrackerByName(trackerType), frame, bbox)
-
-
+    
+    #좌표를 표현할 이름있는 튜플
+    Point=collections.namedtuple('Point',['x','y'])
+    lastPoint=Point(x=-1, y=-1)
+    distance = 0
+    
 	# Process video and track objects
 	while cap.isOpened():#비디오가 잘 열렸는지 확인하는 함수-길
 		success, frame123 = cap.read()# cap.read() 는 동영상을 1프레임씩 읽어오는 것-길
@@ -181,6 +189,15 @@ if __name__ == '__main__':
 				# Following line overlays transparent rectangle over the image
 				heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
 				
+                if(!(lastPoint.x==-1 && lastPoint.y==-1)) :
+                    a = (int)newbox[0]-lastPoint.x
+                    b = (int)newbox[1]-lastPoint.y
+                    distance = distance + math.sqrt(math.pow(a,2) + math.pow(b,2))
+                    
+                lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))    
+                print('거리 : ',distance)
+                
+                
 				if(cnt>10):
 					f.write( 'Home: Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )		#save location coords for future use
 					cnt = 0
