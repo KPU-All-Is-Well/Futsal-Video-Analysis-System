@@ -5,7 +5,11 @@ import os								# 운영체제 기능을 파이썬에서 사용 ex 파일입출
 import sys								# 환경변수같은 인수를 입력받는 모듈
 import random							# 난수 생성할때 사용하는 모듈
 import imutils                          # image utils 이미지 관련된 유틸리티 - opencv와 관련된 라이브러리
+
 #import pycuda
+import math
+import collections
+
 
 # 여러 트레커를 사용할 수 있게 트레커들의 이름을 저장한 준비리스트 - 엘레먼트를 계속 추가할 수 있음
 # 튜플은 변경이 불가
@@ -51,11 +55,13 @@ if __name__ == '__main__':
 	#for t in trackerTypes:
 	#    print(t)      
   
-	trackerType = 'CSRT'      
+	trackerType = 'CSRT'
 	videoPath = sys.argv[1]   # Read video. here it is pano.mp4 in the same directory
+ #videoPath='drone.mp4' 이런식으로 패스를 정해줘도 됨-길
+ 
   
 	# Create a video capture object to read videos 
-	cap = cv2.VideoCapture(videoPath)
+	cap = cv2.VideoCapture(videoPath)#비디오를 읽는 함수-길
 	# Set video to load
 	success, frame123 = cap.read()
 
@@ -79,25 +85,27 @@ if __name__ == '__main__':
 		# here its done for first frame to enable better selection of ROI.
 		# hardcoded for pano.mp4 
 
-		cv2.circle(frame123, (583, 50), 5, (0, 0, 255), -1)
-		cv2.circle(frame123, (1342, 50), 5, (0, 0, 255), -1)
-		cv2.circle(frame123, (11, 390), 5, (0, 0, 255), -1)
-		cv2.circle(frame123, (1911, 390), 5, (0, 0, 255), -1)
-		pts1 = np.float32([[583, 50], [1342, 50], [25, 390], [1911, 390]])
-		pts2 = np.float32([[0, 0], [1800, 0], [0, 600], [1800, 600]])
-		matrix = cv2.getPerspectiveTransform(pts1, pts2)
+		# cv2.circle(frame123, (583, 50), 5, (0, 0, 255), -1)
+		# cv2.circle(frame123, (1342, 50), 5, (0, 0, 255), -1)
+		# cv2.circle(frame123, (11, 390), 5, (0, 0, 255), -1)
+		# cv2.circle(frame123, (1911, 390), 5, (0, 0, 255), -1)
+		# pts1 = np.float32([[583, 50], [1342, 50], [25, 390], [1911, 390]])
+		# pts2 = np.float32([[0, 0], [1800, 0], [0, 600], [1800, 600]])
+		# matrix = cv2.getPerspectiveTransform(pts1, pts2)
 
 		# frame = cv2.warpPerspective(frame123, matrix, (1800, 600))
 
 		frame = frame123
 
-		print('Select the 11 Home Team Players')
-		print('Select the 11 Away Team Players')
+		print('Select the 6 Home Team Players')
+		print('Select the 6 Away Team Players')
 
-		# draw bounding boxes over objects
-		# selectROI's default behaviour is to draw box starting from the center
-		# when fromCenter is set to false, you can draw box starting from top left corner
-		bbox = cv2.selectROI('MultiTracker', frame)
+		# ?draw bounding boxes over objects
+		# ?selectROI's default behaviour is to draw box starting from the center
+		# ?when fromCenter is set to false, you can draw box starting from top left corner
+		bbox = cv2.selectROI('MultiTracker', frame) #roi 를 선택하는 함수-길
+  #roi 정보가 bbox 에 저장되어 사용된다-길
+  #tracker.init(frame123, bbox) # 오브젝트 트래커가 frame123과 bboc를 따라가게끔 설정한다.
 		bboxes.append(bbox)
 		if (p<6):
 			colors.append((0,0,255))
@@ -128,13 +136,18 @@ if __name__ == '__main__':
 	# Initialize MultiTracker 
 	for bbox in bboxes:
 		multiTracker.add(createTrackerByName(trackerType), frame, bbox)
-
-
+    
+    #좌표를 표현할 이름있는 튜플
+    Point=collections.namedtuple('Point',['x','y'])
+    lastPoint=Point(x=-1, y=-1)
+    distance = 0
+    
 	# Process video and track objects
-	while cap.isOpened():
-		success, frame123 = cap.read()
+	while cap.isOpened():#비디오가 잘 열렸는지 확인하는 함수-길
+		success, frame123 = cap.read()# cap.read() 는 동영상을 1프레임씩 읽어오는 것-길
 		frame123 = imutils.resize(frame123, width=1000) # 리사이징
-
+# if not success:
+#    exit()     #영상이 읽히지 않으면 종료한다.-길
 		# apply perspective transform for pano.mp4 to improve player detection accuracy
 		# hardcoded for pano.mp4 
 		cv2.circle(frame123, (583, 50), 5, (0, 0, 255), -1)
@@ -151,7 +164,7 @@ if __name__ == '__main__':
 			break
 
 		# get updated location of objects in subsequent frames
-		success, boxes = multiTracker.update(frame)
+		success, boxes = multiTracker.update(frame)#update() 따라가게 만드는 함수 - 길
 		l,b ,channels = frame.shape  #maintain all tabs in same shape
 		heatmap_background = cv2.resize(heatmap_background,(b,l))
 		original = cv2.resize(original,(b,l))
@@ -161,6 +174,8 @@ if __name__ == '__main__':
 			p1 = (int(newbox[0]), int(newbox[1]))
 			p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
 			cv2.rectangle(frame, p1, p2, colors[i], 2, 1)
+                        # rectangle(): 직사각형을 그리는 함수-길
+                        #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
 
 			if (i<6):
 				cv2.putText(frame, str(i), (int(newbox[0]), int(newbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
@@ -174,6 +189,15 @@ if __name__ == '__main__':
 				# Following line overlays transparent rectangle over the image
 				heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
 				
+                if(!(lastPoint.x==-1 && lastPoint.y==-1)) :
+                    a = (int)newbox[0]-lastPoint.x
+                    b = (int)newbox[1]-lastPoint.y
+                    distance = distance + math.sqrt(math.pow(a,2) + math.pow(b,2))
+                    
+                lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))    
+                print('거리 : ',distance)
+                
+                
 				if(cnt>10):
 					f.write( 'Home: Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )		#save location coords for future use
 					cnt = 0
@@ -205,3 +229,7 @@ f.close()
 
 
 
+
+# 사각형의 중심 좌표
+# center_x = left+w / 2
+# center_y = top+h / 2
