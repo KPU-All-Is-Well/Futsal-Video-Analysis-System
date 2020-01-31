@@ -51,13 +51,11 @@ if __name__ == '__main__':
 	#for t in trackerTypes:
 	#    print(t)      
   
-	trackerType = 'CSRT'
+	trackerType = 'CSRT'      
 	videoPath = sys.argv[1]   # Read video. here it is pano.mp4 in the same directory
- #videoPath='drone.mp4' 이런식으로 패스를 정해줘도 됨-길
- 
   
 	# Create a video capture object to read videos 
-	cap = cv2.VideoCapture(videoPath)#비디오를 읽는 함수-길
+	cap = cv2.VideoCapture(videoPath)
 	# Set video to load
 	success, frame123 = cap.read()
 
@@ -81,27 +79,25 @@ if __name__ == '__main__':
 		# here its done for first frame to enable better selection of ROI.
 		# hardcoded for pano.mp4 
 
-		# cv2.circle(frame123, (583, 50), 5, (0, 0, 255), -1)
-		# cv2.circle(frame123, (1342, 50), 5, (0, 0, 255), -1)
-		# cv2.circle(frame123, (11, 390), 5, (0, 0, 255), -1)
-		# cv2.circle(frame123, (1911, 390), 5, (0, 0, 255), -1)
-		# pts1 = np.float32([[583, 50], [1342, 50], [25, 390], [1911, 390]])
-		# pts2 = np.float32([[0, 0], [1800, 0], [0, 600], [1800, 600]])
-		# matrix = cv2.getPerspectiveTransform(pts1, pts2)
+		cv2.circle(frame123, (583, 50), 5, (0, 0, 255), -1)
+		cv2.circle(frame123, (1342, 50), 5, (0, 0, 255), -1)
+		cv2.circle(frame123, (11, 390), 5, (0, 0, 255), -1)
+		cv2.circle(frame123, (1911, 390), 5, (0, 0, 255), -1)
+		pts1 = np.float32([[583, 50], [1342, 50], [25, 390], [1911, 390]])
+		pts2 = np.float32([[0, 0], [1800, 0], [0, 600], [1800, 600]])
+		matrix = cv2.getPerspectiveTransform(pts1, pts2)
 
 		# frame = cv2.warpPerspective(frame123, matrix, (1800, 600))
 
 		frame = frame123
 
-		print('Select the 6 Home Team Players')
-		print('Select the 6 Away Team Players')
+		print('Select the 11 Home Team Players')
+		print('Select the 11 Away Team Players')
 
-		# ?draw bounding boxes over objects
-		# ?selectROI's default behaviour is to draw box starting from the center
-		# ?when fromCenter is set to false, you can draw box starting from top left corner
-		bbox = cv2.selectROI('MultiTracker', frame) #roi 를 선택하는 함수-길
-  #roi 정보가 bbox 에 저장되어 사용된다-길
-  #tracker.init(frame123, bbox) # 오브젝트 트래커가 frame123과 bboc를 따라가게끔 설정한다.
+		# draw bounding boxes over objects
+		# selectROI's default behaviour is to draw box starting from the center
+		# when fromCenter is set to false, you can draw box starting from top left corner
+		bbox = cv2.selectROI('MultiTracker', frame)
 		bboxes.append(bbox)
 		if (p<6):
 			colors.append((0,0,255))
@@ -135,11 +131,10 @@ if __name__ == '__main__':
 
 
 	# Process video and track objects
-	while cap.isOpened():#비디오가 잘 열렸는지 확인하는 함수-길
-		success, frame123 = cap.read()# cap.read() 는 동영상을 1프레임씩 읽어오는 것-길
+	while cap.isOpened():
+		success, frame123 = cap.read()
 		frame123 = imutils.resize(frame123, width=1000) # 리사이징
-# if not success:
-#    exit()     #영상이 읽히지 않으면 종료한다.-길
+
 		# apply perspective transform for pano.mp4 to improve player detection accuracy
 		# hardcoded for pano.mp4 
 		cv2.circle(frame123, (583, 50), 5, (0, 0, 255), -1)
@@ -156,7 +151,7 @@ if __name__ == '__main__':
 			break
 
 		# get updated location of objects in subsequent frames
-		success, boxes = multiTracker.update(frame)#update() 따라가게 만드는 함수 - 길
+		success, boxes = multiTracker.update(frame)
 		l,b ,channels = frame.shape  #maintain all tabs in same shape
 		heatmap_background = cv2.resize(heatmap_background,(b,l))
 		original = cv2.resize(original,(b,l))
@@ -166,8 +161,6 @@ if __name__ == '__main__':
 			p1 = (int(newbox[0]), int(newbox[1]))
 			p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
 			cv2.rectangle(frame, p1, p2, colors[i], 2, 1)
-                        # rectangle(): 직사각형을 그리는 함수-길
-                        #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
 
 			if (i<6):
 				cv2.putText(frame, str(i), (int(newbox[0]), int(newbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
@@ -212,7 +205,3 @@ f.close()
 
 
 
-
-# 사각형의 중심 좌표
-# center_x = left+w / 2
-# center_y = top+h / 2
