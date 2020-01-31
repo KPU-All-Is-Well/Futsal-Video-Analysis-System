@@ -43,7 +43,7 @@
 </head> 
 
 <!--ì¼ìª½ ëª©ì°¨ -->
-<body class="left-menu">  
+<body class="left-menu">
     
     <div class="menu-wrapper">
         <div class="mobile-menu">
@@ -61,69 +61,36 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="fa fa-angle-down"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
+                                <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+                               
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="fa fa-angle-down"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
+                                <a href="myData.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Data </a>
+                              
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <span class="fa fa-angle-down"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Video</a>
+                                
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="fa fa-angle-down"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar</a>
+                                
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog <span class="fa fa-angle-down"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coach Note</a>
+                                
                             </li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                            <li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li>
+                         
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
-        </div><!-- end mobile-menu -->
+        </div>
+        
+        <!-- end mobile-menu ------------------------------------------------------------------------------->
 
         <header class="vertical-header">
             <div class="vertical-header-wrapper">
@@ -137,82 +104,18 @@
                     <ul class="primary-menu">
 
 						<!--Home ëª©ì°¨ -->
-                        <li class="child-menu"><a href="#">Home <i class="fa fa-angle-right"></i></a>
-                            <div class="sub-menu-wrapper">
-                                <ul class="sub-menu center-content">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
-                            </div>
+                        <li class="child-menu"><a href="main.jsp">Home </a>
+                          
+
+						<!--My Data ëª©ì°¨ -->
+                        <li class="child-menu"><a href="myData.jsp">My Data</a>
+                          
                         </li>
 
 						<!--My Data ëª©ì°¨ -->
-                        <li class="child-menu"><a href="#">My Data <i class="fa fa-angle-right"></i></a>
-                            <div class="sub-menu-wrapper">
-                                <ul class="sub-menu center-content">
-                                    <li><a href="chartjs_line_page.jsp">선수 체력 </a></li>
-                                    <li><a href="chartjs_radar.html">선수 스텟 </a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
-                            </div>
-                        </li>
-
-						<!--My Data ëª©ì°¨ -->
-                        <li class="child-menu"><a href="#">My Video <i class="fa fa-angle-right"></i></a>
-                            <div class="sub-menu-wrapper">
-                                <ul class="sub-menu center-content">
-                                    <li><a href="#">Menu Example 01 <i class="fa fa-angle-right"></i></a> 
-                                        <div class="subsub-menu-wrapper">  
-                                            <ul class="subsub-menu center-content">
-                                                <li><a href="#">Menu Example 01</a></li>
-                                                <li><a href="#">Menu Example 02</a></li>
-                                                <li><a href="#">Menu Example 03</a></li>
-                                                <li><a href="#">Menu Example 04</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">Menu Example 02 <i class="fa fa-angle-right"></i></a> 
-                                        <div class="subsub-menu-wrapper">  
-                                            <ul class="subsub-menu center-content">
-                                                <li><a href="#">Menu Example 01</a></li>
-                                                <li><a href="#">Menu Example 02</a></li>
-                                                <li><a href="#">Menu Example 03</a></li>
-                                                <li><a href="#">Menu Example 04</a></li>
-                                                <li><a href="#">Menu Example 05</a></li>
-                                                <li><a href="#">Menu Example 06</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">Menu Example 03 <i class="fa fa-angle-right"></i></a> 
-                                        <div class="subsub-menu-wrapper">  
-                                            <ul class="subsub-menu center-content">
-                                                <li><a href="#">Menu Example 01</a></li>
-                                                <li><a href="#">Menu Example 02</a></li>
-                                                <li><a href="#">Menu Example 03</a></li>
-                                                <li><a href="#">Menu Example 04</a></li>
-                                                <li><a href="#">Menu Example 05</a></li>
-                                                <li><a href="#">Menu Example 06</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">Menu Example 04 <i class="fa fa-angle-right"></i></a> 
-                                        <div class="subsub-menu-wrapper">  
-                                            <ul class="subsub-menu center-content">
-                                                <li><a href="#">Menu Example 01</a></li>
-                                                <li><a href="#">Menu Example 02</a></li>
-                                                <li><a href="#">Menu Example 03</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
+                        <li class="child-menu"><a href="#">My Video</a>
+                           
+                                
                         </li>
 
 					
@@ -281,7 +184,7 @@
         -->
 
         <div class="section footer" > <!-- section bgcolor noover  -->
-            <div class="container">
+            <div class="container"> 
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tagline-message" >
