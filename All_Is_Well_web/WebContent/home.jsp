@@ -42,8 +42,8 @@
 
 </head> 
 
-<!--ì¼ìª½ ëª©ì°¨ -->
-<body class="left-menu">
+<!-- -------------------------------------------------------------------------mobile menu ---------------------------------------------------------------------------->
+<body class="left-menu">  
     
     <div class="menu-wrapper">
         <div class="mobile-menu">
@@ -61,37 +61,85 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
-                               
+                                <a href="home.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="fa fa-angle-down"></span></a>
+                                <!--  
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Menu Example 01</a></li>
+                                    <li><a href="#">Menu Example 02</a></li>
+                                    <li><a href="#">Menu Example 03</a></li>
+                                    <li><a href="#">Menu Example 04</a></li>
+                                    <li><a href="#">Menu Example 05</a></li>
+                                    <li><a href="#">Menu Example 06</a></li>
+                                </ul>
+                                -->
                             </li>
                             <li class="dropdown">
-                                <a href="myData.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Data </a>
-                              
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="fa fa-angle-down"></span></a>
+                                <!-- 
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Menu Example 01</a></li>
+                                    <li><a href="#">Menu Example 02</a></li>
+                                    <li><a href="#">Menu Example 03</a></li>
+                                    <li><a href="#">Menu Example 04</a></li>
+                                    <li><a href="#">Menu Example 05</a></li>
+                                    <li><a href="#">Menu Example 06</a></li>
+                                </ul>
+                                 -->
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Video</a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <span class="fa fa-angle-down"></span></a>
+                                <!--
+                                <ul class="dropdown-menu">
                                 
+                                    <li><a href="#">Menu Example 01</a></li>
+                                    <li><a href="#">Menu Example 02</a></li>
+                                    <li><a href="#">Menu Example 03</a></li>
+                                    <li><a href="#">Menu Example 04</a></li>
+                                    <li><a href="#">Menu Example 05</a></li>
+                                    <li><a href="#">Menu Example 06</a></li>
+                                </ul>
+                                -->
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar</a>
-                                
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="fa fa-angle-down"></span></a>
+                                <!--
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Menu Example 01</a></li>
+                                    <li><a href="#">Menu Example 02</a></li>
+                                    <li><a href="#">Menu Example 03</a></li>
+                                    <li><a href="#">Menu Example 04</a></li>
+                                    <li><a href="#">Menu Example 05</a></li>
+                                    <li><a href="#">Menu Example 06</a></li>
+                                </ul>
+                                -->
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coach Note</a>
-                                
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog <span class="fa fa-angle-down"></span></a>
+                                <!--
+                                <ul class="dropdown-menu">
+                                    <li><a href="#">Menu Example 01</a></li>
+                                    <li><a href="#">Menu Example 02</a></li>
+                                    <li><a href="#">Menu Example 03</a></li>
+                                    <li><a href="#">Menu Example 04</a></li>
+                                    <li><a href="#">Menu Example 05</a></li>
+                                    <li><a href="#">Menu Example 06</a></li>
+                                </ul>
+                                -->
                             </li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                         
+                            <li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li>
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
         </div>
         
-        <!-- end mobile-menu ------------------------------------------------------------------------------->
+<!-------------------------------------------------------------------------- end mobile-menu ---------------------------------------------------------------------------->
 
+<!---------------------------------------------------------------------------- web-menu -------------------------------------------------------------------------------->
+        
         <header class="vertical-header">
             <div class="vertical-header-wrapper">
                 <nav class="nav-menu">
@@ -102,66 +150,78 @@
                     <div class="margin-block"></div>
 
                     <ul class="primary-menu">
+                        
+                        
+                        <!--Home -->	
+						<li><a href="home.jsp">Home</a></li>
+                        
+                        <!--Home -->	
+						<li><a href="googleChart.html">myData</a></li>
 
-						<!--Home ëª©ì°¨ -->
-                        <li class="child-menu"><a href="main.jsp">Home </a>
-                          
-
-						<!--My Data ëª©ì°¨ -->
-                        <li class="child-menu"><a href="myData.jsp">My Data</a>
-                          
-                        </li>
-
-						<!--My Data ëª©ì°¨ -->
-                        <li class="child-menu"><a href="#">My Video</a>
-                           
-                                
+						<!-- My Video menu lists -->
+                        <li class="child-menu"><a href="myVideo.jsp">My Video <i class="fa fa-angle-right"></i></a>
+                            <div class="sub-menu-wrapper">
+                                <ul class="sub-menu center-content">
+                                    <li><a href="#">Menu Example 01 <i class="fa fa-angle-right"></i></a> 
+                                        <!-- 
+                                        <div class="subsub-menu-wrapper">  
+                                            <ul class="subsub-menu center-content">
+                                                <li><a href="#">Menu Example 01</a></li>
+                                                <li><a href="#">Menu Example 02</a></li>
+                                                <li><a href="#">Menu Example 03</a></li>
+                                            </ul>
+                                        </div>
+                                         -->
+                                    </li>
+                                    <li><a href="#">Menu Example 02 <i class="fa fa-angle-right"></i></a> 
+                                        <div class="subsub-menu-wrapper">  
+                                        	 <!-- 
+                                            <ul class="subsub-menu center-content">
+                                                <li><a href="#">Menu Example 01</a></li>
+                                                <li><a href="#">Menu Example 02</a></li>
+                                                <li><a href="#">Menu Example 03</a></li>
+                                            </ul>
+                                             -->
+                                        </div>
+                                    </li>
+                                    <li><a href="#">Menu Example 03 <i class="fa fa-angle-right"></i></a> 
+                                        <!--
+                                        <div class="subsub-menu-wrapper">  
+                                            <ul class="subsub-menu center-content">
+                                                <li><a href="#">Menu Example 01</a></li>
+                                                <li><a href="#">Menu Example 02</a></li>
+                                                <li><a href="#">Menu Example 03</a></li>
+                                            </ul>
+                                        </div>
+                                        -->
+                                    </li>
+                                   
+                                </ul>
+                            </div>
                         </li>
 
 					
-						<!--Calendar ëª©ì°¨ -->	
-						<li><a href="#">Calendar</a></li>
+						<!--Calendar -->	
+						<li><a href="calendar.jsp">Calendar</a></li>
 
-						<!--Coach Note ëª©ì°¨ -->	
-						<li><a href="#">Coach Note</a></li>
+						<!--Coach Note -->	
+						<li><a href="coachNote.jsp">Coach Note</a></li>
 						
-						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->  
-                        <li><a href="#">Contact</a></li>
+						<!--Contact -->  
+                        <li><a href="contact.jsp">Contact</a></li>
 
-                        <!--<li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li> -->
+
                     </ul>
                     
                     <div class="margin-block"></div>
 					
-					<!--
-                    <div class="menu-search">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="What you are looking?">
-                                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
-					--> <!-- end menu-search -->
-
-                    <div class="margin-block"></div>
-
-					<!--
-                    <div class="menu-social">
-                        <ul class="list-inline text-center">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                    </div>--><!-- end menu -->
 
                 </nav><!-- end nav-menu -->
-            </div><!-- end vertical-header-wrapper -->
+            </div><!-- end vertical-header-wrapxper -->
         </header><!-- end header -->
     </div><!-- end menu-wrapper -->
 	
-<!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
+<!------------------------------------------------------------- end web menu ------------------------------------------------------------------------->
 	
 	
     <div id="wrapper">
@@ -184,7 +244,7 @@
         -->
 
         <div class="section footer" > <!-- section bgcolor noover  -->
-            <div class="container"> 
+            <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tagline-message" >
@@ -285,7 +345,7 @@
                         <div class="magnifier">
                             <div class="magni-desc">
                                 <h4>
-                                    <a href="chartjs_line.html">Detail </a>
+                                    <a href="chartjs_line.jsp">Detail </a>
                                     <small>in: websites</small>
                                 </h4>
                                 <a class="goitem" href="#"><i class="fa fa-link"></i></a>
