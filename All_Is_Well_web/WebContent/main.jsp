@@ -9,25 +9,25 @@
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+
     <!-- Site Meta -->
     <title>All is Well</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-    
-	
+
+
     <!-- Site Icons --> <!-- 브라우저 창 위에 보이는 아이콘 -->
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	
+
 
 	<!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
 
 	<!-- Custom & Default Styles -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -40,11 +40,11 @@
 		<script src="js/vendor/respond.min.js"></script>
 	<![endif]-->
 
-</head> 
+</head>
 
 <!--ì¼ìª½ ëª©ì°¨ -->
 <body class="left-menu">
-    
+
     <div class="menu-wrapper">
         <div class="mobile-menu">
             <nav class="navbar navbar-inverse">
@@ -62,34 +62,34 @@
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
                                 <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
-                               
+
                             </li>
                             <li class="dropdown">
                                 <a href="myData.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Data </a>
-                              
+
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Video</a>
-                                
+
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar</a>
-                                
+
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coach Note</a>
-                                
+
                             </li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
-                         
+
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
         </div>
-        
+
         <!-- end mobile-menu ------------------------------------------------------------------------------->
 
         <header class="vertical-header">
@@ -105,34 +105,34 @@
 
 						<!--Home ëª©ì°¨ -->
                         <li class="child-menu"><a href="main.jsp">Home </a>
-                          
+
 
 						<!--My Data ëª©ì°¨ -->
                         <li class="child-menu"><a href="myData.jsp">My Data</a>
-                          
+
                         </li>
 
 						<!--My Data ëª©ì°¨ -->
                         <li class="child-menu"><a href="#">My Video</a>
-                           
-                                
+
+
                         </li>
 
-					
-						<!--Calendar ëª©ì°¨ -->	
+
+						<!--Calendar ëª©ì°¨ -->
 						<li><a href="#">Calendar</a></li>
 
-						<!--Coach Note ëª©ì°¨ -->	
+						<!--Coach Note ëª©ì°¨ -->
 						<li><a href="#">Coach Note</a></li>
-						
-						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->  
+
+						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->
                         <li><a href="#">Contact</a></li>
 
                         <!--<li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li> -->
                     </ul>
-                    
+
                     <div class="margin-block"></div>
-					
+
 					<!--
                     <div class="menu-search">
                         <form>
@@ -160,18 +160,18 @@
             </div><!-- end vertical-header-wrapper -->
         </header><!-- end header -->
     </div><!-- end menu-wrapper -->
-	
+
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
-	
-	
+
+
     <div id="wrapper">
 
-		<!--  
+		<!--
         <div id="home" class="video-section js-height-full">
             <div class="overlay"></div>
             <div class="home-text-wrapper relative container">
                 <div class="home-message">
-                    <img src="images/rsz_1biglogo.png" alt=""> 
+                    <img src="images/rsz_1biglogo.png" alt="">
                     <p>Welcome to All Is Well</p>
                     <div class="btn-wrapper">
                         <div class="text-center">
@@ -184,7 +184,7 @@
         -->
 
         <div class="section footer" > <!-- section bgcolor noover  -->
-            <div class="container"> 
+            <div class="container">
                 <div class="row">
                     <div class="col-md-12">
                         <div class="tagline-message" >
@@ -195,8 +195,8 @@
             </div><!-- end container -->
         </div><!-- end section -->
 
-      
-<!-- 
+
+<!--
         <section class="section">
             <div class="container">
                 <div class="row">
@@ -225,7 +225,7 @@
                                         <li>AJAX Transitions</li>
                                         <li>High Quality Support</li>
                                         <li>Unlimited Options</li>
-                                    </ul>end check    
+                                    </ul>end check
                                 </div>end col-lg-4
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 last">
                                     <ul class="check">
@@ -235,13 +235,13 @@
                                         <li>Footer Styles</li>
                                         <li>Header Styles</li>
                                     </ul>end check
-                                </div>end col-lg-4 
-                            </div>end row      
+                                </div>end col-lg-4
+                            </div>end row
                         </div>end widget
                     </div>end col-lg-6
                 </div>end row
             </div>end container
-            <div class="perspective-image hidden-sm hidden-xs hidden-md"> 
+            <div class="perspective-image hidden-sm hidden-xs hidden-md">
                 <img src="images/upload/p1.jpg" alt="" class="img-responsive">
             </div>
         </section>
@@ -504,7 +504,7 @@
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div>
-        </section>    
+        </section>
 
         <section class="section bgcolor">
             <div class="container">
@@ -520,9 +520,9 @@
                     </div>
                 </div><!-- end row -->
                 </a>
-            </div><!-- end container -->  
+            </div><!-- end container -->
         </section>
-        
+
 		<!------------------------------------------------------- footer ---------------------------------------------------------------->
         <footer class="section footer">
             <div class="container">
@@ -543,7 +543,7 @@
 
                     <div class="col-lg-2 col-md-4">
                         <div class="widget clearfix">
-                            <div class="list-widget">   
+                            <div class="list-widget">
                                 <ul>
                                     <li><a href="page-about.html">About us</a></li>
                                     <li><a href="page-about-me.html">About me</a></li>
@@ -557,7 +557,7 @@
 
                     <div class="col-lg-2 col-md-4">
                         <div class="widget clearfix">
-                            <div class="list-widget">   
+                            <div class="list-widget">
                                 <ul>
                                     <li><a href="page-contact-02.html">Get In Touch</a></li>
                                     <li><a href="page-faqs.html">FAQ's</a></li>
@@ -571,7 +571,7 @@
 
                     <div class="col-lg-2 col-md-4">
                         <div class="widget clearfix">
-                            <div class="list-widget">   
+                            <div class="list-widget">
                                 <ul>
                                     <li><a href="shop-checkout.html">Checkout</a></li>
                                     <li><a href="shop-cart.html">Shopping Cart</a></li>
@@ -597,7 +597,7 @@
                     <div class="col-lg-9 col-md-9 text-right">
                         <div class="cop-links">
                             <ul class="list-inline">
-                                &copy; 2020 All is Well 
+                                &copy; 2020 All is Well
                             </ul>
                         </div>
                     </div>
@@ -619,12 +619,12 @@
     <script src="js/masonry.js"></script>
     <script src="js/masonry-4-col.js"></script>
     <!-- VIDEO BG PLUGINS -->
-    <script src="videos/libs/swfobject.js"></script> 
-    <script src="videos/libs/modernizr.video.js"></script> 
-    <script src="videos/libs/video_background.js"></script> 
+    <script src="videos/libs/swfobject.js"></script>
+    <script src="videos/libs/modernizr.video.js"></script>
+    <script src="videos/libs/video_background.js"></script>
     <script>
         jQuery(document).ready(function($) {
-            var Video_back = new video_background($("#home"), { 
+            var Video_back = new video_background($("#home"), {
                 "position": "absolute", //Follow page scroll
                 "z-index": "-1",        //Behind everything
                 "loop": true,           //Loop when it reaches the end
@@ -640,3 +640,4 @@
 
 </body>
 </html>
+<%-- 이건지워주세요 --%>
