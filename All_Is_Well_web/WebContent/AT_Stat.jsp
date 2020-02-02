@@ -223,7 +223,7 @@
   
  <div id="btn_group" style="text-align:center"  >
  <a href="AT_Distance.jsp"> <button id="test_btn1">선수체력 </button></a> 
-<a href="AT_Stat.jsp"> <button id="test_btn2">선수스텟 </button></a>
+  <a href="AT_Stat.jsp"> <button id="test_btn2">선수스텟 </button></a>
 </div>
  
  </html>
@@ -231,7 +231,7 @@
 
   
 <div style="float:left;">
-<iframe src="chartjs_line.html" width="1200" height="600"></iframe>	
+<iframe src="chartjs_radar.html" width="1200" height="600"></iframe>	
 </div>
 
                       

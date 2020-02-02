@@ -106,7 +106,7 @@
                             
                         </li>
 
-						 <!--My Data ëª©ì°¨ -->
+						<!--My Data ëª©ì°¨ -->
                         <li class="myData.jsp"><a href="#">My Data </a>
                           
                         </li>
@@ -117,7 +117,7 @@
                          
                         </li>
 
-	      
+	       
 					
 						<!--Calendar ëª©ì°¨ -->	
 						<li><a href="#">Calendar</a></li>
@@ -223,7 +223,7 @@
   
  <div id="btn_group" style="text-align:center"  >
  <a href="AT_Distance.jsp"> <button id="test_btn1">선수체력 </button></a> 
-<a href="AT_Stat.jsp"> <button id="test_btn2">선수스텟 </button></a>
+  <a href="AT_Stat.jsp"> <button id="test_btn2">선수스텟 </button></a>
 </div>
  
  </html>

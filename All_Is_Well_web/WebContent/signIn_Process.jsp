@@ -13,6 +13,7 @@
 		
 		String id = request.getParameter("id");
 		String passwd = request.getParameter("passwd");
+
 		/*
 			'디비 데이터'와 '입력 데이터' 비교
 			로그인 성공시  -> 메인 페이지
@@ -25,7 +26,7 @@
 		
 		try{
 				
-			String sql = "select id, passwd from PlayerSignUpInfo where id =  '" + id + "'";  // 코치용 로그인 따로 만들어야 함!
+			String sql = "select id, passwd from CoachSignUpInfo where id =  '" + id + "'";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			//if(stmt != null)
@@ -39,7 +40,7 @@
 				if(id.equals(rId) && passwd.equals(rPasswd)){ // TT
 					out.println("<script>");
 					out.println("alert('로그인 되었습니다. All Is Well에 오신 것을 진심으로 환영합니다.')");
-					out.println("location.href='home.jsp'");
+					out.println("location.href='main.jsp'");
 					out.println("</script>");	
 				}/*else{ // TF, FT, FF 
 					out.println("<script>");

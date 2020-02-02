@@ -47,7 +47,7 @@
             <div class="home-text-wrapper relative container">
                 <div class="home-message">
                     <img src="images/rsz_1biglogo.png" alt=""> 
-                    <p>Welcome to All Is Well</p>	
+                    <p>Welcome to All Is Well</p>
                     <div class="btn-wrapper">
                         <div class="text-center">
                             <a href="signIn.jsp" class="btn btn-primary">Sign In</a> &nbsp;<a href="coachOrPlayer.jsp" class="btn btn-default">Sign Up</a>
@@ -93,9 +93,8 @@
                 "video_ratio": 1.7778,              // width/height -> If none provided sizing of the video is set to adjust
                 "fallback_image": "images/dummy.png",   //Fallback image path
                 "priority": "html5"             //Priority for html5 (if set to flash and tested locally will give a flash security error)
-            });        });
-        
-        
+            });
+        });
     </script>
     
 </body>
