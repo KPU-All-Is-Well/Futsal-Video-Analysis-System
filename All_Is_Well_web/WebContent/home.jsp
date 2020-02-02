@@ -1,3 +1,6 @@
+<!-- main.jsp -->
+<%@ page contentType="text/html; charset=utf-8" %>
+
 <!doctype html>
 <!--[if IE 9]> <html class="no-js ie9 fixed-layout" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js " lang="en"> <!--<![endif]-->
@@ -6,25 +9,25 @@
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    
+
     <!-- Site Meta -->
     <title>All is Well</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-    
-	
-    <!-- Site Icons -->
+
+
+    <!-- Site Icons --> <!-- 브라우저 창 위에 보이는 아이콘 -->
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	
+
 
 	<!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
 
 	<!-- Custom & Default Styles -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
@@ -37,11 +40,17 @@
 		<script src="js/vendor/respond.min.js"></script>
 	<![endif]-->
 
-</head> 
+</head>
 
-<!--왼쪽 목차 -->
+<<<<<<< HEAD:All_Is_Well_web/WebContent/main.jsp
+<!--ì¼ìª½ ëª©ì°¨ -->
+<body class="left-menu">
+
+=======
+<!-- -------------------------------------------------------------------------mobile menu ---------------------------------------------------------------------------->
 <body class="left-menu">  
     
+>>>>>>> e29a337cda11f15591f17999057d0ca85f956e45:All_Is_Well_web/WebContent/home.jsp
     <div class="menu-wrapper">
         <div class="mobile-menu">
             <nav class="navbar navbar-inverse">
@@ -58,7 +67,28 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="fa fa-angle-down"></span></a>
+<<<<<<< HEAD:All_Is_Well_web/WebContent/main.jsp
+                                <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+
+                            </li>
+                            <li class="dropdown">
+                                <a href="myData.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Data </a>
+
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Video</a>
+
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar</a>
+
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coach Note</a>
+
+=======
+                                <a href="home.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span class="fa fa-angle-down"></span></a>
+                                <!--  
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Menu Example 01</a></li>
                                     <li><a href="#">Menu Example 02</a></li>
@@ -67,9 +97,11 @@
                                     <li><a href="#">Menu Example 05</a></li>
                                     <li><a href="#">Menu Example 06</a></li>
                                 </ul>
+                                -->
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pages <span class="fa fa-angle-down"></span></a>
+                                <!-- 
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Menu Example 01</a></li>
                                     <li><a href="#">Menu Example 02</a></li>
@@ -78,10 +110,13 @@
                                     <li><a href="#">Menu Example 05</a></li>
                                     <li><a href="#">Menu Example 06</a></li>
                                 </ul>
+                                 -->
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Portfolio <span class="fa fa-angle-down"></span></a>
+                                <!--
                                 <ul class="dropdown-menu">
+                                
                                     <li><a href="#">Menu Example 01</a></li>
                                     <li><a href="#">Menu Example 02</a></li>
                                     <li><a href="#">Menu Example 03</a></li>
@@ -89,9 +124,11 @@
                                     <li><a href="#">Menu Example 05</a></li>
                                     <li><a href="#">Menu Example 06</a></li>
                                 </ul>
+                                -->
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Shop <span class="fa fa-angle-down"></span></a>
+                                <!--
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Menu Example 01</a></li>
                                     <li><a href="#">Menu Example 02</a></li>
@@ -100,9 +137,11 @@
                                     <li><a href="#">Menu Example 05</a></li>
                                     <li><a href="#">Menu Example 06</a></li>
                                 </ul>
+                                -->
                             </li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog <span class="fa fa-angle-down"></span></a>
+                                <!--
                                 <ul class="dropdown-menu">
                                     <li><a href="#">Menu Example 01</a></li>
                                     <li><a href="#">Menu Example 02</a></li>
@@ -111,17 +150,32 @@
                                     <li><a href="#">Menu Example 05</a></li>
                                     <li><a href="#">Menu Example 06</a></li>
                                 </ul>
+                                -->
+>>>>>>> e29a337cda11f15591f17999057d0ca85f956e45:All_Is_Well_web/WebContent/home.jsp
                             </li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
+<<<<<<< HEAD:All_Is_Well_web/WebContent/main.jsp
+
+=======
                             <li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li>
+>>>>>>> e29a337cda11f15591f17999057d0ca85f956e45:All_Is_Well_web/WebContent/home.jsp
                         </ul>
                     </div><!--/.nav-collapse -->
                 </div><!--/.container-fluid -->
             </nav>
-        </div><!-- end mobile-menu -->
+        </div>
+<<<<<<< HEAD:All_Is_Well_web/WebContent/main.jsp
 
+        <!-- end mobile-menu ------------------------------------------------------------------------------->
+=======
+        
+<!-------------------------------------------------------------------------- end mobile-menu ---------------------------------------------------------------------------->
+>>>>>>> e29a337cda11f15591f17999057d0ca85f956e45:All_Is_Well_web/WebContent/home.jsp
+
+<!---------------------------------------------------------------------------- web-menu -------------------------------------------------------------------------------->
+        
         <header class="vertical-header">
             <div class="vertical-header-wrapper">
                 <nav class="nav-menu">
@@ -132,74 +186,69 @@
                     <div class="margin-block"></div>
 
                     <ul class="primary-menu">
+<<<<<<< HEAD:All_Is_Well_web/WebContent/main.jsp
 
-						<!--Home 목차 -->
-                        <li class="child-menu"><a href="#">Home <i class="fa fa-angle-right"></i></a>
-                            <div class="sub-menu-wrapper">
-                                <ul class="sub-menu center-content">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
-                            </div>
+						<!--Home ëª©ì°¨ -->
+                        <li class="child-menu"><a href="main.jsp">Home </a>
+
+
+						<!--My Data ëª©ì°¨ -->
+                        <li class="child-menu"><a href="myData.jsp">My Data</a>
+
                         </li>
 
-						<!--My Data 목차 -->
-                        <li class="child-menu"><a href="#">My Data <i class="fa fa-angle-right"></i></a>
-                            <div class="sub-menu-wrapper">
-                                <ul class="sub-menu center-content">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
-                            </div>
+						<!--My Data ëª©ì°¨ -->
+                        <li class="child-menu"><a href="#">My Video</a>
+
+
                         </li>
 
-						<!--My Data 목차 -->
-                        <li class="child-menu"><a href="#">My Video <i class="fa fa-angle-right"></i></a>
+
+						<!--Calendar ëª©ì°¨ -->
+						<li><a href="#">Calendar</a></li>
+
+						<!--Coach Note ëª©ì°¨ -->
+						<li><a href="#">Coach Note</a></li>
+
+						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->
+                        <li><a href="#">Contact</a></li>
+=======
+                        
+                        
+                        <!--Home -->	
+						<li><a href="home.jsp">Home</a></li>
+                        
+                        <!--Home -->	
+						<li><a href="googleChart.html">myData</a></li>
+
+						<!-- My Video menu lists -->
+                        <li class="child-menu"><a href="myVideo.jsp">My Video <i class="fa fa-angle-right"></i></a>
                             <div class="sub-menu-wrapper">
                                 <ul class="sub-menu center-content">
                                     <li><a href="#">Menu Example 01 <i class="fa fa-angle-right"></i></a> 
+                                        <!-- 
                                         <div class="subsub-menu-wrapper">  
                                             <ul class="subsub-menu center-content">
                                                 <li><a href="#">Menu Example 01</a></li>
                                                 <li><a href="#">Menu Example 02</a></li>
                                                 <li><a href="#">Menu Example 03</a></li>
-                                                <li><a href="#">Menu Example 04</a></li>
                                             </ul>
                                         </div>
+                                         -->
                                     </li>
                                     <li><a href="#">Menu Example 02 <i class="fa fa-angle-right"></i></a> 
                                         <div class="subsub-menu-wrapper">  
+                                        	 <!-- 
                                             <ul class="subsub-menu center-content">
                                                 <li><a href="#">Menu Example 01</a></li>
                                                 <li><a href="#">Menu Example 02</a></li>
                                                 <li><a href="#">Menu Example 03</a></li>
-                                                <li><a href="#">Menu Example 04</a></li>
-                                                <li><a href="#">Menu Example 05</a></li>
-                                                <li><a href="#">Menu Example 06</a></li>
                                             </ul>
+                                             -->
                                         </div>
                                     </li>
                                     <li><a href="#">Menu Example 03 <i class="fa fa-angle-right"></i></a> 
-                                        <div class="subsub-menu-wrapper">  
-                                            <ul class="subsub-menu center-content">
-                                                <li><a href="#">Menu Example 01</a></li>
-                                                <li><a href="#">Menu Example 02</a></li>
-                                                <li><a href="#">Menu Example 03</a></li>
-                                                <li><a href="#">Menu Example 04</a></li>
-                                                <li><a href="#">Menu Example 05</a></li>
-                                                <li><a href="#">Menu Example 06</a></li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                    <li><a href="#">Menu Example 04 <i class="fa fa-angle-right"></i></a> 
+                                        <!--
                                         <div class="subsub-menu-wrapper">  
                                             <ul class="subsub-menu center-content">
                                                 <li><a href="#">Menu Example 01</a></li>
@@ -207,26 +256,30 @@
                                                 <li><a href="#">Menu Example 03</a></li>
                                             </ul>
                                         </div>
+                                        -->
                                     </li>
+                                   
                                 </ul>
                             </div>
                         </li>
 
 					
-						<!--Calendar 목차 -->	
-						<li><a href="#">Calendar</a></li>
+						<!--Calendar -->	
+						<li><a href="calendar.jsp">Calendar</a></li>
 
-						<!--Coach Note 목차 -->	
-						<li><a href="#">Coach Note</a></li>
+						<!--Coach Note -->	
+						<li><a href="coachNote.jsp">Coach Note</a></li>
 						
-						<!--Contact 목차: 누르면 팀원 정보 -->  
-                        <li><a href="#">Contact</a></li>
+						<!--Contact -->  
+                        <li><a href="contact.jsp">Contact</a></li>
 
-                        <!--<li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li> -->
+>>>>>>> e29a337cda11f15591f17999057d0ca85f956e45:All_Is_Well_web/WebContent/home.jsp
+
                     </ul>
-                    
+
                     <div class="margin-block"></div>
-					
+<<<<<<< HEAD:All_Is_Well_web/WebContent/main.jsp
+
 					<!--
                     <div class="menu-search">
                         <form>
@@ -249,71 +302,58 @@
                             <li><a href="#"><i class="fa fa-instagram"></i></a></li>
                         </ul>
                     </div>--><!-- end menu -->
+=======
+					
+>>>>>>> e29a337cda11f15591f17999057d0ca85f956e45:All_Is_Well_web/WebContent/home.jsp
 
                 </nav><!-- end nav-menu -->
-            </div><!-- end vertical-header-wrapper -->
+            </div><!-- end vertical-header-wrapxper -->
         </header><!-- end header -->
     </div><!-- end menu-wrapper -->
+<<<<<<< HEAD:All_Is_Well_web/WebContent/main.jsp
 
+<!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
+
+
+=======
+	
+<!------------------------------------------------------------- end web menu ------------------------------------------------------------------------->
+	
+	
+>>>>>>> e29a337cda11f15591f17999057d0ca85f956e45:All_Is_Well_web/WebContent/home.jsp
     <div id="wrapper">
 
+		<!--
         <div id="home" class="video-section js-height-full">
             <div class="overlay"></div>
             <div class="home-text-wrapper relative container">
                 <div class="home-message">
-                    <img src="images/rsz_1biglogo.png" alt=""> 
+                    <img src="images/rsz_1biglogo.png" alt="">
                     <p>Welcome to All Is Well</p>
                     <div class="btn-wrapper">
                         <div class="text-center">
                             <a href="#" class="btn btn-primary">Sign In</a> &nbsp;<a href="#" class="btn btn-default">Sign Up</a>
                         </div>
-                    </div><!-- end row -->
+                    </div>
                 </div>
             </div>
         </div>
+        -->
 
-        <div class="section bgcolor noover">
+        <div class="section footer" > <!-- section bgcolor noover  -->
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="tagline-message">
-                            <h3><mark class="rotate">Hello, Bonjour, Merhaba</mark> we are Genius, we have brought together the best quality services, offers, projects for you!</h3>
+                        <div class="tagline-message" >
+                            <h3><mark class="rotate">안녕하세요  &nbsp;, Bonjour&nbsp;&nbsp;, Hello&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;</mark>   we are All Is Well, we have brought together the best quality services, offers, projects for you!</h3>
                         </div>
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div><!-- end container -->
         </div><!-- end section -->
 
-        <section class="section lb nopadtop noover">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="service-box m30">
-                            <i class="flaticon-monitor"></i>
-                            <h3>Outstanding design</h3>
-                            <p>Designed to be flexible according to all your needs. Create your site with all module position.</p>
-                        </div>
-                    </div><!-- end col -->
 
-                    <div class="col-lg-4 col-md-12">
-                        <div class="service-box m30">
-                            <i class="flaticon-technology"></i>
-                            <h3>Responsive Layout</h3>
-                            <p>Genius template can be easily viewed on any mobile device. Smoothly responsive.</p>
-                        </div>
-                    </div><!-- end col -->
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="service-box m30">
-                            <i class="flaticon-gears"></i>
-                            <h3>Easy to use</h3>
-                            <p>The modules we have prepared are simple to use. No code information is needed.</p>
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
-
+<!--
         <section class="section">
             <div class="container">
                 <div class="row">
@@ -333,8 +373,8 @@
                                         <li>Unlimited Shortcodes</li>
                                         <li>Responsive Theme</li>
                                         <li>Tons of Layouts</li>
-                                    </ul><!-- end check -->
-                                </div><!-- end col-lg-4 -->
+                                    </ul>end check
+                                </div>end col-lg-4
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                     <ul class="check">
                                         <li>Font Awesome Icons</li>
@@ -342,280 +382,67 @@
                                         <li>AJAX Transitions</li>
                                         <li>High Quality Support</li>
                                         <li>Unlimited Options</li>
-                                    </ul><!-- end check -->    
-                                </div><!-- end col-lg-4 -->
+                                    </ul>end check
+                                </div>end col-lg-4
                                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 last">
                                     <ul class="check">
                                         <li>Shopping Layouts</li>
                                         <li>Pre-Defined Fonts</li>
-                                        <li>Style Changers</li>
+                                        <li>Changers</li>
                                         <li>Footer Styles</li>
                                         <li>Header Styles</li>
-                                    </ul><!-- end check -->
-                                </div><!-- end col-lg-4 --> 
-                            </div><!-- end row -->      
-                        </div><!-- end widget -->
-                    </div><!-- end col-lg-6 -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-            <div class="perspective-image hidden-sm hidden-xs hidden-md"> 
+                                    </ul>end check
+                                </div>end col-lg-4
+                            </div>end row
+                        </div>end widget
+                    </div>end col-lg-6
+                </div>end row
+            </div>end container
+            <div class="perspective-image hidden-sm hidden-xs hidden-md">
                 <img src="images/upload/p1.jpg" alt="" class="img-responsive">
             </div>
         </section>
 
-        <section class="section lb">
-            <div class="container">
-                <div class="section-title text-center">
-                    <h3>Recent Works</h3>
-                    <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
-                </div><!-- end title -->
-
-                <div class="case-top clearfix">
-                    <div class="pull-left hidden-xs">
-                        <p>Showing 1–12 of 24 results</p>
-                    </div><!-- end col -->
-
-                    <div class="pull-right">
-                        <div class="dropdown portfolio-filter">
-                            <button class="btn btn-custom dropdown-toggle" type="button" data-toggle="dropdown">Product Filter
-                            <span class="fa fa-angle-down"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a class="active" href="#" data-filter="*">All Projects</a></li>
-                                <li><a class="" href="#" data-filter=".cat1">Web Design</a></li>
-                                <li><a class="" href="#" data-filter=".cat2">Motion Design</a></li>
-                                <li><a class="" href="#" data-filter=".cat3">Graphic Design</a></li>
-                                <li><a class="" href="#" data-filter=".cat4">Development</a></li>
-                            </ul>
-                        </div><!-- end dropdown -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="portfolio row with-desc">
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_01.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Plumeria Logo Design</a></h4>
-                                    <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed sed. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat2">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_02.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Back to Life</a></h4>
-                                    <p>Aliquam erat volutpat. Donec pharetra imperdiet metus, eget cras.</p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat3">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_03.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Creative Share App</a></h4>
-                                    <p>Aenean consectetur semper lorem, sit amet volutpat. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat4">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_04.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Luana 3D Max</a></h4>
-                                    <p>Nunc vitae metus sagittis, pharetra risus non, luctus ligula volutpat. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_05.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Custom M Logo</a></h4>
-                                    <p>Proin non mollis orci, quis maximus nisi. In imperdiet neque eu metus. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat2">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_06.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Internal App Project</a></h4>
-                                    <p>Etiam fermentum, urna sed varius aliquet, sem enim ultrices arcu amet. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat3">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_07.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Audio Player App</a></h4>
-                                    <p>Ut convallis mollis est, eu tincidunt magna varius dignissim. Sed sed.</p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat4">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_08.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Geek Vector Design</a></h4>
-                                    <p>Ut porttitor aliquet auctor. Donec pellentesque libero et mattis amet. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_09.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Sweet Admin Dashboard</a></h4>
-                                    <p>Aliquam quis euismod metus, vitae iaculis ipsum. Aliquam non enim sed.</p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_10.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Smooth Keyboard Design</a></h4>
-                                    <p>Nunc aliquet mi ante. Nulla magna ante, porttitor in sagittis posuere. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat2">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_11.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Click Smart App</a></h4>
-                                    <p>Vivamus mattis sit amet ipsum vitae pretium. Proin vitae nulla nullam. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat3">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_12.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Gabfire Vector Logo</a></h4>
-                                    <p>Maecenas nisl magna, ultricies lobortis tortor vel, dapibus cras amet. </p>
-                                </div>
-                            </div><!-- end post-media -->
-                        </div><!-- end row -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
-
-        <div class="section bgcolor noover">
+ -->
+      <!--   <div class="section bgcolor noover">
             <div class="container-fluid">
                 <div class="client-box">
                     <img src="images/upload/client_01.png" alt="" class="img-responsive">
-                </div><!-- end col -->
+                </div>end col
 
                 <div class="client-box">
                     <img src="images/upload/client_02.png" alt="" class="img-responsive">
-                </div><!-- end col -->
+                </div>end col
 
                 <div class="client-box">
                     <img src="images/upload/client_03.png" alt="" class="img-responsive">
-                </div><!-- end col -->
+                </div>end col
 
                 <div class="client-box">
                     <img src="images/upload/client_04.png" alt="" class="img-responsive">
-                </div><!-- end col -->
+                </div>end col
 
                 <div class="client-box">
                     <img src="images/upload/client_05.png" alt="" class="img-responsive">
-                </div><!-- end col -->
-            </div><!-- end container -->
-        </div><!-- end section -->
+                </div>end col
+            </div>end container
+        </div>end section
+ -->
 
         <section class="section">
             <div class="container">
                 <div class="section-title text-center">
-                    <h3>Case Studies</h3>
-                    <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
+                    <h3>Summary</h3>
+                    <p>자신의 스텟을 확인해보세요 </p>
                 </div><!-- end title -->
 
                 <div id="owl-01" class="owl-carousel owl-theme owl-theme-01">
                     <div class="item">
-                        <img src="images/upload/work_03.jpg" alt="" class="img-responsive">
+                        <img src="images/upload/linegragh.png" alt="" class="img-responsive">
                         <div class="magnifier">
                             <div class="magni-desc">
                                 <h4>
-                                    <a href="#">Website Template</a>
+                                    <a href="chartjs_line.jsp">Detail </a>
                                     <small>in: websites</small>
                                 </h4>
                                 <a class="goitem" href="#"><i class="fa fa-link"></i></a>
@@ -665,7 +492,37 @@
             </div><!-- end container -->
         </section>
 
-        <section class="section parallax" data-stellar-background-ratio="0.6" style="background-image:url('images/upload/parallax_01.jpg');">
+  <section class="section lb nopadtop noover">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-md-12">
+                        <div class="service-box m30">
+                            <i class="flaticon-monitor"></i>
+                            <h3>Outstanding design</h3>
+                            <p>Designed to be flexible according to all your needs. Create your site with all module position.</p>
+                        </div>
+                    </div><!-- end col -->
+
+                    <div class="col-lg-4 col-md-12">
+                        <div class="service-box m30">
+                            <i class="flaticon-technology"></i>
+                            <h3>Responsive Layout</h3>
+                            <p>Genius template can be easily viewed on any mobile device. Smoothly responsive.</p>
+                        </div>
+                    </div><!-- end col -->
+
+                    <div class="col-lg-4 col-md-12">
+                        <div class="service-box m30">
+                            <i class="flaticon-gears"></i>
+                            <h3>Easy to use</h3>
+                            <p>The modules we have prepared are simple to use. No code information is needed.</p>
+                        </div>
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section><!-- end section -->
+
+        <section class="section parallax" data-stellar-background-ratio="0.6" style="background-image:url('images/upload/1920_1080.jpg');">
             <div class="container">
                 <div class="section-title light-color text-center">
                     <h3>Working Process</h3>
@@ -804,7 +661,7 @@
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div>
-        </section>    
+        </section>
 
         <section class="section bgcolor">
             <div class="container">
@@ -820,9 +677,10 @@
                     </div>
                 </div><!-- end row -->
                 </a>
-            </div><!-- end container -->  
+            </div><!-- end container -->
         </section>
 
+		<!------------------------------------------------------- footer ---------------------------------------------------------------->
         <footer class="section footer">
             <div class="container">
                 <div class="row">
@@ -842,7 +700,7 @@
 
                     <div class="col-lg-2 col-md-4">
                         <div class="widget clearfix">
-                            <div class="list-widget">   
+                            <div class="list-widget">
                                 <ul>
                                     <li><a href="page-about.html">About us</a></li>
                                     <li><a href="page-about-me.html">About me</a></li>
@@ -856,7 +714,7 @@
 
                     <div class="col-lg-2 col-md-4">
                         <div class="widget clearfix">
-                            <div class="list-widget">   
+                            <div class="list-widget">
                                 <ul>
                                     <li><a href="page-contact-02.html">Get In Touch</a></li>
                                     <li><a href="page-faqs.html">FAQ's</a></li>
@@ -870,32 +728,33 @@
 
                     <div class="col-lg-2 col-md-4">
                         <div class="widget clearfix">
-                            <div class="list-widget">   
+                            <div class="list-widget">
                                 <ul>
                                     <li><a href="shop-checkout.html">Checkout</a></li>
                                     <li><a href="shop-cart.html">Shopping Cart</a></li>
                                     <li><a href="shop-account.html">My Account</a></li>
-                                    <li><a href="shop-login.html">Login / Register</a></li>
+                                    <li><a href="shop-login.jsp">Login / Register</a></li>
                                 </ul>
                             </div><!-- end list-widget -->
-                        </div><!-- end widget -->
+                        </div><!-- end widssget -->
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div><!-- end container -->
         </footer><!-- end footer -->
 
+		<!--------------------------------------------------------- copyrights-------------------------------------------------- -->
         <div class="section copyrights">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-3 col-md-3">
                         <div class="cop-logo">
-                            <img src="images/logo-normal.png" alt="">
+                            <img src="images/rsz_1logo.png" alt="">
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-9 text-right">
                         <div class="cop-links">
                             <ul class="list-inline">
-                                <li>&copy; 2020 All is Well | Design: <a href="https://html.design">HTML Design</a></li>
+                                &copy; 2020 All is Well
                             </ul>
                         </div>
                     </div>
@@ -904,7 +763,10 @@
         </div>
     </div><!-- end wrapper -->
 
-    <!-- jQuery Files -->
+<!--------------------------------------------------- end Content ------------------------------------------------------------------>
+
+
+    <!-- -----------------------------------------------jQuery Files ------------------------------------------------------------------>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/carousel.js"></script>
@@ -914,12 +776,12 @@
     <script src="js/masonry.js"></script>
     <script src="js/masonry-4-col.js"></script>
     <!-- VIDEO BG PLUGINS -->
-    <script src="videos/libs/swfobject.js"></script> 
-    <script src="videos/libs/modernizr.video.js"></script> 
-    <script src="videos/libs/video_background.js"></script> 
+    <script src="videos/libs/swfobject.js"></script>
+    <script src="videos/libs/modernizr.video.js"></script>
+    <script src="videos/libs/video_background.js"></script>
     <script>
         jQuery(document).ready(function($) {
-            var Video_back = new video_background($("#home"), { 
+            var Video_back = new video_background($("#home"), {
                 "position": "absolute", //Follow page scroll
                 "z-index": "-1",        //Behind everything
                 "loop": true,           //Loop when it reaches the end
@@ -935,3 +797,4 @@
 
 </body>
 </html>
+<%-- 이건지워주세요 --%>
