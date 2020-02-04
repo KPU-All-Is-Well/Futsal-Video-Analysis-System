@@ -9,16 +9,19 @@
     src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
+
+	
+
     var queryObject = "";
     var queryObjectLen = "";
     $.ajax({
         type : 'POST',
-        url : 'googleChart_Process.jsp',
+        url : 'googleChart2_Process.jsp',
         dataType : 'json',
         success : function(data) {
             
             
-            queryObject = eval('(' + JSON.stringify(data,null, 2) + ')');             
+            queryObject = eval('(' + JSON.stringify(data,null, 3) + ')');             
             // stringify : 인자로 전달된 자바스크립트의 데이터(배열)를 JSON문자열로 바꾸기.   
             // eval: javascript 코드가 맞는지 검증하고 문자열을 자바스크립트 코드로 처리하는 함수 
             // queryObject.barlist[0].city ="korea"
@@ -39,49 +42,44 @@
     google.charts.load('current', {
         packages : [ 'corechart', 'bar' ]
     });
-    google.charts.setOnLoadCallback(drawMultSeries);
+    google.charts.setOnLoadCallback(drawVisualization);
  
-    function drawMultSeries() {
+    function drawVisualization() {
         
          var data = new google.visualization.DataTable();
          data.addColumn('string', 'id');
          data.addColumn('number', 'totalDistance');
          data.addColumn('number', 'maxSpeed');
+         data.addColumn('number', 'avgSpeed');
  
         //alert('data생성');
         for (var i = 0; i < queryObjectLen; i++) {
             var id = queryObject.barlist[i].id;
             var totalDistance = queryObject.barlist[i].totalDistance;
             var maxSpeed = queryObject.barlist[i].maxSpeed;
+            var avgSpeed = queryObject.barlist[i].avgSpeed;
             
             //alert(city + amount + per);
              data.addRows([
-                            [id,totalDistance,maxSpeed]
+                            [id, totalDistance, maxSpeed, avgSpeed]
                         ]);
  
         }
  
         var options = {
-            title : 'Total Distance you ran',
-            chartArea : {
-                width : '50%'
-            },
-            hAxis : {
-                title : 'TEST IMPORMATION',
-                minValue : 0
-            },
-            vAxis : {
-                title : 'ID'
-            }
+        		title : 'Monthly Coffee Production by Country',
+                vAxis: {title: ' : )'},
+                hAxis: {title: ' : )'},
+                seriesType: 'bars',
+                series: {5: {type: 'line'}}
         };
-        var chart = new google.visualization.BarChart(document
-                .getElementById('chart_div'));
+        var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
         chart.draw(data, options);
     }
 </script>
 </head>
 <body>
-    <div id="chart_div"></div>
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
  
 </body>
 </html>

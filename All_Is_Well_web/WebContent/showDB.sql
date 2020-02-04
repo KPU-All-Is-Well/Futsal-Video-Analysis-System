@@ -45,7 +45,7 @@ CREATE TABLE PlayInfo(  /*개개인 선수의 경기에 대한 정보*/
 	distance_15 float not null, /* 10~15분 뛴 거리*/
 	distance_20 float not null, /*15~20분 뛴 거리*/
 	totalDistance float not null, /*뛴 총 거리*/
-	
+	calorie int not null, /*20분 동안 소모한 칼로리*/
 	
 	PRIMARY KEY(id),
 	FOREIGN KEY (id) REFERENCES PlayerSignUpInfo(id)
@@ -53,15 +53,32 @@ CREATE TABLE PlayInfo(  /*개개인 선수의 경기에 대한 정보*/
 	
 );
 
+/*칼럼 추가 명령어*/
+alter table PlayInfo add calorie int not null; /*칼로리*/
+alter table PlayInfo add walk int not null; /*걷기, 조깅, 스프린트 비율*/
+alter table PlayInfo add jog int not null;
+alter table PlayInfo add sprint int not null;
 
-/*임시로 데이터 넣어보기*/
+
+/*임시로 데이터 넣어놓기*/
+INSERT INTO PlayInfo values('a', '2.5', '5', '2', '1', '3', '0.5', '1.5', '800', '10', '50', '40');
+INSERT INTO PlayInfo values('b', '2', '4', '1.5', '2', '4', '1', '3', '650', '50', '20', '30');
+INSERT INTO PlayInfo values('c', '2', '4', '1.5', '2', '4', '1', '3', '1250', '50', '20', '30');
+INSERT INTO PlayInfo values('d', '2', '4', '1.5', '2', '4', '1', '3', '2000', '35', '10', '55');
 
 
+/*
+ * 칼로리 
+ * 
+ *  55~65 -> 122kcal
+ * 65~75 -> 142kcal
+ * 75~85 -> 162kcal
+ * 85~ -> 183kcal
+ * 
+ * 뛴 거리 
+ * 
+ * */
 
-INSERT INTO PlayInfo values('a', '2.5', '5', '2', '1', '3', '0.5', '1.5');
-INSERT INTO PlayInfo values('b', '2', '4', '1.5', '2', '4', '1', '3');
-INSERT INTO PlayInfo values('c', '2', '4', '1.5', '2', '4', '1', '3');
-INSERT INTO PlayInfo values('d', '2', '4', '1.5', '2', '4', '1', '3');
 
 /*테이블 전체 데이터 보기 원할 때*/
 SELECT * FROM CoachSignUpInfo;
@@ -69,7 +86,7 @@ SELECT * FROM PlayerSignUpInfo;
 SELECT * FROM PlayInfo;
 
 /*데이터 전체 삭제 원할 때*/
-delete from PlayerSignUpInfo;
+delete from PlayInfo;
 
 /*테이블 자체 삭제 원할 때*/
 drop table PlayerSignUpInfo;
@@ -78,7 +95,7 @@ drop table PlayerSignUpInfo;
 SHOW TABLES;
 
 /*테이블 내  조회시*/
-DESC PlayerSignUpInfo;
+DESC PlayInfo;
 
 
 

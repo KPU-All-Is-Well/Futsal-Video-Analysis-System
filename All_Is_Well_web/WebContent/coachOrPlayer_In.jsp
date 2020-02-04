@@ -1,4 +1,4 @@
-
+<!-- signIn.jsp -->
 <%@ page contentType="text/html; charset=utf-8" %>
 <html>
 
@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
     <!-- Site Meta -->
-    <title>All is Well</title>
+    <title>coachOrPlayer.jsp</title>
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -32,7 +32,8 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
-
+	
+	
 	<!--[if lt IE 9]>
 		<script src="js/vendor/html5shiv.min.js"></script>
 		<script src="js/vendor/respond.min.js"></script>
@@ -49,24 +50,20 @@
 
 <body>
 	
-	<div id="main">
-		<div id="contents"> 
-			<form action="signIn_Process.jsp" method = "get">
-               	<p>아이디: <input type="text" name="id">
-               	<p>비밀번호: <input type="password" name="passwd">     
-               	
-               	<div class="form-group">
-               		<div class="text-center">
-               			<p><input type="submit" value="확인">
-               		</div>
-               	</div>
-               	   
-             </form> 
-		</div> 
+	
+ <!--  이미지 버튼 사용시
+	<div class="linkArea">
+	
+		<a href="http://www.naver.com" onclick="alert('이전');return false;"> 
+  		<img src="images/main/btn_event_prev.gif" alt="이전 이벤트 보기"/></a>
+ 		<a href="http://www.daum.net" onClick="alert('다음');">
+  		<img src="images/main/btn_event_next.gif" alt="다음 이벤트 보기"/></a>
 	
 	</div>
-
+ -->	
 	
+	
+        
         
         <!--  배경음악 끊기지 않게...
 		<frameset rows="100%,0%" frameborder=0 frame=0 border=0>
@@ -75,7 +72,22 @@
 		</frameset>
 		-->
 
-
+	 <!-- 감독 모드: 아이디, 이름, 비밀번호, 메일, 팀명 -->     
+		<div id="main">
+			
+			<div class="text-center">
+				<div id="contents"> 
+                	<form method="post" action="coachOrPlayer_In_Process.jsp"> 
+                		
+                		<input type="radio" name="role" value="선수">선수
+                		<input type="radio" name="role" value="코치">코치
+         				<div class="form-group">
+              				<p><input type="submit" value="확인">
+               			</div>
+             		</form> 
+				</div>
+			</div>
+        </div>
      
         
      <!-- -----------------------------------------------jQuery Files ------------------------------------------------------------------>
