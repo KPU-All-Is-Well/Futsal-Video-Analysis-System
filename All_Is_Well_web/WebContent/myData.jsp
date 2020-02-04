@@ -102,7 +102,7 @@
                     <ul class="primary-menu">
 
 						<!--Home ëª©ì°¨ -->
-                        <li class="child-menu"><a href="main.jsp">Home</a>
+                        <li class="child-menu"><a href="home.jsp">Home</a>
                             
                         </li>
 
@@ -228,10 +228,14 @@
  
  </html>
 
-
+<!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
   
 <div style="float:left;">
-<iframe src="chartjs_line.html" width="1200" height="600"></iframe>	
+
+<iframe src="chartjs_line.jsp" width="1200" height="600"></iframe>
+<iframe src="googleChart.html" width="1200" height="600"></iframe> 
+<iframe src="googleChart2.html" width="1200" height="600"></iframe>	
+<iframe src="googleChart3.jsp" width="1200" height="600"></iframe>	
 </div>
 
                       

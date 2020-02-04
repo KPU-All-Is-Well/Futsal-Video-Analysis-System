@@ -26,7 +26,7 @@
 		
 		try{
 				
-			String sql = "select id, passwd from CoachSignUpInfo where id =  '" + id + "'";
+			String sql = "select id, passwd from PlayerSignUpInfo where id =  '" + id + "'";
 			stmt = conn.createStatement();
 			rs = stmt.executeQuery(sql);
 			//if(stmt != null)
@@ -38,9 +38,10 @@
 				String rPasswd = rs.getString("passwd");
 							
 				if(id.equals(rId) && passwd.equals(rPasswd)){ // TT
+					session.setAttribute("id", id);
 					out.println("<script>");
 					out.println("alert('로그인 되었습니다. All Is Well에 오신 것을 진심으로 환영합니다.')");
-					out.println("location.href='main.jsp'");
+					out.println("location.href='home.jsp'");
 					out.println("</script>");	
 				}/*else{ // TF, FT, FF 
 					out.println("<script>");
