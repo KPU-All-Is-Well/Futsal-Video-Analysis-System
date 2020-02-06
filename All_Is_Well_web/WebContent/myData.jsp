@@ -222,8 +222,8 @@
 </style>
   
  <div id="btn_group" style="text-align:center"  >
- <a href="AT_Distance.jsp"> <button id="test_btn1">선수체력 </button></a> 
-<a href="AT_Stat.jsp"> <button id="test_btn2">선수스텟 </button></a>
+ <a href="AT_Distance.jsp"> <button id="test_btn1">선수 </button></a> 
+<a href="AT_Stat.jsp"> <button id="test_btn2">Team Data </button></a>
 </div>
  
  </html>
@@ -232,10 +232,14 @@
   
 <div style="float:left;">
 
-<iframe src="chartjs_line.jsp" width="1200" height="600"></iframe>
-<iframe src="googleChart.html" width="1200" height="600"></iframe> 
-<iframe src="googleChart2.html" width="1200" height="600"></iframe>	
-<iframe src="googleChart3.jsp" width="1200" height="600"></iframe>	
+<!-- 
+<iframe src="chartjs_line.jsp" width="900px" height="400px"></iframe>
+ -->
+<iframe src="googleChart.html" width="900px" height="400px"></iframe> 
+<!-- 
+<iframe src="googleChart2.html" width="900px" height="600"></iframe>	
+<iframe src="googleChart3.jsp" width="900px" height="600" ></iframe>	
+ -->
 </div>
 
                       

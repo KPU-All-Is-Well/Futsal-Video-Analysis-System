@@ -5,13 +5,14 @@
 <!--[if IE 9]> <html class="no-js ie9 fixed-layout" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!--> <html class="no-js " lang="en"> <!--<![endif]-->
 <head>
-
+<meta http-equiv="Content-Type" content="text/html;charset=euc-kr;">
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Mobile Meta -->
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <!-- viewport를 성정할 것이며, 그 설정값은 content=""에 있다, device-width는 모바일 기기의 너비에 맞춘다.  유저의 크기 확대 no -->
     
     <!-- Site Meta -->
     <title>All is Well</title>
@@ -42,7 +43,7 @@
 
 </head> 
 
-<!--ì¼ìª½ ëª©ì°¨ -->
+<!--  -->
 <body class="left-menu">
     
     <div class="menu-wrapper">
@@ -104,7 +105,7 @@
                     <ul class="primary-menu">
 
 						<!--Home ëª©ì°¨ -->
-                        <li class="child-menu"><a href="home.jsp">Home </a>
+                        <li class="child-menu"><a href="main.jsp">Home </a>
                           
 
 						<!--My Data ëª©ì°¨ -->
@@ -132,29 +133,10 @@
                     </ul>
                     
                     <div class="margin-block"></div>
-					
-					<!--
-                    <div class="menu-search">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="What you are looking?">
-                                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
-					--> <!-- end menu-search -->
 
                     <div class="margin-block"></div>
 
-					<!--
-                    <div class="menu-social">
-                        <ul class="list-inline text-center">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                    </div>--><!-- end menu -->
+		
 
                 </nav><!-- end nav-menu -->
             </div><!-- end vertical-header-wrapper -->
@@ -166,22 +148,7 @@
 	
     <div id="wrapper">
 
-		<!--  
-        <div id="home" class="video-section js-height-full">
-            <div class="overlay"></div>
-            <div class="home-text-wrapper relative container">
-                <div class="home-message">
-                    <img src="images/rsz_1biglogo.png" alt=""> 
-                    <p>Welcome to All Is Well</p>
-                    <div class="btn-wrapper">
-                        <div class="text-center">
-                            <a href="#" class="btn btn-primary">Sign In</a> &nbsp;<a href="#" class="btn btn-default">Sign Up</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
+
 
         <div class="section footer" > <!-- section bgcolor noover  -->
             <div class="container"> 
@@ -195,150 +162,85 @@
             </div><!-- end container -->
         </div><!-- end section -->
 
-      
-<!-- 
-        <section class="section">
+       
+
+
+
+        <section class="section parallax" data-stellar-background-ratio="0.1 " style="background-image:url('images/upload/1920_1080(8).jpg');">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-7 col-md-12">
-                        <div class="text-widget">
-                            <h3>Powerful template features</h3>
-
-                            <p>Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla nunc dui, tristique in <a href="#">semper vel</a>, congue sed ligula. Nam dolor ligula, faucibus id sodales in, auctor fringill torquent per conubia nostra.</p>
-
-                            <div class="clearfix"></div>
-
-                            <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 first">
-                                    <ul class="check">
-                                        <li>Custom Shortcodes</li>
-                                        <li>Visual Page Builder</li>
-                                        <li>Unlimited Shortcodes</li>
-                                        <li>Responsive Theme</li>
-                                        <li>Tons of Layouts</li>
-                                    </ul>end check
-                                </div>end col-lg-4
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                    <ul class="check">
-                                        <li>Font Awesome Icons</li>
-                                        <li>Pre-Defined Colors</li>
-                                        <li>AJAX Transitions</li>
-                                        <li>High Quality Support</li>
-                                        <li>Unlimited Options</li>
-                                    </ul>end check    
-                                </div>end col-lg-4
-                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 last">
-                                    <ul class="check">
-                                        <li>Shopping Layouts</li>
-                                        <li>Pre-Defined Fonts</li>
-                                        <li>Changers</li>
-                                        <li>Footer Styles</li>
-                                        <li>Header Styles</li>
-                                    </ul>end check
-                                </div>end col-lg-4 
-                            </div>end row      
-                        </div>end widget
-                    </div>end col-lg-6
-                </div>end row
-            </div>end container
-            <div class="perspective-image hidden-sm hidden-xs hidden-md"> 
-                <img src="images/upload/p1.jpg" alt="" class="img-responsive">
-            </div>
-        </section>
-
- -->
-      <!--   <div class="section bgcolor noover">
-            <div class="container-fluid">
-                <div class="client-box">
-                    <img src="images/upload/client_01.png" alt="" class="img-responsive">
-                </div>end col
-
-                <div class="client-box">
-                    <img src="images/upload/client_02.png" alt="" class="img-responsive">
-                </div>end col
-
-                <div class="client-box">
-                    <img src="images/upload/client_03.png" alt="" class="img-responsive">
-                </div>end col
-
-                <div class="client-box">
-                    <img src="images/upload/client_04.png" alt="" class="img-responsive">
-                </div>end col
-
-                <div class="client-box">
-                    <img src="images/upload/client_05.png" alt="" class="img-responsive">
-                </div>end col
-            </div>end container
-        </div>end section
- -->
-
-        <section class="section">
-            <div class="container">
-                <div class="section-title text-center">
-                    <h3>Summary</h3>
-                    <p>자신의 스텟을 확인해보세요 </p>
+                <div class="section-title light-color text-center">
+                    <h3>All is well </h3>
+                    <h1 style="color:gray; font-size: 16px;">Welcome to All is well analysis program </h1>
                 </div><!-- end title -->
 
-                <div id="owl-01" class="owl-carousel owl-theme owl-theme-01">
-                    <div class="item">
-                        <img src="images/upload/linegragh.png" alt="" class="img-responsive">
-                        <div class="magnifier">
-                            <div class="magni-desc">
-                                <h4>
-                                    <a href="chartjs_line.html">Detail </a>
-                                    <small>in: websites</small>
-                                </h4>
-                                <a class="goitem" href="#"><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="process-box" OnClick="location.href ='AT_Distance.jsp'" style="cursor:pointer;">			
+                        		<!-- 버튼에 링크 거는 법 -->
+                        		
+                            <div class="process-front text-center">
+                                <i class="flaticon-lightbulb-idea"></i>
+                                <h3>We plan properly</h3>
+                            </div><!-- end front -->
 
-                    <div class="item">
-                        <img src="images/upload/work_04.jpg" alt="" class="img-responsive">
-                        <div class="magnifier">
-                            <div class="magni-desc">
-                                <h4>
-                                    <a href="#">CSS3 Animation</a>
-                                    <small>in: animations</small>
-                                </h4>
-                                <a class="goitem" href="#"><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                            <div class="process-end text-center">
+                                <h3>Result</h3>
+                                <p>Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis.</p>
+                            </div><!-- end end -->
+                        </div><!-- end process -->
+                    </div><!-- end col -->
 
-                    <div class="item">
-                        <img src="images/upload/work_01.jpg" alt="" class="img-responsive">
-                        <div class="magnifier">
-                            <div class="magni-desc">
-                                <h4>
-                                    <a href="#">Mockup Template</a>
-                                    <small>in: mockups</small>
-                                </h4>
-                                <a class="goitem" href="#"><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="process-box" OnClick="location.href ='AT_Distance.jsp'" style="cursor:pointer;">
+                            <div class="process-front text-center">
+                                <i class="flaticon-computer"></i>
+                                <h3>Exactly anlysis program</h3>
+                            </div><!-- end front -->
 
-                    <div class="item">
-                        <img src="images/upload/work_02.jpg" alt="" class="img-responsive">
-                        <div class="magnifier">
-                            <div class="magni-desc">
-                                <h4>
-                                    <a href="#">Mockup Template</a>
-                                    <small>in: css3</small>
-                                </h4>
-                                <a class="goitem" href="#"><i class="fa fa-link"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                            <div class="process-end text-center">
+                                <h3>Result</h3>
+                                <p>Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis.</p>
+                            </div><!-- end end -->
+                        </div><!-- end process -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-3 col-md-6">
+						<div class="process-box" OnClick="location.href ='AT_Distance.jsp'" style="cursor:pointer;">	
+                            <div class="process-front text-center">
+                                <i class="flaticon-people"></i>
+                                <h3>We can access simply</h3>
+                            </div><!-- end front -->
+
+                            <div class="process-end text-center">
+                                <h3>Result</h3>
+                                <p>Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis.</p>
+                            </div><!-- end end -->
+                        </div><!-- end process -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-3 col-md-6">
+                        <div class="process-box" OnClick="location.href ='AT_Distance.jsp'" style="cursor:pointer;">	
+                            <div class="process-front text-center">
+                                <i class="flaticon-smiley"></i>
+                                <h3>You'll be happy</h3>
+                            </div><!-- end front -->
+
+                            <div class="process-end text-center">
+                                <h3>Result</h3>
+                                <p>Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis.</p>
+                            </div><!-- end end -->
+                        </div><!-- end process -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
             </div><!-- end container -->
         </section>
 
-  <section class="section lb nopadtop noover">
+        
+        <!-- ---------------------- -->
+          <section class="section lb nopadtop noover">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
+                <div class="row">  <!-- 가로로 쌓기  -->
+                    <div class="col-lg-4 col-md-12"> <!-- 열-md-열 크기  -->
                         <div class="service-box m30">
                             <i class="flaticon-monitor"></i>
                             <h3>Outstanding design</h3>
@@ -364,164 +266,224 @@
                 </div><!-- end row -->
             </div><!-- end container -->
         </section><!-- end section -->
-
-        <section class="section parallax" data-stellar-background-ratio="0.6" style="background-image:url('images/upload/1920_1080.jpg');">
+        
+                <section class="section lb">
             <div class="container">
-                <div class="section-title light-color text-center">
-                    <h3>Working Process</h3>
+                <div class="section-title text-center">
+                    <h3>Recent Works</h3>
                     <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
                 </div><!-- end title -->
 
+                <div class="case-top clearfix">
+                    <div class="pull-left hidden-xs">
+                        <p>Showing 1–12 of 24 results</p>
+                    </div><!-- end col -->
+
+                    <div class="pull-right">
+                        <div class="dropdown portfolio-filter">
+                            <button class="btn btn-custom dropdown-toggle" type="button" data-toggle="dropdown">Product Filter
+                            <span class="fa fa-angle-down"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a class="active" href="#" data-filter="*">All Projects</a></li>
+                                <li><a class="" href="#" data-filter=".cat1">개인 스탯 </a></li>
+                                <li><a class="" href="#" data-filter=".cat2">팀 스탯 </a></li>
+                                <li><a class="" href="#" data-filter=".cat3">미정 </a></li>
+                                <li><a class="" href="#" data-filter=".cat4">Development</a></li>
+                            </ul>
+                        </div><!-- end dropdown -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+
                 <div class="row">
-                    <div class="col-lg-3 col-md-6">
-                        <div class="process-box">
-                            <div class="process-front text-center">
-                                <i class="flaticon-lightbulb-idea"></i>
-                                <h3>We plan properly</h3>
-                            </div><!-- end front -->
+                    <div class="col-md-12">
+                        <div class="portfolio row with-desc">
+                        
+                            <div class="post-media pitem item-w1 item-h1 cat1">
+                                <div class="entry">
+                                    <img src="images/upload/run_son.jpg" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                        
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">뛴 거리 </a></h4>
+                                    <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed sed. </p>
+                                </div>
+                            </div><!-- end post-media -->
 
-                            <div class="process-end text-center">
-                                <h3>Result</h3>
-                                <p>Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis.</p>
-                            </div><!-- end end -->
-                        </div><!-- end process -->
-                    </div><!-- end col -->
+                            <div class="post-media pitem item-w1 item-h1 cat2">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_02.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#"> 팀 뛴 거리 </a></h4>
+                                    <p>Aliquam erat volutpat. Donec pharetra imperdiet metus, eget cras.</p>
+                                </div>
+                            </div><!-- end post-media -->
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="process-box">
-                            <div class="process-front text-center">
-                                <i class="flaticon-computer"></i>
-                                <h3>We start project</h3>
-                            </div><!-- end front -->
+                            <div class="post-media pitem item-w1 item-h1 cat3">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_03.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">Creative Share App</a></h4>
+                                    <p>Aenean consectetur semper lorem, sit amet volutpat. </p>
+                                </div>
+                            </div><!-- end post-media -->
 
-                            <div class="process-end text-center">
-                                <h3>Result</h3>
-                                <p>Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis.</p>
-                            </div><!-- end end -->
-                        </div><!-- end process -->
-                    </div><!-- end col -->
+                            <div class="post-media pitem item-w1 item-h1 cat4">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_04.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">Luana 3D Max</a></h4>
+                                    <p>Nunc vitae metus sagittis, pharetra risus non, luctus ligula volutpat. </p>
+                                </div>
+                            </div><!-- end post-media -->
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="process-box">
-                            <div class="process-front text-center">
-                                <i class="flaticon-people"></i>
-                                <h3>We showcase work</h3>
-                            </div><!-- end front -->
+                            <div class="post-media pitem item-w1 item-h1 cat1">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_05.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">히트 맵 </a></h4>
+                                    <p>Proin non mollis orci, quis maximus nisi. In imperdiet neque eu metus. </p>
+                                </div>
+                            </div><!-- end post-media -->
 
-                            <div class="process-end text-center">
-                                <h3>Result</h3>
-                                <p>Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis.</p>
-                            </div><!-- end end -->
-                        </div><!-- end process -->
-                    </div><!-- end col -->
+                            <div class="post-media pitem item-w1 item-h1 cat2">
+                                <div class="entry">
+                                    <img src="images/upload/run_son.jpg" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">팀 히트맵 </a></h4>
+                                    <p>Etiam fermentum, urna sed varius aliquet, sem enim ultrices arcu amet. </p>
+                                </div>
+                            </div><!-- end post-media -->
 
-                    <div class="col-lg-3 col-md-6">
-                        <div class="process-box">
-                            <div class="process-front text-center">
-                                <i class="flaticon-smiley"></i>
-                                <h3>You'll be happy</h3>
-                            </div><!-- end front -->
+                            <div class="post-media pitem item-w1 item-h1 cat3">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_07.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">Audio Player App</a></h4>
+                                    <p>Ut convallis mollis est, eu tincidunt magna varius dignissim. Sed sed.</p>
+                                </div>
+                            </div><!-- end post-media -->
 
-                            <div class="process-end text-center">
-                                <h3>Result</h3>
-                                <p>Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis.</p>
-                            </div><!-- end end -->
-                        </div><!-- end process -->
+                            <div class="post-media pitem item-w1 item-h1 cat4">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_08.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">Geek Vector Design</a></h4>
+                                    <p>Ut porttitor aliquet auctor. Donec pellentesque libero et mattis amet. </p>
+                                </div>
+                            </div><!-- end post-media -->
+
+                            <div class="post-media pitem item-w1 item-h1 cat1">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_09.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">스피드 </a></h4>
+                                    <p>Aliquam quis euismod metus, vitae iaculis ipsum. Aliquam non enim sed.</p>
+                                </div>
+                            </div><!-- end post-media -->
+
+                            <div class="post-media pitem item-w1 item-h1 cat1">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_10.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">개인 랭킹 </a></h4>
+                                    <p>Nunc aliquet mi ante. Nulla magna ante, porttitor in sagittis posuere. </p>
+                                </div>
+                            </div><!-- end post-media -->
+
+                            <div class="post-media pitem item-w1 item-h1 cat2">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_11.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">팀 평균 속도 </a></h4>
+                                    <p>Vivamus mattis sit amet ipsum vitae pretium. Proin vitae nulla nullam. </p>
+                                </div>
+                            </div><!-- end post-media -->
+
+                            <div class="post-media pitem item-w1 item-h1 cat3">
+                                <div class="entry">
+                                    <img src="images/upload/desc_work_12.png" alt="" class="img-responsive">
+                                    <div class="magnifier">
+                                        <a class="golink" href="#">
+                                           <i class="fa fa-link"></i>
+                                        </a>
+                                    </div><!-- end magnifier -->
+                                </div><!-- end entry -->
+                                <div class="item-desc">
+                                    <h4><a href="#">Gabfire Vector Logo</a></h4>
+                                    <p>Maecenas nisl magna, ultricies lobortis tortor vel, dapibus cras amet. </p>
+                                </div>
+                            </div><!-- end post-media -->
+                        </div><!-- end row -->
                     </div><!-- end col -->
                 </div><!-- end row -->
             </div><!-- end container -->
-        </section>
-
-        <section class="section lb">
-            <div class="container">
-                <div class="section-title text-center">
-                    <h3>Latest News</h3>
-                    <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu.</p>
-                </div><!-- end title -->
-
-                <div class="row text-center">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="#"><img src="images/upload/blog_01.jpg" alt="" class="img-responsive"></a>
-                            </div><!-- end media -->
-
-                            <div class="blog-desc">
-                                <h4><a href="#">The most suitable web design</a></h4>
-                                <p>Praesent at suscipit ligula. Suspendisse pre neque, quis suscipit enim. sed maximus, mia auctor.</p>
-                            </div><!-- end blog-desc -->
-
-                            <div class="post-meta">
-                                <ul class="list-inline">
-                                    <li><a href="#">21 March 2017</a></li>
-                                    <li><a href="#">by HTML Design</a></li>
-                                    <li><a href="#">14 Share</a></li>
-                                </ul>
-                            </div><!-- end post-meta -->
-                        </div><!-- end blog -->
-                    </div><!-- end col -->
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="#"><img src="images/upload/blog_02.jpg" alt="" class="img-responsive"></a>
-                            </div><!-- end media -->
-
-                            <div class="blog-desc">
-                                <h4><a href="#">The most suitable web design</a></h4>
-                                <p>Sed suscipit neque in erat posuere tristique aliquam porta vestibulum. Cras placerat tincidunt. </p>
-                            </div><!-- end blog-desc -->
-
-                            <div class="post-meta">
-                                <ul class="list-inline">
-                                    <li><a href="#">20 March 2017</a></li>
-                                    <li><a href="#">by HTML Design</a></li>
-                                    <li><a href="#">11 Share</a></li>
-                                </ul>
-                            </div><!-- end post-meta -->
-                        </div><!-- end blog -->
-                    </div><!-- end col -->
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="blog-box">
-                            <div class="post-media">
-                                <a href="#"><img src="images/upload/blog_03.jpg" alt="" class="img-responsive"></a>
-                            </div><!-- end media -->
-
-                            <div class="blog-desc">
-                                <h4><a href="#">Design for all mobile devices</a></h4>
-                                <p>Suspendisse scelerisque ex ac mattis molestie vel enim ut massa placerat faucibus sed ut dui vivamus. </p>
-                            </div><!-- end blog-desc -->
-
-                            <div class="post-meta">
-                                <ul class="list-inline">
-                                    <li><a href="#">19 March 2017</a></li>
-                                    <li><a href="#">by HTML Design</a></li>
-                                    <li><a href="#">44 Share</a></li>
-                                </ul>
-                            </div><!-- end post-meta -->
-                        </div><!-- end blog -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div>
-        </section>    
-
-        <section class="section bgcolor">
-            <div class="container">
-                <a href="#">
-                <div class="row callout">
-                    <div class="col-md-4 text-center">
-                        <h3><sup>$</sup>49.99</h3>
-                        <h4>Start your awesome project today!</h4>
-                    </div><!-- end col -->
-
-                    <div class="col-md-8">
-                        <p class="lead">Limited time offer! Your Agency profile will be added to our "Agencies" directory as well. </p>
-                    </div>
-                </div><!-- end row -->
-                </a>
-            </div><!-- end container -->  
-        </section>
+        </section><!-- end section -->
+        
         
 		<!------------------------------------------------------- footer ---------------------------------------------------------------->
         <footer class="section footer">
@@ -621,8 +583,8 @@
     <!-- VIDEO BG PLUGINS -->
     <script src="videos/libs/swfobject.js"></script> 
     <script src="videos/libs/modernizr.video.js"></script> 
-    <script src="videos/libs/video_background.js"></script> 
-    <script>
+    <script src="videos/libs/video_background.js"></script>
+      <script>
         jQuery(document).ready(function($) {
             var Video_back = new video_background($("#home"), { 
                 "position": "absolute", //Follow page scroll
@@ -640,4 +602,3 @@
 
 </body>
 </html>
-<!-- 이건 지워주세요  -->

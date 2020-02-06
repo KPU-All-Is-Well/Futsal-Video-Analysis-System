@@ -179,11 +179,11 @@ MENU
 }
 
 .vertical-header-wrapper {
-    width: 100%;
+    width: 181%;
     height: 100%;
-    background: rgba(0, 0, 0, 1) url("images/menubg.jpg") no-repeat scroll center center;
+    background: #090823 no-repeat scroll center center;
     z-index: 10;
-    overflow-x: hidden;
+    overflow-x: hidden;x
     min-width: 260px;
     overflow-y: auto
 }
@@ -668,7 +668,9 @@ SECTIONS
 
 .container {
     width: 100%;
+    hight: 100px;
     max-width: 1180px;
+  
 }
 
 .section {
@@ -676,7 +678,7 @@ SECTIONS
     position: relative;
     overflow: hidden;
     display: block;
-    background-color: #ffffff;
+    background-color: #090823;
 }
 
 .section.noover {
@@ -701,8 +703,9 @@ SECTIONS
     padding: 0;
 }
 
+/* 중간 아래  */
 .section.lb {
-    background-color: #f7f6f6
+    background-color: #193349;
 }
 
 .section.db {
@@ -1087,7 +1090,7 @@ FOOTER
 *********************/
 
 .section.footer {
-    background-color: #000
+    background-color: #193349
 }
 
 .section.footer.light-footer {
@@ -1120,7 +1123,7 @@ FOOTER
 
 .copyrights {
     padding: 25px 0;
-    background-color: #151515;
+    background-color: #090823;
 }
 
 .newsletter-widget .form-control {
