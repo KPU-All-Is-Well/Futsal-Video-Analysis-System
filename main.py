@@ -1,263 +1,228 @@
-from __future__ import print_function	# print_function 이라는 모듈에서 future만 뽑아서 사용 # python 2에서 python3의 문법을 사용하기 위해
-import numpy as np						# np numarray 이미지 파일을 배열형식으로 뽑아낼때 사용 
-import cv2								# 오픈cv 열기
-import os								# 운영체제 기능을 파이썬에서 사용 ex 파일입출력
-import sys								# 환경변수같은 인수를 입력받는 모듈
-import random							# 난수 생성할때 사용하는 모듈
+from __future__ import print_function    # print_function 이라는 모듈에서 future만 뽑아서 사용 # python 2에서 python3의 문법을 사용하기 위해
+import numpy as np                        # np numarray 이미지 파일을 배열형식으로 뽑아낼때 사용 
+import cv2                                # 오픈cv 열기
+import os                                # 운영체제 기능을 파이썬에서 사용 ex 파일입출력
+import sys                                # 환경변수같은 인수를 입력받는 모듈
+import random                            # 난수 생성할때 사용하는 모듈
 import imutils                          # image utils 이미지 관련된 유틸리티 - opencv와 관련된 라이브러리
-
-#import pycuda
+# import pycuda
 import math
 import collections
 
-
-# 여러 트레커를 사용할 수 있게 트레커들의 이름을 저장한 준비리스트 - 엘레먼트를 계속 추가할 수 있음
-# 튜플은 변경이 불가
-trackerTypes = ['BOOSTING', 'MIL', 'KCF','TLD', 'MEDIANFLOW', 'GOTURN', 'MOSSE', 'CSRT']
-
 # to have different colours in plotting heatmaps for different players
-# 히트맵에 각기 다른 색상을 표현하기 위한 튜플로 된 리스트  12개??
+# 히트맵에 각기 다른 색상을 표현하기 위한 튜플로 된 리스트  12개
 colors123 = [(0,0,0),(255,255,255),(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,255),(192,192,192),(244,164,96),(128,128,0),(240, 50, 230)]
-
-cnt = 0
- 
-# 트레커를 지정하는 함수
-def createTrackerByName(trackerType):
-	# Create a tracker based on tracker name
-	if trackerType == trackerTypes[0]:
-		tracker = cv2.TrackerBoosting_create()
-	elif trackerType == trackerTypes[1]:  
-		tracker = cv2.TrackerMIL_create()
-	elif trackerType == trackerTypes[2]:
-		tracker = cv2.TrackerKCF_create()
-	elif trackerType == trackerTypes[3]:
-		tracker = cv2.TrackerTLD_create()
-	elif trackerType == trackerTypes[4]:
-		tracker = cv2.TrackerMedianFlow_create()
-	elif trackerType == trackerTypes[5]:
-		tracker = cv2.TrackerGOTURN_create()
-	elif trackerType == trackerTypes[6]:
-		tracker = cv2.TrackerMOSSE_create()
-	elif trackerType == trackerTypes[7]:
-		tracker = cv2.TrackerCSRT_create()
-	else: #사용자가 트래킹 모드 입력 안 했을 경우
-		tracker = None
-		print('Incorrect tracker name')
-		print('Available trackers are:')
-		for t in trackerTypes:
-			print(t)
-	return tracker
 
 if __name__ == '__main__':
 
-	#print("Default tracking algoritm is CSRT \n"
-	#      "Available tracking algorithms are:\n")
-	#for t in trackerTypes:
-	#    print(t)      
-  
-	trackerType = 'CSRT'
-	videoPath = sys.argv[1]   # Read video. here it is pano.mp4 in the same directory
- #videoPath='drone.mp4' 이런식으로 패스를 정해줘도 됨-길
+    tracker = cv2.TrackerCSRT_create()  # CSRT tracker 초기화
+    videoPath = 'drone2.mp4'   # Read video. here it is pano.mp4 in the same directory
  
-	# Create a video capture object to read videos 
-	cap = cv2.VideoCapture(videoPath)#비디오를 읽는 함수-길
-	# Set video to load
-	success, frame123 = cap.read()
+    # Create a video capture object to read videos 
+    cap = cv2.VideoCapture(videoPath)#비디오를 읽는 함수-길
+    
+    # Set video to load
+    success, frame = cap.read()
+    
+    fps = cap.get(cv2.CAP_PROP_FPS)
+    fps = round(fps,0)
+    print(fps)
 
-	frame123 = imutils.resize(frame123, width=600) # 리사이징
-	
-	backSub = cv2.createBackgroundSubtractorMOG2()  
+    frame = imutils.resize(frame, width=600) # 리사이징
+    
+    backSub = cv2.createBackgroundSubtractorMOG2() # cv에서 제공하는 배경제거를 위한 마스크 초기화
 
     
-    
-    
-	heatmap_background = cv2.imread('heatmap.png')    # heatmap.png as heatmap window's background
-	original = cv2.imread('heatmap.png') # 
-	f = open( 'file.txt', 'w' )
-	# quit if unable to read the video file
-	if not success:
-		print('Failed to read video')
-		sys.exit(1)
+    heatmap_background = cv2.imread('heatmap.png')    # heatmap.png as heatmap window's background
+    original = cv2.imread('heatmap.png')
+    f = open( 'file.txt', 'w' )
+    # quit if unable to read the video file
+    if not success:
+        print('Failed to read video')
+        sys.exit(1)
 
-	## Select boxes 빈 리스트 선언
-	bboxes = []
-	colors = [] 
-	p=0
-	# OpenCV's selectROI function doesn't work for selecting multiple objects in Python
-	# So we will call this function in a loop till we are done selecting all objects
-	while True:
-		# apply perspective transform for pano.mp4 to improve player detection accuracy
-		# here its done for first frame to enable better selection of ROI.
-		# hardcoded for pano.mp4 
-
-		# cv2.circle(frame123, (583, 50), 5, (0, 0, 255), -1)
-		# cv2.circle(frame123, (1342, 50), 5, (0, 0, 255), -1)
-		# cv2.circle(frame123, (11, 390), 5, (0, 0, 255), -1)
-		# cv2.circle(frame123, (1911, 390), 5, (0, 0, 255), -1)
-		# pts1 = np.float32([[583, 50], [1342, 50], [25, 390], [1911, 390]])
-		# pts2 = np.float32([[0, 0], [1800, 0], [0, 600], [1800, 600]])
-		# matrix = cv2.getPerspectiveTransform(pts1, pts2)
-
-		# frame = cv2.warpPerspective(frame123, matrix, (1800, 600))
-
-		frame = frame123
-		fgMask = backSub.apply(frame)
-		type(frame)
-		print(type(frame))
-
-		print('Select the 6 Home Team Players')
-		print('Select the 6 Away Team Players')
-
-		# ?draw bounding boxes over objects
-		# ?selectROI's default behaviour is to draw box starting from the center
-		# ?when fromCenter is set to false, you can draw box starting from top left corner
-		bbox = cv2.selectROI('MultiTracker', frame) #roi 를 선택하는 함수-길
-  #roi 정보가 bbox 에 저장되어 사용된다-길
-  #tracker.init(frame123, bbox) # 오브젝트 트래커가 frame123과 bboc를 따라가게끔 설정한다.
-		bboxes.append(bbox)
-		if (p<6):
-			colors.append((0,0,255))
-		else:
-			colors.append((255,0,0))
-		print("Press q to quit selecting boxes and start tracking")
-		print("Press any other key to select next object : ", p)
-		p=p+1
-		k = cv2.waitKey(0) & 0xFF
-		if (k == 113):  # q is pressed
-			break
-	print('Selected bounding boxes {}'.format(bboxes))
-
-	## Initialize MultiTracker	
-	# There are two ways you can initialize multitracker
-	# 1. tracker = cv2.MultiTracker("CSRT")
-	# All the trackers added to this multitracker
-	# will use CSRT algorithm as default
-	# 2. tracker = cv2.MultiTracker()
-	# No default algorithm specified
-
-	# Initialize MultiTracker with tracking algo
-	# Specify tracker type
-  
-	# Create MultiTracker object
-	multiTracker = cv2.MultiTracker_create()
-	#좌표를 표현할 이름있는 튜플
-	Point=collections.namedtuple('Point',['x','y'])
-	lastPoint=Point(x=-1, y=-1)
-	estimate_distance=0
-	distance = 0
-	frame_cnt = 0
-	test_distance=0
-	moving_weight=0
-    
-
-	# Initialize MultiTracker 
-	for bbox in bboxes:
-		multiTracker.add(createTrackerByName(trackerType), fgMask, bbox)
-
-	# Process video and track objects
-	while cap.isOpened():#비디오가 잘 열렸는지 확인하는 함수-길
-		success, frame123 = cap.read()# cap.read() 는 동영상을 1프레임씩 읽어오는 것-길
-		frame123 = imutils.resize(frame123, width=600) # 리사이징
-# if not success:
-#    exit()     #영상이 읽히지 않으면 종료한다.-길
-		# apply perspective transform for pano.mp4 to improve player detection accuracy
-		# hardcoded for pano.mp4 
-		# cv2.circle(frame123, (583, 50), 5, (0, 0, 255), -1)
-		# cv2.circle(frame123, (1342, 50), 5, (0, 0, 255), -1)
-		# cv2.circle(frame123, (11, 390), 5, (0, 0, 255), -1)
-		# cv2.circle(frame123, (1911, 390), 5, (0, 0, 255), -1)
-		# pts1 = np.float32([[583, 50], [1342, 50], [25, 390], [1911, 390]])
-		# pts2 = np.float32([[0, 0], [1800, 0], [0, 600], [1800, 600]])
-		# matrix = cv2.getPerspectiveTransform(pts1, pts2)
-
-		#frame = cv2.warpPerspective(frame123, matrix, (1800, 600))
-		frame = frame123
-		fgMask = backSub.apply(frame)
-
+    ## Select boxes 빈 리스트 선언
+    bboxes = []
+    colors = [] 
+    p=0
+    # OpenCV's selectROI function doesn't work for selecting multiple objects in Python
+    # So we will call this function in a loop till we are done selecting all objects
+    while True:
         
-		if not success:
-			break
+        fgMask = backSub.apply(frame)   # frame에 배경제거 mask를 적용시켜 이미지 생성
 
-		# get updated location of objects in subsequent frames
-		success, boxes = multiTracker.update(frame)#update() 따라가게 만드는 함수 - 길
-		l,b ,channels = frame.shape  #maintain all tabs in same shape
-		heatmap_background = cv2.resize(heatmap_background,(b,l))
-		original = cv2.resize(original,(b,l))
-		radar = original.copy()
-		# draw tracked objects
-		for i, newbox in enumerate(boxes):
-			p1 = (int(newbox[0]), int(newbox[1]))
-			p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
-			cv2.rectangle(frame, p1, p2, colors[i], 2, 1)
+        print('Select the Player')
+
+        # ?draw bounding boxes over objects
+        # ?selectROI's default behaviour is to draw box starting from the center
+        # ?when fromCenter is set to false, you can draw box starting from top left corner
+        bbox = cv2.selectROI('MultiTracker', frame) #roi 를 선택하는 함수-길
+                                                    #roi 정보가 bbox 에 저장되어 사용된다-길
+                                                    #tracker.init(frame123, bbox) # 오브젝트 트래커가 frame123과 bboc를 따라가게끔 설정한다.
+        bboxes.append(bbox)
+        if (p<6):
+            colors.append((0,0,255))
+        else:
+            colors.append((255,0,0))
+        print("Press q to quit selecting boxes and start tracking")
+        print("Press any other key to select next object : ", p)
+        p=p+1
+        k = cv2.waitKey(0) & 0xFF
+        if (k == 113):  # q is pressed
+            break
+    print('Selected bounding boxes {}'.format(bboxes))
+
+
+
+    # Create MultiTracker object
+    multiTracker = cv2.MultiTracker_create()
+    
+    #좌표를 표현할 이름있는 튜플
+    Point = collections.namedtuple('Point',['x','y'])
+    lastPoint = Point(x=-1, y=-1)   # 과거의 좌표값을 저장할 튜플, -1로 초기화
+    estimate_distance = 0           # 영상기반 추정거리값을 저장
+    distance = 0                    # 거리값을 저장
+    frame_cnt = 0                   # 프레임을 카운팅함                   
+    moving_weight = 0               # 움직인 거리의 비중을 저장
+    top_speed = 0                   # 최고 속도를 저장
+    accumulate_speed = 0            # 속도들의 누적값
+    temp_distance = 0               # 뛴 거리를 임시저장
+    section_distance = 0            # 특정 시간마다의 뛴거리
+
+    
+
+    # Initialize MultiTracker 
+    for bbox in bboxes:
+        multiTracker.add(tracker, fgMask, bbox)
+
+    # Process video and track objects
+    while cap.isOpened():#비디오가 잘 열렸는지 확인하는 함수-길
+        success, frame = cap.read()# cap.read() 는 동영상을 1프레임씩 읽어오는 것-길
+
+        if not success:
+            break
+
+        frame = imutils.resize(frame, width=600) # 리사이징
+        
+        fgMask = backSub.apply(frame)   # 프레임에 마스크를 적용시켜 그레이스케일로 만들어줌
+
+
+        # get updated location of objects in subsequent frames
+        success, boxes = multiTracker.update(frame)  #update() 따라가게 만드는 함수 - 길
+        l,b ,channels = frame.shape  #maintain all tabs in same shape
+        heatmap_background = cv2.resize(heatmap_background,(b,l))
+        original = cv2.resize(original,(b,l))
+        radar = original.copy()
+        # draw tracked objects
+        for i, newbox in enumerate(boxes):
+            p1 = (int(newbox[0]), int(newbox[1]))
+            p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
+            cv2.rectangle(frame, p1, p2, colors[i], 2, 1)
                         # rectangle(): 직사각형을 그리는 함수-길
                         #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
 
-			if (i<6):
-				cv2.putText(frame, str(i), (int(newbox[0]), int(newbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
+            if (i<6):
+                cv2.putText(frame, str(i), (int(newbox[0]), int(newbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
 
-				cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (0,0,255), -1)
-				#Radar_Window
+                cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (0,0,255), -1)
+                #Radar_Window
 
-				overlay=heatmap_background.copy()
-				alpha = 0.1  # Transparency factor.
-				cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 10, colors123[i], -1)   #Heatmap_Window
-				# Following line overlays transparent rectangle over the image
-				heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
-				
-				if(frame_cnt==0) :
-					lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))
-				if((frame_cnt%30)==0) :
-					a = (int)(newbox[0]) - lastPoint.x
-					b = (int)(newbox[1]) - lastPoint.y
-					
-					moving_weight=math.sqrt(math.pow(a,2) + math.pow(b,2)) # 초당 움직인 거리(즉 속도)
-					if(moving_weight<1.5) :
-						moving_weight=0
+                overlay=heatmap_background.copy()
+                alpha = 0.1  # Transparency factor.
+                cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 10, colors123[i], -1)   #Heatmap_Window
+                # Following line overlays transparent rectangle over the image
+                heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
+                
+                
+                # 거리와 속도 추정치를 계산하기 위한 코드들
+                if(frame_cnt==0) :
+                    lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 첫 프레임에서는 과거 좌표를 현재좌표와 동일하게 초기화함
                     
-					estimate_distance = estimate_distance + moving_weight
+                if((frame_cnt%fps)==0) :     # 프레임기반 1초(fps)마다 동작하는 코드
+                    # 초당 프레임간 발생한 거리차이를 a, b에 누적시킴 
+                    a = (int)(newbox[0]) - lastPoint.x
+                    b = (int)(newbox[1]) - lastPoint.y
                     
-					distance = 8 * estimate_distance / 100
-					distance = round(distance,2)
-					speed = (8 * moving_weight / 100)*3.6
-					speed = round(speed,2)
-					                    
-					# print(estimate_distance - test_distance)
-					# test_distance = estimate_distance
-					lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))
-				frame_cnt=frame_cnt+1
+                    moving_weight=math.sqrt(math.pow(a,2) + math.pow(b,2)) # 초당 움직인 거리(즉 속도) - 유클리디안 거리측정 사용
+                    
+                    # 트레커 추적중 발생하는 진동을 최소화하기위한 코드
+                    if(moving_weight < 2) :
+                        moving_weight=0
+                    
+                    estimate_distance = estimate_distance + moving_weight   # 추정거리값을 누적시킴
+                    
+                    distance = 8 * estimate_distance / 100      # 추정거리에서 도출된 값에 가중치를 두고 m단위로 변환 
+                    distance = round(distance,2)                # 반올림 처리           
+                    speed = (8 * moving_weight / 100)*3.6       # moving_weight를 통해 구해진 m/s에 3.6을 곱해 속도를 k/h로 바꿔줌
+                    speed = round(speed,2)
+                    
+                    if(speed > top_speed) :                     # 최고속도를 top_speed에 저장
+                        top_speed = speed
+                    
+                    accumulate_speed = accumulate_speed+speed   # 속도값들을 전부 누적시킴
+
+                    lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 과거 좌표 갱신
+                    
+                    #txt 로그로 남겨주는 부분
+                    f.write( 'Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )        #save location coords for future use
+
                 
-				print('거리 추정치 : ',distance, ' / 속도 추정치 : ',speed,' km/h')
-				cv2.putText(radar, str(distance)+'m', (int(newbox[0]), int(newbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
+                if((frame_cnt % (fps*10))==0) :     # 프레임기반 10초(fps)마다 동작하는 코드
+                    if(frame_cnt==0) : 
+                        heatmap_filename = 'heatmap_0secs.png'
+                    else :
+                        heatmap_filename = 'heatmap_'+str(frame_cnt / (fps*10)*10)+'secs.png'
 
-                #풋살장 국제규격 길이 
+                    cv2.imwrite(heatmap_filename, heatmap_background, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+
+                        # 10초마다 DB로 전송할 부분
+                        ##########################################################################################
+                        # heatmap_filename = 10초마다 찍은 png 파일명
+
+                        ##########################################################################################
+                    
+
+                if((frame_cnt % (fps*30))==0) :     # 프레임기반 30초(fps)마다 동작하는 코드
+                    section_distance = distance - temp_distance
+                    temp_distance = distance
+                     # 30초마다 DB로 전송할 부분
+                     ##########################################################################################
+                     # section_distance = 30초마다 뛴 거리
+
+                     ##########################################################################################
+
+                frame_cnt=frame_cnt+1   # 프레임 갯수를 세어줌
+                
+                # print('거리 추정치 : ', distance, ' / 속도 추정치 : ',speed,' km/h')
+                
+                # 누적 거리값을 레이더의 플레이어 머리위에 띄워줌
+                cv2.putText(radar, str(speed)+'km/h '+str(distance)+'m', (int(newbox[0]-60), int(newbox[1])-20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
                 
                 
-				f.write( 'Home: Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )		#save location coords for future use
-				
-			else:
-				cv2.putText(frame, str(i), (int(newbox[0])-2, int(newbox[1])-2), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
 
-				cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (255,0,0), -1)#Radar_window
+        # show all windows
+        cv2.imshow('MultiTracker', frame)
+        cv2.imshow('fgMask', fgMask)
+        cv2.imshow('HeatMap',heatmap_background)
+        cv2.imshow('Radar',radar)
+        
+        # quit on ESC button
+        if cv2.waitKey(1) & 0xFF == 27:  #incase Esc is pressed
+            break
+    
+    avg_speed = accumulate_speed / (frame_cnt/fps)
+    avg_speed = round(avg_speed,1)
 
-				overlay=heatmap_background.copy()
-				cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 10, colors123[i-11], -1) #Heatmap_Window
-				alpha = 0.1  # Transparency factor.
-				# Following line overlays transparent rectangle over the image
-				heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0) #Heatmap_Window
-				
-				if(cnt>10):
-					f.write( 'Away: Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )		#save location coords for future use
-					cnt=0
+    print('총 뛴 거리 : ', distance,'m')
+    print('최고 속도 : ', top_speed,'km/h')
+    print('평균 속도 : ', avg_speed,'km/h')
 
-		# show all windows
-		cv2.imshow('MultiTracker', frame)
-		cv2.imshow('fgMask', fgMask)
-		cv2.imshow('HeatMap',heatmap_background)
-		cv2.imshow('Radar',radar)
-		
-		# quit on ESC button
-		if cv2.waitKey(1) & 0xFF == 27:  #incase Esc is pressed
-			break
+    # 최종 데이터를 DB로 전송할 부분
+    ##########################################################################################
+    # distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
+
+    ##########################################################################################
+
 f.close()
 
 
@@ -267,3 +232,10 @@ f.close()
 # center_x = left+w / 2
 # center_y = top+h / 2
 # 풋살장 국제규격 길이(가로) 38m ~ 42m / 너비(세로) 20 ~ 25m  계산하기 쉽도록 가로 40m 세로 20m로 가정함 4000 2000 / 1000 571
+
+
+# 10초 히트맵 사진
+
+# 30초마다 뛴거리
+ 
+# 최종 뛴거리, 평균속도, 최고속도
