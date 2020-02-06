@@ -1,19 +1,68 @@
-from __future__ import print_function    # print_function 이라는 모듈에서 future만 뽑아서 사용 # python 2에서 python3의 문법을 사용하기 위해
-import numpy as np                        # np numarray 이미지 파일을 배열형식으로 뽑아낼때 사용 
-import cv2                                # 오픈cv 열기
-import os                                # 운영체제 기능을 파이썬에서 사용 ex 파일입출력
-import sys                                # 환경변수같은 인수를 입력받는 모듈
-import random                            # 난수 생성할때 사용하는 모듈
-import imutils                          # image utils 이미지 관련된 유틸리티 - opencv와 관련된 라이브러리
-# import pycuda
-import math
+from __future__ import print_function       # print_function 이라는 모듈에서 future만 뽑아서 사용 # python 2에서 python3의 문법을 사용하기 위해
+import numpy as np                          # np numarray 이미지 파일을 배열형식으로 뽑아낼때 사용 
+import cv2                                  # 오픈cv 열기
+import os                                   # 운영체제 기능을 파이썬에서 사용 ex 파일입출력
+import sys                                  # 환경변수같은 인수를 입력받는 모듈
+import random                               # 난수 생성할때 사용하는 모듈
+import imutils                              # image utils 이미지 관련된 유틸리티 - opencv와 관련된 라이브러리
+# import pycuda     
+import math     
 import collections
+
+import pymysql                              # python에서 MySQL을 사용할 수 있게 하는 모듈
+from io import BytesIO                      # 
+from PIL import Image                       # PIL 모듈 Image를 다루기 위한 것
+import base64                               # base64 형식으로 인코딩 디코딩하기 위한 모듈
+import pandas as pd                         # pandas 모듈 Dataframe을 다루기 위한 모듈
+from sqlalchemy import create_engine        # MySQL 다루기 위한 PyMySQL과 다른 모듈
 
 # to have different colours in plotting heatmaps for different players
 # 히트맵에 각기 다른 색상을 표현하기 위한 튜플로 된 리스트  12개
 colors123 = [(0,0,0),(255,255,255),(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,255),(192,192,192),(244,164,96),(128,128,0),(240, 50, 230)]
 
 if __name__ == '__main__':
+
+#######################################################################################################
+#                                           PyMySQL문법                                               #
+#######################################################################################################
+
+    # MySQL의 데이터베이스를 로그인하고 연결하는 메소드 pymysql.connect() connect는 관련된 정보를 저장하는 변수
+    connect = pymysql.connect(host='localhost', user='root', password='1234', db='AIWUserDB',charset='UTF8MB4')
+
+    # 데이터베이스의 데이터를 받아오는 메소드 .corsor()
+    cursor = connect.cursor()
+
+    player_id = input("ID를 입력해주세요 : ")
+
+    while True:
+        if isinstance(player_id,str):
+            break
+        else :
+            player_id = input("ID를 입력해주세요 : ")
+
+    # SQL 문법으로 명령어를 .format() 메소드로 합성
+    sql = "select * from coachsignupinfo where id = '{0}'".format(player_id)
+
+    # 파이썬으로 작성한 SQL문법을 MySQL에서 실행하는 메소드 .execute()
+    cursor.execute(sql)
+
+    # 받아온 데이터에서 하나의 레코드만(행)을 가져오는 메소드 .fetchone() / 모든 데이터 .fetchall()
+    player_information = cursor.fetchone()
+
+    # 데이터 변화 적용
+    # CREATE 혹은 DROP, DELETE, UPDATE, INSERT와 같이 Database 내부의 데이터에 영향을 주는 함수의 경우 .commit()을 해주어야 함.
+    # conn.commit()
+
+    ##################################################################
+    ##이미지를 base64 형식으로 바꾸고 MySQL을 이용해서 DB 저장하는 부분##
+    ##################################################################
+
+    # SQL Alchemy를 이용하여 Python과 MySQL을 연결하는 메소드
+    engine = create_engine('mysql+pymysql://root:1234@localhost/AIWUserDB', echo = False, encoding='utf-8')
+
+    buffer = BytesIO()
+
+#######################################################################################################
 
     tracker = cv2.TrackerCSRT_create()  # CSRT tracker 초기화
     videoPath = 'drone2.mp4'   # Read video. here it is pano.mp4 in the same directory
@@ -32,7 +81,6 @@ if __name__ == '__main__':
     
     backSub = cv2.createBackgroundSubtractorMOG2() # cv에서 제공하는 배경제거를 위한 마스크 초기화
 
-    
     heatmap_background = cv2.imread('heatmap.png')    # heatmap.png as heatmap window's background
     original = cv2.imread('heatmap.png')
     f = open( 'file.txt', 'w' )
@@ -178,7 +226,6 @@ if __name__ == '__main__':
                         # 10초마다 DB로 전송할 부분
                         ##########################################################################################
                         # heatmap_filename = 10초마다 찍은 png 파일명
-
                         ##########################################################################################
                     
 
@@ -220,8 +267,47 @@ if __name__ == '__main__':
     # 최종 데이터를 DB로 전송할 부분
     ##########################################################################################
     # distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
-
     ##########################################################################################
+
+#######################################################################################################
+#                                           PyMySQL문법                                               #
+#######################################################################################################
+# MySQL 문법 나중에 distance부분에 NOT NULL 추가해주면 좋음 아직 미구현 상태인거 같아서 필드만 만들어 놓음
+
+sql = """
+CREATE TABLE IF NOT EXISTS {0} (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    avgSpeed DECIMAL(10,2),
+    maxSpeed DECIMAL(10,2),
+    distance_5 DECIMAL(10,2),
+    distance_10 DECIMAL(10,2),
+    distance_15 DECIMAL(10,2),
+    distance_20 DECIMAL(10,2),
+    totalDistance DECIMAL(10,2),
+    PRIMARY KEY(id)
+    );
+""".format(player_information[0])
+
+insert_data="""
+INSERT INTO {0} (avgSpeed, maxSpeed, totalDistance)
+VALUES ({1},{2},{3})
+;""".format(player_information[0],avg_speed, top_speed, distance)
+
+# INSERT INTO {0} (avgSpeed, maxSpeed, distance_5, distance_10, distance_15, distance_20, totalDistance) SQL문법 나중에 적용
+
+try:
+    cursor.execute(sql)
+    cursor.execute(insert_data)
+    connect.commit()
+except:
+    connect.rollback()
+
+connect.close()
+
+# 최종 데이터를 DB로 전송할 부분
+##########################################################################################
+# distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
+##########################################################################################
 
 f.close()
 
