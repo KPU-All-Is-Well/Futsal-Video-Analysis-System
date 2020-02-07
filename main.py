@@ -1,30 +1,28 @@
-from __future__ import print_function       # print_function 이라는 모듈에서 future만 뽑아서 사용 # python 2에서 python3의 문법을 사용하기 위해
-import numpy as np                          # np numarray 이미지 파일을 배열형식으로 뽑아낼때 사용 
-import cv2                                  # 오픈cv 열기
-import os                                   # 운영체제 기능을 파이썬에서 사용 ex 파일입출력
-import sys                                  # 환경변수같은 인수를 입력받는 모듈
-import random                               # 난수 생성할때 사용하는 모듈
-import imutils                              # image utils 이미지 관련된 유틸리티 - opencv와 관련된 라이브러리
-# import pycuda     
-import math     
+from __future__ import print_function    # print_function 이라는 모듈에서 future만 뽑아서 사용 # python 2에서 python3의 문법을 사용하기 위해
+import numpy as np                        # np numarray 이미지 파일을 배열형식으로 뽑아낼때 사용 
+import cv2                                # 오픈cv 열기
+import os                                # 운영체제 기능을 파이썬에서 사용 ex 파일입출력
+import sys                                # 환경변수같은 인수를 입력받는 모듈
+import random                            # 난수 생성할때 사용하는 모듈
+import imutils                          # image utils 이미지 관련된 유틸리티 - opencv와 관련된 라이브러리
+# import pycuda
+import math
 import collections
+import heatmap
 
 import pymysql                              # python에서 MySQL을 사용할 수 있게 하는 모듈
 from io import BytesIO                      # 
 from PIL import Image                       # PIL 모듈 Image를 다루기 위한 것
 import base64                               # base64 형식으로 인코딩 디코딩하기 위한 모듈
-import pandas as pd                         # pandas 모듈 Dataframe을 다루기 위한 모듈
-from sqlalchemy import create_engine        # MySQL 다루기 위한 PyMySQL과 다른 모듈
 
-# to have different colours in plotting heatmaps for different players
-# 히트맵에 각기 다른 색상을 표현하기 위한 튜플로 된 리스트  12개
-colors123 = [(0,0,0),(255,255,255),(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,255),(192,192,192),(244,164,96),(128,128,0),(240, 50, 230)]
+# 히트맵에 각기 다른 색상을 표현하기 위한 튜플로 된 리스트  12개를 정의
+colors12 = [(0,0,0),(255,255,255),(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,255),(192,192,192),(244,164,96),(128,128,0),(240, 50, 230)]
 
 if __name__ == '__main__':
 
-#######################################################################################################
-#                                           PyMySQL문법                                               #
-#######################################################################################################
+    #######################################################################################################
+    #                                           PyMySQL문법                                               #
+    #######################################################################################################
 
     # MySQL의 데이터베이스를 로그인하고 연결하는 메소드 pymysql.connect() connect는 관련된 정보를 저장하는 변수
     connect = pymysql.connect(host='localhost', user='root', password='1234', db='AIWUserDB',charset='UTF8MB4')
@@ -34,17 +32,15 @@ if __name__ == '__main__':
 
     player_id = input("ID를 입력해주세요 : ")
 
-    while True:
-        if isinstance(player_id,str):
-            break
-        else :
-            player_id = input("ID를 입력해주세요 : ")
-
     # SQL 문법으로 명령어를 .format() 메소드로 합성
-    sql = "select * from coachsignupinfo where id = '{0}'".format(player_id)
+    sql = "select * from playersignupinfo where id = '{0}'".format(player_id)
 
     # 파이썬으로 작성한 SQL문법을 MySQL에서 실행하는 메소드 .execute()
-    cursor.execute(sql)
+    exist_check=cursor.execute(sql)
+
+    if exist_check == 0:
+        print("Invalid ID.")
+        sys.exit()
 
     # 받아온 데이터에서 하나의 레코드만(행)을 가져오는 메소드 .fetchone() / 모든 데이터 .fetchall()
     player_information = cursor.fetchone()
@@ -53,38 +49,87 @@ if __name__ == '__main__':
     # CREATE 혹은 DROP, DELETE, UPDATE, INSERT와 같이 Database 내부의 데이터에 영향을 주는 함수의 경우 .commit()을 해주어야 함.
     # conn.commit()
 
-    ##################################################################
-    ##이미지를 base64 형식으로 바꾸고 MySQL을 이용해서 DB 저장하는 부분##
-    ##################################################################
+    sql = """
+    CREATE TABLE IF NOT EXISTS {0} (
+    play_id INT NOT NULL AUTO_INCREMENT,
+    avgSpeed FLOAT NULL,
+    maxSpeed FLOAT NULL,
+    distance_5 FLOAT NULL,
+    distance_10 FLOAT NULL,
+    distance_15 FLOAT NULL,
+    distance_20 FLOAT NULL,
+    totalDistance FLOAT NULL,
+    calorie FLOAT NULL,
+    walk FLOAT NULL,
+    jog FLOAT NULL,
+    sprint FLOAT NULL, 
+    result_heatmap mediumblob NULL,
+    PRIMARY KEY(play_id)
+    );
+    """.format(player_information[0]) # player_information[0] 사용자 ID => 선수 개인별 경기 관리 테이블 이름
 
-    # SQL Alchemy를 이용하여 Python과 MySQL을 연결하는 메소드
-    engine = create_engine('mysql+pymysql://root:1234@localhost/AIWUserDB', echo = False, encoding='utf-8')
+    cursor.execute(sql)
+    connect.commit()
 
-    buffer = BytesIO()
+    heatmap_table = player_information[0]+"_heatmap"
 
-#######################################################################################################
+    sql = """
+    CREATE TABLE IF NOT EXISTS {0}(
+        heatmap_number INT NOT NULL AUTO_INCREMENT,
+        heatmap_data MEDIUMBLOB,
+        play_id INT NOT NULL,
+        PRIMARY KEY(heatmap_number)
+    );
+    """.format(heatmap_table) # heatmap_table 선수별 히트맵 테이블 이름
+
+    cursor.execute(sql)
+    connect.commit()
+
+    sql = "SELECT * FROM {0}".format(player_information[0])
+
+    cursor.execute(sql)
+    number_check = cursor.fetchone() # 마지막으로 저장한 play_id를 저장하는 변수
+
+    if number_check is None :
+        play_id = 1
+    else :
+        sql = "SELECT * FROM {0} ORDER BY play_id DESC LIMIT 1".format(player_id)
+        cursor.execute(sql)
+        number_check = cursor.fetchone()
+        play_id = number_check[0]+1
+
+    sql = "INSERT INTO {0}(play_id) VALUES({1})".format(player_information[0],play_id)
+    cursor.execute(sql)
+    connect.commit()
+
+    #######################################################################################################
 
     tracker = cv2.TrackerCSRT_create()  # CSRT tracker 초기화
-    videoPath = 'drone2.mp4'   # Read video. here it is pano.mp4 in the same directory
+    videoPath = 'drone2.mp4'   # 비디오를 읽어옴
  
     # Create a video capture object to read videos 
-    cap = cv2.VideoCapture(videoPath)#비디오를 읽는 함수-길
+    cap = cv2.VideoCapture(videoPath)  #비디오를 읽는 함수-길
     
     # Set video to load
     success, frame = cap.read()
     
     fps = cap.get(cv2.CAP_PROP_FPS)
     fps = round(fps,0)
-    print(fps)
 
     frame = imutils.resize(frame, width=600) # 리사이징
+    print(frame.shape)
     
     backSub = cv2.createBackgroundSubtractorMOG2() # cv에서 제공하는 배경제거를 위한 마스크 초기화
+    # backSub = cv2.bgsegm.createBackgroundSubtractorGMG() 사람이 흰점이 되지만 꽤 괜찮음
 
-    heatmap_background = cv2.imread('heatmap.png')    # heatmap.png as heatmap window's background
-    original = cv2.imread('heatmap.png')
-    f = open( 'file.txt', 'w' )
-    # quit if unable to read the video file
+    
+    heatmap_background = cv2.imread('heatmap2.png')    # 히트맵창의 배경 지정
+    original = cv2.imread('heatmap2.png')
+
+    f = open( 'player_coord.txt', 'w' )  # 좌표값을 저장할 파일
+    
+    
+    # 영상 읽기에 실패 예외처리
     if not success:
         print('Failed to read video')
         sys.exit(1)
@@ -93,8 +138,7 @@ if __name__ == '__main__':
     bboxes = []
     colors = [] 
     p=0
-    # OpenCV's selectROI function doesn't work for selecting multiple objects in Python
-    # So we will call this function in a loop till we are done selecting all objects
+    # OpenCV의 selectROI 함수는 다중 객체 선택을 지원하지 않으므로 반복문을 통해 다중 ROI 지정을 구현
     while True:
         
         fgMask = backSub.apply(frame)   # frame에 배경제거 mask를 적용시켜 이미지 생성
@@ -135,13 +179,23 @@ if __name__ == '__main__':
     top_speed = 0                   # 최고 속도를 저장
     accumulate_speed = 0            # 속도들의 누적값
     temp_distance = 0               # 뛴 거리를 임시저장
-    section_distance = 0            # 특정 시간마다의 뛴거리
+    temp_speed = 0                  # 뛴 속도를 임시저장
+    interval = 30                   # 특정 시간(초)
+    interval_distance = 0            # 특정 시간마다의 뛴거리
+    interval_acc_speed = 0               # 특정 시간마다의 속도 누적값
+    interval_avg_speed = 0           # 특정 시간마다의 평균속도
+    str_coord = ''
+    walk_cnt=0
+    jog_cnt=0
+    sprint_cnt = 0
+    distance_value = 0
 
-    
 
     # Initialize MultiTracker 
     for bbox in bboxes:
-        multiTracker.add(tracker, fgMask, bbox)
+        multiTracker.add(tracker, frame, bbox)
+        # multiTracker.add(tracker, fgMask, bbox)
+
 
     # Process video and track objects
     while cap.isOpened():#비디오가 잘 열렸는지 확인하는 함수-길
@@ -156,11 +210,15 @@ if __name__ == '__main__':
 
 
         # get updated location of objects in subsequent frames
-        success, boxes = multiTracker.update(frame)  #update() 따라가게 만드는 함수 - 길
-        l,b ,channels = frame.shape  #maintain all tabs in same shape
-        heatmap_background = cv2.resize(heatmap_background,(b,l))
-        original = cv2.resize(original,(b,l))
-        radar = original.copy()
+        # success, boxes = multiTracker.update(frame)  #update() 따라가게 만드는 함수 - 길
+        success, boxes = multiTracker.update(frame)
+        
+        if(frame_cnt==0) :  # 코드 속도개선을 위해 중복되는 코드는 한번만 수행되도록함
+            height,width ,channels = frame.shape  #maintain all tabs in same shape
+            heatmap_background = cv2.resize(heatmap_background,(width,height))
+            original = cv2.resize(original,(width,height))
+        radar = original.copy()        
+        
         # draw tracked objects
         for i, newbox in enumerate(boxes):
             p1 = (int(newbox[0]), int(newbox[1]))
@@ -177,7 +235,7 @@ if __name__ == '__main__':
 
                 overlay=heatmap_background.copy()
                 alpha = 0.1  # Transparency factor.
-                cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 10, colors123[i], -1)   #Heatmap_Window
+                cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 3, colors12[i], -1)   #Heatmap_Window
                 # Following line overlays transparent rectangle over the image
                 heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
                 
@@ -204,6 +262,13 @@ if __name__ == '__main__':
                     speed = (8 * moving_weight / 100)*3.6       # moving_weight를 통해 구해진 m/s에 3.6을 곱해 속도를 k/h로 바꿔줌
                     speed = round(speed,2)
                     
+                    if( speed < 5 ) :
+                        walk_cnt = walk_cnt+1
+                    elif( speed < 10 ) :
+                        jog_cnt = jog_cnt+1
+                    else :
+                        sprint_cnt = sprint_cnt+1
+                    
                     if(speed > top_speed) :                     # 최고속도를 top_speed에 저장
                         top_speed = speed
                     
@@ -212,8 +277,8 @@ if __name__ == '__main__':
                     lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 과거 좌표 갱신
                     
                     #txt 로그로 남겨주는 부분
-                    f.write( 'Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )        #save location coords for future use
-
+                    # f.write( 'Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )
+                    # fTemp.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')  히트맵에 더많은 로그를 찍기위해 이동
                 
                 if((frame_cnt % (fps*10))==0) :     # 프레임기반 10초(fps)마다 동작하는 코드
                     if(frame_cnt==0) : 
@@ -223,21 +288,59 @@ if __name__ == '__main__':
 
                     cv2.imwrite(heatmap_filename, heatmap_background, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
-                        # 10초마다 DB로 전송할 부분
-                        ##########################################################################################
-                        # heatmap_filename = 10초마다 찍은 png 파일명
-                        ##########################################################################################
+                    # 10초마다 DB로 전송할 부분
+                    ##########################################################################################
+
+                    ### 이미지 MySQL에 저장 ###
+
+                    ##################################################################
+                    ##이미지를 base64 형식으로 바꾸고 MySQL을 이용해서 DB 저장하는 부분##
+                    ##################################################################
+
+                    buffer = BytesIO()
+                    image=Image.open(heatmap_filename)
+                    image.save(buffer,format='png')
+                    encoded_image=base64.b64encode(buffer.getvalue())
+                    sql= "INSERT INTO {0}(heatmap_data,play_id) VALUES(%s,%s)".format(heatmap_table)
+                    insert_data = (encoded_image,play_id)
+                    cursor.execute(sql,insert_data)
+
+                    # heatmap_filename = 10초마다 찍은 png 파일명
+                    ##########################################################################################
                     
 
-                if((frame_cnt % (fps*30))==0) :     # 프레임기반 30초(fps)마다 동작하는 코드
-                    section_distance = distance - temp_distance
+                if((frame_cnt % (fps*interval))==0) :     # 프레임기반 interval[현재는 30초(fps)]마다 동작하는 코드
+                    interval_distance = distance - temp_distance
                     temp_distance = distance
-                     # 30초마다 DB로 전송할 부분
-                     ##########################################################################################
-                     # section_distance = 30초마다 뛴 거리
+                    interval_distance = round(interval_distance,2)
+                    
+                    interval_acc_speed = accumulate_speed - temp_speed;
+                    temp_speed = accumulate_speed
+                    
+                    interval_avg_speed = interval_acc_speed / interval
+                    interval_avg_speed = round(interval_avg_speed,1)
+                    # 30초마다 DB로 전송할 부분
+                    ##########################################################################################
+                    # interval_distance = 30초마다 뛴 거리
 
-                     ##########################################################################################
+                    if interval_distance != 0.0 :
+                        distance_value = distance_value + 5
+                        distance_colum = "distance_{0}".format(distance_value)
+                    
+                        sql = """UPDATE {0}
+                        SET {1} = {2}
+                        WHERE play_id = {3};
+                        """.format(player_information[0],distance_colum,interval_distance,play_id)
 
+                        cursor.execute(sql)
+                        connect.commit()
+
+                    # interval_avg_speed = 30초마다 뛴 속도
+                    ##########################################################################################
+                    print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
+                    
+                #f.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')
+                str_coord = str_coord+str(int(newbox[1]))+','+str(int(newbox[0]))+'\n'  # str_coord 스트링에 좌표값을 누적시킴
                 frame_cnt=frame_cnt+1   # 프레임 갯수를 세어줌
                 
                 # print('거리 추정치 : ', distance, ' / 속도 추정치 : ',speed,' km/h')
@@ -255,6 +358,7 @@ if __name__ == '__main__':
         
         # quit on ESC button
         if cv2.waitKey(1) & 0xFF == 27:  #incase Esc is pressed
+            cv2.destroyAllWindows() # 화면 종료해주기
             break
     
     avg_speed = accumulate_speed / (frame_cnt/fps)
@@ -264,54 +368,79 @@ if __name__ == '__main__':
     print('최고 속도 : ', top_speed,'km/h')
     print('평균 속도 : ', avg_speed,'km/h')
 
+    
+    print('걸음 수 : ',walk_cnt,' / 뜀 수 : ',jog_cnt,' / 스프린트 수 : ',sprint_cnt)
+    move_sum = walk_cnt+jog_cnt+sprint_cnt
+    walk_weight = round(walk_cnt / move_sum * 100,1)
+    jog_weight = round(jog_cnt / move_sum * 100,1)
+    sprint_weight = round(sprint_cnt / move_sum * 100,1)
+    
+    # 산소 소비량으로 측정하는 대략적인 칼로리 계산법   평균 속도 * (3.5 * 몸무게 * 시간(분) * 5 / 1000
+    # 몸무게는 성인 남성 평균체중인 75kg로 가정
+    cal = round(avg_speed * (3.5 * 75 *( 0.0167 * move_sum )) * 5 / 1000,1)
+    print('\n소모 칼로리 : ',cal)
+    
+    f.write(str_coord)
+    f.close()
+    if(not(str_coord=='')) :
+        heatmap.printHeatMap(height,width)
+    
+
+    # 최종 데이터를 DB로 전송할 부분
+    ##########################################################################################
+    # distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
+    # walk_weight = 걷기 비중, jog_weight = 조깅 비중, sprint_weight = 스프린트 비중
+    # cal = 소모 칼로리
+    # result_heatmap.png = 최종 히트맵 파일명
+    ##########################################################################################
+    
+    #######################################################################################################
+    #                                           PyMySQL문법                                               #
+    #######################################################################################################
+    # MySQL 문법 나중에 distance부분에 NOT NULL 추가해주면 좋음 아직 미구현 상태인거 같아서 필드만 만들어 놓음
+    
+    buffer = BytesIO()
+    image=Image.open("result_heatmap.png")
+    image.save(buffer,format='png')
+    encoded_image=base64.b64encode(buffer.getvalue())
+    insert_image = (encoded_image)
+
+    # insert_data="""
+    # INSERT INTO {0} (avgSpeed, maxSpeed, totalDistance, calorie, walk, jog, sprint,result_heatmap)
+    # VALUES ({1},{2},{3},{4},{5},{6},{7},%s)
+    # ;""".format(player_information[0],avg_speed, top_speed, distance, cal, walk_weight, jog_weight, sprint_weight)
+
+    insert_data ="""
+    UPDATE {0}
+    SET avgSpeed = {1},
+    maxSpeed = {2},
+    totalDistance = {3},
+    calorie = {4},
+    walk = {5},
+    jog = {6},
+    sprint = {7},
+    result_heatmap = %s
+    WHERE play_id = {8}
+    ;""".format(player_information[0], avg_speed, top_speed, distance, cal, walk_weight, jog_weight, sprint_weight, play_id)
+
+    # INSERT INTO {0} (avgSpeed, maxSpeed, distance_5, distance_10, distance_15, distance_20, totalDistance) SQL문법 나중에 적용
+
+    cursor.execute(insert_data,insert_image)
+    connect.commit()
+
+
+    connect.close()
+
     # 최종 데이터를 DB로 전송할 부분
     ##########################################################################################
     # distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
     ##########################################################################################
 
-#######################################################################################################
-#                                           PyMySQL문법                                               #
-#######################################################################################################
-# MySQL 문법 나중에 distance부분에 NOT NULL 추가해주면 좋음 아직 미구현 상태인거 같아서 필드만 만들어 놓음
-
-sql = """
-CREATE TABLE IF NOT EXISTS {0} (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    avgSpeed DECIMAL(10,2),
-    maxSpeed DECIMAL(10,2),
-    distance_5 DECIMAL(10,2),
-    distance_10 DECIMAL(10,2),
-    distance_15 DECIMAL(10,2),
-    distance_20 DECIMAL(10,2),
-    totalDistance DECIMAL(10,2),
-    PRIMARY KEY(id)
-    );
-""".format(player_information[0])
-
-insert_data="""
-INSERT INTO {0} (avgSpeed, maxSpeed, totalDistance)
-VALUES ({1},{2},{3})
-;""".format(player_information[0],avg_speed, top_speed, distance)
-
-# INSERT INTO {0} (avgSpeed, maxSpeed, distance_5, distance_10, distance_15, distance_20, totalDistance) SQL문법 나중에 적용
-
-try:
-    cursor.execute(sql)
-    cursor.execute(insert_data)
-    connect.commit()
-except:
-    connect.rollback()
-
-connect.close()
-
-# 최종 데이터를 DB로 전송할 부분
-##########################################################################################
-# distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
-##########################################################################################
-
-f.close()
 
 
+
+
+#v2.1 히트맵 기능 추가
 
 
 # 사각형의 중심 좌표
@@ -325,3 +454,6 @@ f.close()
 # 30초마다 뛴거리
  
 # 최종 뛴거리, 평균속도, 최고속도
+
+
+# 30초마다 평균속도, 최종 히트맵, 칼로리, 비율 추가해야함
