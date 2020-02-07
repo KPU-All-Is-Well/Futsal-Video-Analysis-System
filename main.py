@@ -10,10 +10,99 @@ import math
 import collections
 import heatmap
 
+import pymysql                              # python에서 MySQL을 사용할 수 있게 하는 모듈
+from io import BytesIO                      # 
+from PIL import Image                       # PIL 모듈 Image를 다루기 위한 것
+import base64                               # base64 형식으로 인코딩 디코딩하기 위한 모듈
+
 # 히트맵에 각기 다른 색상을 표현하기 위한 튜플로 된 리스트  12개를 정의
 colors12 = [(0,0,0),(255,255,255),(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,255),(192,192,192),(244,164,96),(128,128,0),(240, 50, 230)]
 
 if __name__ == '__main__':
+
+    #######################################################################################################
+    #                                           PyMySQL문법                                               #
+    #######################################################################################################
+
+    # MySQL의 데이터베이스를 로그인하고 연결하는 메소드 pymysql.connect() connect는 관련된 정보를 저장하는 변수
+    connect = pymysql.connect(host='localhost', user='root', password='1234', db='AIWUserDB',charset='UTF8MB4')
+
+    # 데이터베이스의 데이터를 받아오는 메소드 .corsor()
+    cursor = connect.cursor()
+
+    player_id = input("ID를 입력해주세요 : ")
+
+    # SQL 문법으로 명령어를 .format() 메소드로 합성
+    sql = "select * from playersignupinfo where id = '{0}'".format(player_id)
+
+    # 파이썬으로 작성한 SQL문법을 MySQL에서 실행하는 메소드 .execute()
+    exist_check=cursor.execute(sql)
+
+    if exist_check == 0:
+        print("Invalid ID.")
+        sys.exit()
+
+    # 받아온 데이터에서 하나의 레코드만(행)을 가져오는 메소드 .fetchone() / 모든 데이터 .fetchall()
+    player_information = cursor.fetchone()
+
+    # 데이터 변화 적용
+    # CREATE 혹은 DROP, DELETE, UPDATE, INSERT와 같이 Database 내부의 데이터에 영향을 주는 함수의 경우 .commit()을 해주어야 함.
+    # conn.commit()
+
+    sql = """
+    CREATE TABLE IF NOT EXISTS {0} (
+    play_id INT NOT NULL AUTO_INCREMENT,
+    avgSpeed FLOAT NULL,
+    maxSpeed FLOAT NULL,
+    distance_5 FLOAT NULL,
+    distance_10 FLOAT NULL,
+    distance_15 FLOAT NULL,
+    distance_20 FLOAT NULL,
+    totalDistance FLOAT NULL,
+    calorie FLOAT NULL,
+    walk FLOAT NULL,
+    jog FLOAT NULL,
+    sprint FLOAT NULL, 
+    result_heatmap mediumblob NULL,
+    PRIMARY KEY(play_id)
+    );
+    """.format(player_information[0]) # player_information[0] 사용자 ID => 선수 개인별 경기 관리 테이블 이름
+
+    cursor.execute(sql)
+    connect.commit()
+
+    heatmap_table = player_information[0]+"_heatmap"
+
+    sql = """
+    CREATE TABLE IF NOT EXISTS {0}(
+        heatmap_number INT NOT NULL AUTO_INCREMENT,
+        heatmap_data MEDIUMBLOB,
+        play_id INT NOT NULL,
+        PRIMARY KEY(heatmap_number)
+    );
+    """.format(heatmap_table) # heatmap_table 선수별 히트맵 테이블 이름
+
+    cursor.execute(sql)
+    connect.commit()
+
+    sql = "SELECT * FROM {0}".format(player_information[0])
+
+    cursor.execute(sql)
+    number_check = cursor.fetchone() # 마지막으로 저장한 play_id를 저장하는 변수
+
+    if number_check is None :
+        play_id = 1
+    else :
+        sql = "SELECT * FROM {0} ORDER BY play_id DESC LIMIT 1".format(player_id)
+        cursor.execute(sql)
+        number_check = cursor.fetchone()
+        play_id = number_check[0]+1
+
+    sql = "INSERT INTO {0}(play_id) VALUES({1})".format(player_information[0],play_id)
+    cursor.execute(sql)
+    connect.commit()
+
+    #######################################################################################################
 
     tracker = cv2.TrackerCSRT_create()  # CSRT tracker 초기화
     videoPath = 'drone2.mp4'   # 비디오를 읽어옴
@@ -99,6 +188,7 @@ if __name__ == '__main__':
     walk_cnt=0
     jog_cnt=0
     sprint_cnt = 0
+    distance_value = 0
 
 
     # Initialize MultiTracker 
@@ -198,10 +288,25 @@ if __name__ == '__main__':
 
                     cv2.imwrite(heatmap_filename, heatmap_background, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
-                        # 10초마다 DB로 전송할 부분
-                        ##########################################################################################
-                        # heatmap_filename = 10초마다 찍은 png 파일명
-                        ##########################################################################################
+                    # 10초마다 DB로 전송할 부분
+                    ##########################################################################################
+
+                    ### 이미지 MySQL에 저장 ###
+
+                    ##################################################################
+                    ##이미지를 base64 형식으로 바꾸고 MySQL을 이용해서 DB 저장하는 부분##
+                    ##################################################################
+
+                    buffer = BytesIO()
+                    image=Image.open(heatmap_filename)
+                    image.save(buffer,format='png')
+                    encoded_image=base64.b64encode(buffer.getvalue())
+                    sql= "INSERT INTO {0}(heatmap_data,play_id) VALUES(%s,%s)".format(heatmap_table)
+                    insert_data = (encoded_image,play_id)
+                    cursor.execute(sql,insert_data)
+
+                    # heatmap_filename = 10초마다 찍은 png 파일명
+                    ##########################################################################################
                     
 
                 if((frame_cnt % (fps*interval))==0) :     # 프레임기반 interval[현재는 30초(fps)]마다 동작하는 코드
@@ -214,12 +319,26 @@ if __name__ == '__main__':
                     
                     interval_avg_speed = interval_acc_speed / interval
                     interval_avg_speed = round(interval_avg_speed,1)
-                     # 30초마다 DB로 전송할 부분
-                     ##########################################################################################
-                     # interval_distance = 30초마다 뛴 거리
-                     # interval_avg_speed = 30초마다 뛴 속도
-                     ##########################################################################################
+                    # 30초마다 DB로 전송할 부분
+                    ##########################################################################################
+                    # interval_distance = 30초마다 뛴 거리
+
+                    if interval_distance != 0.0 :
+                        distance_value = distance_value + 5
+                        distance_colum = "distance_{0}".format(distance_value)
+                    
+                        sql = """UPDATE {0}
+                        SET {1} = {2}
+                        WHERE play_id = {3};
+                        """.format(player_information[0],distance_colum,interval_distance,play_id)
+
+                        cursor.execute(sql)
+                        connect.commit()
+
+                    # interval_avg_speed = 30초마다 뛴 속도
+                    ##########################################################################################
                     print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
+                    
                 #f.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')
                 str_coord = str_coord+str(int(newbox[1]))+','+str(int(newbox[0]))+'\n'  # str_coord 스트링에 좌표값을 누적시킴
                 frame_cnt=frame_cnt+1   # 프레임 갯수를 세어줌
@@ -275,7 +394,47 @@ if __name__ == '__main__':
     # result_heatmap.png = 최종 히트맵 파일명
     ##########################################################################################
     
+    #######################################################################################################
+    #                                           PyMySQL문법                                               #
+    #######################################################################################################
+    # MySQL 문법 나중에 distance부분에 NOT NULL 추가해주면 좋음 아직 미구현 상태인거 같아서 필드만 만들어 놓음
     
+    buffer = BytesIO()
+    image=Image.open("result_heatmap.png")
+    image.save(buffer,format='png')
+    encoded_image=base64.b64encode(buffer.getvalue())
+    insert_image = (encoded_image)
+
+    # insert_data="""
+    # INSERT INTO {0} (avgSpeed, maxSpeed, totalDistance, calorie, walk, jog, sprint,result_heatmap)
+    # VALUES ({1},{2},{3},{4},{5},{6},{7},%s)
+    # ;""".format(player_information[0],avg_speed, top_speed, distance, cal, walk_weight, jog_weight, sprint_weight)
+
+    insert_data ="""
+    UPDATE {0}
+    SET avgSpeed = {1},
+    maxSpeed = {2},
+    totalDistance = {3},
+    calorie = {4},
+    walk = {5},
+    jog = {6},
+    sprint = {7},
+    result_heatmap = %s
+    WHERE play_id = {8}
+    ;""".format(player_information[0], avg_speed, top_speed, distance, cal, walk_weight, jog_weight, sprint_weight, play_id)
+
+    # INSERT INTO {0} (avgSpeed, maxSpeed, distance_5, distance_10, distance_15, distance_20, totalDistance) SQL문법 나중에 적용
+
+    cursor.execute(insert_data,insert_image)
+    connect.commit()
+
+
+    connect.close()
+
+    # 최종 데이터를 DB로 전송할 부분
+    ##########################################################################################
+    # distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
+    ##########################################################################################
 
 
 
