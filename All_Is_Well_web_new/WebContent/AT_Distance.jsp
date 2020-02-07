@@ -61,7 +61,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+                                <a href="home.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
                                
                             </li>
                             <li class="dropdown">
@@ -102,7 +102,7 @@
                     <ul class="primary-menu">
 
 						<!--Home ëª©ì°¨ -->
-                        <li class="child-menu"><a href="main.jsp">Home</a>
+                        <li class="child-menu"><a href="home.jsp">Home</a>
                             
                         </li>
 

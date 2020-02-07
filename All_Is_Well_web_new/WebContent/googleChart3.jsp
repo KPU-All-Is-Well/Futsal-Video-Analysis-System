@@ -6,7 +6,7 @@
   <head>
   
 	<%@ include file="dbconn.jsp" %>
-   <%! String rId;
+   <%! 
    String rWalk;
    String rJog;
    String rSprint;
@@ -22,15 +22,14 @@
       
       try{
             
-         String sql="select id, walk, jog, sprint from PlayInfo where id = '" + id + "'";
+         String sql="select walk, jog, sprint from " + id;
          stmt = conn.createStatement();
          rs = stmt.executeQuery(sql);
-         //if(stmt != null)
-         //   stmt.close();
+      
          
          while(rs.next()){
                      
-            rId = rs.getString("id");
+            //rId = rs.getString("id");
             rWalk = rs.getString("walk");
             rJog = rs.getString("jog");
             rSprint = rs.getString("sprint");
@@ -63,9 +62,9 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Hours per Day'],
-          ['Walk', <%= Integer.parseInt(rWalk) %>],
-          ['Jog', <%= Integer.parseInt(rJog) %>],
-          ['Sprint', <%= Integer.parseInt(rSprint) %>],
+          ['Walk', <%= Float.parseFloat(rWalk) %>],
+          ['Jog', <%= Float.parseFloat(rJog) %>],
+          ['Sprint', <%= Float.parseFloat(rSprint) %>],
         
         ]);
 

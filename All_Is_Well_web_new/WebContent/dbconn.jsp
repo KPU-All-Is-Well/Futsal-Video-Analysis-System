@@ -11,10 +11,18 @@
 	<%
 		Connection conn = null;
 		
-		String url = "jdbc:mysql://192.168.103.36: 3306/AIWUserDB"; 
+		String url = "jdbc:mysql://192.168.103.149: 3306/AIWUserDB"; 
+		//String url = "jdbc:mysql://localhost: 3306/AIWUserDB";
+		
+		
 		String user = "sk";
 		String password = "1234";
 		
+		
+		/*
+		String user = "root";
+		String password = "1234";
+		*/
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = DriverManager.getConnection(url, user, password);
 	

@@ -102,7 +102,7 @@
                     <ul class="primary-menu">
 
 						<!--Home ëª©ì°¨ -->
-                        <li class="child-menu"><a href="main.jsp">Home</a>
+                        <li class="child-menu"><a href="home.jsp">Home</a>
                             
                         </li>
 

@@ -233,13 +233,17 @@
 <div style="float:left;">
 
 <!-- 
-<iframe src="chartjs_line.jsp" width="900px" height="400px"></iframe>
- -->
-<iframe src="googleChart.html" width="900px" height="400px"></iframe> 
-<!-- 
-<iframe src="googleChart2.html" width="900px" height="600"></iframe>	
-<iframe src="googleChart3.jsp" width="900px" height="600" ></iframe>	
- -->
+<iframe src="chartjs_line.jsp" width="900px" height="400px"></iframe> //고쳐야 함
+-->
+
+<iframe src="googleChart.html" width="900px" height="400px"></iframe> //고침
+
+
+<!--  
+<iframe src="googleChart2.html" width="900px" height="600"></iframe>	// 고치는 중 
+  -->
+<iframe src="googleChart3.jsp" width="900px" height="600" ></iframe>	  //고침
+
 </div>
 
                       

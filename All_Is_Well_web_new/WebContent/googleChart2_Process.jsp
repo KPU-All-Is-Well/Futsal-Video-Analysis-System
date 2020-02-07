@@ -8,9 +8,14 @@
     try {
         //드라이버 호출, 커넥션 연결
         Class.forName("com.mysql.jdbc.Driver").newInstance();
+        /*
         con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/AIWUserDB", "root", "1234");
- 
+ 		*/
+ 		
+ 		con = DriverManager.getConnection(
+                "jdbc:mysql://localhost:3306/AIWUserDB", "root", "1234");
+ 		
         //ResultSet : 쿼리문에 대한 반환값
         ResultSet rs = null;
  
