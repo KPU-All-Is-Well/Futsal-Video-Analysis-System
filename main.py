@@ -190,6 +190,8 @@ if __name__ == '__main__':
     sprint_cnt = 0
     distance_value = 0
 
+    coord_head=coord_tail= Point(x=0,y=0)
+
 
     # Initialize MultiTracker 
     for bbox in bboxes:
@@ -234,15 +236,16 @@ if __name__ == '__main__':
                 #Radar_Window
 
                 overlay=heatmap_background.copy()
-                alpha = 0.1  # Transparency factor.
-                cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 3, colors12[i], -1)   #Heatmap_Window
+                alpha = 0.5  # Transparency factor.
+                # cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 3, colors12[i], -1)   #Heatmap_Window
                 # Following line overlays transparent rectangle over the image
-                heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
+                # heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
                 
                 
                 # 거리와 속도 추정치를 계산하기 위한 코드들
                 if(frame_cnt==0) :
                     lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 첫 프레임에서는 과거 좌표를 현재좌표와 동일하게 초기화함
+                    coord_head = coord_tail = Point(x = int(newbox[0]), y = int(newbox[1])) # 히트맵을 위한 좌표값들 초기화
                     
                 if((frame_cnt%fps)==0) :     # 프레임기반 1초(fps)마다 동작하는 코드
                     # 초당 프레임간 발생한 거리차이를 a, b에 누적시킴 
@@ -279,7 +282,22 @@ if __name__ == '__main__':
                     #txt 로그로 남겨주는 부분
                     # f.write( 'Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )
                     # fTemp.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')  히트맵에 더많은 로그를 찍기위해 이동
-                
+               
+                if(frame_cnt % (fps*2)==0) :
+                    if(coord_head == coord_tail) :
+                        coord_head = Point(x = int(newbox[0]), y = int(newbox[1]))
+                        print('testhi')
+                    else :
+                        coord_tail = coord_head
+                        coord_head = Point(x = int(newbox[0]), y = int(newbox[1]))
+                        cv2.arrowedLine(overlay,coord_tail, coord_head, (0,0,0),2,cv2.LINE_AA)
+                        cv2.arrowedLine(overlay,coord_tail, coord_head, (0,0,0),2,cv2.LINE_AA)
+
+                        print('testhihi2')
+                        heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
+
+
+
                 if((frame_cnt % (fps*10))==0) :     # 프레임기반 10초(fps)마다 동작하는 코드
                     if(frame_cnt==0) : 
                         heatmap_filename = 'heatmap_0secs.png'
