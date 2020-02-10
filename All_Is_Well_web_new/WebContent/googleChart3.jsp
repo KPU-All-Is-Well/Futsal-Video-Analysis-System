@@ -22,14 +22,13 @@
       
       try{
             
-         String sql="select walk, jog, sprint from " + id;
+         String sql="select walk, jog, sprint from " + id + " where play_id = '1'";
          stmt = conn.createStatement();
          rs = stmt.executeQuery(sql);
       
          
          while(rs.next()){
                      
-            //rId = rs.getString("id");
             rWalk = rs.getString("walk");
             rJog = rs.getString("jog");
             rSprint = rs.getString("sprint");
@@ -79,6 +78,6 @@
     </script>
   </head>
   <body>
-    <div id="donutchart" style="width: 900px; height: 500px;"></div>
+    <div id="donutchart" style="width: 100%; height: 500px;"></div>
   </body>
 </html>

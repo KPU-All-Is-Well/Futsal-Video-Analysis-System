@@ -43,7 +43,7 @@
 
 </head> 
 <!--ì¼ìª½ ëª©ì°¨ -->
-<body class="left-menu">
+<body class="left-menu"  >
     
     <div class="menu-wrapper">
         <div class="mobile-menu">
@@ -222,17 +222,33 @@
 </style>
   
  <div id="btn_group" style="text-align:center"  >
- <a href="AT_Distance.jsp"> <button id="test_btn1">선수체력 </button></a> 
-  <a href="AT_Stat.jsp"> <button id="test_btn2">선수스텟 </button></a>
+ <a href="playerData.jsp"> <button id="test_btn1">Player Data </button></a> 
+<a href="teamData.jsp"> <button id="test_btn2">Team Data </button></a>
 </div>
  
  </html>
 
+<!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
-  
-<div style="float:left;">
-<iframe src="chartjs_radar.html" width="1200" height="600"></iframe>	
+<!-- 구글차트 -->
+<div style="float: left;">
+
+ 
 </div>
+
+<!-- 하이차트 -->
+<!--<jsp:include page = "pre_highchart1.html" /> -->
+<!--<jsp:include page = "pre_highchart2.jsp" />-->
+
+<!-- 구글차트 -->
+<jsp:include page = "googleChart.html" /> <!-- 팀 정보 --> 
+<jsp:include page = "googleChart2.html" /> <!-- 팀 정보 -->
+
+
+
+
+
+
 
                       
  </div>

@@ -243,8 +243,6 @@
 <!-- 구글차트 -->
 <!--<jsp:include page = "googleChart.html" /> --> <!-- 팀 정보 -->
 <!--<jsp:include page = "googleChart2.html" /> --> <!-- 팀 정보 -->
-
-<!-- 선수 개인 데이터가 myData 누르면 첫 화면에 나오도록 설정 -->
 <jsp:include page = "googleChart3.jsp" />  <!-- 선수 개인 -->
 <jsp:include page = "googleChart4.jsp" />  <!-- 선수 개인 -->
 <jsp:include page = "chartjs_radar.html" />  <!-- 선수 개인 -->

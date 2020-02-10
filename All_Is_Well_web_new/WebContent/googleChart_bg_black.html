@@ -62,39 +62,47 @@
         }
  
         var options = {
-                title: ' ',
-                chartArea: {width: '50%'},
-                hAxis: {
-                  title: ' ',
-                  minValue: 0,
-                  textStyle: {
-                    bold: true,
-                    fontSize: 12,
-                    color: '#4d4d4d'
-                  },
-                  titleTextStyle: {
-                    bold: true,
-                    fontSize: 18,
-                    color: '#4d4d4d'
-                  }
-                },
-                vAxis: {
-                  title: ' ',
-                  textStyle: {
-                    fontSize: 14,
-                    bold: true,
-                    color: '#848484'
-                  },
-                  titleTextStyle: {
-                    fontSize: 14,
-                    bold: true,
-                    color: '#848484'
-                  }
+            title : 'Total Distance and Max Speed',
+            titleTextStyle: { 
+                color: 'white' // 타이틀 색
+            },
+            chartArea : {
+                width : '50%'
+            },
+            hAxis : {
+                title : ' ',
+                minValue : 0,
+                color: 'white',
+                textStyle:{
+                    color:'white'
                 }
-              };
+            },
+            vAxis : {
+                title : ' ',
+                titleTextStyle: { 
+                    color: 'white' // 타이틀 색
+                },
+                textStyle:{
+                    color:'white'
+                },
+                gridlines: { // 중간의 선
+                    color: '#8898A1'
+                },
+                baselineColor:'8898A1' // 하단 선
+            },
+            
+            backgroundColor: {
+            	fill : '#000000', //#01253f 남색, #001b2d 찐남색
+            	opacity : 100
+            },
+            legend:{ // 항목
+                textStyle:{
+                   color:'white'
+                }
+            }
           
 
-       
+        };
         var chart = new google.visualization.BarChart(document
                 .getElementById('chart_div'));
         chart.draw(data, options);
