@@ -43,6 +43,12 @@
 
 </head> 
 <!--ì¼ìª½ ëª©ì°¨ -->
+<style>
+	body{
+		background-color: #000000;
+	}
+</style>
+
 <body class="left-menu"  >
     
     <div class="menu-wrapper">
@@ -232,17 +238,15 @@
 
 <!-- 구글차트 -->
 <div style="float: left;">
-
- 
+	<!-- 구글차트 -->
+	<!--<jsp:include page = "googleChart.html" /> <!-- 팀 정보 --> 
+	<!--<jsp:include page = "googleChart2.html" /> <!-- 팀 정보 -->
+	<jsp:include page = "highchart_Bubble.jsp" /> <!-- 선수 개인에 대한 모든 정보, 감독뷰 -->
+	
 </div>
 
-<!-- 하이차트 -->
-<!--<jsp:include page = "pre_highchart1.html" /> -->
-<!--<jsp:include page = "pre_highchart2.jsp" />-->
 
-<!-- 구글차트 -->
-<jsp:include page = "googleChart.html" /> <!-- 팀 정보 --> 
-<jsp:include page = "googleChart2.html" /> <!-- 팀 정보 -->
+
 
 
 

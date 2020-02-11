@@ -42,7 +42,13 @@
 	<![endif]-->
 
 </head> 
-<!--ì¼ìª½ ëª©ì°¨ -->
+
+<style>
+	body{
+		background-color: #000000;
+	}
+</style>
+
 <body class="left-menu"  >
     
     <div class="menu-wrapper">
@@ -230,22 +236,25 @@
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
-<!-- 구글차트 -->
-<div style="float: left;">
 
+<div style="float: left;">
+	<div style="float: left;"> <!-- 선수 개인 데이터가 myData 누르면 첫 화면에 나오도록 설정 -->
+		
+	<!--<jsp:include page = "pre_highchart1.html" /> --> <!-- X -->
+	
+	
+	<jsp:include page = "highchart_Area.jsp" />  <!-- O 체력, 5분 단위 뛴 거리, 5분 단위 속도-->	
+	<!--<jsp:include page = "highchart_Gauge.jsp" />  <!-- O 뛴거리, 총 경기 시간, 칼로리-->
+	<!--<jsp:include page = "highchart_Pie.jsp" />  <!-- O walk, jog, sprint 비율 및 실제 시간-->		
+	<!--<jsp:include page = "printHeatmap.jsp" />--> <!-- O 활동 반경 히트맵 -->
+
+</div>
  
 </div>
 
-<!-- 하이차트 -->
-<!--<jsp:include page = "pre_highchart1.html" /> -->
-<!--<jsp:include page = "pre_highchart2.jsp" />-->
 
-<!-- 구글차트 -->
-<!--<jsp:include page = "googleChart.html" /> --> <!-- 팀 정보 -->
-<!--<jsp:include page = "googleChart2.html" /> --> <!-- 팀 정보 -->
-<jsp:include page = "googleChart3.jsp" />  <!-- 선수 개인 -->
-<jsp:include page = "googleChart4.jsp" />  <!-- 선수 개인 -->
-<jsp:include page = "chartjs_radar.html" />  <!-- 선수 개인 -->
+
+
 
 
 

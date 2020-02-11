@@ -43,6 +43,12 @@
 
 </head> 
 <!--ì¼ìª½ ëª©ì°¨ -->
+<style>
+	body{
+		background-color: #000000;
+	}
+</style>
+
 <body class="left-menu"  >
     
     <div class="menu-wrapper">
@@ -61,7 +67,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+                                <a href="home.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
                                
                             </li>
                             <li class="dropdown">
@@ -171,8 +177,7 @@
             <div class="overlay"></div>
             <div class="home-text-wrapper relative container">
                 <div class="home-message">
-                    <img src="images/rsz_1biglogo.png" alt=""> 
-                    <p>Welcome to All Is Well</p>
+                    <img src="images/rsz_1biglogo.png" alt="">                     <p>Welcome to All Is Well</p>
                     <div class="btn-wrapper">
                         <div class="text-center">
                             <a href="#" class="btn btn-primary">Sign In</a> &nbsp;<a href="#" class="btn btn-default">Sign Up</a>
@@ -183,7 +188,7 @@
         </div>
         -->
 
-            <div class="section footer" > <!-- section bgcolor noover  -->
+         <div class="section footer" > <!-- section bgcolor noover  -->
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
@@ -221,6 +226,7 @@
   } 
 </style>
   
+  
  <div id="btn_group" style="text-align:center"  >
  <a href="playerData.jsp"> <button id="test_btn1">Player Data </button></a> 
 <a href="teamData.jsp"> <button id="test_btn2">Team Data </button></a>
@@ -230,24 +236,27 @@
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
-<!-- 구글차트 -->
-<div style="float: left;">
 
- 
+<div style="float: left;"> <!-- 선수 개인 데이터가 myData 누르면 첫 화면에 나오도록 설정 -->
+		
+	<!--<jsp:include page = "pre_highchart1.html" /> --> <!-- X -->
+	
+	
+	<jsp:include page = "highchart_Area.jsp" />  <!-- O 체력, 5분 단위 뛴 거리, 5분 단위 속도-->	
+	<jsp:include page = "highchart_Gauge.jsp" />  <!-- O 뛴거리, 총 경기 시간, 칼로리-->
+	<jsp:include page = "highchart_Pie.jsp" />  <!-- O walk, jog, sprint 비율 및 실제 시간-->		
+																		<!-- 스탯 분석 추가-->
+	<jsp:include page = "printHeatmap.jsp" />--> <!-- O 활동 반경 히트맵 -->
+	
+
 </div>
 
-<!-- 하이차트 -->
-<!--<jsp:include page = "pre_highchart1.html" /> -->
-<!--<jsp:include page = "pre_highchart2.jsp" />-->
 
-<!-- 구글차트 -->
-<!--<jsp:include page = "googleChart.html" /> --> <!-- 팀 정보 -->
-<!--<jsp:include page = "googleChart2.html" /> --> <!-- 팀 정보 -->
 
-<!-- 선수 개인 데이터가 myData 누르면 첫 화면에 나오도록 설정 -->
-<jsp:include page = "googleChart3.jsp" />  <!-- 선수 개인 -->
-<jsp:include page = "googleChart4.jsp" />  <!-- 선수 개인 -->
-<jsp:include page = "chartjs_radar.html" />  <!-- 선수 개인 -->
+
+
+
+
 
 
 
