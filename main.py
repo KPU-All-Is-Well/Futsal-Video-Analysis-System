@@ -52,6 +52,10 @@ if __name__ == '__main__':
     sql = """
     CREATE TABLE IF NOT EXISTS {0} (
     play_id INT NOT NULL AUTO_INCREMENT,
+    speed_5 FLOAT NULL,
+    speed_10 FLOAT NULL,
+    speed_15 FLOAT NULL,
+    speed_20 FLOAT NULL,
     avgSpeed FLOAT NULL,
     maxSpeed FLOAT NULL,
     distance_5 FLOAT NULL,
@@ -63,6 +67,7 @@ if __name__ == '__main__':
     walk FLOAT NULL,
     jog FLOAT NULL,
     sprint FLOAT NULL, 
+    video_length FLOAT NULL,
     result_heatmap mediumblob NULL,
     PRIMARY KEY(play_id)
     );
@@ -181,9 +186,9 @@ if __name__ == '__main__':
     temp_distance = 0               # 뛴 거리를 임시저장
     temp_speed = 0                  # 뛴 속도를 임시저장
     interval = 30                   # 특정 시간(초)
-    interval_distance = 0            # 특정 시간마다의 뛴거리
-    interval_acc_speed = 0               # 특정 시간마다의 속도 누적값
-    interval_avg_speed = 0           # 특정 시간마다의 평균속도
+    interval_distance = 0           # 특정 시간마다의 뛴거리
+    interval_acc_speed = 0          # 특정 시간마다의 속도 누적값
+    interval_avg_speed = 0          # 특정 시간마다의 평균속도
     str_coord = ''
     walk_cnt=0
     jog_cnt=0
@@ -286,14 +291,12 @@ if __name__ == '__main__':
                 if(frame_cnt % (fps*2)==0) :
                     if(coord_head == coord_tail) :
                         coord_head = Point(x = int(newbox[0]), y = int(newbox[1]))
-                        print('testhi')
                     else :
                         coord_tail = coord_head
                         coord_head = Point(x = int(newbox[0]), y = int(newbox[1]))
                         cv2.arrowedLine(overlay,coord_tail, coord_head, (0,0,0),2,cv2.LINE_AA)
                         cv2.arrowedLine(overlay,coord_tail, coord_head, (0,0,0),2,cv2.LINE_AA)
 
-                        print('testhihi2')
                         heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
 
 
@@ -340,20 +343,23 @@ if __name__ == '__main__':
                     # 30초마다 DB로 전송할 부분
                     ##########################################################################################
                     # interval_distance = 30초마다 뛴 거리
+                    # interval_avg_speed = 30초마다 뛴 속도
 
-                    if interval_distance != 0.0 :
+                    if interval_distance != 0 or interval_avg_speed != 0:
                         distance_value = distance_value + 5
                         distance_colum = "distance_{0}".format(distance_value)
+                        speed_colum = "speed_{0}".format(distance_value)
                     
                         sql = """UPDATE {0}
-                        SET {1} = {2}
-                        WHERE play_id = {3};
-                        """.format(player_information[0],distance_colum,interval_distance,play_id)
+                        SET {1} = {2},
+                        {3} = {4}
+                        WHERE play_id = {5};
+                        """.format(player_information[0],distance_colum,interval_distance,speed_colum,interval_avg_speed,play_id)
 
                         cursor.execute(sql)
                         connect.commit()
 
-                    # interval_avg_speed = 30초마다 뛴 속도
+
                     ##########################################################################################
                     print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
                     
@@ -397,6 +403,9 @@ if __name__ == '__main__':
     # 몸무게는 성인 남성 평균체중인 75kg로 가정
     cal = round(avg_speed * (3.5 * 75 *( 0.0167 * move_sum )) * 5 / 1000,1)
     print('\n소모 칼로리 : ',cal)
+
+    # Video Time Calcurator
+    video_time= round((frame_cnt / fps),2)
     
     f.write(str_coord)
     f.close()
@@ -423,11 +432,6 @@ if __name__ == '__main__':
     encoded_image=base64.b64encode(buffer.getvalue())
     insert_image = (encoded_image)
 
-    # insert_data="""
-    # INSERT INTO {0} (avgSpeed, maxSpeed, totalDistance, calorie, walk, jog, sprint,result_heatmap)
-    # VALUES ({1},{2},{3},{4},{5},{6},{7},%s)
-    # ;""".format(player_information[0],avg_speed, top_speed, distance, cal, walk_weight, jog_weight, sprint_weight)
-
     insert_data ="""
     UPDATE {0}
     SET avgSpeed = {1},
@@ -437,9 +441,10 @@ if __name__ == '__main__':
     walk = {5},
     jog = {6},
     sprint = {7},
+    video_length = {8},
     result_heatmap = %s
-    WHERE play_id = {8}
-    ;""".format(player_information[0], avg_speed, top_speed, distance, cal, walk_weight, jog_weight, sprint_weight, play_id)
+    WHERE play_id = {9}
+    ;""".format(player_information[0], avg_speed, top_speed, distance, cal, walk_weight, jog_weight, sprint_weight, video_time, play_id)
 
     # INSERT INTO {0} (avgSpeed, maxSpeed, distance_5, distance_10, distance_15, distance_20, totalDistance) SQL문법 나중에 적용
 
