@@ -50,6 +50,7 @@
    <%! 
    String rTotalDistance;
    String rCalorie;
+   String rVideo_length;
  
    %>
    
@@ -63,7 +64,7 @@
       
       try{
             
-         String sql="select totalDistance, calorie from " + id + " where play_id = '1'";
+         String sql="select video_length, totalDistance, calorie from " + id + " where play_id = '1'";
          stmt = conn.createStatement();
          rs = stmt.executeQuery(sql);
       
@@ -72,7 +73,7 @@
                      
         	rTotalDistance = rs.getString("totalDistance");
             rCalorie = rs.getString("calorie");
-            
+            rVideo_length = rs.getString("video_length");
             
          }
       
@@ -93,6 +94,13 @@
      %>
       
 </head>
+
+<style>
+	body{
+		background-color: #000000;
+	}
+</style>
+
 <body>
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
@@ -226,7 +234,7 @@
             style: {
                 fontSize: '16px'
             },
-            valueSuffix: '%',
+            valueSuffix: ' ',
             pointFormat: '{series.name}<br><span style="font-size:2em; color: {point.color}; font-weight: bold">{point.y}</span>',
             positioner: function (labelWidth) {
                 return {
@@ -303,7 +311,7 @@
                 color: Highcharts.getOptions().colors[2],
                 radius: '62%',
                 innerRadius: '38%',
-                y: 30
+                y: <%=Float.parseFloat(rVideo_length) %>
             }]
         }]
     });

@@ -242,17 +242,16 @@
 	<!--<jsp:include page = "pre_highchart1.html" /> --> <!-- X -->
 	
 	
-	<jsp:include page = "highchart_Area.jsp" />  <!-- O 체력, 5분 단위 뛴 거리, 5분 단위 속도-->	
-	<jsp:include page = "highchart_Gauge.jsp" />  <!-- O 뛴거리, 총 경기 시간, 칼로리-->
-	<jsp:include page = "highchart_Pie.jsp" />  <!-- O walk, jog, sprint 비율 및 실제 시간-->		
+	<!--<jsp:include page = "highchart_Pie.jsp" />  <!-- O walk, jog, sprint 비율 및 실제 시간-->
+		<!--  are 차트 -->
+	
+	<!--<jsp:include page = "highchart_Gauge.jsp" />  <!-- O 뛴거리, 총 경기 시간, 칼로리-->
+			
 																		<!-- 스탯 분석 추가-->
-	<jsp:include page = "printHeatmap.jsp" />--> <!-- O 활동 반경 히트맵 -->
+	<!--<jsp:include page = "printHeatmap.jsp" />--> <!-- O 활동 반경 히트맵 -->
 	
 
 </div>
-
-
-
 
 
 

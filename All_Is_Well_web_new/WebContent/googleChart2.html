@@ -48,28 +48,65 @@
         
          var data = new google.visualization.DataTable();
          data.addColumn('string', 'name');
-         data.addColumn('number', 'totalDistance');
+         data.addColumn('number', 'sprint');
          data.addColumn('number', 'maxSpeed');
          data.addColumn('number', 'avgSpeed');
  
         //alert('data생성');
         for (var i = 0; i < queryObjectLen; i++) {
             var name = queryObject.barlist[i].name;
-            var totalDistance = queryObject.barlist[i].totalDistance;
+            var sprint = queryObject.barlist[i].sprint;
             var maxSpeed = queryObject.barlist[i].maxSpeed;
             var avgSpeed = queryObject.barlist[i].avgSpeed;
             
             //alert(city + amount + per);
              data.addRows([
-                            [name, totalDistance, maxSpeed, avgSpeed]
+                            [name, sprint, maxSpeed, avgSpeed]
                         ]);
  
         }
  
         var options = {
-        		title : 'Monthly Coffee Production by Country',
-                vAxis: {title: ' '},
-                hAxis: {title: ' '},
+        		title : 'Ratio of Sprint and Average Speed and Max Speed',
+        		itleTextStyle: { 
+                    color: 'white' // 타이틀 색
+                },
+                vAxis: {title: ' ',
+                	color: 'white',
+                    textStyle: {
+                      bold: true,
+                      fontSize: 12,
+                      color: 'white'
+                    },
+                    titleTextStyle: {
+                      bold: true,
+                      fontSize: 18,
+                      color: '#4d4d4d'
+                    }
+                	},
+                hAxis: {title: ' ',
+                	titleTextStyle: { 
+                        color: 'white' // 타이틀 색
+                    },
+                    textStyle: {
+                      fontSize: 14,
+                      bold: true,
+                      color: 'white'
+                    },
+                    titleTextStyle: {
+                      fontSize: 14,
+                      bold: true,
+                      color: '#848484'
+                    }},
+                    backgroundColor: {
+                    	fill : '#000000', //#01253f 남색, #001b2d 찐남색
+                    	opacity : 100
+                    },
+                    legend:{ // 항목
+                        textStyle:{
+                           color:'white'
+                        }
+                    }     
                 seriesType: 'bars',
                 series: {5: {type: 'line'}},
                 
@@ -79,6 +116,7 @@
     }
 </script>
 </head>
+
 <body >
     <div id="chart_div" style="width: 800px; height: 300px;"></div>
  

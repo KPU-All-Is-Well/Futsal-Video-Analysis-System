@@ -63,14 +63,18 @@
  
         var options = {
                 title: ' ',
+                titleTextStyle: { 
+                    color: 'white' // 타이틀 색
+                },
                 chartArea: {width: '50%'},
                 hAxis: {
                   title: ' ',
                   minValue: 0,
+                  color: 'white',
                   textStyle: {
                     bold: true,
                     fontSize: 12,
-                    color: '#4d4d4d'
+                    color: 'white'
                   },
                   titleTextStyle: {
                     bold: true,
@@ -80,17 +84,32 @@
                 },
                 vAxis: {
                   title: ' ',
+                  titleTextStyle: { 
+                      color: 'white' // 타이틀 색
+                  },
                   textStyle: {
                     fontSize: 14,
                     bold: true,
-                    color: '#848484'
+                    color: 'white'
                   },
                   titleTextStyle: {
                     fontSize: 14,
                     bold: true,
                     color: '#848484'
                   }
+                  
+                },
+                backgroundColor: {
+                	fill : '#000000', //#01253f 남색, #001b2d 찐남색
+                	opacity : 100
+                },
+                legend:{ // 항목
+                    textStyle:{
+                       color:'white'
+                    }
                 }
+                
+                
               };
           
 
@@ -103,7 +122,12 @@
     }
 </script>
 </head>
-<body bgcolor='#01253f'>
+<style>
+	body{
+		background-color: #000000;
+	}
+</style>
+<body >
     <div id="chart_div" style="width: 800px; height: 300px;"></div>
  
 </body>

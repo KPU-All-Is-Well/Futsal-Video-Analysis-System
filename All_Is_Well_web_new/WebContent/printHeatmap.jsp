@@ -8,7 +8,15 @@
 <meta charset="utf-8">
 <title>Insert title here</title>
 </head>
+<style>
+body{
+	background-color: #000000;
+}
+</style>
 <body>
+
+
+
 
 <%! String src="data:image/png;base64,"; %>
 

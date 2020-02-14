@@ -40,6 +40,12 @@
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
+
+
+body{
+	background-color: #000000;
+}
+
 		
 
 </style>
@@ -107,7 +113,7 @@
         similar to the activity chart found on the Apple Watch. Each gauge has a
         custom icon, and the tooltip is positioned statically in the center.
     </p>
-</figure>
+
 
 
 
@@ -167,6 +173,7 @@
         }]
     });
     </script>
+</figure>
 
 </body>
 

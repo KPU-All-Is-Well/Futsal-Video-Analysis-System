@@ -62,7 +62,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+                                <a href="home.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
                                
                             </li>
                             <li class="dropdown">
@@ -105,7 +105,7 @@
                     <ul class="primary-menu">
 
 						<!--Home ëª©ì°¨ -->
-                        <li class="child-menu"><a href="main.jsp">Home </a>
+                        <li class="child-menu"><a href="home.jsp">Home </a>
                           
 
 						<!--My Data ëª©ì°¨ -->
@@ -300,91 +300,93 @@
                         
                             <div class="post-media pitem item-w1 item-h1 cat1">
                                 <div class="entry">
-                                    <img src="images/upload/run_son.jpg" alt="" class="img-responsive">
+                                    <img src="images/heatmap.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="printHeatmap.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                         
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">뛴 거리 </a></h4>
+                                    <h4><a href="#">활동반경 Heatmap </a></h4>
                                     <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed sed. </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat2">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_02.png" alt="" class="img-responsive">
+                                    <img src="images/pie.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Pie.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#"> 팀 뛴 거리 </a></h4>
+                                    <h4><a href="#"> Walk, Jog, Sprint 비율 </a></h4>
                                     <p>Aliquam erat volutpat. Donec pharetra imperdiet metus, eget cras.</p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat3">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_03.png" alt="" class="img-responsive">
+                                    <img src="images/team1_1.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="googleChart.html">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">Creative Share App</a></h4>
+                                    <h4><a href="#">최고속도와 뛴 총거리 선수간 비교</a></h4>
                                     <p>Aenean consectetur semper lorem, sit amet volutpat. </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat4">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_04.png" alt="" class="img-responsive">
+                                    <img src="images/team2.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="googleChart2.html">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">Luana 3D Max</a></h4>
+                                    <h4><a href="#">스프린트 비율, 최대속도, 평균 속도 선수별 비교 </a></h4>
                                     <p>Nunc vitae metus sagittis, pharetra risus non, luctus ligula volutpat. </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat1">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_05.png" alt="" class="img-responsive">
+                                    <img src="images/gauge.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Gauge.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">히트 맵 </a></h4>
+                                    <h4><a href="#">칼로리, 뛴 거리, 총 시간 </a></h4>
                                     <p>Proin non mollis orci, quis maximus nisi. In imperdiet neque eu metus. </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat2">
                                 <div class="entry">
-                                    <img src="images/upload/run_son.jpg" alt="" class="img-responsive">
+                                <a href="highchart_Area.jsp">
+                                    <img src="images/area.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Area.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
+                                 </a>
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">팀 히트맵 </a></h4>
+                                    <h4><a href="#">체력변화 </a></h4>
                                     <p>Etiam fermentum, urna sed varius aliquet, sem enim ultrices arcu amet. </p>
                                 </div>
                             </div><!-- end post-media -->

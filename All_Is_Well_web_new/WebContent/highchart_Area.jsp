@@ -37,16 +37,27 @@
     background: #f1f7ff;
 }
 
+
+body{
+	background-color: #000000;
+}
+
+
 </style>
 
 
 <%@ include file="dbconn.jsp" %>
 
    <%! 
-   Float fDistance_5; String distance_5; 
-   Float fDistance_10; String distance_10;
-   Float fDistance_15; String distance_15;
-   Float fDistance_20; String distance_20;
+   float fDistance_5; String distance_5; 
+   float fDistance_10; String distance_10;
+  	float fDistance_15; String distance_15;
+   float fDistance_20; String distance_20;
+   
+   float fSpeed_5; String speed_5; 
+   float fSpeed_10; String speed_10;
+  	float fSpeed_15; String speed_15;
+   float fSpeed_20; String speed_20;
    
    float stamina; //처음 시작할 때는 10으로 시작
    float stamina_5; 
@@ -66,13 +77,17 @@
       
       try{
             
-         String sql="select distance_5, distance_10, distance_15, distance_20 from " + id + "where play_id = '1'";
+         String sql="select speed_5, speed_10, speed_15, speed_20, distance_5, distance_10, distance_15, distance_20 from " + id + " where play_id = '1'";
          stmt = conn.createStatement();
          rs = stmt.executeQuery(sql);
       
          
          while(rs.next()){
                      
+        	 speed_5 = rs.getString("speed_5");
+        	 speed_10 = rs.getString("speed_10");
+        	 speed_15 = rs.getString("speed_15");
+        	 speed_20 = rs.getString("speed_20");
             distance_5 = rs.getString("distance_5");
             distance_10 = rs.getString("distance_10");
             distance_15 = rs.getString("distance_15");
@@ -98,6 +113,11 @@
       fDistance_10 = Float.parseFloat(distance_10);
       fDistance_15 = Float.parseFloat(distance_15);
       fDistance_20 = Float.parseFloat(distance_20);
+      
+      fSpeed_5 = Float.parseFloat(speed_5);
+      fSpeed_10 = Float.parseFloat(speed_10);
+      fSpeed_15 = Float.parseFloat(speed_15);
+      fSpeed_20 = Float.parseFloat(speed_20);
       
       //체력 변화 계산 알고리즘
       stamina = 100;
@@ -158,8 +178,6 @@
         similar to the activity chart found on the Apple Watch. Each gauge has a
         custom icon, and the tooltip is positioned statically in the center.
     </p>
-</figure>
-
 
 
     <script type="text/javascript">
@@ -233,7 +251,7 @@ Highcharts.chart('container', {
         data: [0, <%= fDistance_5 %>, <%= fDistance_10 %>, <%= fDistance_15 %>, <%= fDistance_20 %>]
     }, {
         name: 'Amount of Speed per 5 minutes',
-        data: [10, 50, 30, 40, 60]
+        data: [0, <%= fSpeed_5 %>, <%= fSpeed_10 %>, <%= fSpeed_15 %>, <%= fSpeed_20 %>]
     }],
 
     responsive: {
@@ -253,7 +271,10 @@ Highcharts.chart('container', {
 
 });
     </script>
+    
+</figure>    
 
+<div id = "container" style="width:100%; height:400px;"> </div>
 </body>
 
 </html>
