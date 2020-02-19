@@ -11,7 +11,7 @@
 	<%
 		Connection conn = null;
 		
-		String url = "jdbc:mysql://192.168.100.216: 3306/AIWUserDB"; 
+		String url = "jdbc:mysql://13.124.69.190: 3306/AIWUserDB"; 
 		
 		String user = "sk";
 		String password = "1234";
