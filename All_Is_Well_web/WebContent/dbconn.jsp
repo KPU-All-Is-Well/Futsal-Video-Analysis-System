@@ -14,16 +14,16 @@
 	<%
 		Connection conn = null;
 		
-		/* String url = "jdbc:mysql://192.168.100.216: 3306/AIWUserDB"; 
+		 String url = "jdbc:mysql://15.164.30.158: 3306/AIWUserDB"; 
 		
 		String user = "sk";
 		String password = "1234";
-		 */
+		 
 		
-		String url = "jdbc:mysql://localhost: 3306/AIWUserDB";
+		/* String url = "jdbc:mysql://localhost: 3306/AIWUserDB";
 		
 		String user = "root";
-		String password = "1234";
+		String password = "1234"; */
 		
 		Class.forName("com.mysql.jdbc.Driver");
 		conn = DriverManager.getConnection(url, user, password);

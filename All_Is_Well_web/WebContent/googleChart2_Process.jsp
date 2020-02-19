@@ -10,15 +10,15 @@
         //드라이버 호출, 커넥션 연결
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         
-     /*    
+     
         con = DriverManager.getConnection(
-                "jdbc:mysql://192.168.100.216:3306/AIWUserDB", "sk", "1234");
- 		 */
+                "jdbc:mysql://15.164.30.158:3306/AIWUserDB", "sk", "1234");
+ 		 
  		
  	
- 		con = DriverManager.getConnection(
+ 		/* con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/AIWUserDB", "root", "1234");
-        
+         */
         
         //ResultSet : 쿼리문에 대한 반환값
         ResultSet rs = null;
