@@ -43,12 +43,7 @@
 					out.println("alert('로그인 되었습니다. All Is Well에 오신 것을 진심으로 환영합니다.')");
 					out.println("location.href='home.jsp'");
 					out.println("</script>");	
-				}/*else{ // TF, FT, FF 
-					out.println("<script>");
-					out.println("alert('일치하는 비밀번호가 없습니다. ')");
-					out.println("location.href='welcome.jsp'");
-					out.println("</script>");
-				}*/
+				}
 			
 			}
 			
@@ -58,9 +53,7 @@
 				out.println("location.href='welcome.jsp'");
 				out.println("</script>");
 			}
-			
 				
-		
 		}catch (SQLException ex){
 			out.println("SQLException: "+ex.getMessage());
 			

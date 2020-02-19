@@ -62,7 +62,7 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="main.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+                                <a href="home.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
                                
                             </li>
                             <li class="dropdown">
@@ -105,7 +105,7 @@
                     <ul class="primary-menu">
 
 						<!--Home ëª©ì°¨ -->
-                        <li class="child-menu"><a href="main.jsp">Home </a>
+                        <li class="child-menu"><a href="home.jsp">Home </a>
                           
 
 						<!--My Data ëª©ì°¨ -->
@@ -170,7 +170,7 @@
             <div class="container">
                 <div class="section-title light-color text-center">
                     <h3>All is well </h3>
-                    <h1 style="color:gray; font-size: 16px;">Welcome to All is well analysis program </h1>
+                    <h1 style="color:gray; font-size: 16px;">Welcome to <strong>All is well</strong> analysis program </h1>
                 </div><!-- end title -->
 
                 <div class="row">
@@ -243,16 +243,16 @@
                     <div class="col-lg-4 col-md-12"> <!-- 열-md-열 크기  -->
                         <div class="service-box m30">
                             <i class="flaticon-monitor"></i>
-                            <h3>Outstanding design</h3>
-                            <p>Designed to be flexible according to all your needs. Create your site with all module position.</p>
+                            <h3>Easy to access homepage </h3>
+                            <p>PC환경에서 쾌적한 데이터 분석 가능! </p>
                         </div>
                     </div><!-- end col -->
 
                     <div class="col-lg-4 col-md-12">
                         <div class="service-box m30">
                             <i class="flaticon-technology"></i>
-                            <h3>Responsive Layout</h3>
-                            <p>Genius template can be easily viewed on any mobile device. Smoothly responsive.</p>
+                            <h3>Can use mobile phone</h3>
+                            <p>스마트폰에서도 만나실 수 있습니다! </p>
                         </div>
                     </div><!-- end col -->
 
@@ -260,7 +260,7 @@
                         <div class="service-box m30">
                             <i class="flaticon-gears"></i>
                             <h3>Easy to use</h3>
-                            <p>The modules we have prepared are simple to use. No code information is needed.</p>
+                            <p>직관적인 인터페이스로 누구나 사용 가능! </p>
                         </div>
                     </div><!-- end col -->
                 </div><!-- end row -->
@@ -270,8 +270,8 @@
                 <section class="section lb">
             <div class="container">
                 <div class="section-title text-center">
-                    <h3>Recent Works</h3>
-                    <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
+                    <h3>데이터 </h3>
+                    <p>원하는 다양한 데이터를 원클릭으로 만나보세요 </p>
                 </div><!-- end title -->
 
                 <div class="case-top clearfix">
@@ -300,92 +300,94 @@
                         
                             <div class="post-media pitem item-w1 item-h1 cat1">
                                 <div class="entry">
-                                    <img src="images/upload/run_son.jpg" alt="" class="img-responsive">
+                                    <img src="images/heatmap.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="printHeatmap.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                         
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">뛴 거리 </a></h4>
-                                    <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed sed. </p>
+                                    <h4><a href="#">활동반경 Heatmap </a></h4>
+                                    <p>내가 어느 위치에서 활동했는지 보고싶다면?  </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat2">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_02.png" alt="" class="img-responsive">
+                                    <img src="images/pie.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Pie.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#"> 팀 뛴 거리 </a></h4>
-                                    <p>Aliquam erat volutpat. Donec pharetra imperdiet metus, eget cras.</p>
+                                    <h4><a href="#"> Walk, Jog, Sprint 비율 </a></h4>
+                                    <p>내가 성실하게 경기를 뛰었는지 보고 싶다면? </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat3">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_03.png" alt="" class="img-responsive">
+                                    <img src="images/team1_1.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="googleChart.html">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">Creative Share App</a></h4>
-                                    <p>Aenean consectetur semper lorem, sit amet volutpat. </p>
+                                    <h4><a href="#">최고속도와 총 뛴 거리 선수간 비교</a></h4>
+                                    <p>다른 선수와 스피드 경쟁 !  </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat4">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_04.png" alt="" class="img-responsive">
+                                    <img src="images/team2.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="googleChart2.html">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">Luana 3D Max</a></h4>
-                                    <p>Nunc vitae metus sagittis, pharetra risus non, luctus ligula volutpat. </p>
+                                    <h4><a href="#">스프린트 비율, 최대속도, 평균 속도 선수별 비교 </a></h4>
+                                    <p>스피드가 궁금하다면?  </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat1">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_05.png" alt="" class="img-responsive">
+                                    <img src="images/gauge.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Gauge.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">히트 맵 </a></h4>
-                                    <p>Proin non mollis orci, quis maximus nisi. In imperdiet neque eu metus. </p>
+                                    <h4><a href="#">칼로리, 뛴 거리, 총 운동 시간 </a></h4>
+                                    <p>나의 운동 지표가 궁금하다면 ? </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat2">
                                 <div class="entry">
-                                    <img src="images/upload/run_son.jpg" alt="" class="img-responsive">
+                                <a href="highchart_Area.jsp">
+                                    <img src="images/area.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Area.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
+                                 </a>
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">팀 히트맵 </a></h4>
-                                    <p>Etiam fermentum, urna sed varius aliquet, sem enim ultrices arcu amet. </p>
+                                    <h4><a href="#">체력변화 </a></h4>
+                                    <p>나의 시간대별 체력이 궁금하다면 ?  </p>
                                 </div>
                             </div><!-- end post-media -->
 
@@ -451,15 +453,15 @@
 
                             <div class="post-media pitem item-w1 item-h1 cat2">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_11.png" alt="" class="img-responsive">
+                                    <img src="images/upload/highchart_columm.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Columm.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">팀 평균 속도 </a></h4>
+                                    <h4><a href="#">팀 스피드 랭킹 </a></h4>
                                     <p>Vivamus mattis sit amet ipsum vitae pretium. Proin vitae nulla nullam. </p>
                                 </div>
                             </div><!-- end post-media -->

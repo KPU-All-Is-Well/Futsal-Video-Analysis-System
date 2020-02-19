@@ -4,18 +4,18 @@
 <%@page import="java.util.*"%>
 <%@page import="org.json.JSONObject"%>
 <%
-    //커넥션 선언
+    //커넥션 선s언
     Connection con = null;
     try {
         //드라이버 호출, 커넥션 연결
         Class.forName("com.mysql.jdbc.Driver").newInstance();
         
-     /*    
+        /*
         con = DriverManager.getConnection(
-                "jdbc:mysql://192.168.100.216:3306/AIWUserDB", "sk", "1234");
- 		 */
+                "jdbc:mysql://192.168.103.149:3306/AIWUserDB", "sk", "1234");
+ 		*/
  		
- 	
+ 		
  		con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/AIWUserDB", "root", "1234");
         
@@ -59,22 +59,20 @@
             String id = rs.getString("id"); //id 
         	
             //쿼리문 2번째
-        	String query2 = "select sprint, maxSpeed, avgSpeed from " + id+ " where play_id = '1'"; //id 테이블 
+        	String query2 = "select maxSpeed, totalDistance from " + id+ " where play_id = '1'"; //id 테이블 
         	
         	PreparedStatement pstm2 = con.prepareStatement(query2);
             
             rs2 = pstm2.executeQuery();
            
             if(rs2.next()){
-            	float sprint = rs2.getFloat("sprint"); //평균 스피드
-            	float avgSpeed = rs2.getFloat("avgSpeed"); //평균 스피드
+            	float totalDistance = rs2.getFloat("totalDistance"); //총 거리
                 float maxSpeed = rs2.getFloat("maxSpeed"); //최고 스피드
                	
                 
                 barObj = new JSONObject();
-                barObj.put("name", name);
-                barObj.put("sprint", sprint);
-                barObj.put("avgSpeed", avgSpeed);
+                barObj.put("name", name); 
+                barObj.put("totalDistance", totalDistance);
                 barObj.put("maxSpeed", maxSpeed);
                 
                 barlist.add(barObj);
