@@ -173,12 +173,12 @@
     series: [{
         name: 'Population',
         data: [
-            ['son', 24.2],
-            ['Beijing', 20.8],
-            ['Karachi', 14.9],
-            ['Shenzhen', 13.7],
-            ['Guangzhou', 13.1],
-            ['Istanbul', 12.7],
+            ['Son', 24.2],
+            ['Park', 20.8],
+            ['Ki', 14.9],
+            ['Messi', 13.7],
+            ['Baek', 13.1],
+            ['Lee', 12.7],
           
             
         ],

@@ -237,17 +237,24 @@
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
 <!-- 구글차트 -->
-<div style="float: left;">
-	<!-- 구글차트 -->
-	<!--<jsp:include page = "googleChart.html" /> <!-- 팀 정보 --> 
-	<!--<jsp:include page = "googleChart2.html" /> <!-- 팀 정보 -->
-	<jsp:include page = "highchart_Bubble.jsp" /> <!-- 선수 개인에 대한 모든 정보, 감독뷰 -->
-	
+
+<div style="float: center;">
+<iframe name="f5" src="highchart_Distance_Rank.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
 </div>
 
+<div style="float: center;">
+<iframe name="f6" src="highchart_Columm.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
 
+<!-- 위치가 너무 안예뻐서 주석 
+<div style="float: center;">
+<iframe name="f7" src="googleChart.html" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
 
-
+ -->
 
 
 

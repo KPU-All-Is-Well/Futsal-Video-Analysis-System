@@ -50,12 +50,16 @@ body{
 </style>
 	<%@ include file="dbconn.jsp" %>
 	<%! 
-   String rWalk;
-   String rJog;
-   String rSprint;
+   String rspeed;
+   String rpower;
+   String rendurance;
+   String rtechnic;
+   String rpass;
+   String rshooting;
+   
    %>
     <%   
-   /*
+   
      request.setCharacterEncoding("utf-8");
       String id = (String)session.getAttribute("id");
       
@@ -64,20 +68,29 @@ body{
       
       try{
             
-         String sql="select walk, jog, sprint from " + id + " where play_id = '1'";
+         String sql="select speed, power, endurance, technic, pass, shooting from " + id + " where play_id = '1'";
          stmt = conn.createStatement();
          rs = stmt.executeQuery(sql);
       
          
+         
          while(rs.next()){
-                     
-            rWalk = rs.getString("walk");
-            rJog = rs.getString("jog");
-            rSprint = rs.getString("sprint");
+  			
+           rspeed = rs.getString("speed");
+           rpower=rs.getString("power");
+           rendurance=rs.getString("endurance");
+           rtechnic=rs.getString("technic");
+           rpass=rs.getString("pass");
+           rshooting = rs.getString("shooting");
+          
             
          }
+     
       
-      }catch (SQLException ex){
+      }
+      
+      
+         catch (SQLException ex){
          out.println("SQLException: "+ex.getMessage());
          
       }finally{
@@ -89,8 +102,9 @@ body{
          if(conn != null)
             conn.close();
          
-      } */
+      } 
      %>
+     
       
 </head>
 <body>
@@ -131,6 +145,7 @@ body{
         });
     }	 
  // 차트 그리기 시작
+ 
  
    Highcharts.chart('container', {
 
@@ -176,14 +191,16 @@ body{
 
     series: [{
         name: '2018/2019 season',
-        data: [43000, 19000, 60000, 35000, 17000, 10000],
+       
+        data: [50000, 39000, 42000, 31000, 26000, 14000],
+        
         pointPlacement: 'on'
     }, {
-        name: '2019/2020 season',
+        name: '2019/2020 season',        
         data: [50000, 39000, 42000, 31000, 26000, 14000],
         pointPlacement: 'on'
     }],
-
+  
     responsive: {
         rules: [{
             condition: {
@@ -203,6 +220,7 @@ body{
     }
 
 });
+
     </script>
 </figure>
 

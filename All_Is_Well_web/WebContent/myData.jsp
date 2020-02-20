@@ -226,8 +226,7 @@
   } 
 </style>
   
-  
- <div id="btn_group" style="text-align:center"  >
+ <div id="btn_group" style="text-align:center">
  <a href="playerData.jsp"> <button id="test_btn1">Player Data </button></a> 
 <a href="teamData.jsp"> <button id="test_btn2">Team Data </button></a>
 </div>

@@ -453,7 +453,7 @@
 
                             <div class="post-media pitem item-w1 item-h1 cat2">
                                 <div class="entry">
-                                    <img src="images/upload/highchart_columm.png" alt="" class="img-responsive">
+                                    <img src="images/upload/speed_rank.png" alt="" class="img-responsive">
                                     <div class="magnifier">
                                         <a class="golink" href="highchart_Columm.jsp">
                                            <i class="fa fa-link"></i>

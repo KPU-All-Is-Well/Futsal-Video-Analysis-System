@@ -11,7 +11,7 @@
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript">
 
-	
+   
 
     var queryObject = "";
     var queryObjectLen = "";
@@ -68,48 +68,39 @@
         }
  
         var options = {
-        		title : 'Ratio of Sprint and Average Speed and Max Speed',
-        		itleTextStyle: { 
+              title : 'Ratio of Sprint and Average Speed and Max Speed',
+              titleTextStyle: { 
                     color: 'white' // 타이틀 색
                 },
-                vAxis: {title: ' ',
-                	color: 'white',
+              vAxis: {
+                 title: ' ',
+                 color: 'white',
                     textStyle: {
                       bold: true,
                       fontSize: 12,
                       color: 'white'
-                    },
-                    titleTextStyle: {
-                      bold: true,
-                      fontSize: 18,
-                      color: '#4d4d4d'
                     }
-                	},
-                hAxis: {title: ' ',
-                	titleTextStyle: { 
-                        color: 'white' // 타이틀 색
-                    },
+              },
+                hAxis: {
+                   title: ' ',
+                   color: 'white',
                     textStyle: {
-                      fontSize: 14,
                       bold: true,
+                      fontSize: 12,
                       color: 'white'
-                    },
-                    titleTextStyle: {
-                      fontSize: 14,
-                      bold: true,
-                      color: '#848484'
-                    }},
-                    backgroundColor: {
-                    	fill : '#000000', //#01253f 남색, #001b2d 찐남색
-                    	opacity : 100
-                    },
-                    legend:{ // 항목
-                        textStyle:{
-                           color:'white'
-                        }
-                    }     
+                    }
+              },
                 seriesType: 'bars',
                 series: {5: {type: 'line'}},
+                backgroundColor: {
+                   fill : '#000000', //#01253f 남색, #001b2d 찐남색
+                   opacity : 100
+                },
+                legend:{ // 항목
+                    textStyle:{
+                       color:'white'
+                    }
+                }
                 
         };
         var chart = new google.visualization.ComboChart(document.getElementById('chart_div'));
@@ -117,9 +108,13 @@
     }
 </script>
 </head>
-
+<style>
+   body{
+      background-color: #000000;
+   }
+</style>
 <body >
-    <div id="chart_div" style="width: 800px; height: 300px;"></div>
+    <div id="chart_div" style="width: 900px; height: 300px;"></div>
  
 </body>
 </html>
