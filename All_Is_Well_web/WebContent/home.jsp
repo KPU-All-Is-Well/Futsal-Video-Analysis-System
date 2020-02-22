@@ -309,7 +309,7 @@
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">활동반경 Heatmap </a></h4>
+                                    <h4><a href="printHeatmap.jsp">활동반경 Heatmap </a></h4>
                                     <p>내가 어느 위치에서 활동했는지 보고싶다면?  </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -324,7 +324,7 @@
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#"> Walk, Jog, Sprint 비율 </a></h4>
+                                    <h4><a href="highchart_Pie.jsp"> Walk, Jog, Sprint 비율 </a></h4>
                                     <p>내가 성실하게 경기를 뛰었는지 보고 싶다면? </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -339,7 +339,7 @@
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">최고속도와 총 뛴 거리 선수간 비교</a></h4>
+                                    <h4><a href="googleChart.html">최고속도와 총 뛴 거리 선수간 비교</a></h4>
                                     <p>다른 선수와 스피드 경쟁 !  </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -354,7 +354,7 @@
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">스프린트 비율, 최대속도, 평균 속도 선수별 비교 </a></h4>
+                                    <h4><a href="googleChart2.html">스프린트 비율, 최대속도, 평균 속도 선수별 비교 </a></h4>
                                     <p>스피드가 궁금하다면?  </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -369,7 +369,7 @@
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">칼로리, 뛴 거리, 총 운동 시간 </a></h4>
+                                    <h4><a href="highchart_Gauge.jsp">칼로리, 뛴 거리, 총 운동 시간 </a></h4>
                                     <p>나의 운동 지표가 궁금하다면 ? </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -386,7 +386,7 @@
                                  </a>
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">체력변화 </a></h4>
+                                    <h4><a href="highchart_Area.jsp">체력변화 </a></h4>
                                     <p>나의 시간대별 체력이 궁금하다면 ?  </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -408,30 +408,30 @@
 
                             <div class="post-media pitem item-w1 item-h1 cat4">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_08.png" alt="" class="img-responsive">
+                                    <img src="images/totalDistance.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Distance_Rank.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">Geek Vector Design</a></h4>
+                                    <h4><a href="highchart_Distance_Rank.jsp">팀 뛴 거리 랭킹</a></h4>
                                     <p>Ut porttitor aliquet auctor. Donec pellentesque libero et mattis amet. </p>
                                 </div>
                             </div><!-- end post-media -->
 
                             <div class="post-media pitem item-w1 item-h1 cat1">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_09.png" alt="" class="img-responsive">
+                                    <img src="images/maxSpeed.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Column_avg.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">스피드 </a></h4>
+                                    <h4><a href="highchart_Column_avg.jsp">팀 평균 스피드 랭킹</a></h4>
                                     <p>Aliquam quis euismod metus, vitae iaculis ipsum. Aliquam non enim sed.</p>
                                 </div>
                             </div><!-- end post-media -->
@@ -453,15 +453,15 @@
 
                             <div class="post-media pitem item-w1 item-h1 cat2">
                                 <div class="entry">
-                                    <img src="images/upload/speed_rank.png" alt="" class="img-responsive">
+                                    <img src="images/maxSpeed.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="highchart_Columm.jsp">
+                                        <a class="golink" href="highchart_Column.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">팀 스피드 랭킹 </a></h4>
+                                    <h4><a href="highchart_Column.jsp">팀 최고 스피드 랭킹 </a></h4>
                                     <p>Vivamus mattis sit amet ipsum vitae pretium. Proin vitae nulla nullam. </p>
                                 </div>
                             </div><!-- end post-media -->

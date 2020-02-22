@@ -13,10 +13,10 @@
      
         con = DriverManager.getConnection(
                 "jdbc:mysql://15.164.30.158:3306/AIWUserDB", "sk", "1234");
-        
-       
-    
-       /* con = DriverManager.getConnection(
+ 		 
+ 		
+ 	
+ 		/* con = DriverManager.getConnection(
                 "jdbc:mysql://localhost:3306/AIWUserDB", "root", "1234");
          */
         
@@ -54,22 +54,22 @@
         
         //2차 쿼리
         while(rs.next()){
-           
-           String name = rs.getString("name"); //이름
+        	
+        	String name = rs.getString("name"); //이름
             String id = rs.getString("id"); //id 
-           
+        	
             //쿼리문 2번째
-           String query2 = "select sprint, maxSpeed, avgSpeed from " + id+ " where play_id = '1'"; //id 테이블 
-           
-           PreparedStatement pstm2 = con.prepareStatement(query2);
+        	String query2 = "select sprint, maxSpeed, avgSpeed from " + id+ " where play_id = '1'"; //id 테이블 
+        	
+        	PreparedStatement pstm2 = con.prepareStatement(query2);
             
             rs2 = pstm2.executeQuery();
            
             if(rs2.next()){
-               float sprint = rs2.getFloat("sprint"); //평균 스피드
-               float avgSpeed = rs2.getFloat("avgSpeed"); //평균 스피드
+            	float sprint = rs2.getFloat("sprint"); //평균 스피드
+            	float avgSpeed = rs2.getFloat("avgSpeed"); //평균 스피드
                 float maxSpeed = rs2.getFloat("maxSpeed"); //최고 스피드
-                  
+               	
                 
                 barObj = new JSONObject();
                 barObj.put("name", name);
@@ -80,7 +80,7 @@
                 barlist.add(barObj);
      
             }       
-                      
+                   	
         }
         
         responseObj.put("barlist", barlist);

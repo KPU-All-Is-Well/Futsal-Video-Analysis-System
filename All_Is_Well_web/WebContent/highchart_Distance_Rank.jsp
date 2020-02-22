@@ -1,5 +1,9 @@
  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="java.sql.*"%>
+<%@page import="java.util.*"%> 
+<%@page import="java.lang.*"%> 
+
 <html>
 <head>
 <style>
@@ -46,55 +50,7 @@
 </style>
 
 
-	<%@ include file="dbconn.jsp" %>
-	<%! 
-   String rWalk;
-   String rJog;
-   String rSprint;
-   %>
-   
-    <%   
-   
-      request.setCharacterEncoding("utf-8");
-      String id = (String)session.getAttribute("id");
-      
-    /*  미정 탭에
-         선수 평균 뛴 거리  랭킹  
-         
-         
-    ResultSet rs = null;
-      Statement stmt =null;
-      
-      try{
-            
-         String sql="select walk, jog, sprint from " + id + " where play_id = '1'";
-         stmt = conn.createStatement();
-         rs = stmt.executeQuery(sql);
-      
-         
-         while(rs.next()){
-                     
-            rWalk = rs.getString("walk");
-            rJog = rs.getString("jog");
-            rSprint = rs.getString("sprint");
-            
-         }
-      
-      }catch (SQLException ex){
-         out.println("SQLException: "+ex.getMessage());
-         
-      }finally{
-         
-         if(rs != null)
-            rs.close();
-         if(stmt != null)
-            stmt.close();
-         if(conn != null)
-            conn.close(); 
-         
-      }*/
-      
-     %>
+
       
 </head>
 <body>
@@ -112,7 +68,104 @@
     </p>
  
 
+	<%! 
+	
+	Connection con = null;
+	ResultSet rs = null;
+    ResultSet rs2 = null;
+    List barlist = new LinkedList();
+    
+    //추가함 List -> Array(배열)
+    ArrayList<Float> arrayList = new ArrayList<>(); //스피드 담을 ArrayList
+    ArrayList<String> arrayName = new ArrayList<>(); //이름 담을 ArrayList
+    
+    Float[] array; //Float 래퍼 클래스 객체들을 담을 배열
+    String[] arrName; //List를 배열로 바꿔 담을 공간
+    
+    float float1; float float2; float float3; float float4;
+    
 
+   %>
+   
+    <%   
+   
+    
+    try {
+        //드라이버 호출, 커넥션 연결
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        
+     
+        con = DriverManager.getConnection(
+                "jdbc:mysql://15.164.30.158:3306/AIWUserDB", "sk", "1234");
+        
+       
+        
+       
+       
+        //1차 쿼리 -> name을 얻기 위한 
+        String query = "select id, name from playerSignUpInfo"; //get data from ID table
+    
+        PreparedStatement pstm = con.prepareStatement(query);
+        
+        rs = pstm.executeQuery();
+
+       
+        
+        //2차 쿼리
+        while(rs.next()){
+           
+           String name = rs.getString("name"); //이름
+           String id = rs.getString("id"); //id
+           arrayName.add(name); //이름 List에 추가 
+           
+           
+            //쿼리문 2번째
+           String query2 = "select totalDistance from " + id+ " where play_id = '1'"; //id 테이블 
+           
+           PreparedStatement pstm2 = con.prepareStatement(query2);
+            
+            rs2 = pstm2.executeQuery();
+           	
+           
+            
+            if(rs2.next()){
+                float totalDistance = rs2.getFloat("totalDistance"); //최고 스피드
+                
+                //추가함
+               	Float wTotalDistance = new Float(totalDistance); //maxSpeed는 Float 래퍼 클래스여야 함 -> //float 자료형을 Float 래퍼 클래스로  변환
+
+     			arrayList.add(wTotalDistance); 
+     			
+     			
+            }       
+                      
+        }
+        
+        array = arrayList.toArray(new Float[arrayList.size()]); //arrayList(리스트) -> array(배열)
+        arrName = arrayName.toArray(new String[arrayName.size()]); //arrayName(리스트)) -> arrName(배열)
+        
+        //Float 래퍼 클래스 -> float 자료형으로 auto unboxing
+        float1 = array[0];
+        float2 = array[1];
+        float3 = array[2];
+        float4 = array[3];
+
+    
+ 
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+ 
+    }
+      
+	%>
 
 
 
@@ -182,49 +235,34 @@ Highcharts.chart('container', {
 
     tooltip: {
         headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> of total<br/>'
+        pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y:.2f}</b> <br/>'
     },
 
     series: [
         {
-            name: "Browsers",
+            name: "Player",
             colorByPoint: true,
             data: [
                 {
-                    name: "Son",
-                    y: 13.74,
-                    drilldown: "Son"
+                    name: "<%=arrName[0] %>",
+                    y: <%= float1 %>,
+                    drilldown: "<%=arrName[0] %>"
                 },
                 
                 {
-                    name: "Park",
-                    y: 10.57,
-                    drilldown: "Park"
+                    name: "<%=arrName[1] %>",
+                    y: <%= float2 %>,
+                    drilldown: "<%=arrName[1] %>"
                 },
                 {
-                    name: "Ki",
-                    y: 7.23,
-                    drilldown: " Ki"
+                    name: "<%=arrName[2] %>",
+                    y: <%= float3 %>,
+                    drilldown: "<%=arrName[2] %>"
                 },
                 {
-                    name: "Messi",
-                    y: 5.58,
-                    drilldown: "Messi"
-                },
-                {
-                    name: "Cha Boom",
-                    y: 4.02,
-                    drilldown: "Cha Boom"
-                },
-                {
-                    name: "Baek",
-                    y: 1.92,
-                    drilldown: "Baek"
-                },
-                {
-                    name: "Lee",
-                    y: 7.62,
-                    drilldown: "Lee"
+                    name: "<%=arrName[3] %>",
+                    y: <%= float4 %>,
+                    drilldown: "<%=arrName[3] %>"
                 }
             ]
         }
@@ -460,6 +498,11 @@ Highcharts.chart('container', {
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+   body{
+      background-color: #000000;
+   }
+</style>
 <body>
 
 </body>
