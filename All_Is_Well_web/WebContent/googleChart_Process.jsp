@@ -15,9 +15,7 @@
                 "jdbc:mysql://15.164.30.158:3306/AIWUserDB", "sk", "1234");
  		 
  		
- 		/* con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/AIWUserDB", "root", "1234"); */
-        
+ 		      
         
         //ResultSet : 쿼리문에 대한 반환값
         ResultSet rs = null;
