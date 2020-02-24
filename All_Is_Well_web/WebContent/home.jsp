@@ -393,15 +393,15 @@
 
                             <div class="post-media pitem item-w1 item-h1 cat3">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_07.png" alt="" class="img-responsive">
+                                    <img src="images/bubble.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Bubble.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">Audio Player App</a></h4>
+                                    <h4><a href="highchart_Bubble.jsp">선수 전체 정보</a></h4>
                                     <p>Ut convallis mollis est, eu tincidunt magna varius dignissim. Sed sed.</p>
                                 </div>
                             </div><!-- end post-media -->

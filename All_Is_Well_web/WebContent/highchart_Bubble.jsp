@@ -1,12 +1,18 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@page import="java.text.DecimalFormat"%>
+ <%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <%@page import="java.sql.*"%>
-<%@page import="java.util.*"%>
-<%@page import="org.json.JSONObject"%>
+<%@page import="java.util.*"%> 
+<%@page import="java.lang.*"%> 
+
 <html>
 <head>
 <style>
-		.highcharts-figure, .highcharts-data-table table {
+	#container {
+    height: 800px; 
+}
+
+.highcharts-figure, .highcharts-data-table table {
     min-width: 320px; 
     max-width: 800px;
     margin: 1em auto;
@@ -40,17 +46,142 @@
     background: #f1f7ff;
 }
 
+
+		
+
 </style>
 
+	<%! 
+	
+	Connection con = null;
+	ResultSet rs = null;
+    ResultSet rs2 = null;
+    
+    //ArrayList(리스트) 
+    ArrayList<Float> arrList_avg = new ArrayList<>(); //스피드 담을 ArrayList
+    ArrayList<Float> arrList_max = new ArrayList<>(); //스피드 담을 ArrayList
+    ArrayList<Float> arrList_dist = new ArrayList<>(); //스피드 담을 ArrayList
+    ArrayList<Float> arrList_calorie = new ArrayList<>(); //스피드 담을 ArrayList
+    ArrayList<Float> arrList_walk = new ArrayList<>(); //스피드 담을 ArrayList
+    ArrayList<Float> arrList_jog = new ArrayList<>(); //스피드 담을 ArrayList
+    ArrayList<Float> arrList_sprint = new ArrayList<>(); //스피드 담을 ArrayList
+    ArrayList<String> arrList_name = new ArrayList<>(); //이름 담을 ArrayList
+    
+    //Array(배열) -> Float 래퍼 클래스 객체들을 담을 배열
+    Float[] arr_avg;    Float[] arr_max;    Float[] arr_dist;		Float[] arr_calorie;
+    Float[] arr_walk;    Float[] arr_jog;	Float[] arr_sprint;
+   
+    String[] arr_name;
+    
+    float f1_avg; float f2_avg; float f3_avg; float f4_avg;
+    float f1_max; float f2_max; float f3_max; float f4_max;
+    float f1_dist; float f2_dist; float f3_dist; float f4_dist;
+    float f1_calorie; float f2_calorie; float f3_calorie; float f4_calorie;
+    float f1_walk; float f2_walk; float f3_walk; float f4_walk;
+    float f1_jog; float f2_jog; float f3_jog; float f4_jog;
+    float f1_sprint; float f2_sprint; float f3_sprint; float f4_sprint;
+    
 
-
-   <%! 
-   String rTotalDistance;
-   String rCalorie;
- 
    %>
    
+    <%   
    
+    //Connection con = null;
+    try {
+        //드라이버 호출, 커넥션 연결
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        
+     
+        con = DriverManager.getConnection(
+                "jdbc:mysql://15.164.30.158:3306/AIWUserDB", "sk", "1234");
+        
+       
+        
+       
+       
+        //1차 쿼리 -> name을 얻기 위한 
+        String query = "select id, name from playerSignUpInfo"; //get data from ID table
+    
+        PreparedStatement pstm = con.prepareStatement(query);
+        
+        rs = pstm.executeQuery();
+
+       
+        
+        //2차 쿼리
+        while(rs.next()){
+           
+           String name = rs.getString("name"); //이름
+           String id = rs.getString("id"); //id
+           arrList_name.add(name); //이름 List에 추가 
+           
+           
+            //쿼리문 2번째
+           String query2 = "select avgSpeed, maxSpeed, totalDistance, calorie, walk, jog, sprint from " + id+ " where play_id = '1'"; //id 테이블 
+           
+           PreparedStatement pstm2 = con.prepareStatement(query2);
+            
+            rs2 = pstm2.executeQuery();
+           	
+           
+            
+            if(rs2.next()){
+                float avgSpeed = rs2.getFloat("avgSpeed"); 	float maxSpeed = rs2.getFloat("maxSpeed"); 
+                float totalDistance = rs2.getFloat("totalDistance"); float calorie = rs2.getFloat("calorie"); 
+                float walk = rs2.getFloat("walk"); 	float jog = rs2.getFloat("jog"); 
+                float sprint = rs2.getFloat("sprint"); 
+                
+                //추가함
+               	Float wAvgSpeed = new Float(avgSpeed); //maxSpeed는 Float 래퍼 클래스여야 함 -> //float 자료형을 Float 래퍼 클래스로  변환
+               	Float wMaxSpeed = new Float(maxSpeed);   Float wTotalDistance = new Float(totalDistance);
+               	Float wCalorie = new Float(calorie);		Float wWalk = new Float(walk);
+               	Float wJog = new Float(jog);	Float wSprint = new Float(sprint);
+               	
+       
+     			arrList_avg.add(wAvgSpeed); arrList_max.add(wMaxSpeed);
+     			arrList_dist.add(wTotalDistance); arrList_calorie.add(wCalorie);
+     			arrList_walk.add(wWalk);	arrList_jog.add(wJog);
+     			arrList_sprint.add(wSprint);
+     			
+     			
+            }       
+                      
+        }
+        
+        
+      	//arrList_max(리스트) -> arr_max(배열)
+        arr_avg = arrList_avg.toArray(new Float[arrList_avg.size()]);        arr_max = arrList_max.toArray(new Float[arrList_max.size()]);
+        arr_dist = arrList_dist.toArray(new Float[arrList_dist.size()]);        arr_calorie = arrList_calorie.toArray(new Float[arrList_calorie.size()]);
+        arr_walk = arrList_walk.toArray(new Float[arrList_walk.size()]);        arr_jog = arrList_jog.toArray(new Float[arrList_jog.size()]);
+        arr_sprint = arrList_sprint.toArray(new Float[arrList_sprint.size()]);
+      
+      	arr_name = arrList_name.toArray(new String[arrList_name.size()]); //arrList_name(리스트)) -> arr_name(배열)
+        
+        //Float 래퍼 클래스 -> float 자료형으로 auto unboxing
+        f1_max = arr_max[0];		f2_max = arr_max[1];   f3_max = arr_max[2];   f4_max = arr_max[3];
+        f1_avg = arr_avg[0];		f2_avg = arr_avg[1];   f3_avg = arr_avg[2];   f4_avg = arr_avg[3];
+        f1_dist = arr_dist[0];		f2_dist = arr_dist[1];   f3_dist = arr_dist[2];   f4_dist = arr_dist[3];
+        f1_calorie = arr_calorie[0];		f2_calorie = arr_calorie[1];   f3_calorie = arr_calorie[2];   f4_calorie = arr_calorie[3];
+        f1_walk = arr_walk[0];		f2_walk = arr_walk[1];   f3_walk = arr_walk[2];   f4_walk = arr_walk[3];
+        f1_jog = arr_jog[0];		f2_jog = arr_jog[1];   f3_jog = arr_jog[2];   f4_jog = arr_jog[3];
+        f1_sprint = arr_sprint[0];		f2_sprint = arr_sprint[1];   f3_sprint = arr_sprint[2];   f4_sprint = arr_sprint[3];
+        
+    
+ 
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+ 
+    }
+      
+%>
       
 </head>
 <body>
@@ -59,96 +190,61 @@
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
-<script type="text/javascript"
-    src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 
 
 
 <figure class="highcharts-figure">
     <div id="container"></div>
     <p class="highcharts-description">
-        A chart showing multiple gauge series arcing around the center point,
-        similar to the activity chart found on the Apple Watch. Each gauge has a
-        custom icon, and the tooltip is positioned statically in the center.
+    
     </p>
-</figure>
 
 
 
-    <script type="text/javascript">
- // Uncomment to style it like Apple Watch
-/***************************************************/    
-    
-      var queryObject = "";
-    var queryObjectLen = "";
-    $.ajax({
-        type : 'POST',
-        url : 'highchart_Bubble_Process.jsp',
-        dataType : 'json',
-        success : function(data) {
-            
-            
-            queryObject = eval('(' + JSON.stringify(data,null, 2) + ')');             
-            // stringify : 인자로 전달된 자바스크립트의 데이터(배열)를 JSON문자열로 바꾸기.   
-            // eval: javascript 코드가 맞는지 검증하고 문자열을 자바스크립트 코드로 처리하는 함수 
-            // queryObject.barlist[0].city ="korea"
- 
-            queryObjectLen = queryObject.barlist.length;
-            // queryObject.empdetails 에는 4개의 Json 객체가 있음 
- 
-            //alert('ㅋㅋ' + queryObjectLen);
-            // alert(queryObject.barlist[0].city +queryObject.barlist[0].per );
-        },
-        error : function(xhr, type) {
-            alert('server error occured')  //id 테이블 안 넣어놔서 오류 뜨는걸 수도!!!
-        }
-    });
-    //JSON에 데이터 담는 부분
-    
-    if (!Highcharts.theme) {
+
+  <script type="text/javascript">
+	//theme 색깔 적용
+	    if (!Highcharts.theme) {
         Highcharts.setOptions({
             chart: {
                 backgroundColor: 'black'
             },
-            colors: ['#F62366', '#9DFF02', '#0CCDD6'],
+            colors: ['#239ef6', '#9DFF02', '#0CCDD6','#ff0fff','#f0ffff','#ffff0f'],
             title: {
                 style: {
-                    color: 'silver'
+                    color: 'white'
                 }
             },
             tooltip: {
                 style: {
-                    color: 'silver'
+                    color: 'black'
                 }
             }
         });
-    }
-    // */
-	
-    Highcharts.chart('container', {
+    }	 
+ // 차트 그리기 시작
+ 
+	Highcharts.chart('container', {
     chart: {
         type: 'packedbubble',
         height: '100%'
     },
     title: {
-        text: 'Carbon emissions around the world (2014)'
+        text: '선수 전체 데이터'
     },
     tooltip: {
         useHTML: true,
-        pointFormat: '<b>{point.name}:</b> {point.value}m CO<sub>2</sub>'
+        pointFormat: '<b>{point.name}:</b> {point.value} <sub> </sub>'
     },
     plotOptions: {
         packedbubble: {
-            minSize: '20%',
-            maxSize: '100%',
+            minSize: '30%',
+            maxSize: '120%',
             zMin: 0,
             zMax: 1000,
             layoutAlgorithm: {
-                gravitationalConstant: 0.05,
-                splitSeries: true,
-                seriesInteraction: false,
-                dragBetweenSeries: true,
-                parentNodeLimit: true
+                splitSeries: false,
+                gravitationalConstant: 0.02
             },
             dataLabels: {
                 enabled: true,
@@ -167,484 +263,144 @@
         }
     },
     series: [{
-        name: 'Europe',
+        name: "<%=arr_name[0] %>",
         data: [{
-            name: 'Germany',
-            value: 767.1
+            name: 'Average Speed',
+            value: <%= f1_avg %>
         }, {
-            name: 'Croatia',
-            value: 20.7
+            name: 'Max Speed',
+            value: <%= f1_max %>
         },
         {
-            name: "Belgium",
-            value: 97.2
+            name: "Total Distance",
+            value: <%= f1_dist %>
         },
         {
-            name: "Czech Republic",
-            value: 111.7
+            name: "Calorie",
+            value: <%= f1_calorie %>
         },
         {
-            name: "Netherlands",
-            value: 158.1
+            name: "Ratio of Walk",
+            value: <%= f1_walk %>
         },
         {
-            name: "Spain",
-            value: 241.6
+            name: "Ratio of Jog",
+            value: <%= f1_jog %>
         },
         {
-            name: "Ukraine",
-            value: 249.1
-        },
-        {
-            name: "Poland",
-            value: 298.1
-        },
-        {
-            name: "France",
-            value: 323.7
-        },
-        {
-            name: "Romania",
-            value: 78.3
-        },
-        {
-            name: "United Kingdom",
-            value: 415.4
-        }, {
-            name: "Turkey",
-            value: 353.2
-        }, {
-            name: "Italy",
-            value: 337.6
-        },
-        {
-            name: "Greece",
-            value: 71.1
-        },
-        {
-            name: "Austria",
-            value: 69.8
-        },
-        {
-            name: "Belarus",
-            value: 67.7
-        },
-        {
-            name: "Serbia",
-            value: 59.3
-        },
-        {
-            name: "Finland",
-            value: 54.8
-        },
-        {
-            name: "Bulgaria",
-            value: 51.2
-        },
-        {
-            name: "Portugal",
-            value: 48.3
-        },
-        {
-            name: "Norway",
-            value: 44.4
-        },
-        {
-            name: "Sweden",
-            value: 44.3
-        },
-        {
-            name: "Hungary",
-            value: 43.7
-        },
-        {
-            name: "Switzerland",
-            value: 40.2
-        },
-        {
-            name: "Denmark",
-            value: 40
-        },
-        {
-            name: "Slovakia",
-            value: 34.7
-        },
-        {
-            name: "Ireland",
-            value: 34.6
-        },
-        {
-            name: "Croatia",
-            value: 20.7
-        },
-        {
-            name: "Estonia",
-            value: 19.4
-        },
-        {
-            name: "Slovenia",
-            value: 16.7
-        },
-        {
-            name: "Lithuania",
-            value: 12.3
-        },
-        {
-            name: "Luxembourg",
-            value: 10.4
-        },
-        {
-            name: "Macedonia",
-            value: 9.5
-        },
-        {
-            name: "Moldova",
-            value: 7.8
-        },
-        {
-            name: "Latvia",
-            value: 7.5
-        },
-        {
-            name: "Cyprus",
-            value: 7.2
+            name: "Ratio of Sprint",
+            value: <%= f1_sprint %>
         }]
     }, {
-        name: 'Africa',
+        name: "<%=arr_name[1] %>",
         data: [{
-            name: "Senegal",
-            value: 8.2
+            name: "Average Speed",
+            value: <%= f2_avg %>
         },
         {
-            name: "Cameroon",
-            value: 9.2
+            name: "Max Speed",
+            value: <%= f2_max %>
         },
         {
-            name: "Zimbabwe",
-            value: 13.1
+            name: "Total Distance",
+            value: <%= f2_dist %>
         },
         {
-            name: "Ghana",
-            value: 14.1
+            name: "Calorie",
+            value: <%= f2_calorie %>
         },
         {
-            name: "Kenya",
-            value: 14.1
+            name: "Ratio of Walk",
+            value: <%= f2_walk %>
         },
         {
-            name: "Sudan",
-            value: 17.3
+            name: "Ratio of Jog",
+            value: <%= f2_jog %>
         },
         {
-            name: "Tunisia",
-            value: 24.3
-        },
-        {
-            name: "Angola",
-            value: 25
-        },
-        {
-            name: "Libya",
-            value: 50.6
-        },
-        {
-            name: "Ivory Coast",
-            value: 7.3
-        },
-        {
-            name: "Morocco",
-            value: 60.7
-        },
-        {
-            name: "Ethiopia",
-            value: 8.9
-        },
-        {
-            name: "United Republic of Tanzania",
-            value: 9.1
-        },
-        {
-            name: "Nigeria",
-            value: 93.9
-        },
-        {
-            name: "South Africa",
-            value: 392.7
-        }, {
-            name: "Egypt",
-            value: 225.1
-        }, {
-            name: "Algeria",
-            value: 141.5
+            name: "Ratio of Sprint",
+            value: <%= f2_sprint %>
         }]
     }, {
-        name: 'Oceania',
+        name: "<%=arr_name[2] %>",
         data: [{
-            name: "Australia",
-            value: 409.4
+            name: "Average Speed",
+            value: <%= f3_avg %>
         },
         {
-            name: "New Zealand",
-            value: 34.1
+            name: "Max Speed",
+            value: <%= f3_max %>
         },
         {
-            name: "Papua New Guinea",
-            value: 7.1
+            name: "Total Distance",
+            value: <%= f3_dist %>
+        },
+        {
+            name: "Calorie",
+            value: <%= f3_calorie %>
+        },
+        {
+            name: "Ratio of Walk",
+            value: <%= f3_walk %>
+        },
+        {
+            name: "Ratio of Jog",
+            value: <%= f3_jog %>
+        },
+        {
+            name: "Ratio of Sprint",
+            value: <%= f3_sprint %>
         }]
     }, {
-        name: 'North America',
+        name: "<%=arr_name[3] %>",
         data: [{
-            name: "Costa Rica",
-            value: 7.6
+            name: "Average Speed",
+            value: <%= f4_avg %>
         },
         {
-            name: "Honduras",
-            value: 8.4
+            name: "Max Speed",
+            value: <%= f4_max %>
         },
         {
-            name: "Jamaica",
-            value: 8.3
+            name: "Total Distance",
+            value: <%= f4_dist %>
         },
         {
-            name: "Panama",
-            value: 10.2
+            name: "Calorie",
+            value: <%= f4_calorie %>
         },
         {
-            name: "Guatemala",
-            value: 12
+            name: "Ratio of Walk",
+            value: <%= f4_walk %>
         },
         {
-            name: "Dominican Republic",
-            value: 23.4
+            name: "Ratio of Jog",
+            value: <%= f4_jog %>
         },
         {
-            name: "Cuba",
-            value: 30.2
-        },
-        {
-            name: "USA",
-            value: 5334.5
-        }, {
-            name: "Canada",
-            value: 566
-        }, {
-            name: "Mexico",
-            value: 456.3
-        }]
-    }, {
-        name: 'South America',
-        data: [{
-            name: "El Salvador",
-            value: 7.2
-        },
-        {
-            name: "Uruguay",
-            value: 8.1
-        },
-        {
-            name: "Bolivia",
-            value: 17.8
-        },
-        {
-            name: "Trinidad and Tobago",
-            value: 34
-        },
-        {
-            name: "Ecuador",
-            value: 43
-        },
-        {
-            name: "Chile",
-            value: 78.6
-        },
-        {
-            name: "Peru",
-            value: 52
-        },
-        {
-            name: "Colombia",
-            value: 74.1
-        },
-        {
-            name: "Brazil",
-            value: 501.1
-        }, {
-            name: "Argentina",
-            value: 199
-        },
-        {
-            name: "Venezuela",
-            value: 195.2
-        }]
-    }, {
-        name: 'Asia',
-        data: [{
-            name: "Nepal",
-            value: 6.5
-        },
-        {
-            name: "Georgia",
-            value: 6.5
-        },
-        {
-            name: "Brunei Darussalam",
-            value: 7.4
-        },
-        {
-            name: "Kyrgyzstan",
-            value: 7.4
-        },
-        {
-            name: "Afghanistan",
-            value: 7.9
-        },
-        {
-            name: "Myanmar",
-            value: 9.1
-        },
-        {
-            name: "Mongolia",
-            value: 14.7
-        },
-        {
-            name: "Sri Lanka",
-            value: 16.6
-        },
-        {
-            name: "Bahrain",
-            value: 20.5
-        },
-        {
-            name: "Yemen",
-            value: 22.6
-        },
-        {
-            name: "Jordan",
-            value: 22.3
-        },
-        {
-            name: "Lebanon",
-            value: 21.1
-        },
-        {
-            name: "Azerbaijan",
-            value: 31.7
-        },
-        {
-            name: "Singapore",
-            value: 47.8
-        },
-        {
-            name: "Hong Kong",
-            value: 49.9
-        },
-        {
-            name: "Syria",
-            value: 52.7
-        },
-        {
-            name: "DPR Korea",
-            value: 59.9
-        },
-        {
-            name: "Israel",
-            value: 64.8
-        },
-        {
-            name: "Turkmenistan",
-            value: 70.6
-        },
-        {
-            name: "Oman",
-            value: 74.3
-        },
-        {
-            name: "Qatar",
-            value: 88.8
-        },
-        {
-            name: "Philippines",
-            value: 96.9
-        },
-        {
-            name: "Kuwait",
-            value: 98.6
-        },
-        {
-            name: "Uzbekistan",
-            value: 122.6
-        },
-        {
-            name: "Iraq",
-            value: 139.9
-        },
-        {
-            name: "Pakistan",
-            value: 158.1
-        },
-        {
-            name: "Vietnam",
-            value: 190.2
-        },
-        {
-            name: "United Arab Emirates",
-            value: 201.1
-        },
-        {
-            name: "Malaysia",
-            value: 227.5
-        },
-        {
-            name: "Kazakhstan",
-            value: 236.2
-        },
-        {
-            name: "Thailand",
-            value: 272
-        },
-        {
-            name: "Taiwan",
-            value: 276.7
-        },
-        {
-            name: "Indonesia",
-            value: 453
-        },
-        {
-            name: "Saudi Arabia",
-            value: 494.8
-        },
-        {
-            name: "Japan",
-            value: 1278.9
-        },
-        {
-            name: "China",
-            value: 10540.8
-        },
-        {
-            name: "India",
-            value: 2341.9
-        },
-        {
-            name: "Russia",
-            value: 1766.4
-        },
-        {
-            name: "Iran",
-            value: 618.2
-        },
-        {
-            name: "Korea",
-            value: 610.1
+            name: "Ratio of Sprint",
+            value: <%= f4_sprint %>
         }]
     }]
+    
 });
-
-    
-    
+  
     </script>
+</figure>
 
 </body>
 
+</html><html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<style>
+   body{
+      background-color: #000000;
+   }
+</style>
+<body>
+
+</body>
 </html>
