@@ -83,6 +83,15 @@ def PlayID(player_id):
 
     return play_id
 
+def EngName(player_id):
+    sql = 'SELECT en_name FROM playersignupinfo WHERE id = "{0}"'.format(player_id)
+
+    cursor.execute(sql)
+    Player_EngName = cursor.fetchone()
+
+    return Player_EngName[0]
+
+
 def CommitHeatmap(heatmap_filename,heatmap_table,play_id):
     buffer = BytesIO()
     image=Image.open(heatmap_filename)

@@ -5,5 +5,5 @@ def openfile():
     path = tk.Tk()
     path.withdraw()
 
-    video_path = filedialog.askopenfilename()
+    video_path = filedialog.askopenfilename(initialdir ="./")
     return video_path

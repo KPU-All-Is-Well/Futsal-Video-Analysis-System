@@ -49,7 +49,7 @@ def HomeWindow():
     root.resizable(0, 0)
     Home.geometry("%dx%d+%d+%d" % (width, height, x, y))
     lbl_home = Label(Home, text="Successfully Login!", font=('arial', 20)).pack()
-    btn_back = Button(Home, text='Exit', command=Back).pack(pady=20, fill=X)
+    btn_back = Button(Home, text='Close', command=Back).pack(pady=20, fill=X)
 
 def Back():
     Home.destroy()
@@ -64,7 +64,7 @@ Top.pack(side=TOP, fill=X)
 Form = Frame(root, height=200)
 Form.pack(side=TOP, pady=20)
 #==============================라벨============================================
-lbl_title = Label(Top, text = "Hello World!!", font=('arial', 15))
+lbl_title = Label(Top, text = "Wellcome To ALLISWELL", font=('arial', 15))
 lbl_title.pack(fill=X)
 lbl_userid = Label(Form, text = "ID:", font=('arial', 14), bd=15)
 lbl_userid.grid(row=0, sticky="e")
