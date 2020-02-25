@@ -64,7 +64,7 @@ Top.pack(side=TOP, fill=X)
 Form = Frame(root, height=200)
 Form.pack(side=TOP, pady=20)
 #==============================라벨============================================
-lbl_title = Label(Top, text = "Wellcome To ALLISWELL", font=('arial', 15))
+lbl_title = Label(Top, text = "Welcome To ALLISWELL", font=('arial', 15))
 lbl_title.pack(fill=X)
 lbl_userid = Label(Form, text = "ID:", font=('arial', 14), bd=15)
 lbl_userid.grid(row=0, sticky="e")

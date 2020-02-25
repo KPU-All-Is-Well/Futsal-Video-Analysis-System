@@ -97,7 +97,7 @@ if __name__ == '__main__':
     estimate_distance = 0           # 영상기반 추정거리값을 저장
     distance = 0                    # 거리값을 저장
     frame_cnt = 0                   # 프레임을 카운팅함                   
-    moving_weight = 0               # 움직인 거리의 비중을 저장
+    moving_distance = 0               # 움직인 거리의 비중을 저장
     top_speed = 0                   # 최고 속도를 저장
     accumulate_speed = 0            # 속도들의 누적값
     temp_distance = 0               # 뛴 거리를 임시저장
@@ -111,6 +111,8 @@ if __name__ == '__main__':
     jog_cnt=0
     sprint_cnt = 0
     distance_value = 0
+    weight = 8
+    en_name = str(executeSQL.EngName(player_id))
 
     coord_head=coord_tail= Point(x=0,y=0)
 
@@ -152,7 +154,9 @@ if __name__ == '__main__':
                         #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
 
             if (i<6):
-                cv2.putText(frame, str(i), (int(newbox[0]), int(newbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
+                #cv2.putText(frame, str(i), (int(newbox[0]), int(newbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
+                cv2.putText(frame, en_name, (int(newbox[0]-10), int(newbox[1]-10)), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
+
 
                 cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (0,0,255), -1)
                 #Radar_Window
@@ -174,17 +178,17 @@ if __name__ == '__main__':
                     a = (int)(newbox[0]) - lastPoint.x
                     b = (int)(newbox[1]) - lastPoint.y
                     
-                    moving_weight=math.sqrt(math.pow(a,2) + math.pow(b,2)) # 초당 움직인 거리(즉 속도) - 유클리디안 거리측정 사용
+                    moving_distance=math.sqrt(math.pow(a,2) + math.pow(b,2)) # 초당 움직인 거리(즉 속도) - 유클리디안 거리측정 사용
                     
                     # 트레커 추적중 발생하는 진동을 최소화하기위한 코드
-                    if(moving_weight < 2) :
-                        moving_weight=0
+                    if(moving_distance < 2) :
+                        moving_distance=0
                     
-                    estimate_distance = estimate_distance + moving_weight   # 추정거리값을 누적시킴
+                    estimate_distance = estimate_distance + moving_distance   # 추정거리값을 누적시킴
                     
-                    distance = 8 * estimate_distance / 100      # 추정거리에서 도출된 값에 가중치를 두고 m단위로 변환 
+                    distance = weight * estimate_distance / 100      # 추정거리에서 도출된 값에 가중치를 두고 m단위로 변환 
                     distance = round(distance,2)                # 반올림 처리           
-                    speed = (8 * moving_weight / 100)*3.6       # moving_weight를 통해 구해진 m/s에 3.6을 곱해 속도를 k/h로 바꿔줌
+                    speed = (weight * moving_distance / 100)*3.6       # moving_distance를 통해 구해진 m/s에 3.6을 곱해 속도를 k/h로 바꿔줌
                     speed = round(speed,2)
                     
                     if( speed < 5 ) :
@@ -337,11 +341,6 @@ if __name__ == '__main__':
 
 
 
-
-
-#v2.1 히트맵 기능 추가
-
-
 # 사각형의 중심 좌표
 # center_x = left+w / 2
 # center_y = top+h / 2
@@ -355,4 +354,4 @@ if __name__ == '__main__':
 # 최종 뛴거리, 평균속도, 최고속도
 
 
-# 30초마다 평균속도, 최종 히트맵, 칼로리, 비율 추가해야함
+# 30초마다 평균속도, 최종 히트맵, 칼로리, 비율
