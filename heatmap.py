@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 
 def printHeatMap(image_x, image_y) :
     x, y = np.genfromtxt('player_coord.txt', delimiter=',', unpack=True)
-    # y = y[np.logical_not(np.isnan(y))]
-    # x = x[np.logical_not(np.isnan(x))]
 
     k = gaussian_kde(np.vstack([x, y]))
     xi, yi = np.mgrid[0:image_y:y.size**0.5*1j,0:image_x:x.size**0.5*1j] 
@@ -16,32 +14,33 @@ def printHeatMap(image_x, image_y) :
     Z, xedges, yedges = np.histogram2d(x, y)
     plt.pcolormesh(xedges, yedges, Z.T)
 
-    
-    fig = plt.figure(figsize=(7,8))
-    # ax1 = fig.add_subplot(211)
-    ax2 = fig.add_subplot(111)
+    # 공백 제거
+    plt.xticks([]), plt.yticks([])
+    plt.tight_layout()
+    plt.subplots_adjust(left = 0, bottom = 0, right = 1, top = 1, hspace = 0, wspace = 0)
+    fig = plt.figure(figsize=(image_y/101.0,image_x/100.0))
+
+    ax = fig.add_subplot(111)
 
     # alpha=0.5를 통해 색을 반투명하게 설정
-    # ax1.pcolormesh(xi, yi, zi.reshape(xi.shape), alpha=0.5)
-    ax2.contourf(xi, yi, zi.reshape(xi.shape), alpha=0.5, cmap='RdYlBu_r')
+    ax.contourf(xi, yi, zi.reshape(xi.shape), alpha=0.5, cmap='RdYlBu_r')
 
-    # ax1.set_xlim(0, image_y)
-    # ax1.set_ylim(image_x, 0)
-    ax2.set_xlim(0, image_y)
-    ax2.set_ylim(image_x, 0)
-    # ax1.axis('off')
-    ax2.axis('off')
+    ax.set_xlim(0, image_y)
+    ax.set_ylim(image_x, 0)
+    ax.axis('off')
+    ax.autoscale(False)
+    ext = ax.get_window_extent().transformed(plt.gcf().dpi_scale_trans.inverted())
 
     # 미리 지정한 pitch에 덮어씌우기
     im = plt.imread('heatmap2.png')
-    # ax1.imshow(im, extent=[0, image_y, image_x,0 ], aspect='auto')
-    ax2.imshow(im, extent=[0, image_y, image_x,0 ])
+    ax.imshow(im, extent=[0, image_y, image_x,0 ])
 
-    fig.savefig('result_heatmap.png', bbox_inches='tight')
+    fig.savefig('result_heatmap.png', bbox_inches=ext)
 
 if __name__ == "__main__":
     printHeatMap(337,600)   # 테스트용 하드코딩
     plt.show()
+
 
 # 참고 컬러바 출력 코드
 # ax=plt.gca() #get the current axes
