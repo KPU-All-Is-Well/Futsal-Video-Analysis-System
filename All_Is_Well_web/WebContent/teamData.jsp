@@ -244,7 +244,7 @@
 </div>
 
 <div style="float: center;">
-<iframe name="f6" src="highchart_Columm.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart_Column.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 

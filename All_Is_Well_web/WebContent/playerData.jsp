@@ -257,14 +257,8 @@
 <iframe name="f4" src="printHeatmap.jsp" width="1200" height="700" scrolling="no" frameborder="no">
  </iframe>
 </div>
-	<!--<jsp:include page = "pre_highchart1.html" /> --> <!-- X -->
 	
 	
-<%-- 	<jsp:include page = "highchart_Area.jsp" />  <!-- O 체력, 5분 단위 뛴 거리, 5분 단위 속도-->	
- --%>
-	<!--<jsp:include page = "highchart_Gauge.jsp" />  <!-- O 뛴거리, 총 경기 시간, 칼로리-->
-	<!--<jsp:include page = "highchart_Pie.jsp" />  <!-- O walk, jog, sprint 비율 및 실제 시간-->		
-	<!--<jsp:include page = "printHeatmap.jsp" />--> <!-- O 활동 반경 히트맵 -->
 
 
  
@@ -273,13 +267,7 @@
 
 
 		
-	<!--<jsp:include page = "pre_highchart1.html" /> --> <!-- X -->
-	
-	
-	<!--<jsp:include page = "highchart_Area.jsp" />  <!-- O 체력, 5분 단위 뛴 거리, 5분 단위 속도-->	
-<%-- 	<jsp:include page = "highchart_Gauge.jsp" />  <!-- O 뛴거리, 총 경기 시간, 칼로리-->
- --%>	<!--<jsp:include page = "highchart_Pie.jsp" />  <!-- O walk, jog, sprint 비율 및 실제 시간-->		
-	<!--<jsp:include page = "printHeatmap.jsp" />--> <!-- O 활동 반경 히트맵 -->
+
 
 </div>
  

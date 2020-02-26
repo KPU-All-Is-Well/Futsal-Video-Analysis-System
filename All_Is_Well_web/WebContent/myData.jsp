@@ -238,18 +238,7 @@
 
 <div style="float: left;"> <!-- 선수 개인 데이터가 myData 누르면 첫 화면에 나오도록 설정 -->
 		
-	<!--<jsp:include page = "pre_highchart1.html" /> --> <!-- X -->
 	
-	
-	<!--<jsp:include page = "highchart_Pie.jsp" />  <!-- O walk, jog, sprint 비율 및 실제 시간-->
-		<!--  are 차트 -->
-	
-	<!--<jsp:include page = "highchart_Gauge.jsp" />  <!-- O 뛴거리, 총 경기 시간, 칼로리-->
-			
-																		<!-- 스탯 분석 추가-->
-	<!--<jsp:include page = "printHeatmap.jsp" />--> <!-- O 활동 반경 히트맵 -->
-	
-
 </div>
 
 
