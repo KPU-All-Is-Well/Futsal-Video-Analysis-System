@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8"  %>
 <html>
 <head>
 <style>
@@ -50,12 +50,12 @@ body{
 </style>
 	<%@ include file="dbconn.jsp" %>
 	<%! 
-   String rspeed;
-   String rpower;
-   String rendurance;
-   String rtechnic;
-   String rpass;
-   String rshooting;
+   String rspeed; float fSpeed;
+   String rpower; float fPower;
+   String rendurance; float fEndurance;
+   String rtechnic; float fTechnic;
+   String rpass; float fPass;
+   String rshooting; float fShooting;
    
    %>
     <%   
@@ -68,28 +68,32 @@ body{
       
       try{
             
-         String sql="select speed, power, endurance, technic, pass, shooting from " + id + " where play_id = '1'";
+         String sql="select speed, power, endurance, technic, pass, shooting from playerSignUpInfo where id = 'messi'";
          stmt = conn.createStatement();
          rs = stmt.executeQuery(sql);
+         
+      
+
       
          
-         
-         while(rs.next()){
-  			
+         while(rs.next()){	
            rspeed = rs.getString("speed");
            rpower=rs.getString("power");
            rendurance=rs.getString("endurance");
            rtechnic=rs.getString("technic");
            rpass=rs.getString("pass");
-           rshooting = rs.getString("shooting");
-          
-            
+           rshooting = rs.getString("shooting");            
          }
+         
+         fSpeed = Float.parseFloat(rspeed);
+         fPower= Float.parseFloat(rpower);
+         fEndurance= Float.parseFloat(rendurance);
+         fTechnic= Float.parseFloat(rtechnic);
+         fPass= Float.parseFloat(rpass);
+         fShooting= Float.parseFloat(rshooting);
      
       
-      }
-      
-      
+      }    
          catch (SQLException ex){
          out.println("SQLException: "+ex.getMessage());
          
@@ -102,7 +106,8 @@ body{
          if(conn != null)
             conn.close();
          
-      } 
+      }
+      
      %>
      
       
@@ -157,7 +162,7 @@ body{
         description: 'A spiderweb chart compares the allocated budget against actual spending within an organization. The spider chart has six spokes. Each spoke represents one of the 6 departments within the organization: sales, marketing, development, customer support, information technology and administration. The chart is interactive, and each data point is displayed upon hovering. The chart clearly shows that 4 of the 6 departments have overspent their budget with Marketing responsible for the greatest overspend of $20,000. The allocated budget and actual spending data points for each department are as follows: Sales. Budget equals $43,000; spending equals $50,000. Marketing. Budget equals $19,000; spending equals $39,000. Development. Budget equals $60,000; spending equals $42,000. Customer support. Budget equals $35,000; spending equals $31,000. Information technology. Budget equals $17,000; spending equals $26,000. Administration. Budget equals $10,000; spending equals $14,000.'
     },
     title: {
-        text: 'Son Stat',
+        text: 'Stat',
         x: -80
     },
     pane: {
@@ -192,12 +197,8 @@ body{
     series: [{
         name: '2018/2019 season',
        
-        data: [50000, 39000, 42000, 31000, 26000, 14000],
+        data: [<%=fPass%> , <%=fShooting%>, <%=fEndurance%>, <%=fSpeed%>, <%=fPower%>, <%=fTechnic%>],
         
-        pointPlacement: 'on'
-    }, {
-        name: '2019/2020 season',        
-        data: [50000, 39000, 42000, 31000, 26000, 14000],
         pointPlacement: 'on'
     }],
   
@@ -208,6 +209,8 @@ body{
             },
             chartOptions: {
                 legend: {
+                	
+                	
                     align: 'center',
                     verticalAlign: 'bottom',
                     layout: 'horizontal'

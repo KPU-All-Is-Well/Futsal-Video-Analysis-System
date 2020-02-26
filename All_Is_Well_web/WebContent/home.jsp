@@ -446,7 +446,7 @@
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">개인 랭킹 </a></h4>
+                                    <h4><a href="#">선수 스탯 총점 랭킹 </a></h4>
                                     <p>Nunc aliquet mi ante. Nulla magna ante, porttitor in sagittis posuere. </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -468,16 +468,16 @@
 
                             <div class="post-media pitem item-w1 item-h1 cat3">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_12.png" alt="" class="img-responsive">
+                                    <img src="images/spyder.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="#">
+                                        <a class="golink" href="highchart_Spyder.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="#">Gabfire Vector Logo</a></h4>
-                                    <p>Maecenas nisl magna, ultricies lobortis tortor vel, dapibus cras amet. </p>
+                                    <h4><a href="highchart_Spyder.jsp">개인 스탯</a></h4>
+                                    <p>나의 스탯을 확인해보세요. </p>
                                 </div>
                             </div><!-- end post-media -->
                         </div><!-- end row -->
