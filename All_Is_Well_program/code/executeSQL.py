@@ -45,23 +45,23 @@ def CreatePlayerTable(player_id):
     cursor.execute(sql)
     connect.commit()
 
-def CreateHeatmapTable(player_id):
-    heatmap_table = player_id+"_heatmap"
+def CreatePathmapTable(player_id):
+    pathmap_table = player_id+"_pathmap"
 
     sql = """
     CREATE TABLE IF NOT EXISTS {0}(
-        heatmap_number INT NOT NULL AUTO_INCREMENT,
-        heatmap_data MEDIUMBLOB,
+        pathmap_number INT NOT NULL AUTO_INCREMENT,
+        pathmap_data MEDIUMBLOB,
         play_id INT NOT NULL,
-        PRIMARY KEY(heatmap_number)
+        PRIMARY KEY(pathmap_number)
     );
-    """.format(heatmap_table)
-    # heatmap_table 선수별 히트맵 테이블 생성
+    """.format(pathmap_table)
+    # pathmap_table 선수별 히트맵 테이블 생성
 
     cursor.execute(sql)
     connect.commit()
 
-    return heatmap_table
+    return pathmap_table
 
 def PlayID(player_id):
     sql = "SELECT * FROM {0}".format(player_id)
@@ -92,12 +92,12 @@ def EngName(player_id):
     return Player_EngName[0]
 
 
-def CommitHeatmap(heatmap_filename,heatmap_table,play_id):
+def CommitPathmap(pathmap_filename,pathmap_table,play_id):
     buffer = BytesIO()
-    image=Image.open(heatmap_filename)
+    image=Image.open(pathmap_filename)
     image.save(buffer,format='png')
     encoded_image=base64.b64encode(buffer.getvalue())
-    sql= "INSERT INTO {0}(heatmap_data,play_id) VALUES(%s,%s)".format(heatmap_table)
+    sql= "INSERT INTO {0}(pathmap_data,play_id) VALUES(%s,%s)".format(pathmap_table)
     insert_data = (encoded_image,play_id)
     cursor.execute(sql,insert_data)
 
@@ -114,7 +114,7 @@ def CommitInterval(player_id, distance_colum, interval_distance, speed_colum, in
 
 def CommitResult(player_id, avg_speed, top_speed, distance, cal, walk_weight, jog_weight, sprint_weight, video_time, play_id):
     buffer = BytesIO()
-    image=Image.open("result_heatmap.png")
+    image=Image.open("../result/result_heatmap.png")
     image.save(buffer,format='png')
     encoded_image=base64.b64encode(buffer.getvalue())
     insert_image = (encoded_image)

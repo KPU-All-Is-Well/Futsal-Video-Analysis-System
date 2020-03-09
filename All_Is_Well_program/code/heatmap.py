@@ -5,7 +5,7 @@ from scipy.stats.kde import gaussian_kde
 import matplotlib.pyplot as plt
 
 def printHeatMap(image_x, image_y) :
-    x, y = np.genfromtxt('player_coord.txt', delimiter=',', unpack=True)
+    x, y = np.genfromtxt('../result/player_coord.txt', delimiter=',', unpack=True)
 
     k = gaussian_kde(np.vstack([x, y]))
     xi, yi = np.mgrid[0:image_y:y.size**0.5*1j,0:image_x:x.size**0.5*1j] 
@@ -32,10 +32,10 @@ def printHeatMap(image_x, image_y) :
     ext = ax.get_window_extent().transformed(plt.gcf().dpi_scale_trans.inverted())
 
     # 미리 지정한 pitch에 덮어씌우기
-    im = plt.imread('heatmap2.png')
+    im = plt.imread('../image/heatmap2.png')
     ax.imshow(im, extent=[0, image_y, image_x,0 ])
 
-    fig.savefig('result_heatmap.png', bbox_inches=ext)
+    fig.savefig('../result/result_heatmap.png', bbox_inches=ext)
 
 if __name__ == "__main__":
     printHeatMap(337,600)   # 테스트용 하드코딩
