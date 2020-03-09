@@ -1,5 +1,5 @@
 # Futsal-Video-Analysis-System
-for Amateur
+for amateur soccer players
 
 What we used for our project is...
 
