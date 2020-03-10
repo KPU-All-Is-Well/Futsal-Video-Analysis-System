@@ -4,15 +4,17 @@
 
 ### 1. 누구나 사용 가능한 영상 분석 서비스
 
-##### &nbsp;&nbsp;&nbsp; 고가의 특수 장비 없이 영상으로만 분석, 전문 리그를 상대로 하는 서비스가 아닌 누구나 사용가능한 프로그램 제공
+#### &nbsp;&nbsp;&nbsp; 고가의 특수 장비 없이 영상으로만 분석, 전문 리그를 상대로 하는 서비스가 아닌 누구나 사용가능한 프로그램 제공
 
 ### 2. 효율적이고 과학적인 팀 관리
 
-#####  &nbsp;&nbsp;&nbsp; 해당 경기를 데이터로 기록하고 축적된 데이터를 기반으로 팀에 알맞은 전술 설정과 피드백을 할 수 있도록 함
+####  &nbsp;&nbsp;&nbsp; 해당 경기를 데이터로 기록하고 축적된 데이터를 기반으로 팀에 알맞은 전술 설정과 피드백을 할 수 있도록 함
 
 ### 3. 활동에 불편함을 일으키는 특수장비 제거
 
-#####   &nbsp;&nbsp;&nbsp;기존의 GPS 장치를 이용한 분석 서비스에서 영상 하나만을 분석하여 다양한 정보를 제공
+####   &nbsp;&nbsp;&nbsp;기존의 GPS 장치를 이용한 분석 서비스에서 영상 하나만을 분석하여 다양한 정보를 제공
+
+
 
 ## 수행 시나리오
 
@@ -85,7 +87,7 @@
 <img width="841" alt="스크린샷 2020-03-10 오후 3 45 09" src="https://user-images.githubusercontent.com/54341018/76286705-228eb780-62e6-11ea-9cd6-c1425d3fd869.png">
 
 
-## 프로그래밍 실행 방법  
+## 프로그램 실행 방법  
 
 ### 파이썬 분석 프로그램   
 (python 3.6 opencv4.1.2 설치)   
@@ -98,6 +100,8 @@
 -pip install pillow  
 -pip install pymsql  
 - exe파일 실행  
+- Website에 가입된 ID, Password 입력
+- 분석할 영상 선택
 - 원하는 선수에게 ROI를 쳐주고 'Enter'를  누르고 'q' 를 누르면 분석이 시작된다.
 
 
@@ -105,7 +109,7 @@
 
 - clone 후 eclipse 에 import   
 
-- index.html 실행 -> sign in   or   sign up( 임의 아이디 -  id:messi pass: 1234 ) 
+- index.html 실행 -> sign in   or   sign up( 임의 아이디 -  ID : messi Password : 1234 ) 
  
 - log in -> 선수 or 감독 모드 선택   
 
