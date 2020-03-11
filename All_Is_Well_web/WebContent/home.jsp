@@ -329,7 +329,8 @@
                                 </div>
                             </div><!-- end post-media -->
 
-                            <div class="post-media pitem item-w1 item-h1 cat3">
+                            <div class="post-media pitem item-w
+                            1 item-h1 cat3">
                                 <div class="entry">
                                     <img src="images/team1_1.png" alt="" class="img-responsive">
                                     <div class="magnifier">
@@ -438,7 +439,7 @@
 
                             <div class="post-media pitem item-w1 item-h1 cat1">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_10.png" alt="" class="img-responsive">
+                                    <img src="images/compare2.png" alt="" class="img-responsive">
                                     <div class="magnifier">
                                         <a class="golink" href="#">
                                            <i class="fa fa-link"></i>

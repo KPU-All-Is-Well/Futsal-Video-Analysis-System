@@ -55,7 +55,8 @@
                       <div id="C"><p>팀명 : <input type="text" name="team" style="text-align:center; width:100px"> </div>
                       <div id="D"><p>아이디 : <input type="text" name="id" style="text-align:center; width:100px"> </div>
                       <div id="E"><p>비밀번호 : <input type="password" name="passwd" style="text-align:center; width:100px"> </div>
-                      <div id="F"><p>키 : <input type="text" name="height" style="text-align:center; width:100px"> 몸무게 : <input type="text" name="weight" style="text-align:center; width:100px"> </div>
+                      <div id="F"><p>키 : <input type="text" name="height" style="text-align:center; width:100px"> 몸무게 : <input type="text" 
+                      name="weight" style="text-align:center; width:100px"> </div>
                       <div id="H"><p>나이 : <input type="text" name="age" style="text-align:center; width:100px"></div> <!-- 나이 97.11.06 으로 바꾸기 -->  
                       <div id="I">
                          <p>주포지션 : <select name = "mainPosition">

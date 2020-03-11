@@ -23,6 +23,7 @@
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 	
+	
 
 	<!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
@@ -65,9 +66,6 @@
   		<frame align=left src="videos/video.mp4">
 		</frameset>
 		-->
-		
-		<!--  <audio autoplay controls loop> <source src="videos/video.mp4" type="audio/mp4"> </audio>
--->
 
 
      
@@ -92,15 +90,13 @@
                 "z-index": "-1",        //Behind everything
                 "loop": true,           //Loop when it reaches the end
                 "autoplay": true,       //Autoplay at start
-                "muted": true,          //Muted at start -> 음소거 x
+                "muted": false,          //Muted at start -> 음소거 x
                 "mp4":"videos/video.mp4" ,     //Path to video mp4 format
                 "video_ratio": 1.7778,              // width/height -> If none provided sizing of the video is set to adjust
                 "fallback_image": "images/dummy.png",   //Fallback image path
                 "priority": "html5"             //Priority for html5 (if set to flash and tested locally will give a flash security error)
             });
         });
-        
-        
     </script>
     
 </body>
