@@ -229,7 +229,7 @@
   
  <div id="btn_group" style="text-align:center"  >
  <a href="playerData_Coach.jsp"> <button id="test_btn1">Player Data </button></a> 
-<a href="teamData_coach.jsp"> <button id="test_btn2">Team Data </button></a>
+<a href="matchData_Coach.jsp"> <button id="test_btn2">Team Data </button></a>
 </div>
  
  </html>
