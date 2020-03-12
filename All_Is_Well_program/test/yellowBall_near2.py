@@ -17,7 +17,7 @@ frame_cnt =0
 Point = collections.namedtuple('Point',['x','y'])
 lastPoint = Point(x=-1, y=-1)   # 과거의 좌표값을 저장할 튜플, -1로 초기화
 currentPoint = Point(x=-1, y=-1)   # 현재의 좌표값을 저장할 튜플, -1로 초기화
-black = 100
+black = 106
 white = 213
 
 #213, 192
@@ -36,8 +36,8 @@ while(1):
     #print(frame.shape) # 가로 = 1000, 세로= 571 
     
     
-    if(cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 5, param1=200, param2=10, minRadius=1,maxRadius=3) is not None):
-        circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 5, param1=200, param2=10, minRadius=1,maxRadius=3)
+    if(cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 5, param1=200, param2=10, minRadius=2,maxRadius=3) is not None):
+        circles = cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 5, param1=200, param2=10, minRadius=2,maxRadius=3)
     
     
     if(circles is not None):
@@ -47,12 +47,13 @@ while(1):
             currentPoint = Point(x = int(c[0]), y = int(c[1]))
             
             # 공인식 부분(제약사항: 흰색이나 검은색 공만 아니면 됨)
-            if(white > frame[y][x][0] > black) and (height*0.1 < y < height*0.9) and (width*0.05 < x < width*0.95):     
+            if(white > frame[y][x][0] > black)  and (frame[y][x][1] > 225)  and (height*0.1 < y < height*0.9) and (width*0.05 < x < width*0.95):     
                 # 정수리 검은색 원과 축구장 바닥 흰색 원 배제(색기반), 경기장 밖 배제(가로 15%, 세로 5%)
                 
                        
-                print('r = ',c[2], '       frame_cnt = ', frame_cnt, '          ',' x = ', x,'      y = ', y,'    ', (frame[y][x][0]))                          
+                print('r = ',c[2], '       frame_cnt = ', frame_cnt, '          ',' x = ', x,'      y = ', y,'    ', (frame[y][x][0]), (frame[y][x][1]), (frame[y][x][2]))                          
                 
+            
                 cv2.circle(frame, (c[0], c[1]), c[2], (0, 0, 255), 2)
                 cv2.circle(gray, (c[0], c[1]), c[2], (0, 0, 255), 2)
                 
