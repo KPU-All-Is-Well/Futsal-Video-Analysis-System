@@ -41,7 +41,7 @@
 					session.setAttribute("id", id);
 					out.println("<script>");
 					out.println("alert('로그인 되었습니다. All Is Well에 오신 것을 진심으로 환영합니다.')");
-					out.println("location.href='home.jsp'");
+					out.println("location.href='home_of_Coach.jsp'");
 					out.println("</script>");	
 				}
 			

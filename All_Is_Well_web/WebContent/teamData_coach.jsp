@@ -20,6 +20,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
+    
 	
     <!-- Site Icons --> <!-- 브라우저 창 위에 보이는 아이콘 -->
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
@@ -43,7 +44,13 @@
 
 </head> 
 <!--ì¼ìª½ ëª©ì°¨ -->
-<body class="left-menu">
+<style>
+	body{
+		background-color: #000000;
+	}
+</style>
+
+<body class="left-menu"  >
     
     <div class="menu-wrapper">
         <div class="mobile-menu">
@@ -61,11 +68,11 @@
                     <div id="navbar" class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
                             <li class="dropdown">
-                                <a href="home.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
+                                <a href="home_of_Coach.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
                                
                             </li>
                             <li class="dropdown">
-                                <a href="myData.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Data </a>
+                                <a href="teamData_coach.jsp.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Team Data </a>
                               
                             </li>
                             <li class="dropdown">
@@ -102,12 +109,12 @@
                     <ul class="primary-menu">
 
 						<!--Home ëª©ì°¨ -->
-                        <li class="child-menu"><a href="home.jsp">Home</a>
+                        <li class="child-menu"><a href="home_of_Coach.jsp">Home</a>
                             
                         </li>
 
-						<!--My Data ëª©ì°¨ -->
-                        <li class="myData.jsp"><a href="#">My Data </a>
+						 <!--My Data ëª©ì°¨ -->
+                        <li class="teamData_coach.jsp"><a href="teamData_coach.jsp">Team Data </a>
                           
                         </li>
 
@@ -117,7 +124,7 @@
                          
                         </li>
 
-	       
+	      
 					
 						<!--Calendar ëª©ì°¨ -->	
 						<li><a href="#">Calendar</a></li>
@@ -222,17 +229,38 @@
 </style>
   
  <div id="btn_group" style="text-align:center"  >
- <a href="AT_Distance.jsp"> <button id="test_btn1">선수체력 </button></a> 
-  <a href="AT_Stat.jsp"> <button id="test_btn2">선수스텟 </button></a>
+ <a href="playerData_Coach.jsp"> <button id="test_btn1">Player Data </button></a> 
+<a href="matchData_Coach.jsp"> <button id="test_btn2">Match Data </button></a>
 </div>
  
  </html>
 
+<!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
-  
-<div style="float:left;">
-<iframe src="chartjs_line.html" width="1200" height="600"></iframe>	
+<!-- 구글차트 -->
+
+<div style="float: center;">
+<iframe name="f5" src="highchart_Distance_Rank.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
 </div>
+
+<div style="float: center;">
+<iframe name="f6" src="highchart_Column.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+<!-- 위치가 너무 안예뻐서 주석 
+<div style="float: center;">
+<iframe name="f7" src="googleChart.html" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+ -->
+
+
+
+
+
 
                       
  </div>
