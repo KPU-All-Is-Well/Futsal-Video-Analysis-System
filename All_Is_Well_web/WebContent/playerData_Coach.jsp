@@ -245,12 +245,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>15</h3>
+                                 <h3>10</h3>
                               </a>
                               <a href="blog.html">
-                                 <h5 class="card-title">Rocky Benard</h5>
+                                 <h5 class="card-title">Lionel messi</h5>
                               </a>
-                              <p>Right Defender</p>
+                              <p>center Forward</p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -268,12 +268,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>15</h3>
+                                 <h3>16</h3>
                               </a>
                               <a href="blog.html">
-                                 <h5 class="card-title">Adult Malerd</h5>
+                                 <h5 class="card-title">Ki sung yueng</h5>
                               </a>
-                              <p>Right Defender</p>
+                              <p> Defence Midfilder</p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -291,12 +291,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>15</h3>
+                                 <h3>13</h3>
                               </a>
                               <a href="blog.html">
-                                 <h5 class="card-title">Rocky Benard</h5>
+                                 <h5 class="card-title">Park ji sung</h5>
                               </a>
-                              <p>Right Defender</p>
+                              <p>Winger</p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -314,12 +314,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>15</h3>
+                                 <h3>7</h3>
                               </a>
                               <a href="blog.html">
-                                 <h5 class="card-title">Jimmy Cartoon</h5>
+                                 <h5 class="card-title">Son heung min</h5>
                               </a>
-                              <p>Right Defender</p>
+                              <p>Winger</p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -337,12 +337,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>15</h3>
+                                 <h3>8</h3>
                               </a>
                               <a href="blog.html">
-                                 <h5 class="card-title">Jimmy Cartoon</h5>
+                                 <h5 class="card-title">Baek seung ho</h5>
                               </a>
-                              <p>Right Defender</p>
+                              <p>Center midfilder</p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
