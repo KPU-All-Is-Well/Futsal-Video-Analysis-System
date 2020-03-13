@@ -98,10 +98,10 @@ body{
       request.setCharacterEncoding("utf-8");
       
 
-     //String id = (String)session.getAttribute("id");
-     String id = "messi";
+     String id = (String)session.getAttribute("id");
+     //String id = "messi";
       
-      String query="select result_heatmap from "+ id;
+      String query="select result_heatmap from "+ id + " where play_id = '1'";
       ResultSet rs = null;
       PreparedStatement pstm = conn.prepareStatement(query);
       String encordingImg = "";

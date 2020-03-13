@@ -249,6 +249,32 @@
  </iframe>
 </div>
 
+<div style="float: center;">
+<iframe name="f6" src="highchart_Column_avg.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+
+<div style="float: center;">
+<iframe name="f6" src="highchart_Bubble.jsp" width="1200" height="650" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+
+<!-- 
+<div style="float: center;">
+<iframe name="f6" src="googleChart.html" width="1400" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+<div style="float: left;">
+<iframe name="f6" src="googleChart2.html" width="1400" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+ -->
+
+
 <!-- 위치가 너무 안예뻐서 주석 
 <div style="float: center;">
 <iframe name="f7" src="googleChart.html" width="1200" height="500" scrolling="no" frameborder="no">

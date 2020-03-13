@@ -82,23 +82,22 @@
     Float[] array; //Float 래퍼 클래스 객체들을 담을 배열
     String[] arrName; //List를 배열로 바꿔 담을 공간
     
-    float float1; float float2; float float3; float float4;
+    float float1 =0; float float2 = 2; float float3 = 0; float float4 = 0;
     
 
    %>
-   
    
     <%
    
     
     try {
         //드라이버 호출, 커넥션 연결
-        Class.forName("com.mysql.jdbc.Driver").newInstance();
-        //Class.forName(" com.mysql.cj.jdbc.Driver").newInstance();
+        //Class.forName("com.mysql.jdbc.Driver").newInstance();
+        Class.forName(" com.mysql.cj.jdbc.Driver").newInstance();
       
      
         con = DriverManager.getConnection(
-                "jdbc:mysql://15.164.30.158:3306/AIWUserDB", "sk", "1234");
+                "jdbc:mysql://15.164.30.158:3306/AIWUserDB?autoReconnect=true&amp;serverTimezone=UTC", "sk", "1234");
         
        
         
@@ -241,25 +240,25 @@ Highcharts.chart('container', {
             colorByPoint: true,
             data: [
                 {
-                    name: '<%=arrName[0] %>',
+                    name: 'sally',
                     y: <%= float1 %>,
-                    drilldown: '<%=arrName[0] %>'
+                    drilldown: "sally"
                 },
                 
                 {
-                    name: '<%=arrName[1] %>',
+                    name:  "ally",
                     y: <%= float2 %>,
-                    drilldown: '<%=arrName[1] %>'
+                    drilldown:  'ally'
                 },
                 {
-                    name: '<%=arrName[2] %>',
+                    name:  "lly",
                     y: <%= float3 %>,
-                    drilldown: '<%=arrName[2] %>'
+                    drilldown: "lly"
                 },
                 {
-                    name: '<%=arrName[3] %>',
+                    name:  "y",
                     y: <%= float4 %>,
-                    drilldown: '<%=arrName[3] %>'
+                    drilldown:  "y"
                 }
             ]
         }
