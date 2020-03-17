@@ -233,10 +233,10 @@
   } 
 </style>
   
- <div id="btn_group" style="text-align:center"  >
- <a href="playerData_Coach.jsp"> <button id="test_btn1">Player </button></a> 
+<div id="btn_group" style="text-align:center"  >
+<a href="playerData_Coach.jsp"> <button id="test_btn1">Player </button></a> 
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
-<a href="position_Coach.jsp"> <button id="test_btn3">Position </button></a>
+<a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
 </div>
  
  </html>
@@ -268,28 +268,19 @@
  </iframe>
 </div>
 
+<!-- 구글차트 부분 -> 하이차트로 바꿔야 함 -->
+<div  style = text-align:center >
+	<div  style = margin-left:17%>
+	
+		<h2><br>선수 뛴 거리, 최고 속력 랭킹</h2>
+		<iframe name="f6" src="googleChart.html" width="1400" height="500" scrolling="no" frameborder="no">
+ 		</iframe>
 
-<!-- 
-<div style="float: center;">
-<iframe name="f6" src="googleChart.html" width="1400" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
-<div style="float: left;">
-<iframe name="f6" src="googleChart2.html" width="1400" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
- -->
-
-
-<!-- 위치가 너무 안예뻐서 주석 
-<div style="float: center;">
-<iframe name="f7" src="googleChart.html" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
- -->
+		<iframe name="f6" src="googleChart2.html" width="1400" height="500" scrolling="no" frameborder="no">
+ 		</iframe>
+ 	
+	</div>	
+ </div>
 
 
 

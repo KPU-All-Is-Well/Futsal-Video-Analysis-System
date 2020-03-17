@@ -210,16 +210,21 @@
   margin-right:-4px;   
   } 
 #test_btn2
+{ 
+  margin-left:-3px; 
+  }
+  #test_btn3
 { border-top-right-radius: 5px;
  border-bottom-right-radius: 5px;
   margin-left:-3px; 
   }
+  
  #btn_group button
  {
   border: 1px solid skyblue;
   background-color: rgba(0,0,0,0);
    color: skyblue;
-    padding: 5px; 
+    padding: 15px; 
     } 
  #btn_group button:hover
  { color:white; 
@@ -227,9 +232,10 @@
   } 
 </style>
   
- <div id="btn_group" style="text-align:center"  >
- <a href="playerData_Coach.jsp"> <button id="test_btn1">Player Data </button></a> 
-<a href="matchData_Coach.jsp"> <button id="test_btn2">Team Data </button></a>
+<div id="btn_group" style="text-align:center"  >
+<a href="playerData_Coach.jsp"> <button id="test_btn1">Player</button></a> 
+<a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
+<a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
 </div>
  
  </html>
