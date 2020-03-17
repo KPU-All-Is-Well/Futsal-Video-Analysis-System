@@ -236,60 +236,22 @@
  <div id="btn_group" style="text-align:center"  >
  <a href="playerData_Coach.jsp"> <button id="test_btn1">Player </button></a> 
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
-<a href="position_Coach.jsp"> <button id="test_btn3">Position </button></a>
+<!--  <a href="position_Coach.jsp"> <button id="test_btn3">Position </button></a> -->
+<a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
 </div>
  
  </html>
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
-<!-- 구글차트 -->
-
-<!-- 구글차트 -->
-
-<div style="float: center;">
-<iframe name="f5" src="highchart_Distance_Rank.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
-<div style="float: center;">
-<iframe name="f6" src="highchart_Column.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
-<div style="float: center;">
-<iframe name="f6" src="highchart_Column_avg.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
 
 
 <div style="float: center;">
-<iframe name="f6" src="highchart_Bubble.jsp" width="1200" height="650" scrolling="no" frameborder="no">
+<iframe name="f4" src="printHeatmap_Coach.jsp" width="1200" height="700" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 
-<!-- 
-<div style="float: center;">
-<iframe name="f6" src="googleChart.html" width="1400" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
-<div style="float: left;">
-<iframe name="f6" src="googleChart2.html" width="1400" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
- -->
-
-
-<!-- 위치가 너무 안예뻐서 주석 
-<div style="float: center;">
-<iframe name="f7" src="googleChart.html" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
- -->
 
 
 
