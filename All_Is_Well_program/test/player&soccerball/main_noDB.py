@@ -348,7 +348,7 @@ if __name__ == '__main__':
         if player >= flag + 1 : # A팀 3명, B팀 5명으로 경기할 경우 -> flag = 3 
             ball_share_B.append(ball_cnt)
             #print(player-flag-1)
-            print('B팀 ', player, '번째 선수 개인의 공 점유 프레임 수 : ', ball_share_B[player-flag-1]) # 0, 1...
+            print('B팀 ', player-flag, '번째 선수 개인의 공 점유 프레임 수 : ', ball_share_B[player-flag-1]) # 0, 1...
             sum_ball_B += ball_share_B[player-flag-1]
             print('B팀 공 점유 프레임 수 누적값: ', sum_ball_B)
         else :
@@ -395,10 +395,13 @@ if __name__ == '__main__':
     
     
     ########################################공 점유율 계산 알고리즘################################################
+    
     #for문이 다 돌은 뒤 공 점유율 계산
     ball_share_A_res = sum_ball_A / (sum_ball_A + sum_ball_B) * 100
     ball_share_B_res = sum_ball_B / (sum_ball_A + sum_ball_B) * 100
     
+    print('\n')
+    print('==>')
     print('A팀 공 점유율: ', sum_ball_A, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     
