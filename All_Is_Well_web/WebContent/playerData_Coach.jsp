@@ -253,7 +253,7 @@
                               <a href="#" class="blog_item_date">
                                  <h3>10</h3>
                               </a>
-                              <a href="blog.html">
+                              <a href="coach_aboutPlayer.html">
                                  <h5 class="card-title">Lionel messi</h5>
                               </a>
                               <p>center Forward</p>
@@ -276,7 +276,7 @@
                               <a href="#" class="blog_item_date">
                                  <h3>16</h3>
                               </a>
-                              <a href="blog.html">
+                              <a href="coach_aboutPlayer.html">
                                  <h5 class="card-title">Ki sung yueng</h5>
                               </a>
                               <p> Defence Midfilder</p>
@@ -299,7 +299,7 @@
                               <a href="#" class="blog_item_date">
                                  <h3>13</h3>
                               </a>
-                              <a href="blog.html">
+                              <a href="coach_aboutPlayer.html">
                                  <h5 class="card-title">Park ji sung</h5>
                               </a>
                               <p>Winger</p>
@@ -322,7 +322,7 @@
                               <a href="#" class="blog_item_date">
                                  <h3>7</h3>
                               </a>
-                              <a href="blog.html">
+                              <a href="coach_aboutPlayer.html">
                                  <h5 class="card-title">Son heung min</h5>
                               </a>
                               <p>Winger</p>
@@ -345,7 +345,7 @@
                               <a href="#" class="blog_item_date">
                                  <h3>8</h3>
                               </a>
-                              <a href="blog.html">
+                              <a href="coach_aboutPlayer.html">
                                  <h5 class="card-title">Baek seung ho</h5>
                               </a>
                               <p>Center midfilder</p>
@@ -368,7 +368,7 @@
                               <a href="#" class="blog_item_date">
                                  <h3>15</h3>
                               </a>
-                              <a href="blog.html">
+                              <a href="coach_aboutPlayer.html">
                                  <h5 class="card-title">Adult Malerd</h5>
                               </a>
                               <p>Right Defender</p>
@@ -391,7 +391,7 @@
                               <a href="#" class="blog_item_date">
                                  <h3>15</h3>
                               </a>
-                              <a href="blog.html">
+                              <a href="coach_aboutPlayer.html">
                                  <h5 class="card-title">Rocky Benard</h5>
                               </a>
                               <p>Right Defender</p>
@@ -414,7 +414,7 @@
                               <a href="#" class="blog_item_date">
                                  <h3>15</h3>
                               </a>
-                              <a href="blog.html">
+                              <a href="coach_aboutPlayer.html">
                                  <h5 class="card-title">Rocky Benard</h5>
                               </a>
                               <p>Right Defender</p>
