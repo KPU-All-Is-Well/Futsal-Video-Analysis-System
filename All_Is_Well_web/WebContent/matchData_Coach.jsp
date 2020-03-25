@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -202,8 +201,6 @@
             </div><!-- end container -->
         </div><!-- end section -->
 
-
-
 <style> 	
 #test_btn1
 { border-top-left-radius: 5px;
@@ -242,25 +239,27 @@
  </html>
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
-  
-      
- <section class="ftco-section">
-			<div class="container">
+ 
+        
+<section class="section parallax" data-stellar-background-ratio="0.1 ">
+
+			<div class="contatiner">
 				<div class="row">
 					<div class="col-md-8">
-	          <div class="heading-section ftco-animate">
+	          <div class="section-title light-color text-center">
+	          
 	          	<span class="subheading">Game Report</span>
-	            <h2 class="mb-4">Baseball Game Reports 2019</h2>
+	            <h2 class="mb-4"style="color:white">Baseball Game Reports 2019</h2>
 	          </div>
 	          <div class="row">
 	          	<div class="col-md-12">
 	          		<div class="scoreboard scoreboard-2 slash">
-			          	<div class="divider ftco-animate text-center mb-4"><span>Mon. June 3, 2019; Baseball Champions League</span></div>
-			          	<div class="sport-team-wrap ftco-animate">
-			          		<span class="vs">vs</span>
+			          	         <div class="section-title light-color text-center"><h4 style="color:white">Mon. June 3, 2019; Baseball Champions League</h4></div>
+			           <div class="section-title light-color text-center">
+			          		<h4 style="color:black">vs</h4>
 				          	<div class="d-sm-flex mb-4">
 					          	<div class="sport-team d-flex align-items-center">
-				          			<div class="img logo" style="background-image: url(images/team-1.jpg);"></div>
+				          			<div class="img logo" style="background-image: url(images/team-3.jpg);"></div>
 												<div class="text-center px-1 px-md-3 desc">
 													<h3 class="score win"><span>12</span></h3>
 													<h4 class="team-name">Phoenix</h4>
@@ -275,16 +274,18 @@
 					          	</div>
 				          	</div>
 			          	</div>
-			          	<div class="text-center ftco-animate">
+			          	
+			          	
+			          	         <div class="section-title light-color text-center">
 				          	<p class="mb-0"><a href="#" class="btn btn-black">More Details</a></p>
 				          </div>
 			          </div>
 	          	</div>
 	          	<div class="col-md-12">
 	          		<div class="scoreboard scoreboard-2 slash">
-			          	<div class="divider ftco-animate text-center mb-4"><span>Mon. June 3, 2019; Baseball Champions League</span></div>
-			          	<div class="sport-team-wrap ftco-animate">
-			          		<span class="vs">vs</span>
+			          	         <div class="section-title light-color text-center"><h4 style="color:white">Mon. June 3, 2019; Baseball Champions League</h4></div>
+        						 <div class="section-title light-color text-center">
+         			          				<h4 style="color:black">vs</h4>
 				          	<div class="d-sm-flex mb-4">
 					          	<div class="sport-team d-flex align-items-center">
 				          			<div class="img logo" style="background-image: url(images/team-3.jpg);"></div>
@@ -302,16 +303,16 @@
 					          	</div>
 				          	</div>
 			          	</div>
-			          	<div class="text-center ftco-animate">
+			          	 <div class="section-title light-color text-center">
 				          	<p class="mb-0"><a href="#" class="btn btn-black">More Details</a></p>
 				          </div>
 			          </div>
 	          	</div>
 	          	<div class="col-md-12">
 	          		<div class="scoreboard scoreboard-2 slash">
-			          	<div class="divider ftco-animate text-center mb-4"><span>Mon. June 3, 2019; Baseball Champions League</span></div>
-			          	<div class="sport-team-wrap ftco-animate">
-			          		<span class="vs">vs</span>
+			          	         <div class="section-title light-color text-center"><h4 style="color:white">Mon. June 3, 2019; Baseball Champions League</h4></div>
+			          	 <div class="section-title light-color text-center">
+			          				<h4 style="color:black">vs</h4>
 				          	<div class="d-sm-flex mb-4">
 					          	<div class="sport-team d-flex align-items-center">
 				          			<div class="img logo" style="background-image: url(images/team-5.jpg);"></div>
@@ -329,16 +330,16 @@
 					          	</div>
 				          	</div>
 			          	</div>
-			          	<div class="text-center ftco-animate">
+			          	 <div class="section-title light-color text-center">
 				          	<p class="mb-0"><a href="#" class="btn btn-black">More Details</a></p>
 				          </div>
 			          </div>
 	          	</div>
 	          	<div class="col-md-12">
 	          		<div class="scoreboard scoreboard-2 slash">
-			          	<div class="divider ftco-animate text-center mb-4"><span>Mon. June 3, 2019; Baseball Champions League</span></div>
-			          	<div class="sport-team-wrap ftco-animate">
-			          		<span class="vs">vs</span>
+			          	         <div class="section-title light-color text-center"><h4 style="color:white">Mon. June 3, 2019; Baseball Champions League</h4></div>
+			          	 <div class="section-title light-color text-center">
+			          				<h4 style="color:black">vs</h4>
 				          	<div class="d-sm-flex mb-4">
 					          	<div class="sport-team d-flex align-items-center">
 				          			<div class="img logo" style="background-image: url(images/team-3.jpg);"></div>
@@ -356,7 +357,7 @@
 					          	</div>
 				          	</div>
 			          	</div>
-			          	<div class="text-center ftco-animate">
+			           <div class="section-title light-color text-center">
 				          	<p class="mb-0"><a href="#" class="btn btn-black">More Details</a></p>
 				          </div>
 			          </div>

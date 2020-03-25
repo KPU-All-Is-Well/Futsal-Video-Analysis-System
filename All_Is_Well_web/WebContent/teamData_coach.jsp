@@ -203,7 +203,7 @@
             </div><!-- end container -->
         </div><!-- end section -->
 
-<!-------------------------------------------------------------------- 버튼 팀, 선수, 포지션 -------------------------------------------------------------------------->
+
 
 <style> 	
 #test_btn1
@@ -241,7 +241,7 @@
  
  </html>
 
-<!----------------------------------------------------------------------- DB에서 읽은 그래프 --------------------------------------------------------->
+<!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
 <!-- 구글차트 -->
 
@@ -268,15 +268,22 @@
  </iframe>
 </div>
 
-<div style="float: center;">
-<iframe name="f6" src="highchart_BasicBar.jsp" width="1200" height="650" scrolling="no" frameborder="no">
- </iframe>
-</div>
+<!-- 구글차트 부분 -> 하이차트로 바꿔야 함 -->
+<div  style = text-align:center >
+	<div  style = margin-left:17%>
+	
+		<h2><br>선수 뛴 거리, 최고 속력 랭킹</h2>
+		<iframe name="f6" src="googleChart.html" width="1400" height="500" scrolling="no" frameborder="no">
+ 		</iframe>
 
-<div style="float: center;">
-<iframe name="f6" src="highchart_Fixed.jsp" width="1200" height="650" scrolling="no" frameborder="no">
- </iframe>
-</div>
+		<iframe name="f6" src="googleChart2.html" width="1400" height="500" scrolling="no" frameborder="no">
+ 		</iframe>
+ 	
+	</div>	
+ </div>
+
+
+
 
 
 
