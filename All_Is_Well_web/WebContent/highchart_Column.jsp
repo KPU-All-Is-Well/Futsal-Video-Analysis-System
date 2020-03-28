@@ -172,7 +172,7 @@
             chart: {
                 backgroundColor: 'black'
             },
-            colors: ['#239ef6', '#9DFF02', '#0CCDD6','#ff0fff','#f0ffff','#ffff0f'],
+            colors: ['#9DFF02', '#9DFF02', '#0CCDD6','#ff0fff','#f0ffff','#ffff0f'],
             title: {
                 style: {
                     color: 'white'
