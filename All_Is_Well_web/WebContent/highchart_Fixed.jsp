@@ -104,6 +104,7 @@
            String id = rs.getString("id"); //id
            arrayName.add(name); //이름 List에 추가 
            
+           try{
            
             //쿼리문 2번째
            String query2 = "select avgSpeed, maxSpeed from " + id+ " where play_id = '1'"; //id 테이블 
@@ -112,7 +113,6 @@
             
             rs2 = pstm2.executeQuery();
            	
-           
             
             if(rs2.next()){
                 float avgSpeed = rs2.getFloat("avgSpeed"); //총 뛴 거리
@@ -124,9 +124,14 @@
                	
      			arrayList.add(wMaxSpeed);
      			arrayList2.add(wAvgSpeed);
-     			
-     			
-            }       
+     						
+            }
+           
+           }catch(Exception e){ //Null Pointer Exception 발생시 ArrayList에 추가 안 함(→  null인 곳을 참조하게 되므로)
+         	  	//아무것도 x 
+           }finally{
+           
+           }
                       
         }
         

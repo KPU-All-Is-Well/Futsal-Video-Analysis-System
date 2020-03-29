@@ -138,8 +138,12 @@ try{
     	  String mainPosition = rs.getString("mainPosition"); //메인 포지션
     	  String name = rs.getString("name"); //이름
           String id = rs.getString("id"); //id
-          listName.add(name); 
-          listPosition.add(mainPosition); 
+          
+          
+          
+          try{ //Null Pointer Exception 
+        	  //회원가입 테이블에 id가 존재하지만 분석이 안 되어 id 테이블이 존재하지 않는 경우 예외처리
+        	  
           
           //2차 쿼리문
           String query2="select result_heatmap from "+ id + " where play_id = '1'";
@@ -155,9 +159,18 @@ try{
              encordingImg = rs2.getString("result_heatmap");
           }
           
+          listName.add(name); 
+          listPosition.add(mainPosition); 
           src = src + encordingImg;
           listSrc.add(src);
-          src = "data:image/png;base64,"; //src 초기화 
+          src = "data:image/png;base64,"; //src 초기화
+          
+          }catch(Exception e){
+        	  //아무것도 x
+          }finally{
+        	  
+          }
+          
       }
       
       arrSrc = listSrc.toArray(new String[listSrc.size()]); //arraySrc(리스트)) -> arrSrc(배열)

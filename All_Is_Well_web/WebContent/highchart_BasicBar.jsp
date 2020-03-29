@@ -101,8 +101,10 @@
            
            String name = rs.getString("name"); //이름
            String id = rs.getString("id"); //id
-           arrayName.add(name); //이름 List에 추가 
            
+           
+           try{
+        	   
            
             //쿼리문 2번째
            String query2 = "select totalDistance, maxSpeed from " + id+ " where play_id = '1'"; //id 테이블 
@@ -120,12 +122,18 @@
                 //추가함
                 Float wTotalDistance = new Float(totalDistance); //totalDistance Float 래퍼 클래스여야 함 -> //float 자료형을 Float 래퍼 클래스로  변환
                	Float wMaxSpeed = new Float(maxSpeed); //maxSpeed는 Float 래퍼 클래스여야 함 -> //float 자료형을 Float 래퍼 클래스로  변환
-
+				
+               	arrayName.add(name); //이름 List에 추가 
      			arrayList.add(wMaxSpeed);
-     			arrayList2.add(wTotalDistance);
+     			arrayList2.add(wTotalDistance);	
      			
-     			
-            }       
+            }
+            
+           }catch(Exception e){ //Null Pointer Exception 발생시 ArrayList에 추가 안 함(→  null인 곳을 참조하게 되므로)
+         	  	//아무것도 x 
+           }finally{
+           
+           }
                       
         }
         

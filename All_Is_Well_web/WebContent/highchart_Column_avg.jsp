@@ -99,8 +99,8 @@
            
            String name = rs.getString("name"); //이름
            String id = rs.getString("id"); //id
-           arrayName.add(name); //이름 List에 추가 
            
+           try{
            
             //쿼리문 2번째
            String query2 = "select avgSpeed from " + id+ " where play_id = '1'"; //id 테이블 
@@ -116,12 +116,18 @@
                 
                 //추가함
                	Float wAvgSpeed = new Float(avgSpeed); //maxSpeed는 Float 래퍼 클래스여야 함 -> //float 자료형을 Float 래퍼 클래스로  변환
-
+				
+               	arrayName.add(name); //이름 List에 추가 
      			arrayList.add(wAvgSpeed); 
      			
      			
             }       
-                      
+        }catch(Exception e){ //Null Pointer Exception 발생시 ArrayList에 추가 안 함(→  null인 곳을 참조하게 되므로)
+      	  	//아무것도 x 
+        }finally{
+        
+        }	
+            
         }
         
         array = arrayList.toArray(new Float[arrayList.size()]); //arrayList(리스트) -> array(배열)
