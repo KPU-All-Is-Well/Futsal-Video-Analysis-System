@@ -59,9 +59,11 @@
    <%! 
 
    ArrayList<String> arrayName = new ArrayList<>(); //이름 담을 ArrayList
+   ArrayList<String> arrayId = new ArrayList<>(); //id 담을 ArrayList
    ArrayList<String> arrayPosition = new ArrayList<>(); //포지션 담을 ArrayList
    String[] arrName; //List를 배열로 바꿔 담을 공간
-   String[] arrPosition; 
+   String[] arrPosition;
+   String[] arrId;
    String team;
    
    %>
@@ -89,7 +91,7 @@
          }
          
     	  // ② 감독이 관리하는 팀의 팀원들 List에 담기 
-         String sql2="select name, mainPosition from playerSignUpInfo where team = '"+ team + "'";
+         String sql2="select id, name, mainPosition from playerSignUpInfo where team = '"+ team + "'";
          stmt2 = conn.createStatement();
          rs2 = stmt2.executeQuery(sql2);
       
@@ -98,12 +100,15 @@
                      
         	String name = rs2.getString("name");
             String position = rs2.getString("mainPosition");
-        	arrayName.add(name); //이름 List에 추가
+            String DBid = rs2.getString("id"); 
+            arrayId.add(DBid); //id List에 추가
+            arrayName.add(name); //이름 List에 추가
         	arrayPosition.add(position); //포지션 List에 추가
          }
          
          arrName = arrayName.toArray(new String[arrayName.size()]); //arrayName(리스트)) -> arrName(배열)
          arrPosition = arrayPosition.toArray(new String[arrayPosition.size()]); //arrayPosition(리스트)) -> arrPosition(배열)
+         arrId = arrayId.toArray(new String[arrayId.size()]); //arrayPosition(리스트)) -> arrPosition(배열)
       
       }catch (SQLException ex){
          out.println("SQLException: "+ex.getMessage());
@@ -283,7 +288,7 @@
  
  </html>
 
-<!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
+<!----------------------------------------------선수들의 개인 프로필 출력 ---------------------------------------------------->
 
   <%@ page import="java.net.URLEncoder" %>
 <!-- conflict 해결
@@ -293,19 +298,24 @@
 <section class="section parallax" data-stellar-background-ratio="0.1 " >         <div class="container">
 
             <div class="row">
+               
+               <% 
+               for(int i=0; i <arrId.length ; i++){
+            	%>   
+            	
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/messi_profile.png" class="card-img-top" alt="blog">
+                        <img src="images/team/<%=arrId[i] %>.png" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
                                  <!-- <h3>10</h3> -->
                               </a>
-                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[0], "UTF-8") %> ">
-                                 <h5 class="card-title"><%=arrName[0] %></h5>
+                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[i], "UTF-8") %> ">
+                                 <h5 class="card-title"><%=arrName[i] %></h5>
                               </a>
-                              <p><%=arrPosition[0] %></p>
+                              <p><%=arrPosition[i] %></p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -316,126 +326,11 @@
                      </div>
                   </div>
                </div>
-               <div class="col-sm-6 col-lg-3">
-                  <div class="single_team_member single-home-blog">
-                     <div class="card">
-                        <img src="images/team/ki_profile.jpg" class="card-img-top" alt="blog">
-                        <div class="card-body">
-                           <div class="tean_content">
-                              <a href="#" class="blog_item_date">
-                                 <!-- <h3>16</h3> -->
-                              </a>
-                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[1], "UTF-8") %> ">
-                                 <h5 class="card-title"><%=arrName[1] %></h5>
-                              </a>
-                              <p><%=arrPosition[1] %></p>
-                           </div>
-                           <div class="tean_right_content">
-                              <div class="header_social_icon">
-                               
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3">
-                  <div class="single_team_member single-home-blog">
-                     <div class="card">
-                        <img src="images/team/park_profile.jpeg" class="card-img-top" alt="blog">
-                        <div class="card-body">
-                           <div class="tean_content">
-                              <a href="#" class="blog_item_date">
-                                 <!-- <h3>13</h3> -->
-                              </a>
-
-                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[2], "UTF-8") %> ">
-                                 <h5 class="card-title"><%=arrName[2] %></h5>
-                              </a>
-                              <p><%=arrPosition[2] %></p>
-
-
-                           </div>
-                           <div class="tean_right_content">
-                              <div class="header_social_icon">
-                               
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3">
-                  <div class="single_team_member single-home-blog">
-                     <div class="card">
-                        <img src="images/team/son_profile.jpg" class="card-img-top" alt="blog">
-                        <div class="card-body">
-                           <div class="tean_content">
-                              <a href="#" class="blog_item_date">
-                                 <!-- <h3>7</h3> -->
-                              </a>
-                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[3], "UTF-8") %> ">
-                                 <h5 class="card-title"><%=arrName[3] %></h5>
-                              </a>
-                              <p><%=arrPosition[3] %></p>
-                           </div>
-                           <div class="tean_right_content">
-                              <div class="header_social_icon">
-                                 
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3">
-                  <div class="single_team_member single-home-blog">
-                     <div class="card">
-                        <img src="images/team/baek_profile.jpg" class="card-img-top" alt="blog">
-                        <div class="card-body">
-                           <div class="tean_content">
-                              <a href="#" class="blog_item_date">
-                                 <!-- <h3>8</h3> -->
-
-                              </a>
-                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[4], "UTF-8") %> ">
-                                 <h5 class="card-title"><%=arrName[4] %></h5>
-                              </a>
-                              <p><%=arrPosition[4] %></p>
-                           </div>
-                           <div class="tean_right_content">
-                              <div class="header_social_icon">
-                                
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3">
-                  <div class="single_team_member single-home-blog">
-                     <div class="card">
-                        <img src="images/team/lee_profile.jpeg" class="card-img-top" alt="blog">
-                        <div class="card-body">
-                           <div class="tean_content">
-                              <a href="#" class="blog_item_date">
-                                 <!--<h3>15</h3>  -->
-                              </a>
-                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[5], "UTF-8") %> ">
-                                 <h5 class="card-title"><%=arrName[5] %></h5>
-                              </a>
-                              <p><%=arrPosition[5] %></p>
-                           </div>
-                           <div class="tean_right_content">
-                              <div class="header_social_icon">
-                                
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-
+               
+               <%
+                }
+               %>
+              
          </div>
       </section>
       <!-- about part start-->

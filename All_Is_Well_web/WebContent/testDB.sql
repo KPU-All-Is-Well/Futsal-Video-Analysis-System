@@ -16,5 +16,7 @@ select * from coachSignUpInfo;
 UPDATE playerSignUpInfo SET  technic = 90 where id = 'ki';
 UPDATE coachSignUpInfo SET  team = 'pep' where id = 'pep';
 
+delete from playerSignUpInfo where id = 'DBtest2'; 
+
 select team from coachSignUpInfo where id = 'kwon';
 
