@@ -230,7 +230,8 @@
   } 
 </style>
   
- <div id="btn_group" style="text-align:center"  >
+ <div id="btn_group" style="text-align:center; background-color:#090823"   >
+
 <a href="playerData_Coach.jsp"> <button id="test_btn1">Player </button></a> 
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
 <a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>

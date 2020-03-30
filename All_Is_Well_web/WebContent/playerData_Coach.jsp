@@ -232,7 +232,7 @@
   } 
 </style>
   
-<div id="btn_group" style="text-align:center"  >
+ <div id="btn_group" style="text-align:center; background-color:#090823"   >
 <a href="playerData_Coach.jsp"> <button id="test_btn1">Player</button></a> 
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
 <a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
@@ -241,8 +241,7 @@
  </html>
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
-  <section class="team_member section_padding padding_less_40">
-         <div class="container">
+<section class="section parallax" data-stellar-background-ratio="0.1 " >         <div class="container">
             <div class="row">
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
