@@ -246,7 +246,7 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_1.png" class="card-img-top" alt="blog">
+                        <img src="images/team/messi_profile.png" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
@@ -269,7 +269,7 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_2.png" class="card-img-top" alt="blog">
+                        <img src="images/team/ki_profile.jpg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
@@ -292,16 +292,17 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_3.png" class="card-img-top" alt="blog">
+                        <img src="images/team/park_profile.jpeg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
                                  <h3>13</h3>
                               </a>
                               <a href="blog.html">
-                                 <h5 class="card-title">Park ji sung</h5>
+                                 <h5 class="card-title">Park   
+                                 ji sung</h5>
                               </a>
-                              <p>Winger</p>
+                              <p>offensive Midfielder</p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -315,7 +316,7 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_4.png" class="card-img-top" alt="blog">
+                        <img src="images/team/son_profile.jpg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
@@ -338,11 +339,12 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_1.png" class="card-img-top" alt="blog">
+                        <img src="images/team/baek_profile.jpg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
                                  <h3>8</h3>
+                                 
                               </a>
                               <a href="blog.html">
                                  <h5 class="card-title">Baek seung ho</h5>
@@ -361,16 +363,16 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_2.png" class="card-img-top" alt="blog">
+                        <img src="images/team/lee_profile.jpeg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
                                  <h3>15</h3>
                               </a>
                               <a href="blog.html">
-                                 <h5 class="card-title">Adult Malerd</h5>
+                                 <h5 class="card-title">Lee gang in</h5>
                               </a>
-                              <p>Right Defender</p>
+                              <p>Center midfilder</p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -384,16 +386,16 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_3.png" class="card-img-top" alt="blog">
+                        <img src="images/team/nymar_profile.jpeg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
                                  <h3>15</h3>
                               </a>
                               <a href="blog.html">
-                                 <h5 class="card-title">Rocky Benard</h5>
+                                 <h5 class="card-title">Nymar da Silva</h5>
                               </a>
-                              <p>Right Defender</p>
+                              <p>Winger</p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -407,16 +409,16 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_4.png" class="card-img-top" alt="blog">
+                        <img src="images/team/maguire_profile.jpeg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
                                  <h3>15</h3>
                               </a>
                               <a href="blog.html">
-                                 <h5 class="card-title">Rocky Benard</h5>
+                                 <h5 class="card-title">Maguire</h5>
                               </a>
-                              <p>Right Defender</p>
+                              <p>Center Defender</p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
