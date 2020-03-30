@@ -207,16 +207,17 @@
   } 
 </style>
   
-<div id="btn_group" style="text-align:center"  >
+<div id="btn_group" style="text-align:center; background-color:#090823"  >
 <a href="playerData_Coach.jsp"> <button id="test_btn1">Player </button></a> 
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
+
 <a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
 </div>
  
  </html>
 
 <!----------------------------------------------------------------------- DB에서 읽은 그래프 --------------------------------------------------------->
-
+<section class="section parallax" data-stellar-background-ratio="0.1 ">
 
 <div style="float: center;">
 <iframe name="f6" src="highchart_3D.jsp" width="1200" height="500" scrolling="no" frameborder="no">
@@ -253,6 +254,8 @@
 
                       
  </div>
+ </section>
+ 
 <!--------------------------------------------------- end Content ------------------------------------------------------------------>
 
 

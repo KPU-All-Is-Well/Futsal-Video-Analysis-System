@@ -273,8 +273,9 @@
   } 
 </style>
   
+
  <div id="wrapper">  
-<div id="btn_group" style="text-align:center"  >
+ <div id="btn_group" style="text-align:center; background-color:#090823"   >
 <a href="playerData_Coach.jsp"> <button id="test_btn1">Player</button></a> 
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
 <a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
@@ -283,14 +284,19 @@
  </html>
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
+
   <%@ page import="java.net.URLEncoder" %>
+<!-- conflict 해결
   <section class="team_member section_padding padding_less_40">
          <div class="container">
+          --> 
+<section class="section parallax" data-stellar-background-ratio="0.1 " >         <div class="container">
+
             <div class="row">
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_1.png" class="card-img-top" alt="blog">
+                        <img src="images/team/messi_profile.png" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
@@ -313,7 +319,7 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_2.png" class="card-img-top" alt="blog">
+                        <img src="images/team/ki_profile.jpg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
@@ -336,16 +342,19 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_3.png" class="card-img-top" alt="blog">
+                        <img src="images/team/park_profile.jpeg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
                                  <!-- <h3>13</h3> -->
                               </a>
+
                               <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[2], "UTF-8") %> ">
                                  <h5 class="card-title"><%=arrName[2] %></h5>
                               </a>
                               <p><%=arrPosition[2] %></p>
+
+
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -359,7 +368,7 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_4.png" class="card-img-top" alt="blog">
+                        <img src="images/team/son_profile.jpg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
@@ -382,11 +391,12 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_1.png" class="card-img-top" alt="blog">
+                        <img src="images/team/baek_profile.jpg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
                                  <!-- <h3>8</h3> -->
+
                               </a>
                               <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[4], "UTF-8") %> ">
                                  <h5 class="card-title"><%=arrName[4] %></h5>
@@ -405,7 +415,7 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/team_2.png" class="card-img-top" alt="blog">
+                        <img src="images/team/lee_profile.jpeg" class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
@@ -425,7 +435,7 @@
                      </div>
                   </div>
                </div>
-               
+
          </div>
       </section>
       <!-- about part start-->

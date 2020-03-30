@@ -39,6 +39,9 @@ if __name__ == '__main__':
     
     fps = cap.get(cv2.CAP_PROP_FPS)
     fps = round(fps,0)
+    interval = cap.get(cv2.CAP_PROP_FRAME_COUNT)/4
+    interval = int(round(interval,0)-1)
+    print(interval)
 
     frame = imutils.resize(frame, width=600) # 리사이징
     print(frame.shape)
@@ -102,7 +105,7 @@ if __name__ == '__main__':
     accumulate_speed = 0            # 속도들의 누적값
     temp_distance = 0               # 뛴 거리를 임시저장
     temp_speed = 0                  # 뛴 속도를 임시저장
-    interval = 30                   # 특정 시간(초)
+    #interval = 30                   # 특정 시간(초)
     interval_distance = 0           # 특정 시간마다의 뛴거리
     interval_acc_speed = 0          # 특정 시간마다의 속도 누적값
     interval_avg_speed = 0          # 특정 시간마다의 평균속도
@@ -245,7 +248,7 @@ if __name__ == '__main__':
                     ##########################################################################################
                     
 
-                if((frame_cnt % (fps*interval))==0) :     # 프레임기반 interval[현재는 30초(fps)]마다 동작하는 코드
+                if((frame_cnt % interval)==0 and frame_cnt != 0) :     # 프레임기반 interval[현재는 30초(fps)]마다 동작하는 코드
                     interval_distance = distance - temp_distance
                     temp_distance = distance
                     interval_distance = round(interval_distance,2)
@@ -253,7 +256,7 @@ if __name__ == '__main__':
                     interval_acc_speed = accumulate_speed - temp_speed;
                     temp_speed = accumulate_speed
                     
-                    interval_avg_speed = interval_acc_speed / interval
+                    interval_avg_speed = interval_acc_speed / (interval/fps)
                     interval_avg_speed = round(interval_avg_speed,1)
                     # 30초마다 DB로 전송할 부분
                     ##########################################################################################
