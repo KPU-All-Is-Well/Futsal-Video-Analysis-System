@@ -236,6 +236,47 @@
 </iframe>
 </div>
 
+
+
+<section class="section parallax" data-stellar-background-ratio="0.1 ">
+
+<div style="float:left;">
+<iframe name="f6" src="highchart_3D.jsp" width="370" height="420" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+<div style="float: left;">
+<iframe name="f5" src="highchart_Distance_Rank.jsp" width="370" height="420" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+<div style="float: left;">
+<iframe name="f6" src="highchart_Column.jsp" width="370" height="420" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+<div style="float: left;">
+<iframe name="f6" src="highchart_Column_avg.jsp" width="370" height="420" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+
+
+<div style="float: left;">
+<iframe name="f6" src="highchart_BasicBar.jsp" width="370" height="420" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+<div style="float: left;">
+<iframe name="f6" src="highchart_Fixed.jsp" width=370" height="420" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+
+
+ </section>          
+ </div>
+ 
  
  </html>                
  
