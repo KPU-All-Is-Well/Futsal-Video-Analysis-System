@@ -149,8 +149,7 @@ body{
         tooltip: {
             headerFormat: '',
             pointFormat: '<span style="color:{point.color}">\u25CF</span> <b> {point.name}</b><br/>' +
-                'Area (square m): <b>{point.y}</b><br/>' +
-                'Population density (people per square km): <b>{point.z}</b><br/>'
+                '<b>{point.z}</b>%'
         },
         series: [{
             minPointSize: 10,

@@ -76,11 +76,13 @@ body{
       Statement stmt =null;
       
       try{
+    	  
+    
           // 이 파일은 영상 끝까지 돌려야 그래프 제대로 출려됨, 그래야 4번 단위로 체크한 값이 데이터로 들어감, 너무 짧게 파이썬 프로그램 돌리면 null 값이 다 들어가서 NullPointerException 뜸    
          String sql="select speed_5, speed_10, speed_15, speed_20, distance_5, distance_10, distance_15, distance_20 from " + id + " where play_id = '1'";
          stmt = conn.createStatement();
          rs = stmt.executeQuery(sql);
-      
+		      
          
          while(rs.next()){
                      
@@ -94,9 +96,12 @@ body{
             distance_20 = rs.getString("distance_20");
             
          }
-      
-      }catch (SQLException ex){
-         out.println("SQLException: "+ex.getMessage());
+         
+    	 
+    	
+    	
+      }catch (Exception e){
+         e.printStackTrace();
          
       }finally{
          

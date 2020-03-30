@@ -173,34 +173,7 @@
 	
     <div id="wrapper">
 
-		<!--
-        <div id="home" class="video-section js-height-full">
-            <div class="overlay"></div>
-            <div class="home-text-wrapper relative container">
-                <div class="home-message">
-                    <img src="images/rsz_1biglogo.png" alt=""> 
-                    <p>Welcome to All Is Well</p>
-                    <div class="btn-wrapper">
-                        <div class="text-center">
-                            <a href="#" class="btn btn-primary">Sign In</a> &nbsp;<a href="#" class="btn btn-default">Sign Up</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
 
-            <div class="section footer" > <!-- section bgcolor noover  -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tagline-message" >
-                            <h3>Hello! we are All Is Well, we have brought together the best quality services, offers, projects for you!</h3>
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </div><!-- end section -->
 
 
 
@@ -254,35 +227,10 @@
  </iframe>
 </div>
 
-
 <div style="float: center;">
-<iframe name="f6" src="highchart_Bubble.jsp" width="1200" height="650" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart_Fixed.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
-
-
-<!-- 
-<div style="float: center;">
-<iframe name="f6" src="googleChart.html" width="1400" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
-<div style="float: left;">
-<iframe name="f6" src="googleChart2.html" width="1400" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
- -->
-
-
-<!-- 위치가 너무 안예뻐서 주석 
-<div style="float: center;">
-<iframe name="f7" src="googleChart.html" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
- -->
-
 
 
 

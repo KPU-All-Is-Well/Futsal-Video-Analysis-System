@@ -170,37 +170,7 @@
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
 	
 	
-    <div id="wrapper">
-
-		<!--
-        <div id="home" class="video-section js-height-full">
-            <div class="overlay"></div>
-            <div class="home-text-wrapper relative container">
-                <div class="home-message">
-                    <img src="images/rsz_1biglogo.png" alt="">                     <p>Welcome to All Is Well</p>
-                    <div class="btn-wrapper">
-                        <div class="text-center">
-                            <a href="#" class="btn btn-primary">Sign In</a> &nbsp;<a href="#" class="btn btn-default">Sign Up</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
-
-         <div class="section footer" > <!-- section bgcolor noover  -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tagline-message" >
-                            <h3>Hello! we are All Is Well, we have brought together the best quality services, offers, projects for you!</h3>
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </div><!-- end section -->
-
-
+    
 
 <style> 	
 #test_btn1
@@ -224,8 +194,16 @@
  { color:white; 
  background-color: skyblue;
   } 
-</style>
   
+   div.relative { 
+        position: relative;
+        left:70px;
+        top: 50px;
+      }        
+  
+</style>
+
+ <div id="wrapper"> 
  <div id="btn_group" style="text-align:center">
  <a href="playerData.jsp"> <button id="test_btn1">Player Data </button></a> 
 <a href="teamData.jsp"> <button id="test_btn2">Team Data </button></a>
@@ -235,20 +213,32 @@
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
-
-<div style="float: left;"> <!-- 선수 개인 데이터가 myData 누르면 첫 화면에 나오도록 설정 -->
-		
-	
+<div class= "relative" style="float: center;">
+<iframe name="f3" src="highchart_Spyder.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
 </div>
 
 
+<div style="float: center;">
+<iframe name="f2" src="highchart_Gauge.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+	
+	
+<div style="float: center;">
+<iframe name="f3" src="highchart_Pie.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
 
+<div style="float:center;">
+<iframe name="f1" src="highchart_Area.jsp" width="1300" height="500" scrolling="no" frameborder="no">
+</iframe>
+</div>
 
-
-
-
-
-
+<div style="float: center;">
+<iframe name="f4" src="printHeatmap.jsp" width="1200" height="700" scrolling="no" frameborder="no">
+</iframe>
+</div>
 
                       
  </div>

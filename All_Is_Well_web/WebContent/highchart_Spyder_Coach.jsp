@@ -56,31 +56,30 @@ body{
    String rtechnic; float fTechnic;
    String rpass; float fPass;
    String rshooting; float fShooting;
-   String name;
    
    %>
+   
     <%   
    
      request.setCharacterEncoding("utf-8");
-      String id = (String)session.getAttribute("id");
-      
+     String name = request.getParameter("name"); //이전 페이지에서 name이라는 변수에서 값 전달받음
+     
       ResultSet rs = null;
       Statement stmt =null;
       
       try{
-            
-         String sql="select name, speed, power, endurance, technic, pass, shooting from playerSignUpInfo where id = '"+ id + "'";
-         //String sql="select speed, power, endurance, technic, pass, shooting from playerSignUpInfo where id = 'messi'";
+         
+    	   	  
+         //String sql="select speed, power, endurance, technic, pass, shooting from playerSignUpInfo where id = '"+ id + "'";
+         String sql="select speed, power, endurance, technic, pass, shooting from playerSignUpInfo where name = '"+name+"'";
          
          stmt = conn.createStatement();
          rs = stmt.executeQuery(sql);
          
-      
-
-      
+          
          
          while(rs.next()){	
-           name = rs.getString("name");
+        	 
            rspeed = rs.getString("speed");
            rpower=rs.getString("power");
            rendurance=rs.getString("endurance");
@@ -98,6 +97,7 @@ body{
      
       
       }catch (Exception e){
+         
          
       }finally{
          

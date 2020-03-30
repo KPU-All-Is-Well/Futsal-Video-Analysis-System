@@ -172,37 +172,7 @@
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
 	
 	
-    <div id="wrapper">
-
-		<!--
-        <div id="home" class="video-section js-height-full">
-            <div class="overlay"></div>
-            <div class="home-text-wrapper relative container">
-                <div class="home-message">
-                    <img src="images/rsz_1biglogo.png" alt=""> 
-                    <p>Welcome to All Is Well</p>
-                    <div class="btn-wrapper">
-                        <div class="text-center">
-                            <a href="#" class="btn btn-primary">Sign In</a> &nbsp;<a href="#" class="btn btn-default">Sign Up</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
-
-            <div class="section footer" > <!-- section bgcolor noover  -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tagline-message" >
-                            <h3>Hello! we are All Is Well, we have brought together the best quality services, offers, projects for you!</h3>
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </div><!-- end section -->
-
+    
 
 
 <style> 	
@@ -232,7 +202,8 @@
  background-color: skyblue;
   } 
 </style>
-  
+ 
+<div id="wrapper">  
  <div id="btn_group" style="text-align:center"  >
  <a href="playerData_Coach.jsp"> <button id="test_btn1">Player </button></a> 
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
@@ -250,12 +221,6 @@
 <iframe name="f4" src="printHeatmap_Coach.jsp" width="1200" height="700" scrolling="no" frameborder="no">
  </iframe>
 </div>
-
-
-
-
-
-
 
 
                       

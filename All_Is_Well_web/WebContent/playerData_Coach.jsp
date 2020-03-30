@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<%@page import="java.sql.*"%>
+<%@page import="java.util.*"%> 
+<%@page import="java.lang.*"%> 
+
+
 
 <!doctype html>
 <!--[if IE 9]> <html class="no-js ie9 fixed-layout" lang="en"> <![endif]-->
@@ -49,7 +54,76 @@
 	}
 </style>
 
+<%@ include file="dbconn.jsp" %>
+
+   <%! 
+
+   ArrayList<String> arrayName = new ArrayList<>(); //이름 담을 ArrayList
+   ArrayList<String> arrayPosition = new ArrayList<>(); //포지션 담을 ArrayList
+   String[] arrName; //List를 배열로 바꿔 담을 공간
+   String[] arrPosition; 
+   String team;
+   
+   %>
+   
+   <%   
+   
+      request.setCharacterEncoding("utf-8");
+      String id = (String)session.getAttribute("id"); // 사용자가 로그인 할 때, 적은 정보를 가져오겠다.
+      
+      ResultSet rs2 = null;
+      Statement stmt2 =null;
+      
+      ResultSet rs1 = null;
+      Statement stmt1 =null;
+      
+      try{
+         
+    	  // ① 로그인한 감독의 팀명 받아오기
+    	 String sql1 =  "select team from coachSignUpInfo where id = '" + id + "'";
+    	 stmt1 = conn.createStatement();
+         rs1 = stmt1.executeQuery(sql1); 
+    	 
+         while(rs1.next()){
+        	 team = rs1.getString("team");
+         }
+         
+    	  // ② 감독이 관리하는 팀의 팀원들 List에 담기 
+         String sql2="select name, mainPosition from playerSignUpInfo where team = '"+ team + "'";
+         stmt2 = conn.createStatement();
+         rs2 = stmt2.executeQuery(sql2);
+      
+         
+         while(rs2.next()){
+                     
+        	String name = rs2.getString("name");
+            String position = rs2.getString("mainPosition");
+        	arrayName.add(name); //이름 List에 추가
+        	arrayPosition.add(position); //포지션 List에 추가
+         }
+         
+         arrName = arrayName.toArray(new String[arrayName.size()]); //arrayName(리스트)) -> arrName(배열)
+         arrPosition = arrayPosition.toArray(new String[arrayPosition.size()]); //arrayPosition(리스트)) -> arrPosition(배열)
+      
+      }catch (SQLException ex){
+         out.println("SQLException: "+ex.getMessage());
+         
+      }finally{
+         
+         if(rs2 != null)
+            rs2.close();
+         if(stmt2 != null)
+            stmt2.close();
+         if(conn != null)
+            conn.close();
+         
+      }
+      
+     %>
+
+
 <body class="left-menu"  >
+
     
     <div class="menu-wrapper">
         <div class="mobile-menu">
@@ -169,39 +243,6 @@
 	
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
 	
-	
-    <div id="wrapper">
-
-		<!--
-        <div id="home" class="video-section js-height-full">
-            <div class="overlay"></div>
-            <div class="home-text-wrapper relative container">
-                <div class="home-message">
-                    <img src="images/rsz_1biglogo.png" alt=""> 
-                    <p>Welcome to All Is Well</p>
-                    <div class="btn-wrapper">
-                        <div class="text-center">
-                            <a href="#" class="btn btn-primary">Sign In</a> &nbsp;<a href="#" class="btn btn-default">Sign Up</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        -->
-
-            <div class="section footer" > <!-- section bgcolor noover  -->
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tagline-message" >
-                            <h3>Hello! we are All Is Well, we have brought together the best quality services, offers, projects for you!</h3>
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </div><!-- end section -->
-
-
 
 <style> 	
 #test_btn1
@@ -232,6 +273,7 @@
   } 
 </style>
   
+ <div id="wrapper">  
 <div id="btn_group" style="text-align:center"  >
 <a href="playerData_Coach.jsp"> <button id="test_btn1">Player</button></a> 
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
@@ -241,6 +283,7 @@
  </html>
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
+  <%@ page import="java.net.URLEncoder" %>
   <section class="team_member section_padding padding_less_40">
          <div class="container">
             <div class="row">
@@ -251,12 +294,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>10</h3>
+                                 <!-- <h3>10</h3> -->
                               </a>
-                              <a href="blog.html">
-                                 <h5 class="card-title">Lionel messi</h5>
+                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[0], "UTF-8") %> ">
+                                 <h5 class="card-title"><%=arrName[0] %></h5>
                               </a>
-                              <p>center Forward</p>
+                              <p><%=arrPosition[0] %></p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -274,12 +317,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>16</h3>
+                                 <!-- <h3>16</h3> -->
                               </a>
-                              <a href="blog.html">
-                                 <h5 class="card-title">Ki sung yueng</h5>
+                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[1], "UTF-8") %> ">
+                                 <h5 class="card-title"><%=arrName[1] %></h5>
                               </a>
-                              <p> Defence Midfilder</p>
+                              <p><%=arrPosition[1] %></p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -297,12 +340,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>13</h3>
+                                 <!-- <h3>13</h3> -->
                               </a>
-                              <a href="blog.html">
-                                 <h5 class="card-title">Park ji sung</h5>
+                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[2], "UTF-8") %> ">
+                                 <h5 class="card-title"><%=arrName[2] %></h5>
                               </a>
-                              <p>Winger</p>
+                              <p><%=arrPosition[2] %></p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -320,12 +363,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>7</h3>
+                                 <!-- <h3>7</h3> -->
                               </a>
-                              <a href="blog.html">
-                                 <h5 class="card-title">Son heung min</h5>
+                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[3], "UTF-8") %> ">
+                                 <h5 class="card-title"><%=arrName[3] %></h5>
                               </a>
-                              <p>Winger</p>
+                              <p><%=arrPosition[3] %></p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -343,12 +386,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>8</h3>
+                                 <!-- <h3>8</h3> -->
                               </a>
-                              <a href="blog.html">
-                                 <h5 class="card-title">Baek seung ho</h5>
+                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[4], "UTF-8") %> ">
+                                 <h5 class="card-title"><%=arrName[4] %></h5>
                               </a>
-                              <p>Center midfilder</p>
+                              <p><%=arrPosition[4] %></p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -366,12 +409,12 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <h3>15</h3>
+                                 <!--<h3>15</h3>  -->
                               </a>
-                              <a href="blog.html">
-                                 <h5 class="card-title">Adult Malerd</h5>
+                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[5], "UTF-8") %> ">
+                                 <h5 class="card-title"><%=arrName[5] %></h5>
                               </a>
-                              <p>Right Defender</p>
+                              <p><%=arrPosition[5] %></p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
@@ -382,53 +425,7 @@
                      </div>
                   </div>
                </div>
-               <div class="col-sm-6 col-lg-3">
-                  <div class="single_team_member single-home-blog">
-                     <div class="card">
-                        <img src="images/team/team_3.png" class="card-img-top" alt="blog">
-                        <div class="card-body">
-                           <div class="tean_content">
-                              <a href="#" class="blog_item_date">
-                                 <h3>15</h3>
-                              </a>
-                              <a href="blog.html">
-                                 <h5 class="card-title">Rocky Benard</h5>
-                              </a>
-                              <p>Right Defender</p>
-                           </div>
-                           <div class="tean_right_content">
-                              <div class="header_social_icon">
-                                
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-sm-6 col-lg-3">
-                  <div class="single_team_member single-home-blog">
-                     <div class="card">
-                        <img src="images/team/team_4.png" class="card-img-top" alt="blog">
-                        <div class="card-body">
-                           <div class="tean_content">
-                              <a href="#" class="blog_item_date">
-                                 <h3>15</h3>
-                              </a>
-                              <a href="blog.html">
-                                 <h5 class="card-title">Rocky Benard</h5>
-                              </a>
-                              <p>Right Defender</p>
-                           </div>
-                           <div class="tean_right_content">
-                              <div class="header_social_icon">
-                                
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
+               
          </div>
       </section>
       <!-- about part start-->

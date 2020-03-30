@@ -143,6 +143,7 @@
      			arrayList4.add(wCalorie);
      			
             }  
+           
       	}catch(Exception e){ //Null Pointer Exception 발생시 ArrayList에 추가 안 함(→  null인 곳을 참조하게 되므로)
       	  	//아무것도 x 
         }finally{

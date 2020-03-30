@@ -57,7 +57,7 @@
    <%   
    
       request.setCharacterEncoding("utf-8");
-      String id = (String)session.getAttribute("id"); // 사용자가 로그인 할 때, 적은 정보를 가져오겠다.i
+      String id = (String)session.getAttribute("id"); // 사용자가 로그인 할 때, 적은 정보를 가져오겠다.
       
       ResultSet rs = null;
       Statement stmt =null;
