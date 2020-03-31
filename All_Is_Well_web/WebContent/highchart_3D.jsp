@@ -251,7 +251,7 @@
     },
 
     title: {
-        text: 'Comparison of Each Player Data'
+        text: '선수 데이터 비교'
     },
 
     xAxis: {

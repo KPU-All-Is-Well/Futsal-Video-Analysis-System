@@ -295,10 +295,9 @@
   <section class="team_member section_padding padding_less_40">
          <div class="container">
           --> 
-<section class="section parallax" data-stellar-background-ratio="0.1 " >         <div class="container">
-
+<section class="section parallax" data-stellar-background-ratio="0.1 " >     
+      <div class="container">
             <div class="row">
-               
                <% 
                for(int i=0; i <arrId.length ; i++){
             	%>   
@@ -306,7 +305,7 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img src="images/team/<%=arrId[i] %>.png" class="card-img-top" alt="blog">
+                        <img  src="images/team/<%=arrId[i] %>.png"  class="card-img-top" alt="blog">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">

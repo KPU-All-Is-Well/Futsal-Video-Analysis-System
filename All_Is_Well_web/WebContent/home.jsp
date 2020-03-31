@@ -403,7 +403,7 @@
                                 </div><!-- end entry -->
                                 <div class="item-desc">
                                     <h4><a href="highchart_Bubble.jsp">선수 전체 정보</a></h4>
-                                    <p>Ut convallis mollis est, eu tincidunt magna varius dignissim. Sed sed.</p>
+                                    <p>전체 선수를 한눈에 보자 </p>
                                 </div>
                             </div><!-- end post-media -->
 
@@ -418,7 +418,7 @@
                                 </div><!-- end entry -->
                                 <div class="item-desc">
                                     <h4><a href="highchart_Distance_Rank.jsp">팀 뛴 거리 랭킹</a></h4>
-                                    <p>Ut porttitor aliquet auctor. Donec pellentesque libero et mattis amet. </p>
+                                    <p>우리팀 체력왕은 누구일까?  </p>
                                 </div>
                             </div><!-- end post-media -->
 
@@ -433,7 +433,7 @@
                                 </div><!-- end entry -->
                                 <div class="item-desc">
                                     <h4><a href="highchart_Column_avg.jsp">팀 평균 스피드 랭킹</a></h4>
-                                    <p>Aliquam quis euismod metus, vitae iaculis ipsum. Aliquam non enim sed.</p>
+                                    <p>우리 팀 평균 속도 랭킹  </p>
                                 </div>
                             </div><!-- end post-media -->
 
@@ -448,7 +448,7 @@
                                 </div><!-- end entry -->
                                 <div class="item-desc">
                                     <h4><a href="#">선수 스탯 총점 랭킹 </a></h4>
-                                    <p>Nunc aliquet mi ante. Nulla magna ante, porttitor in sagittis posuere. </p>
+                                    <p>우리 팀에서 가장 좋은 스탯인 선수는?  </p>
                                 </div>
                             </div><!-- end post-media -->
 
@@ -463,7 +463,7 @@
                                 </div><!-- end entry -->
                                 <div class="item-desc">
                                     <h4><a href="highchart_Column.jsp">팀 최고 스피드 랭킹 </a></h4>
-                                    <p>Vivamus mattis sit amet ipsum vitae pretium. Proin vitae nulla nullam. </p>
+                                    <p>우리팀에서 가장 빠른 선수는? </p>
                                 </div>
                             </div><!-- end post-media -->
 

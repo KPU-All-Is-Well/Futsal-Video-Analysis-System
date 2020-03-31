@@ -226,11 +226,11 @@ body{
 Highcharts.chart('container', {
 
     title: {
-        text: 'Change of Stamina'
+        text: '선수 체력 변화 '
     },
 
     subtitle: {
-        text: 'Source: thesolarfoundation.com'
+        text: ''
     },
 
     yAxis: {
@@ -262,13 +262,13 @@ Highcharts.chart('container', {
     },
 
     series: [{
-        name: 'Stamina',
+        name: '체력 ',
         data: [100, <%= stamina_5 %>, <%= stamina_10 %>, <%= stamina_15 %>, <%= stamina_20 %>]
     }, {
-        name: 'Amount of Activity per 5 minutes',
+        name: '5분당 활동량 ',
         data: [0, <%= fDistance_5 %>, <%= fDistance_10 %>, <%= fDistance_15 %>, <%= fDistance_20 %>]
     }, {
-        name: 'Amount of Speed per 5 minutes',
+        name: '5분당 평균 속도 ',
         data: [0, <%= fSpeed_5 %>, <%= fSpeed_10 %>, <%= fSpeed_15 %>, <%= fSpeed_20 %>]
     }],
 

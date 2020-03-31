@@ -236,9 +236,9 @@
         },
 
         title: {
-            text: 'Activity',
+            text: '운동량 ',
             style: {
-                fontSize: '24px'
+                fontSize: '18px'
             }
         },
 
@@ -305,7 +305,7 @@
         },
 
         series: [{
-            name: 'Total Distance',
+            name: '총 뛴 거리',
             data: [{
                 color: Highcharts.getOptions().colors[0],
                 radius: '112%',
@@ -313,7 +313,7 @@
                 y: <%= Float.parseFloat(rTotalDistance) %>
             }]
         }, {
-            name: 'Calorie',
+            name:'칼로리 ',
             data: [{
                 color: Highcharts.getOptions().colors[1],
                 radius: '87%',
@@ -321,7 +321,7 @@
                 y: <%=Float.parseFloat(rCalorie) %> /*값 바뀌는 부분*/
             }]
         }, {
-            name: 'Time',
+            name: '시간 ',
             data: [{
                 color: Highcharts.getOptions().colors[2],
                 radius: '62%',

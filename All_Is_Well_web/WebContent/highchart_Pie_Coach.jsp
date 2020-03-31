@@ -160,7 +160,7 @@ body{
             type: 'variablepie'
         },
         title: {
-            text: 'The ratio of walk, jog and sprint while you played'
+            text: '걷고 뛴 비율 '
         },
         tooltip: {
             headerFormat: '',
