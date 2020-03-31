@@ -20,3 +20,5 @@ delete from playerSignUpInfo where id = 'DBtest2';
 
 select team from coachSignUpInfo where id = 'kwon';
 
+desc ki;
+

@@ -240,6 +240,7 @@
 
 <section class="section parallax" data-stellar-background-ratio="0.1 ">
 
+<!-- 선수들 간 데이터 비교 -->
 <div style="float:left;">
 <iframe name="f6" src="highchart_3D.jsp" width="370" height="420" scrolling="no" frameborder="no">
  </iframe>
@@ -272,6 +273,24 @@
  </iframe>
 </div>
 
+<!-- 개인 데이터  -->
+<div style="float: left;">
+<iframe name="f6" src="highchart_Area_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
+</iframe>
+</div>
+
+
+<div style="float: left;">
+<iframe name="f6" src="highchart_Gauge_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+<div style="float: left;">
+<iframe name="f6" src="highchart_Pie_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+
 
 
  </section>          
@@ -282,32 +301,8 @@
  
 <!--------------------------------------------------- end Content ------------------------------------------------------------------>
 
-<!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
-
-<!-- 
-<div style="float: center;">
-<iframe name="f4" src="printHeatmap.jsp" width="1200" height="700" scrolling="no" frameborder="no">
- </iframe>
-</div>
 
 
-<div style="float:center;">
-<iframe name="f1" src="highchart_Area.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
-<div style="float: center;">
-<iframe name="f2" src="highchart_Gauge.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-	
-	
-	<div style="float: center;">
-<iframe name="f3" src="highchart_Pie.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
- -->
 </div>
 
 
