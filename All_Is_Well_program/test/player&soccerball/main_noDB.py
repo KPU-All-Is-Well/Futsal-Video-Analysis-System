@@ -21,12 +21,16 @@ ball_share_B = []
 sum_ball_A = 0
 sum_ball_B = 0
 
-def selectMultiROI() :
+
+def selectMultiROI(player_cnt, team_cnt, team) :
     global p, bboxes, colors
 
     while True:
         
         print('Select the Player')
+
+        cv2.putText(frame, str(team)+' Team  '+str(player_cnt)+' / '+str(team_cnt), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0,0,255), 2, cv2.LINE_AA)  #Multitracker_Window
+
 
         # ?draw bounding boxes over objects
         # ?selectROI's default behaviour is to draw box starting from the center
@@ -59,8 +63,8 @@ if __name__ == '__main__':
     
     ######################################################
     
-    A = int(input('A팀의 인원 입력 : '))
-    B = int(input('B팀의 인원 입력: '))   
+    A = int(input('Home팀의 인원 입력 : '))
+    B = int(input('Away팀의 인원 입력 : '))   
     
     # 6명 vs 6명으로 뛴다고 입력 받았을 경우
     total_player = A + B # 경기에 참여하는 플레이어 수가 12명인 경우
@@ -131,8 +135,16 @@ if __name__ == '__main__':
         #     if (k == 113):  # q is pressed
         #         break
         # print('Selected bounding boxes {}'.format(bboxes))
-       
-        selectMultiROI();
+        
+        
+        if player <= flag : 
+            team_name = 'Home'
+            player_num = player
+            selectMultiROI(player_num, A, team_name);
+        else :
+            team_name = 'Away'
+            player_num = player-flag
+            selectMultiROI(player_num, B, team_name);
 
 
 
@@ -213,7 +225,7 @@ if __name__ == '__main__':
                         #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
 
                 if (i<6):
-                    cv2.putText(frame, str(i), (int(newbox[0]), int(newbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
+                    cv2.putText(frame, team_name+' '+str(player_num), (int(newbox[0])-27, int(newbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
 
                     cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (0,0,255), -1)
                     if(ball_x[frame_cnt] > -1):
@@ -223,7 +235,7 @@ if __name__ == '__main__':
                     overlay=heatmap_background.copy()
                     alpha = 0.5  # Transparency factor.
                     # cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 3, colors12[i], -1)   #Heatmap_Window
-                    # Following line overlays transparent rectangle over the image
+                    # Following line overlays transparent rectangle over the imagex
                     # heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
                 
                 
