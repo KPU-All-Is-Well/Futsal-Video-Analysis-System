@@ -223,27 +223,27 @@
 	          <div class="section-title light-color text-center">
 	          
 	          	<span class="subheading">Game Report</span>
-	            <h2 class="mb-4"style="color:white">Baseball Game Reports 2019</h2>
+	            <h2 class="mb-4"style="color:white">Football Game Reports 2019</h2>
 	          </div>
 	          <div class="row">
 	          	<div class="col-md-12">
 	          		<div class="scoreboard scoreboard-2 slash">
-			          	         <div class="section-title light-color text-center"><h4 style="color:white">Mon. June 3, 2019; Baseball Champions League</h4></div>
+			          	         <div class="section-title light-color text-center"><h4 style="color:white">sat. June 3, 2019;  Premier League</h4></div>
 			           <div class="section-title light-color text-center">
 			          		<h4 style="color:black">vs</h4>
 				          	<div class="d-sm-flex mb-4">
 					          	<div class="sport-team d-flex align-items-center">
-				          			<div class="img logo" style="background-image: url(images/team-3.jpg);"></div>
+				          			<div class="img logo" style="background-image: url(images/leister.png);"></div>
 												<div class="text-center px-1 px-md-3 desc">
-													<h3 class="score win"><span>12</span></h3>
-													<h4 class="team-name">Phoenix</h4>
+													<h3 class="score win"><span>2</span></h3>
+													<h4 class="team-name">Leister City</h4>
 												</div>
 					          	</div>
 					          	<div class="sport-team d-flex align-items-center">
-				          			<div class="img logo order-sm-last" style="background-image: url(images/team-2.jpg);"></div>
+				          			<div class="img logo order-sm-last" style="background-image: url(images/MU.png);"></div>
 												<div class="text-center px-1 px-md-3 desc">
-													<h3 class="score lost"><span>8</span></h3>
-													<h4 class="team-name">Mighty Falcons</h4>
+													<h3 class="score lost"><span>3</span></h3>
+													<h4 class="team-name">Manchester Utd</h4>
 												</div>
 					          	</div>
 				          	</div>
@@ -257,49 +257,22 @@
 	          	</div>
 	          	<div class="col-md-12">
 	          		<div class="scoreboard scoreboard-2 slash">
-			          	         <div class="section-title light-color text-center"><h4 style="color:white">Mon. June 3, 2019; Baseball Champions League</h4></div>
+			          	         <div class="section-title light-color text-center"><h4 style="color:white">sat. June 10, 2019;  Premier League</h4></div>
         						 <div class="section-title light-color text-center">
          			          				<h4 style="color:black">vs</h4>
 				          	<div class="d-sm-flex mb-4">
 					          	<div class="sport-team d-flex align-items-center">
-				          			<div class="img logo" style="background-image: url(images/team-3.jpg);"></div>
+				          			<div class="img logo" style="background-image: url(images/MU.png);"></div>
 												<div class="text-center px-1 px-md-3 desc">
-													<h3 class="score win"><span>12</span></h3>
-													<h4 class="team-name">Phoenix</h4>
+													<h3 class="score win"><span>2</span></h3>
+													<h4 class="team-name">Manchester Utd</h4>
 												</div>
 					          	</div>
 					          	<div class="sport-team d-flex align-items-center">
-				          			<div class="img logo order-sm-last" style="background-image: url(images/team-4.jpg);"></div>
+				          			<div class="img logo order-sm-last" style="background-image: url(images/totenham.png);"></div>
 												<div class="text-center px-1 px-md-3 desc">
-													<h3 class="score lost"><span>8</span></h3>
-													<h4 class="team-name">Mighty Falcons</h4>
-												</div>
-					          	</div>
-				          	</div>
-			          	</div>
-			          	 <div class="section-title light-color text-center">
-				          	<p class="mb-0"><a href="#" class="btn btn-black">More Details</a></p>
-				          </div>
-			          </div>
-	          	</div>
-	          	<div class="col-md-12">
-	          		<div class="scoreboard scoreboard-2 slash">
-			          	         <div class="section-title light-color text-center"><h4 style="color:white">Mon. June 3, 2019; Baseball Champions League</h4></div>
-			          	 <div class="section-title light-color text-center">
-			          				<h4 style="color:black">vs</h4>
-				          	<div class="d-sm-flex mb-4">
-					          	<div class="sport-team d-flex align-items-center">
-				          			<div class="img logo" style="background-image: url(images/team-5.jpg);"></div>
-												<div class="text-center px-1 px-md-3 desc">
-													<h3 class="score win"><span>12</span></h3>
-													<h4 class="team-name">Phoenix</h4>
-												</div>
-					          	</div>
-					          	<div class="sport-team d-flex align-items-center">
-				          			<div class="img logo order-sm-last" style="background-image: url(images/team-6.jpg);"></div>
-												<div class="text-center px-1 px-md-3 desc">
-													<h3 class="score lost"><span>8</span></h3>
-													<h4 class="team-name">Mighty Falcons</h4>
+													<h3 class="score lost"><span>0</span></h3>
+													<h4 class="team-name">Totenham</h4>
 												</div>
 					          	</div>
 				          	</div>
@@ -309,24 +282,25 @@
 				          </div>
 			          </div>
 	          	</div>
+	          	
 	          	<div class="col-md-12">
 	          		<div class="scoreboard scoreboard-2 slash">
-			          	         <div class="section-title light-color text-center"><h4 style="color:white">Mon. June 3, 2019; Baseball Champions League</h4></div>
+			          	         <div class="section-title light-color text-center"><h4 style="color:white">sat. June 17, 2019;  Premier League</h4></div>
 			          	 <div class="section-title light-color text-center">
 			          				<h4 style="color:black">vs</h4>
 				          	<div class="d-sm-flex mb-4">
 					          	<div class="sport-team d-flex align-items-center">
-				          			<div class="img logo" style="background-image: url(images/team-3.jpg);"></div>
+				          			<div class="img logo" style="background-image: url(images/MC.jpeg);"></div>
 												<div class="text-center px-1 px-md-3 desc">
-													<h3 class="score win"><span>12</span></h3>
-													<h4 class="team-name">Phoenix</h4>
+													<h3 class="score win"><span>0</span></h3>
+													<h4 class="team-name">Manchester City</h4>
 												</div>
 					          	</div>
 					          	<div class="sport-team d-flex align-items-center">
-				          			<div class="img logo order-sm-last" style="background-image: url(images/team-6.jpg);"></div>
+				          			<div class="img logo order-sm-last" style="background-image: url(images/MU.png);"></div>
 												<div class="text-center px-1 px-md-3 desc">
-													<h3 class="score lost"><span>8</span></h3>
-													<h4 class="team-name">Mighty Falcons</h4>
+													<h3 class="score lost"><span>5</span></h3>
+													<h4 class="team-name">Manchester United</h4>
 												</div>
 					          	</div>
 				          	</div>
@@ -336,6 +310,34 @@
 				          </div>
 			          </div>
 	          	</div>
+	          	<div class="col-md-12">
+	          		<div class="scoreboard scoreboard-2 slash">
+			          	         <div class="section-title light-color text-center"><h4 style="color:white">sat. June 24, 2019;  Premier League</h4></div>
+			          	 <div class="section-title light-color text-center">
+			          				<h4 style="color:black">vs</h4>
+				          	<div class="d-sm-flex mb-4">
+					          	<div class="sport-team d-flex align-items-center">
+				          			<div class="img logo" style="background-image: url(images/MU.png);"></div>
+												<div class="text-center px-1 px-md-3 desc">
+													<h3 class="score win"><span>4</span></h3>
+													<h4 class="team-name">Manchester Utd</h4>
+												</div>
+					          	</div>
+					          	<div class="sport-team d-flex align-items-center">
+				          			<div class="img logo order-sm-last" style="background-image: url(images/westham.png);"></div>
+												<div class="text-center px-1 px-md-3 desc">
+													<h3 class="score lost"><span>0</span></h3>
+													<h4 class="team-name">West Ham</h4>
+												</div>
+					          	</div>
+				          	</div>
+			          	</div>
+			          	 <div class="section-title light-color text-center">
+				          	<p class="mb-0"><a href="#" class="btn btn-black">More Details</a></p>
+				          </div>
+			          </div>
+	          	</div>
+	          	
 	          </div>
 	          <div class="row mt-5">
 		          <div class="col text-center">
@@ -356,7 +358,7 @@
 					<div class="col-md-4 sidebar">
 						<div class="sidebar-box">
 	            <h2 class="mb-4">Latest Video</h2>
-							<div class="img d-flex align-items-center justify-content-center py-5" style="background-image: url(images/victory.jpg); width: 100%;">
+							<div class="img d-flex align-items-center justify-content-center py-5" style="background-image: url(images/epl.jpeg); width: 100%;">
 								<p class="text-center mb-0 py-5">
 									<a href="https://vimeo.com/45830194" class="icon-video-2 popup-vimeo d-flex justify-content-center align-items-center mr-3">
 		    						<span class="ion-ios-play"></span>
@@ -377,39 +379,39 @@
 						    </thead>
 						    <tbody>
 						      <tr>
-						        <td>Knights Warrior</td>
+						        <td>Manchester United</td>
+						        <td>14</td>
+						        <td>28</td>
+						      </tr>
+						      <tr>
+						        <td>Totenham</td>
 						        <td>14</td>
 						        <td>24</td>
 						      </tr>
 						      <tr>
-						        <td>Mighty Falcons</td>
+						        <td>Leister City</td>
 						        <td>14</td>
-						        <td>24</td>
+						        <td>22</td>
 						      </tr>
 						      <tr>
-						        <td>Germany Baseball</td>
+						        <td>Arsenal</td>
 						        <td>14</td>
-						        <td>24</td>
+						        <td>21</td>
 						      </tr>
 						      <tr>
-						        <td>Colorado</td>
+						        <td>Liverpool</td>
 						        <td>14</td>
-						        <td>24</td>
+						        <td>21</td>
 						      </tr>
 						      <tr>
-						        <td>Florida CLub</td>
+						        <td>West ham</td>
 						        <td>14</td>
-						        <td>24</td>
+						        <td>19</td>
 						      </tr>
 						      <tr>
-						        <td>Miami Club</td>
+						        <td>Manchester City</td>
 						        <td>14</td>
-						        <td>24</td>
-						      </tr>
-						      <tr>
-						        <td>Toronto Team</td>
-						        <td>14</td>
-						        <td>24</td>
+						        <td>15</td>
 						      </tr>
 						    </tbody>
 						  </table>
@@ -418,31 +420,31 @@
 	            <h2 class="mb-4">Top Scores</h2>
 	            <div class="row">
 	            	<div class="col-md-6 top-score pb-4 mb-1">
-			    				<div class="img" style="background-image: url(images/staff-1.jpg);"></div>
+			    				<div class="img" style="background-image: url(images/rash.jpeg);"></div>
 			    				<div class="text text-center">
-			    					<h3 class="mb-0">David Scott</h3>
+			    					<h3 class="mb-0">Marcus Rashford</h3>
+			    					<span class="score">12 games / 14 goals</span>
+			    				</div>
+		    				</div>
+		    				<div class="col-md-6 top-score pb-4 mb-1">
+			    				<div class="img" style="background-image: url(images/buruno.jpeg);"></div>
+			    				<div class="text text-center">
+			    					<h3 class="mb-0">Buruno Fernandes</h3>
 			    					<span class="score">12 games / 10 goals</span>
 			    				</div>
 		    				</div>
 		    				<div class="col-md-6 top-score pb-4 mb-1">
-			    				<div class="img" style="background-image: url(images/staff-2.jpg);"></div>
+			    				<div class="img" style="background-image: url(images/vardy.jpeg);"></div>
 			    				<div class="text text-center">
-			    					<h3 class="mb-0">David Scott</h3>
-			    					<span class="score">12 games / 10 goals</span>
+			    					<h3 class="mb-0">Jamie Vardy</h3>
+			    					<span class="score">12 games / 9 goals</span>
 			    				</div>
 		    				</div>
 		    				<div class="col-md-6 top-score pb-4 mb-1">
-			    				<div class="img" style="background-image: url(images/staff-3.jpg);"></div>
+			    				<div class="img" style="background-image: url(images/daniel.jpeg);"></div>
 			    				<div class="text text-center">
-			    					<h3 class="mb-0">David Scott</h3>
-			    					<span class="score">12 games / 10 goals</span>
-			    				</div>
-		    				</div>
-		    				<div class="col-md-6 top-score pb-4 mb-1">
-			    				<div class="img" style="background-image: url(images/staff-4.jpg);"></div>
-			    				<div class="text text-center">
-			    					<h3 class="mb-0">David Scott</h3>
-			    					<span class="score">12 games / 10 goals</span>
+			    					<h3 class="mb-0">Daniel James</h3>
+			    					<span class="score">12 games / 9 goals</span>
 			    				</div>
 		    				</div>
 	            </div>

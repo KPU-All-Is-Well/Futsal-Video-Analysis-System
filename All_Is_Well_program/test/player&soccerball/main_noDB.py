@@ -21,6 +21,7 @@ ball_share_B = []
 sum_ball_A = 0
 sum_ball_B = 0
 
+past_box = []
 
 def selectMultiROI(player_cnt, team_cnt, team) :
     global p, bboxes, colors
@@ -28,21 +29,25 @@ def selectMultiROI(player_cnt, team_cnt, team) :
     while True:
         
         print('Select the Player')
-
-        cv2.putText(frame, str(team)+' Team  '+str(player_cnt)+' / '+str(team_cnt), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0,0,255), 2, cv2.LINE_AA)  #Multitracker_Window
+        
+        cv2.putText(frame, str(team)+' Team  '+str(player_cnt)+' / '+str(team_cnt), (60, 60), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,0), 2, cv2.LINE_AA)  #Multitracker_Window
 
 
         # ?draw bounding boxes over objects
         # ?selectROI's default behaviour is to draw box starting from the center
         # ?when fromCenter is set to false, you can draw box starting from top left corner
+
         bbox = cv2.selectROI('MultiTracker', frame) #roi 를 선택하는 함수-길
                                                     #roi 정보가 bbox 에 저장되어 사용된다-길
                                                     #tracker.init(frame123, bbox) # 오브젝트 트래커가 frame123과 bboc를 따라가게끔 설정한다.
         bboxes.append(bbox)
+        #past_box.append(bbox)      여기말고 첫프레임으로 옮김
+
         if (p<6):
             colors.append((0,0,255))
         else:
             colors.append((255,0,0))
+            
         print("Press q to quit selecting boxes and start tracking")
         print("Press any other key to select next object : ", p)
         p=p+1
@@ -88,7 +93,6 @@ if __name__ == '__main__':
         fps = round(fps,0)
 
         frame = imutils.resize(frame, width=1000) # 리사이징
-        print(frame.shape)
         
         
          
@@ -137,6 +141,15 @@ if __name__ == '__main__':
         #         break
         # print('Selected bounding boxes {}'.format(bboxes))
         
+        if(player>1) :
+            print(past_box)
+            for boxinfo in past_box:
+                box_p1 = (int(boxinfo[0]), int(boxinfo[1]))
+                box_p2 = (int(boxinfo[0] + boxinfo[2]), int(boxinfo[1] + boxinfo[3]))
+                cv2.rectangle(frame, box_p1, box_p2, (0,0,0), 2, 1) 
+                cv2.putText(frame, boxinfo[4]+' '+boxinfo[5], (int(boxinfo[0])-27, int(boxinfo[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,0), 2, cv2.LINE_AA)  #Multitracker_Window
+
+
         
         if player <= flag : 
             team_name = 'Home'
@@ -147,7 +160,7 @@ if __name__ == '__main__':
             player_num = player-flag
             selectMultiROI(player_num, B, team_name);
 
-
+        
 
         # Create MultiTracker object
         multiTracker = cv2.MultiTracker_create()
@@ -180,6 +193,7 @@ if __name__ == '__main__':
         # Initialize MultiTracker 
         for bbox in bboxes:
             multiTracker.add(tracker, frame, bbox)
+            
             # multiTracker.add(tracker, fgMask, bbox)
 
 
@@ -244,6 +258,8 @@ if __name__ == '__main__':
                     if(frame_cnt==0) :
                         lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 첫 프레임에서는 과거 좌표를 현재좌표와 동일하게 초기화함
                         coord_head = coord_tail = Point(x = int(newbox[0]), y = int(newbox[1])) # 히트맵을 위한 좌표값들 초기화
+                        past_box.append((int(newbox[0]), int(newbox[1]), int(newbox[2]), int(newbox[3]), team_name, str(player_num)))
+
                     
                     if((frame_cnt%fps)==0) :     # 프레임기반 1초(fps)마다 동작하는 코드
                         # 초당 프레임간 발생한 거리차이를 a, b에 누적시킴 
@@ -333,9 +349,7 @@ if __name__ == '__main__':
                     # 누적 거리값을 레이더의 플레이어 머리위에 띄워줌
                     cv2.putText(radar, str(speed)+'km/h '+str(distance)+'m', (int(newbox[0]-60), int(newbox[1])-20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
                 
-                
-
-            # show all windows
+                            # show all windows
             cv2.imshow('MultiTracker', frame)
             # cv2.imshow('fgMask', fgMask)
             cv2.imshow('HeatMap',heatmap_background)

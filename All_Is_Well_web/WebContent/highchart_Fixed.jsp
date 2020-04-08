@@ -213,7 +213,7 @@
         type: 'column'
     },
     title: {
-        text: 'Ranking of Max Speed and Average Speed'
+        text: '최고 속도와 평균 속도 랭킹 '
     },
     xAxis: {
         categories: [
@@ -223,11 +223,11 @@
     yAxis: [{
         min: 0,
         title: {
-            text: 'Employees'
+            text: 'km/h'
         }
     }, {
-        title: {
-            text: 'Profit (millions)'
+        title: { 
+            text: ''
         },
         opposite: true
     }],

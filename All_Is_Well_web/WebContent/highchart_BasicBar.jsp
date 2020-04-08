@@ -212,10 +212,10 @@
         type: 'bar'
     },
     title: {
-        text: 'Ranking of Max Speed and Total Distance'
+        text: ' 최고 속력과 뛴거리 랭킹 '
     },
     subtitle: {
-        text: 'Source: <a href="https://en.wikipedia.org/wiki/World_population">Wikipedia.org</a>'
+        text: ''
     },
     xAxis: {
         categories: ["<%=arrName[0] %>", "<%=arrName[1] %>", "<%=arrName[2] %>", "<%=arrName[3] %>"],
@@ -226,11 +226,11 @@
     yAxis: {
         min: 0,
         title: {
-            text: 'Population (millions)',
+            text: 'km/h',
             align: 'high'
         },
         labels: {
-            overflow: 'justify'
+            overflow: 'justify' 
         }
     },
     tooltip: {
