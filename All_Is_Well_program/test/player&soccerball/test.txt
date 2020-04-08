@@ -1,0 +1,5 @@
+ballTracking.py -> coord.txt -> main_noDB.py
+
+
+x = 220, 726  => 공이 아님 
+

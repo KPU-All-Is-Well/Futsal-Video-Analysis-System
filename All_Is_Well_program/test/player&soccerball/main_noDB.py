@@ -76,7 +76,8 @@ if __name__ == '__main__':
             
         tracker = cv2.TrackerCSRT_create()  # CSRT tracker 초기화
         videoPath = 'near_2.mov'   # 비디오를 읽어옴
- 
+        
+        
         # Create a video capture object to read videos 
         cap = cv2.VideoCapture(videoPath)  #비디오를 읽는 함수-길
     
