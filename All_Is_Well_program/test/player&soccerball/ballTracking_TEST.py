@@ -51,8 +51,13 @@ while(1):
             x = int(c[0])
             y = int(c[1])
             
+            if (100<y<103) or (273 < y < 281) :
+                temp = False
+            else :
+                temp = True
+            
             # 공인식 부분(제약사항: 흰색이나 검은색 공만 아니면 됨)
-            if(white > frame[y][x][0] > black) and (frame[y][x][1] > 209) and (height*0.1 < y < height*0.9) and (width*0.05 < x < width*0.95) :     
+            if(white > frame[y][x][0] > black) and (frame[y][x][1] > 209) and  (temp == True) and (height*0.1 < y < height*0.9) and (width*0.05 < x < width*0.95) :     
                 # 정수리 검은색 원과 축구장 바닥 흰색 원 배제(색기반), 경기장 밖 배제(가로 15%, 세로 5%)
                 
                        
