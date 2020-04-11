@@ -20,7 +20,7 @@ white = 233
 
 str_coord = ''
 ball_x=ball_y=-1
-file = open( 'ball_coord.txt', 'w' )  # 좌표값을 저장할 파일
+file = open( 'ball_coord_TEST.txt', 'w' )  # 좌표값을 저장할 파일
 
 
 #213, 192

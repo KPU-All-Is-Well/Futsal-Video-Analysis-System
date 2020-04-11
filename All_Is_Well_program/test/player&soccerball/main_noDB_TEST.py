@@ -53,7 +53,7 @@ def selectMultiROI(player_cnt, team_cnt, team) :
     return
 
 def readBallCoord() : # ball_coord.txt 파일에서 공 좌표 읽어오는 함수 
-    y, x = np.genfromtxt('ball_coord.txt', delimiter=',', unpack=True,dtype=int)
+    y, x = np.genfromtxt('ball_coord_TEST.txt', delimiter=',', unpack=True,dtype=int)
     return (x,y)
 
 
