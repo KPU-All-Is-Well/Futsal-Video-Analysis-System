@@ -1,0 +1,20 @@
+master - slave 구조 
+p2p 구조
+
+하둡? 
+
+
+main.py -> ① 로그인 디비.py
+	  ② filepath.py 
+	  ③ 데이터 db에 저장할 때마다 -> executeSQL.py
+               ④ coord.txt 읽어서 -> heatmap.py -> 히트맵.png  -> executeSQL.py 
+
+
+(0) python 프로그램에서 선수들 db 이름을 select문으로 읽어온다.
+(1) 프레임에 차례대로 이름을 띄운다.  
+(2) 관리자는 전술판을 참고하여 해당 선수를 roi 쳐준다.
+(3) gui에서 messi 이름을 입력한다.
+(4)
+
+한 경기에 대해 db 에서 공유할 것  
+-> past_box   

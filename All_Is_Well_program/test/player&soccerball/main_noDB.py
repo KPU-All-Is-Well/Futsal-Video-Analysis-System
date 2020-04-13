@@ -81,7 +81,8 @@ if __name__ == '__main__':
             
         tracker = cv2.TrackerCSRT_create()  # CSRT tracker 초기화
         videoPath = 'near_2.mov'   # 비디오를 읽어옴
- 
+        
+        
         # Create a video capture object to read videos 
         cap = cv2.VideoCapture(videoPath)  #비디오를 읽는 함수-길
     
@@ -140,6 +141,8 @@ if __name__ == '__main__':
         #         break
         # print('Selected bounding boxes {}'.format(bboxes))
         
+        
+        ##################################################이미 분석한 선수 박스 쳐 주는 부분 #########################################################
         if(player>1) :
             print(past_box)
             for boxinfo in past_box:
@@ -147,7 +150,7 @@ if __name__ == '__main__':
                 box_p2 = (int(boxinfo[0] + boxinfo[2]), int(boxinfo[1] + boxinfo[3]))
                 cv2.rectangle(frame, box_p1, box_p2, (0,0,0), 2, 1) 
                 cv2.putText(frame, boxinfo[4]+' '+boxinfo[5], (int(boxinfo[0])-27, int(boxinfo[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,0), 2, cv2.LINE_AA)  #Multitracker_Window
-
+        ###################################################################################################################################
 
         
         if player <= flag : 
