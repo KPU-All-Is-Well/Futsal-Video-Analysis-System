@@ -14,6 +14,7 @@ videoPath = 'TEST.mov'   # 비디오를 읽어옴
 cap = cv2.VideoCapture(videoPath)  #비디오를 읽는 함수-길
 
 frame_cnt =0
+pre_frame_cnt =0 # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
 black = 106
 white = 233
 # 207
@@ -100,6 +101,7 @@ while(1):
                     
                     cv2.circle(frame, (ball_x, ball_y), 8, (0, 0, 255), 2)
                     cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
+                   
                     
                 else : # 두 번째 프레임부터
                     tupleForCircle = (c, circle_dist) # 원의 중심좌표와 이전 좌표와의 거리 (가정: 이전 좌표는 확실하게 공)
@@ -155,33 +157,49 @@ while(1):
                             ball_x = int(circles_list[0][0][0])
                             ball_y = int(circles_list[0][0][1])
                             
-  ########################################################골 인식 알고리즘 ######################################################################################################################################                          
-                            # '골'인 경우 노란색으로 표시  
-                            if ball_x == 947 and ball_y ==289 :
-                           
-                                print('골인입니다. 후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
-                           
-                                cv2.circle(frame, (ball_x, ball_y), 8, (0, 228, 255), 2) # 노란색으로 표시
-                                cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
+  ########################################################골 인식 알고리즘 나중에 주석 처리 할 것임######################################################################################################################################                          
                             
-                            # '골 에어리어'에 공이 진입한 경우 초록색으로 표시  
-                            elif ball_x >= 900 :
-                            
-                                print("골에어리어에 공이 진입했습니다.")
-                                print('후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
                            
-                                cv2.circle(frame, (ball_x, ball_y), 8, (22, 219, 29), 2) # 초록색으로 표시
-                                cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)    
+                            if ball_x >= width * 0.9 : # '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
+                            
+                            ####################################함수화##############################################
+                                isInGoalNet = False 
+                                invisible = frame_cnt - pre_frame_cnt
+                                fps = cap.get(cv2.CAP_PROP_FPS)
+                                
+                                if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
+                                    isInGoalNet = True 
+                                  
+                            ################################################함수화###############################
+                                
+                                if isInGoalNet == True  :  # '골'인 경우 노란색으로 표시        #if ball_x == 947 and ball_y ==289 :
+                                    print('!!!!골인입니다!!!!! 후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
+                                    print('invisible: ', invisible)
+                                    
+                                    cv2.circle(frame, (ball_x, ball_y), 8, (0, 228, 255), 2) # 노란색으로 표시
+                                    cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
+                                    pre_frame_cnt = frame_cnt
+                                else :
+                                    print("골에어리어에 공이 진입했습니다.")
+                                    print('후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
+                           
+                                    cv2.circle(frame, (ball_x, ball_y), 8, (22, 219, 29), 2) # 초록색으로 표시
+                                    cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)  
+                                    pre_frame_cnt = frame_cnt
+                                
+                                
+
                             
   #########################################################################################################################################################################################################
                             
-                            # 골이 아닌 경우
-                            else: 
+                            
+                            else: # 골이 아닌 경우
                             
                                 print('후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
                         
                                 cv2.circle(frame, (ball_x, ball_y), 8, (0, 0, 255), 2)
                                 cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
+                                pre_frame_cnt = frame_cnt
                         
                         
                         break;
@@ -217,6 +235,7 @@ while(1):
                         
                             cv2.circle(frame, (ball_x, ball_y), 8, (0, 0, 255), 2)
                             cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
+                            pre_frame_cnt = frame_cnt
                         
                 
                         break     
