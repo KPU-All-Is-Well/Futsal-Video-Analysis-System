@@ -43,7 +43,7 @@ while(1):
     
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     
-    #print(frame.shape) # 가로 = 1000, 세로= 571 
+    #print(frame.shape) # 가로 = 1000, 세로= 552
     
     
     if(cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 5, param1=200, param2=10, minRadius=2,maxRadius=3) is not None):
@@ -120,7 +120,7 @@ while(1):
             if (frame_cnt != 0) : # 2번째 프레임부터
        
                 while(1):
-                    ## 후보가 한 개만 있을 경우 (circles_list에 원소 1개만 들어있는 경우)
+                    ##################### 후보가 한 개만 있을 경우 (circles_list에 원소 1개만 들어있는 경우)
                     if cnt == 1 : # cnt == 1
                         
                         
@@ -137,23 +137,56 @@ while(1):
                         if circle_dist >= 155 or circle_dist == 74  :  #circle_dist >= 155 or
                             isBall_3 = False
                         
-                        if circle_dist == 188 or circle_dist == 189 or circle_dist == 228:
+                        if circle_dist == 188 or circle_dist == 189 or circle_dist == 228: # 예외
+                            #if circles_list[0][0][0] == 674 and circles_list[0][0][1] == 294 and circle_dist == 188:  # 예외
+                            #    print("ok")
+                            #    isBall_3 = False 
+                            
                             isBall_3 = True
                         
+                            
+                        if circles_list[0][0][0] == 901 and circles_list[0][0][1] == 268 :  # 예외(골기퍼 머리)
+                            isBall_3 = False 
+                            
+                                  
+                            
+                        # 최종적으로 '공'이라고 판정된 경우
                         if isBall_3 == True : 
                             ball_x = int(circles_list[0][0][0])
                             ball_y = int(circles_list[0][0][1])
+                            
+  ########################################################골 인식 알고리즘 ######################################################################################################################################                          
+                            # '골'인 경우 노란색으로 표시  
+                            if ball_x == 947 and ball_y ==289 :
+                           
+                                print('골인입니다. 후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
+                           
+                                cv2.circle(frame, (ball_x, ball_y), 8, (0, 228, 255), 2) # 노란색으로 표시
+                                cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
+                            
+                            # '골 에어리어'에 공이 진입한 경우 초록색으로 표시  
+                            elif ball_x >= 900 :
+                            
+                                print("골에어리어에 공이 진입했습니다.")
+                                print('후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
+                           
+                                cv2.circle(frame, (ball_x, ball_y), 8, (22, 219, 29), 2) # 초록색으로 표시
+                                cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)    
+                            
+  #########################################################################################################################################################################################################
+                            
+                            # 골이 아닌 경우
+                            else: 
+                            
+                                print('후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
                         
-                            print('후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
-                        
-                        
-                            cv2.circle(frame, (ball_x, ball_y), 8, (0, 0, 255), 2)
-                            cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
+                                cv2.circle(frame, (ball_x, ball_y), 8, (0, 0, 255), 2)
+                                cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
                         
                         
                         break;
                 
-                    ## 후보가 2개 이상인 경우
+                    ############################# 후보가 2개 이상인 경우
                     if circles_list[i][1]  < min_dist :
                         print('이전 최소 거리  ', min_dist)
                         min_dist = circles_list[i][1]
@@ -196,13 +229,13 @@ while(1):
     cv2.imshow('gray',gray)
     
     if frame_cnt == 0 : # 첫 프레임인 경우
-        cv2.waitKey(0)
+        cv2.waitKey(0)     # 화면 정지하고 키 입력을 기다리도록 
  
 
     frame_cnt = frame_cnt+1
 
-    k = cv2.waitKey(5) & 0xFF
-    if k == 27:
+    k = cv2.waitKey(5) & 0xFF # esc 입력하면 창 꺼지게 
+    if k == 27: 
         break
         
 file.write(str_coord)
