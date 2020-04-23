@@ -209,9 +209,28 @@ if __name__ == '__main__':
             for i, newbox in enumerate(boxes):
                 p1 = (int(newbox[0]), int(newbox[1]))
                 p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
-            
+                
+              
                 ###################################### 공 점유율 계산 알고리즘 ########################################################
-                if(p1[0]-10<ball_x[frame_cnt]<p2[0]+10 and p1[1]-10<ball_y[frame_cnt]<p2[1]+10) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
+                
+                # 예외처리 (사람이 경기장 끝으로 갔을 경우 -> out of index error 발생)
+                player_x1 = p1[0]-10 
+                player_x2 = p2[0]+10
+                player_y1= p1[1]-10 
+                player_y2= p2[1]+10
+                
+                if player_x1 < 0 :
+                    player_x1 = 0 
+                if player_x2 > frame.shape[1] :  # 가로 길이를 초과할 경우 
+                    player_x2 = frame.shape[1]
+                
+                if player_y1 < 0 :
+                    player_y1 = 0 
+                if player_y2 > frame.shape[0] :  # 세로 길이를 초과할 경우
+                    player_y2 = frame.shape[0]
+                
+                
+                if( player_x1 <ball_x[frame_cnt]< player_x2 and player_y1 <ball_y[frame_cnt]< player_y2) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
                     cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1) #파란색으로 roi 색 바꿔주기
                     ball_cnt += 1
                 else :
@@ -250,7 +269,8 @@ if __name__ == '__main__':
                         # rectangle(): 직사각형을 그리는 함수-길
                         #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
 
-                if (i<6):
+                if (i<6): # 멀티트래커 코드의 잔재..... 지워야 함 나중에...
+                
                     cv2.putText(frame, team_name+' '+str(player_num), (int(newbox[0])-27, int(newbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
 
                     cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (0,0,255), -1)
