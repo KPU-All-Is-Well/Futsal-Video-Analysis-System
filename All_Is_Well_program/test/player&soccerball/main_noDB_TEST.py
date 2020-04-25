@@ -30,7 +30,7 @@ def selectMultiROI(player_cnt, team_cnt, team) :
         print('Select the Player')
 
         cv2.putText(frame, str(team)+' Team  '+str(player_cnt)+' / '+str(team_cnt), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0,0,255), 2, cv2.LINE_AA)  #Multitracker_Window
-
+        # 0:0 -> 1:0
 
         # ?draw bounding boxes over objects
         # ?selectROI's default behaviour is to draw box starting from the center
@@ -53,8 +53,8 @@ def selectMultiROI(player_cnt, team_cnt, team) :
     return
 
 def readBallCoord() : # ball_coord.txt 파일에서 공 좌표 읽어오는 함수 
-    y, x = np.genfromtxt('ball_coord_TEST.txt', delimiter=',', unpack=True,dtype=int)
-    return (x,y)
+    y, x, z = np.genfromtxt('ball_coord_TEST.txt', delimiter=',', unpack=True,dtype=int)
+    return (x,y, z)
 
 
 
@@ -157,7 +157,9 @@ if __name__ == '__main__':
         lastPoint = Point(x=-1, y=-1)   # 과거의 좌표값을 저장할 튜플, -1로 초기화
         estimate_distance = 0           # 영상기반 추정거리값을 저장
         distance = 0                    # 거리값을 저장
-        frame_cnt = 0                   # 프레임을 카운팅함 
+        frame_cnt = 0                   # 프레임을 카운팅함
+        ball_frame_cnt = 0              # 공을 인식한 프레임을 따로 저장 
+        pre_frame_cnt =0 # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
         ball_cnt = 0                    # roi로 선택한 선수가 공을 점유한 프레임 수를 카운팅함 
         moving_weight = 0               # 움직인 거리의 비중을 저장
         top_speed = 0                   # 최고 속도를 저장
@@ -175,7 +177,7 @@ if __name__ == '__main__':
 
         coord_head=coord_tail= Point(x=0,y=0)
     
-        ball_x,ball_y = readBallCoord() # 공의 좌표 읽어오기 
+        ball_x,ball_y,ball_frame_cnt = readBallCoord() # 공의 좌표, 공이 인식된 프레임 읽어오기
 
         # Initialize MultiTracker 
         for bbox in bboxes:
@@ -209,9 +211,28 @@ if __name__ == '__main__':
             for i, newbox in enumerate(boxes):
                 p1 = (int(newbox[0]), int(newbox[1]))
                 p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
-            
+                
+              
                 ###################################### 공 점유율 계산 알고리즘 ########################################################
-                if(p1[0]-10<ball_x[frame_cnt]<p2[0]+10 and p1[1]-10<ball_y[frame_cnt]<p2[1]+10) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
+                
+                # 예외처리 (사람이 경기장 끝으로 갔을 경우 -> out of index error 발생)
+                player_x1 = p1[0]-10 
+                player_x2 = p2[0]+10
+                player_y1= p1[1]-10 
+                player_y2= p2[1]+10
+                
+                if player_x1 < 0 :
+                    player_x1 = 0 
+                if player_x2 > frame.shape[1] :  # 가로 길이를 초과할 경우 
+                    player_x2 = frame.shape[1]
+                
+                if player_y1 < 0 :
+                    player_y1 = 0 
+                if player_y2 > frame.shape[0] :  # 세로 길이를 초과할 경우
+                    player_y2 = frame.shape[0]
+                
+                
+                if( player_x1 <ball_x[frame_cnt]< player_x2 and player_y1 <ball_y[frame_cnt]< player_y2) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
                     cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1) #파란색으로 roi 색 바꿔주기
                     ball_cnt += 1
                 else :
@@ -222,35 +243,70 @@ if __name__ == '__main__':
                 if(ball_x[frame_cnt] > -1):
                 
                     ########################################################골 인식 알고리즘 ######################################################################################################################################                          
-                    # '골'인 경우 노란색으로 표시  
-                    if ball_x[frame_cnt] == 947 and ball_y[frame_cnt] ==289 :
+                    
+                    # 공이 슬로우모션으로 쫓아가는 현상 해결(현재 프레임과 공이 인식된 프레임 번호가 같을 경우만 화면에 공 출력)
+                    if ball_frame_cnt[frame_cnt] == frame_cnt :
+                    
+                        # Home팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
+                        if ball_x[frame_cnt] >= width * 0.9 : 
+                            
+                            isInGoalNet = False 
+                            invisible = frame_cnt - pre_frame_cnt
+                            fps = cap.get(cv2.CAP_PROP_FPS)
+                                
+                            if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
+                                isInGoalNet = True
                         
-                        print('Home팀 골인입니다.', frame_cnt)
-                        #print('골인입니다. 후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
-
-                        cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 228, 255), 2) # 노란색으로 표시
-                            
-                    # Home 팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시  (오른쪽 골대 Home팀 것이라고 가정)
-                    elif ball_x[frame_cnt] >= 900 :          # 골 에어리어 영역 -> 경기장의 가로 길이의 양옆 10% 차지한다고 가정
-                            
-                        print("Home팀: 골에어리어에 공이 진입했습니다.", frame_cnt)   
-                        cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (22, 219, 29), 2) # 초록색으로 표시
+                            # '골'인 경우 노란색으로 표시
+                            if isInGoalNet == True  :         #if ball_x == 947 and ball_y ==289 :
+                                print('Home팀 골인입니다!!!!!', frame_cnt)
+                                print('invisible term: ', invisible)
+                                    
+                                cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 228, 255), 2) # 노란색으로 표시
+                                pre_frame_cnt = frame_cnt
+             
+                            else :
+                                print("Home팀 골에어리어에 공이 진입했습니다.", frame_cnt)
+                                cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (22, 219, 29), 2) # 초록색으로 표시
+                                pre_frame_cnt = frame_cnt
                     
-                    # Away 팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시   (왼쪽 골대 Away팀 것이라고 가정)
-                    elif ball_x[frame_cnt] <= 100 :
+                        # Away팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
+                        elif ball_x[frame_cnt] <= width * 0.1 : 
                             
-                        print("Away팀: 골에어리어에 공이 진입했습니다.", frame_cnt)
-                        cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (22, 219, 29), 2) # 초록색으로 표시
-                            
+                            isInGoalNet = False 
+                            invisible = frame_cnt - pre_frame_cnt
+                            fps = cap.get(cv2.CAP_PROP_FPS)
+                                
+                            if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
+                                isInGoalNet = True
+                        
+                            # '골'인 경우 노란색으로 표시
+                            if isInGoalNet == True  :         #if ball_x == 947 and ball_y ==289 :
+                                print('Away팀 골인입니다!!!!!', frame_cnt)
+                                print('invisible term: ', invisible)
+                                    
+                                cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 228, 255), 2) # 노란색으로 표시
+                                pre_frame_cnt = frame_cnt
+             
+                            else :
+                                print("Away팀 골에어리어에 공이 진입했습니다.", frame_cnt)
+                                cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (22, 219, 29), 2) # 초록색으로 표시
+                                pre_frame_cnt = frame_cnt
+                        
+                    
+                        # 골에어리어에 공이 진입하지도 않았고, '골'도 아닌 경우
+                        else : 
+                    
+                            cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 0, 255), 2)
+                            pre_frame_cnt = frame_cnt
+
+                            # rectangle(): 직사각형을 그리는 함수-길
+                            #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
+                        
                     #######################################################################################################################################################################################
-                    else :
-                    
-                        cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 0, 255), 2)
 
-                        # rectangle(): 직사각형을 그리는 함수-길
-                        #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
-
-                if (i<6):
+                if (i<6): # 멀티트래커 코드의 잔재..... 지워야 함 나중에...
+                    # 팀 이름과, 선수 번호
                     cv2.putText(frame, team_name+' '+str(player_num), (int(newbox[0])-27, int(newbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
 
                     cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (0,0,255), -1)

@@ -15,6 +15,7 @@ cap = cv2.VideoCapture(videoPath)  #비디오를 읽는 함수-길
 
 frame_cnt =0
 pre_frame_cnt =0 # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
+ball_frame_cnt = 0 # 공을 인식한 프레임만 저장
 black = 106
 white = 233
 # 207
@@ -59,6 +60,7 @@ while(1):
         cnt = 0 # 후보 공들 개수 카운팅
         
         ######################################################## 공인 것과 공이 아닌 것 구별하는 알고리즘 ###########################################################
+        
         # 한 프레임에서 검출해낸 circle들 공인지 아닌지 true, false 판별하면서 circles_list에 담기 
         for c in circles[0,:]: 
             x = int(c[0])
@@ -101,6 +103,7 @@ while(1):
                     
                     cv2.circle(frame, (ball_x, ball_y), 8, (0, 0, 255), 2)
                     cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
+                    ball_frame_cnt = frame_cnt
                    
                     
                 else : # 두 번째 프레임부터
@@ -157,12 +160,12 @@ while(1):
                             ball_x = int(circles_list[0][0][0])
                             ball_y = int(circles_list[0][0][1])
                             
-  ########################################################골 인식 알고리즘 나중에 주석 처리 할 것임######################################################################################################################################                          
+                            #################################골 인식 알고리즘 나중에 주석 처리 할 것임######################################################################################################################################                          
                             
                            
                             if ball_x >= width * 0.9 : # '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
                             
-                            ####################################함수화##############################################
+                            
                                 isInGoalNet = False 
                                 invisible = frame_cnt - pre_frame_cnt
                                 fps = cap.get(cv2.CAP_PROP_FPS)
@@ -170,15 +173,16 @@ while(1):
                                 if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
                                     isInGoalNet = True 
                                   
-                            ################################################함수화###############################
+                           
                                 
                                 if isInGoalNet == True  :  # '골'인 경우 노란색으로 표시        #if ball_x == 947 and ball_y ==289 :
                                     print('!!!!골인입니다!!!!! 후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
-                                    print('invisible: ', invisible)
+                                    print('invisible term: ', invisible)
                                     
                                     cv2.circle(frame, (ball_x, ball_y), 8, (0, 228, 255), 2) # 노란색으로 표시
                                     cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
                                     pre_frame_cnt = frame_cnt
+                                    ball_frame_cnt = frame_cnt
                                 else :
                                     print("골에어리어에 공이 진입했습니다.")
                                     print('후보 1개 r = ', circles_list[0][0][2], '       frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y, '    dist 차이  ', circle_dist)
@@ -186,6 +190,7 @@ while(1):
                                     cv2.circle(frame, (ball_x, ball_y), 8, (22, 219, 29), 2) # 초록색으로 표시
                                     cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)  
                                     pre_frame_cnt = frame_cnt
+                                    ball_frame_cnt = frame_cnt
                                 
                                 
 
@@ -200,11 +205,12 @@ while(1):
                                 cv2.circle(frame, (ball_x, ball_y), 8, (0, 0, 255), 2)
                                 cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
                                 pre_frame_cnt = frame_cnt
+                                ball_frame_cnt = frame_cnt
                         
                         
                         break;
                 
-                    ############################# 후보가 2개 이상인 경우
+                    ############################# 후보가 2개 이상인 경우 #############################
                     if circles_list[i][1]  < min_dist :
                         print('이전 최소 거리  ', min_dist)
                         min_dist = circles_list[i][1]
@@ -236,14 +242,16 @@ while(1):
                             cv2.circle(frame, (ball_x, ball_y), 8, (0, 0, 255), 2)
                             cv2.circle(gray, (ball_x, ball_y), 8, (0, 0, 255), 2)
                             pre_frame_cnt = frame_cnt
+                            ball_frame_cnt = frame_cnt
                         
                 
                         break     
     
                     i += 1
             
-    str_coord = str_coord+str(ball_y)+','+str(ball_x)+'\n'  # str_coord 스트링에 좌표값을 누적시킴
-
+    #str_coord = str_coord+str(ball_y)+','+str(ball_x)+'\n'  # str_coord 스트링에 좌표값을 누적시킴
+    str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(ball_frame_cnt)+'\n'  # str_coord 스트링에 좌표값을 누적시킴
+    
     cv2.imshow('frame',frame)
     cv2.imshow('gray',gray)
     
