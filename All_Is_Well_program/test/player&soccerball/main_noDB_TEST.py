@@ -9,6 +9,7 @@ import imutils                          # image utils 이미지 관련된 유틸
 import math
 import collections
 import heatmap
+from datetime import datetime
 
 # 히트맵에 각기 다른 색상을 표현하기 위한 튜플로 된 리스트  12개를 정의
 colors12 = [(0,0,0),(255,255,255),(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,255),(192,192,192),(244,164,96),(128,128,0),(240, 50, 230)]
@@ -28,8 +29,23 @@ def selectMultiROI(player_cnt, team_cnt, team) :
     while True:
         
         print('Select the Player')
-
-        cv2.putText(frame, str(team)+' Team  '+str(player_cnt)+' / '+str(team_cnt), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0,0,255), 2, cv2.LINE_AA)  #Multitracker_Window
+        
+        cv2.putText(frame, str(team)+' Team  ', (50, 30), cv2.FONT_HERSHEY_COMPLEX, 1, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
+        cv2.putText(frame, ' done: '+str(player_cnt)+' / total: '+str(team_cnt),(45, 60), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
+        #now = datetime.now()
+        #curTime = now.strftime('%H:%M:%S')
+        videoLen = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        videoFps = cap.get(cv2.CAP_PROP_FPS)
+        videoTime = int((videoLen / videoFps))  # 동영상 재생 시간을 분으로 반환
+        
+        # 분석하는데 남은 에상 소요시간
+        analTime = videoTime * (team_cnt-player_cnt+1)
+        cv2.putText(frame, ' elapsed time: '+str(analTime)+'s',(45, 90), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
+        
+        #finishTime = 
+        #cv2.putText(frame, ' current time: '+str(curTime),(45, 90), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
+        #cv2.putText(frame, ' estimated finish time: '+str(videoTime),(45, 120), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
+        
         # 0:0 -> 1:0
 
         # ?draw bounding boxes over objects
@@ -242,7 +258,7 @@ if __name__ == '__main__':
                 
                 if(ball_x[frame_cnt] > -1):
                 
-                    ########################################################골 인식 알고리즘 ######################################################################################################################################                          
+                    ###################################################(나중에 주석처리)골 인식 알고리즘 #############################################################                          
                     
                     # 공이 슬로우모션으로 쫓아가는 현상 해결(현재 프레임과 공이 인식된 프레임 번호가 같을 경우만 화면에 공 출력)
                     if ball_frame_cnt[frame_cnt] == frame_cnt :
@@ -303,7 +319,7 @@ if __name__ == '__main__':
                             # rectangle(): 직사각형을 그리는 함수-길
                             #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
                         
-                    #######################################################################################################################################################################################
+                    ################################################################################################################################################
 
                 if (i<6): # 멀티트래커 코드의 잔재..... 지워야 함 나중에...
 
@@ -495,7 +511,7 @@ if __name__ == '__main__':
     ball_share_B_res = sum_ball_B / (sum_ball_A + sum_ball_B) * 100
     
     print('\n')
-    print('==>')
+    print('---------------------------------------------------------------------------------------------------')
     print('A팀 공 점유율: ', sum_ball_A, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     
