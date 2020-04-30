@@ -37,11 +37,18 @@ def selectMultiROI(player_cnt, team_cnt, team) :
         #curTime = now.strftime('%H:%M:%S')
         videoLen = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         videoFps = cap.get(cv2.CAP_PROP_FPS)
-        videoTime = int((videoLen / videoFps))  # 동영상 재생 시간을 분으로 반환
+        videoTime = int((videoLen / videoFps))  # 동영상 재생 시간을 초로 반환
         
         # 분석하는데 남은 에상 소요시간
         analTime = videoTime * (team_cnt-player_cnt+1)
-        cv2.putText(frame, ' estimated time: '+str(analTime)+'s',(45, 85), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
+        if analTime < 60 :
+            minute = 0
+            second = analTime
+        else :
+            minute = int(analTime / 60) # 분
+            second = analTime % 60 # 초 
+            
+        cv2.putText(frame, ' estimated time: '+str(minute)+'m '+str(second)+'s',(45, 85), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
         
         #finishTime = 
         #cv2.putText(frame, ' current time: '+str(curTime),(45, 90), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
@@ -254,7 +261,13 @@ if __name__ == '__main__':
                 if( player_x1 <ball_x[frame_cnt]< player_x2 and player_y1 <ball_y[frame_cnt]< player_y2) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
                     cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1) #파란색으로 roi 색 바꿔주기
                     ball_cnt += 1
+                    
+                    # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
+                    cv2.putText(radar, 'Ball Touch: '+str(ball_cnt), (50, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA) 
+                    
                 else :
+                    # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
+                    cv2.putText(radar, 'Ball Touch: '+str(ball_cnt), (50, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
                     cv2.rectangle(frame, p1, p2, (0,0,255), 2, 1) #그렇지 않으면 빨간색 
             
                 ########################################################################################################
@@ -292,8 +305,7 @@ if __name__ == '__main__':
                                 
 
                             else :
-                                print("Home팀 골에어리어에 공이 진입했습니다.", frame_cnt)
-                                #cv2.putText(frame, 'Home team: Ball has entered the goal area!!!!! ',(180, 25), cv2.FONT_HERSHEY_COMPLEX, 1, (0,0,255), 2, cv2.LINE_AA)
+                                print("Home팀 골에어리어에 공이 진입했습니다.", frame_cnt)                      
                                 cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (22, 219, 29), 2) # 초록색으로 표시
                                 pre_frame_cnt = frame_cnt
                     
@@ -384,7 +396,8 @@ if __name__ == '__main__':
                             top_speed = speed
                     
                         accumulate_speed = accumulate_speed+speed   # 속도값들을 전부 누적시킴
-    
+                        
+                        
                         lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 과거 좌표 갱신
                     
                         #txt 로그로 남겨주는 부분
