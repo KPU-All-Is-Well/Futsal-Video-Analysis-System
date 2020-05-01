@@ -79,10 +79,11 @@
 				<div id="contents"> 
                 	<form method="post" action="coachOrPlayer_In_Process.jsp"> 
                 		
-                		<input type="radio" name="role" value="선수">선수
-                		<input type="radio" name="role" value="코치">코치
+                		&nbsp;&nbsp;<input type="radio" name="role" value="선수">&nbsp;&nbsp;선수&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                		<input type="radio" name="role" value="코치">&nbsp;&nbsp;코치&nbsp;
+         				
          				<div class="form-group">
-              				<p><input type="submit" value="확인">
+              				<p><input type="submit" value="확인" style="width:80px;">
                			</div>
              		</form> 
 				</div>
