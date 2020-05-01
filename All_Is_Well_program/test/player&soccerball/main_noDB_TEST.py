@@ -9,6 +9,8 @@ import imutils                          # image utils 이미지 관련된 유틸
 import math
 import collections
 import heatmap
+from datetime import datetime
+from PIL import ImageFont, ImageDraw, Image
 
 # 히트맵에 각기 다른 색상을 표현하기 위한 튜플로 된 리스트  12개를 정의
 colors12 = [(0,0,0),(255,255,255),(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,255),(192,192,192),(244,164,96),(128,128,0),(240, 50, 230)]
@@ -28,9 +30,31 @@ def selectMultiROI(player_cnt, team_cnt, team) :
     while True:
         
         print('Select the Player')
-
-        cv2.putText(frame, str(team)+' Team  '+str(player_cnt)+' / '+str(team_cnt), (50, 50), cv2.FONT_HERSHEY_SIMPLEX, 2, (0,0,255), 2, cv2.LINE_AA)  #Multitracker_Window
-
+        
+        cv2.putText(frame, str(team)+' Team  ', (50, 30), cv2.FONT_HERSHEY_COMPLEX, 1, (255,255,255), 2, cv2.LINE_AA) 
+        cv2.putText(frame, ' done: '+str(player_cnt)+' / total: '+str(team_cnt),(45, 60), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
+        #now = datetime.now()
+        #curTime = now.strftime('%H:%M:%S')
+        videoLen = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        videoFps = cap.get(cv2.CAP_PROP_FPS)
+        videoTime = int((videoLen / videoFps))  # 동영상 재생 시간을 초로 반환
+        
+        # 분석하는데 남은 에상 소요시간
+        analTime = videoTime * (team_cnt-player_cnt+1)
+        if analTime < 60 :
+            minute = 0
+            second = analTime
+        else :
+            minute = int(analTime / 60) # 분
+            second = analTime % 60 # 초 
+            
+        cv2.putText(frame, ' estimated time: '+str(minute)+'m '+str(second)+'s',(45, 85), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
+        
+        #finishTime = 
+        #cv2.putText(frame, ' current time: '+str(curTime),(45, 90), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
+        #cv2.putText(frame, ' estimated finish time: '+str(videoTime),(45, 120), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
+        
+        # 0:0 -> 1:0
 
         # ?draw bounding boxes over objects
         # ?selectROI's default behaviour is to draw box starting from the center
@@ -53,8 +77,8 @@ def selectMultiROI(player_cnt, team_cnt, team) :
     return
 
 def readBallCoord() : # ball_coord.txt 파일에서 공 좌표 읽어오는 함수 
-    y, x = np.genfromtxt('ball_coord_TEST.txt', delimiter=',', unpack=True,dtype=int)
-    return (x,y)
+    y, x, z = np.genfromtxt('ball_coord_TEST.txt', delimiter=',', unpack=True,dtype=int)
+    return (x,y, z)
 
 
 
@@ -157,7 +181,10 @@ if __name__ == '__main__':
         lastPoint = Point(x=-1, y=-1)   # 과거의 좌표값을 저장할 튜플, -1로 초기화
         estimate_distance = 0           # 영상기반 추정거리값을 저장
         distance = 0                    # 거리값을 저장
-        frame_cnt = 0                   # 프레임을 카운팅함 
+        frame_cnt = 0                   # 프레임을 카운팅함
+        show_goal_frame = 0             # 골인 경우 화면에 fps 프레임수 동안 "골인입니다" 표시하기 위해
+        ball_frame_cnt = 0              # 공을 인식한 프레임을 따로 저장 
+        pre_frame_cnt =0 # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
         ball_cnt = 0                    # roi로 선택한 선수가 공을 점유한 프레임 수를 카운팅함 
         moving_weight = 0               # 움직인 거리의 비중을 저장
         top_speed = 0                   # 최고 속도를 저장
@@ -175,7 +202,7 @@ if __name__ == '__main__':
 
         coord_head=coord_tail= Point(x=0,y=0)
     
-        ball_x,ball_y = readBallCoord() # 공의 좌표 읽어오기 
+        ball_x,ball_y,ball_frame_cnt = readBallCoord() # 공의 좌표, 공이 인식된 프레임 읽어오기
 
         # Initialize MultiTracker 
         for bbox in bboxes:
@@ -207,25 +234,120 @@ if __name__ == '__main__':
         
             # draw tracked objects
             for i, newbox in enumerate(boxes):
+            
                 p1 = (int(newbox[0]), int(newbox[1]))
                 p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
-            
+                
+              
                 ###################################### 공 점유율 계산 알고리즘 ########################################################
-                if(p1[0]-10<ball_x[frame_cnt]<p2[0]+10 and p1[1]-10<ball_y[frame_cnt]<p2[1]+10) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
+                
+                # 예외처리 (사람이 경기장 끝으로 갔을 경우 -> out of index error 발생)
+                player_x1 = p1[0]-10 
+                player_x2 = p2[0]+10
+                player_y1= p1[1]-10 
+                player_y2= p2[1]+10
+                
+                if player_x1 < 0 :
+                    player_x1 = 0 
+                if player_x2 > frame.shape[1] :  # 가로 길이를 초과할 경우 
+                    player_x2 = frame.shape[1]
+                
+                if player_y1 < 0 :
+                    player_y1 = 0 
+                if player_y2 > frame.shape[0] :  # 세로 길이를 초과할 경우
+                    player_y2 = frame.shape[0]
+                
+                
+                if( player_x1 <ball_x[frame_cnt]< player_x2 and player_y1 <ball_y[frame_cnt]< player_y2) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
                     cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1) #파란색으로 roi 색 바꿔주기
                     ball_cnt += 1
+                    
+                    # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
+                    cv2.putText(radar, 'Ball Touch: '+str(ball_cnt), (50, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA) 
+                    
                 else :
+                    # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
+                    cv2.putText(radar, 'Ball Touch: '+str(ball_cnt), (50, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
                     cv2.rectangle(frame, p1, p2, (0,0,255), 2, 1) #그렇지 않으면 빨간색 
             
                 ########################################################################################################
                 
                 if(ball_x[frame_cnt] > -1):
-                    cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 0, 255), 2)
+                
+                    ###################################################골 인식 알고리즘 #############################################################                          
+                    
+                    # 공이 슬로우모션으로 쫓아가는 현상 해결(현재 프레임과 공이 인식된 프레임 번호가 같을 경우만 화면에 공 출력)
+                    if ball_frame_cnt[frame_cnt] == frame_cnt :
+                    
+                        # Home팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
+                        if ball_x[frame_cnt] >= width * 0.9 : 
+                            
+                            isInGoalNet = False 
+                            invisible = frame_cnt - pre_frame_cnt
+                            fps = cap.get(cv2.CAP_PROP_FPS)
+                                
+                            if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
+                                isInGoalNet = True
+                        
+                            # '골'인 경우 노란색으로 표시
+                            if isInGoalNet == True  :         #if ball_x == 947 and ball_y ==289 :
+                                print('Home팀 골인입니다!!!!!', frame_cnt)
+                                print('invisible term: ', invisible)
+                                #cv2.waitKey(0)     # 화면 정지하고 키 입력을 기다리도록 
+                                
+                                cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
+                                show_goal_frame = 1
+                                
+                                    
+                                cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 228, 255), 2) # 노란색으로 표시
+                                pre_frame_cnt = frame_cnt
+                                
+                                
 
-                        # rectangle(): 직사각형을 그리는 함수-길
-                        #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
+                            else :
+                                print("Home팀 골에어리어에 공이 진입했습니다.", frame_cnt)                      
+                                cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (22, 219, 29), 2) # 초록색으로 표시
+                                pre_frame_cnt = frame_cnt
+                    
+                        # Away팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
+                        elif ball_x[frame_cnt] <= width * 0.1 : 
+                            
+                            isInGoalNet = False 
+                            invisible = frame_cnt - pre_frame_cnt
+                            fps = cap.get(cv2.CAP_PROP_FPS)
+                                
+                            if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
+                                isInGoalNet = True
+                        
+                            # '골'인 경우 노란색으로 표시
+                            if isInGoalNet == True  :         #if ball_x == 947 and ball_y ==289 :
+                                print('Away팀 골인입니다!!!!!', frame_cnt)
+                                print('invisible term: ', invisible)
+                                    
+                                cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 228, 255), 2) # 노란색으로 표시
+                                pre_frame_cnt = frame_cnt
 
-                if (i<6):
+                                
+             
+                            else :
+                                print("Away팀 골에어리어에 공이 진입했습니다.", frame_cnt)
+                                cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (22, 219, 29), 2) # 초록색으로 표시
+                                pre_frame_cnt = frame_cnt
+                        
+                    
+                        # 골에어리어에 공이 진입하지도 않았고, '골'도 아닌 경우
+                        else : 
+                    
+                            cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 0, 255), 2)
+                            pre_frame_cnt = frame_cnt
+
+                            # rectangle(): 직사각형을 그리는 함수-길
+                            #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
+                        
+                    ################################################################################################################################################
+
+                if (i<6): # 멀티트래커 코드의 잔재..... 지워야 함 나중에...
+
                     cv2.putText(frame, team_name+' '+str(player_num), (int(newbox[0])-27, int(newbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
 
                     cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (0,0,255), -1)
@@ -274,7 +396,8 @@ if __name__ == '__main__':
                             top_speed = speed
                     
                         accumulate_speed = accumulate_speed+speed   # 속도값들을 전부 누적시킴
-    
+                        
+                        
                         lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 과거 좌표 갱신
                     
                         #txt 로그로 남겨주는 부분
@@ -326,8 +449,23 @@ if __name__ == '__main__':
                         print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
                     #f.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')
                     str_coord = str_coord+str(int(newbox[1]))+','+str(int(newbox[0]))+'\n'  # str_coord 스트링에 좌표값을 누적시킴
+                    
+                    
+                    #골인 경우 2초 동안 화면에 보여주기 위함######################### 
+                    fps = cap.get(cv2.CAP_PROP_FPS)
+                    
+                    if 1 <=show_goal_frame <= fps * 2 :
+                        if show_goal_frame != 1 :
+                            cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
+                        show_goal_frame += 1
+                    ####################################################
+                    
                     frame_cnt=frame_cnt+1   # 프레임 갯수를 세어줌
-                
+                    
+                    
+                    
+                    
+                    
                     # print('거리 추정치 : ', distance, ' / 속도 추정치 : ',speed,' km/h')
                 
                     # 누적 거리값을 레이더의 플레이어 머리위에 띄워줌
@@ -414,7 +552,7 @@ if __name__ == '__main__':
     ball_share_B_res = sum_ball_B / (sum_ball_A + sum_ball_B) * 100
     
     print('\n')
-    print('==>')
+    print('---------------------------------------------------------------------------------------------------')
     print('A팀 공 점유율: ', sum_ball_A, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     
