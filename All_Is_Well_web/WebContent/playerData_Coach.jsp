@@ -150,7 +150,7 @@
                                
                             </li>
                             <li class="dropdown">
-                                <a href="teamDate_coach.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Data </a>
+                                <a href="teamDate_coach.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Team Data </a>
                               
                             </li>
                             <li class="dropdown">
