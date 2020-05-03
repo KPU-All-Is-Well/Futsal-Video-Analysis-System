@@ -7,7 +7,9 @@
 
 <body>
 	<%@ include file="dbconn.jsp" %>
+
 	
+
 	<%
 		request.setCharacterEncoding("utf-8");
 		
@@ -39,10 +41,12 @@
 							
 				if(id.equals(rId) && passwd.equals(rPasswd)){ // TT
 					session.setAttribute("id", id);
+					//session.setAttribute("countProfile", "0");	// 프로필 중복 출력 방지를 위해			
 					out.println("<script>");
 					out.println("alert('로그인 되었습니다. All Is Well에 오신 것을 진심으로 환영합니다.')");
 					out.println("location.href='home_of_Coach.jsp'");
 					out.println("</script>");	
+					
 				}
 			
 			}

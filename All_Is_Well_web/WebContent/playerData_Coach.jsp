@@ -281,7 +281,8 @@
 
  <div id="wrapper">  
  <div id="btn_group" style="text-align:center; background-color:#090823"   >
-<a href="playerData_Coach.jsp"> <button id="test_btn1">Player</button></a> 
+
+<a href="move2Profile.jsp"><button id="test_btn1">Player </button>
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
 <a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
 </div>
@@ -298,9 +299,26 @@
 <section class="section parallax" data-stellar-background-ratio="0.1 " >     
       <div class="container">
             <div class="row">
+            
+				 <jsp:useBean id="counter" class="count.CounterBean" scope ="application"/>
+				<jsp:setProperty name ="counter" property="newVisit" value="1" /> 
                <% 
+               
+               int count = counter.getVisitCount();
+               boolean flag = false; 
+               if (count == 1){
+            	   flag = true;
+               }
+               
+            %>
+  
+               
+               <%
+               
+               //if(flag == true){
                for(int i=0; i <arrId.length ; i++){
             	%>   
+ 
             	
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
@@ -309,9 +327,9 @@
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
-                                 <!-- <h3>10</h3> -->
+                                 
                               </a>
-                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[i], "UTF-8") %> ">
+                              <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[i], "UTF-8") %> ">                            
                                  <h5 class="card-title"><%=arrName[i] %></h5>
                               </a>
                               <p><%=arrPosition[i] %></p>
@@ -327,7 +345,9 @@
                </div>
                
                <%
-               }
+               }//end for
+               //}//end if
+        
               
                %>
               
