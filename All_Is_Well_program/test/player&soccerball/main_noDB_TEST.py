@@ -261,13 +261,9 @@ if __name__ == '__main__':
                 if( player_x1 <ball_x[frame_cnt]< player_x2 and player_y1 <ball_y[frame_cnt]< player_y2) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
                     cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1) #파란색으로 roi 색 바꿔주기
                     ball_cnt += 1
-                    
-                    # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
-                    cv2.putText(radar, 'Ball Touch: '+str(ball_cnt), (50, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA) 
+                   
                     
                 else :
-                    # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
-                    cv2.putText(radar, 'Ball Touch: '+str(ball_cnt), (50, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
                     cv2.rectangle(frame, p1, p2, (0,0,255), 2, 1) #그렇지 않으면 빨간색 
             
                 ########################################################################################################
@@ -284,7 +280,7 @@ if __name__ == '__main__':
                             
                             isInGoalNet = False 
                             invisible = frame_cnt - pre_frame_cnt
-                            fps = cap.get(cv2.CAP_PROP_FPS)
+                            #fps = cap.get(cv2.CAP_PROP_FPS)
                                 
                             if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
                                 isInGoalNet = True
@@ -314,7 +310,7 @@ if __name__ == '__main__':
                             
                             isInGoalNet = False 
                             invisible = frame_cnt - pre_frame_cnt
-                            fps = cap.get(cv2.CAP_PROP_FPS)
+                            #fps = cap.get(cv2.CAP_PROP_FPS)
                                 
                             if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
                                 isInGoalNet = True
@@ -346,131 +342,141 @@ if __name__ == '__main__':
                         
                     ################################################################################################################################################
 
-                if (i<6): # 멀티트래커 코드의 잔재..... 지워야 함 나중에...
+                cv2.putText(frame, team_name+' '+str(player_num), (int(newbox[0])-27, int(newbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
 
-                    cv2.putText(frame, team_name+' '+str(player_num), (int(newbox[0])-27, int(newbox[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
-
-                    cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (0,0,255), -1)
-                    if(ball_x[frame_cnt] > -1):
-                        cv2.circle(radar, (ball_x[frame_cnt], ball_y[frame_cnt]), 7, (0, 0, 0), -1)
-                    #Radar_Window
-
-                    overlay=heatmap_background.copy()
-                    alpha = 0.5  # Transparency factor.
-                    # cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 3, colors12[i], -1)   #Heatmap_Window
-                    # Following line overlays transparent rectangle over the imagex
-                    # heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
+                cv2.circle(radar,(int(newbox[0]), int(newbox[1])), 10, (0,0,255), -1)
                 
                 
-                    # 거리와 속도 추정치를 계산하기 위한 코드들
-                    if(frame_cnt==0) :
-                        lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 첫 프레임에서는 과거 좌표를 현재좌표와 동일하게 초기화함
-                        coord_head = coord_tail = Point(x = int(newbox[0]), y = int(newbox[1])) # 히트맵을 위한 좌표값들 초기화
+                if(ball_x[frame_cnt] > -1):
+                    cv2.circle(radar, (ball_x[frame_cnt], ball_y[frame_cnt]), 7, (0, 0, 0), -1)
+                #Radar_Window
+
+                overlay=heatmap_background.copy()
+                alpha = 0.5  # Transparency factor.
+                # cv2.circle(overlay,(int(newbox[0]), int(newbox[1])), 3, colors12[i], -1)   #Heatmap_Window
+                # Following line overlays transparent rectangle over the imagex
+                # heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
+            
+                # 거리와 속도 추정치를 계산하기 위한 코드들
+                if(frame_cnt==0) :
+                    lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 첫 프레임에서는 과거 좌표를 현재좌표와 동일하게 초기화함
+                    coord_head = coord_tail = Point(x = int(newbox[0]), y = int(newbox[1])) # 히트맵을 위한 좌표값들 초기화
+                
+                if((frame_cnt%fps)==0) :     # 프레임기반 1초(fps)마다 동작하는 코드
+                    # 초당 프레임간 발생한 거리차이를 a, b에 누적시킴 
+                    a = (int)(newbox[0]) - lastPoint.x
+                    b = (int)(newbox[1]) - lastPoint.y
+                
+                    moving_weight=math.sqrt(math.pow(a,2) + math.pow(b,2)) # 초당 움직인 거리(즉 속도) - 유클리디안 거리측정 사용
                     
-                    if((frame_cnt%fps)==0) :     # 프레임기반 1초(fps)마다 동작하는 코드
-                        # 초당 프레임간 발생한 거리차이를 a, b에 누적시킴 
-                        a = (int)(newbox[0]) - lastPoint.x
-                        b = (int)(newbox[1]) - lastPoint.y
+                    # 트레커 추적중 발생하는 진동을 최소화하기위한 코드
+                    if(moving_weight < 2) :
+                        moving_weight=0
+                    estimate_distance = estimate_distance + moving_weight   # 추정거리값을 누적시킴
+                
+                    distance = 4 * estimate_distance / 100      # 추정거리에서 도출된 값에 가중치를 두고 m단위로 변환 
+                    distance = round(distance,2)                # 반올림 처리           
+                    speed = (4 * moving_weight / 100)*3.6       # moving_weight를 통해 구해진 m/s에 3.6을 곱해 속도를 k/h로 바꿔줌
+                    speed = round(speed,2)
+                
+                    if( speed < 5 ) :
+                        walk_cnt = walk_cnt+1
+                    elif( speed < 10 ) :
+                        jog_cnt = jog_cnt+1
+                    else :
+                        sprint_cnt = sprint_cnt+1
+                
+                    if(speed > top_speed) :                     # 최고속도를 top_speed에 저장
+                        top_speed = speed
                     
-                        moving_weight=math.sqrt(math.pow(a,2) + math.pow(b,2)) # 초당 움직인 거리(즉 속도) - 유클리디안 거리측정 사용
+          
+                
+                    accumulate_speed = accumulate_speed+speed   # 속도값들을 전부 누적시킴
                     
-                        # 트레커 추적중 발생하는 진동을 최소화하기위한 코드
-                        if(moving_weight < 2) :
-                            moving_weight=0
-                    
-                        estimate_distance = estimate_distance + moving_weight   # 추정거리값을 누적시킴
-                    
-                        distance = 8 * estimate_distance / 100      # 추정거리에서 도출된 값에 가중치를 두고 m단위로 변환 
-                        distance = round(distance,2)                # 반올림 처리           
-                        speed = (8 * moving_weight / 100)*3.6       # moving_weight를 통해 구해진 m/s에 3.6을 곱해 속도를 k/h로 바꿔줌
-                        speed = round(speed,2)
-                    
-                        if( speed < 5 ) :
-                            walk_cnt = walk_cnt+1
-                        elif( speed < 10 ) :
-                            jog_cnt = jog_cnt+1
-                        else :
-                            sprint_cnt = sprint_cnt+1
-                    
-                        if(speed > top_speed) :                     # 최고속도를 top_speed에 저장
-                            top_speed = speed
-                    
-                        accumulate_speed = accumulate_speed+speed   # 속도값들을 전부 누적시킴
+                    if(frame_cnt!=0):
+                        avg_speed = accumulate_speed / (frame_cnt/fps)
+                        avg_speed = round(avg_speed,1)
+                    else :
+                        avg_speed = 0
                         
-                        
-                        lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 과거 좌표 갱신
                     
-                        #txt 로그로 남겨주는 부분
-                        # f.write( 'Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )
-                        # fTemp.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')  히트맵에 더많은 로그를 찍기위해 이동
+                    lastPoint = Point(x = int(newbox[0]), y = int(newbox[1]))   # 과거 좌표 갱신
                 
-                    #if(frame_cnt % (fps*3)==0) :
-                        if(coord_head == coord_tail) :
-                            coord_head = Point(x = int(newbox[0]), y = int(newbox[1]))
-                        else :
-                            coord_tail = coord_head
-                            coord_head = Point(x = int(newbox[0]), y = int(newbox[1]))
-                            cv2.arrowedLine(overlay,coord_tail, coord_head, (0,0,0),2,cv2.LINE_AA)
-                            cv2.arrowedLine(overlay,coord_tail, coord_head, (0,0,0),2,cv2.LINE_AA)
-    
-                            heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
+                    #txt 로그로 남겨주는 부분
+                    # f.write( 'Player '+str(i)+' x,y: '+str(int(newbox[0]))+','+str(int(newbox[1])) + '\n' )
+                    # fTemp.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')  히트맵에 더많은 로그를 찍기위해 이동
+            
+                #if(frame_cnt % (fps*3)==0) :
+                    if(coord_head == coord_tail) :
+                        coord_head = Point(x = int(newbox[0]), y = int(newbox[1]))
+                    else :
+                        coord_tail = coord_head
+                        coord_head = Point(x = int(newbox[0]), y = int(newbox[1]))
+                        cv2.arrowedLine(overlay,coord_tail, coord_head, (0,0,0),2,cv2.LINE_AA)
+                        cv2.arrowedLine(overlay,coord_tail, coord_head, (0,0,0),2,cv2.LINE_AA)
 
-                    
+                        heatmap_background = cv2.addWeighted(overlay, alpha, heatmap_background, 1 - alpha, 0)  #Heatmap_Window
+
                 
-                    if((frame_cnt % (fps*10))==0) :     # 프레임기반 10초(fps)마다 동작하는 코드
-                        if(frame_cnt==0) : 
-                            heatmap_filename = 'heatmap_0secs.png'
-                        else :
-                            heatmap_filename = 'heatmap_'+str(frame_cnt / (fps*10)*10)+'secs.png'
+            
+                if((frame_cnt % (fps*10))==0) :     # 프레임기반 10초(fps)마다 동작하는 코드
+                    if(frame_cnt==0) : 
+                        heatmap_filename = 'heatmap_0secs.png'
+                    else :
+                        heatmap_filename = 'heatmap_'+str(frame_cnt / (fps*10)*10)+'secs.png'
 
-                        cv2.imwrite(heatmap_filename, heatmap_background, [cv2.IMWRITE_PNG_COMPRESSION, 0])
+                    cv2.imwrite(heatmap_filename, heatmap_background, [cv2.IMWRITE_PNG_COMPRESSION, 0])
 
-                            # 10초마다 DB로 전송할 부분
-                            ##########################################################################################
-                            # heatmap_filename = 10초마다 찍은 png 파일명
-                            ##########################################################################################
-                    
-
-                    if((frame_cnt % (fps*interval))==0) :     # 프레임기반 interval[현재는 30초(fps)]마다 동작하는 코드
-                        interval_distance = distance - temp_distance
-                        temp_distance = distance
-                        interval_distance = round(interval_distance,2)
-                    
-                        interval_acc_speed = accumulate_speed - temp_speed;
-                        temp_speed = accumulate_speed
-                    
-                        interval_avg_speed = interval_acc_speed / interval
-                        interval_avg_speed = round(interval_avg_speed,1)
-                        # 30초마다 DB로 전송할 부분
+                        # 10초마다 DB로 전송할 부분
                         ##########################################################################################
-                        # interval_distance = 30초마다 뛴 거리
-                        # interval_avg_speed = 30초마다 뛴 속도
+                        # heatmap_filename = 10초마다 찍은 png 파일명
                         ##########################################################################################
-                        print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
-                    #f.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')
-                    str_coord = str_coord+str(int(newbox[1]))+','+str(int(newbox[0]))+'\n'  # str_coord 스트링에 좌표값을 누적시킴
-                    
-                    
-                    #골인 경우 2초 동안 화면에 보여주기 위함######################### 
-                    fps = cap.get(cv2.CAP_PROP_FPS)
-                    
-                    if 1 <=show_goal_frame <= fps * 2 :
-                        if show_goal_frame != 1 :
-                            cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
-                        show_goal_frame += 1
-                    ####################################################
-                    
-                    frame_cnt=frame_cnt+1   # 프레임 갯수를 세어줌
-                    
-                    
-                    
-                    
-                    
-                    # print('거리 추정치 : ', distance, ' / 속도 추정치 : ',speed,' km/h')
                 
-                    # 누적 거리값을 레이더의 플레이어 머리위에 띄워줌
-                    cv2.putText(radar, str(speed)+'km/h '+str(distance)+'m', (int(newbox[0]-60), int(newbox[1])-20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
+
+                if((frame_cnt % (fps*interval))==0) :     # 프레임기반 interval[현재는 30초(fps)]마다 동작하는 코드
+                    interval_distance = distance - temp_distance
+                    temp_distance = distance
+                    interval_distance = round(interval_distance,2)
                 
+                    interval_acc_speed = accumulate_speed - temp_speed;
+                    temp_speed = accumulate_speed
+                
+                    interval_avg_speed = interval_acc_speed / interval
+                    interval_avg_speed = round(interval_avg_speed,1)
+                    # 30초마다 DB로 전송할 부분
+                    ##########################################################################################
+                    # interval_distance = 30초마다 뛴 거리
+                    # interval_avg_speed = 30초마다 뛴 속도
+                    ##########################################################################################
+                    print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
+                #f.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')
+                str_coord = str_coord+str(int(newbox[1]))+','+str(int(newbox[0]))+'\n'  # str_coord 스트링에 좌표값을 누적시킴
+                
+                
+                #골인 경우 2초 동안 화면에 보여주기 위함######################### 
+                #fps = cap.get(cv2.CAP_PROP_FPS)
+                
+                if 1 <=show_goal_frame <= fps * 2 :
+                    if show_goal_frame != 1 :
+                        cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
+                    show_goal_frame += 1
+                ####################################################
+                
+                frame_cnt=frame_cnt+1   # 프레임 갯수를 세어줌
+                
+                
+                
+                
+                
+                # print('거리 추정치 : ', distance, ' / 속도 추정치 : ',speed,' km/h')
+            
+                # 누적 거리값을 레이더의 플레이어 머리위에 띄워줌
+                cv2.putText(radar, str(speed)+'km/h '+str(distance)+'m', (int(newbox[0]-60), int(newbox[1])-20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
+                # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
+                cv2.putText(radar, 'Speed : '+str(speed)+'km/h'+ ' | Top speed : '+str(top_speed)+ 'km/h',(55, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Average speed : '+str(avg_speed)+'km/h'+' | Running Distance : '+str(distance)+'m', (55, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Walk | Jog | Sprint Count: '+str(walk_cnt)+' | '+str(jog_cnt)+' | '+str(sprint_cnt), (55, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Ball Touch Count: '+str(ball_cnt), (55, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
                 
 
             # show all windows
