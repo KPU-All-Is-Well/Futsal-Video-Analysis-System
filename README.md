@@ -92,13 +92,14 @@
 ### 파이썬 분석 프로그램   
 (python 3.6 opencv4.1.2 설치)   
 - clone 후 terminal 또는 cmd 창에서 라이브러리 설치    
--pip install numpy  
--pip install opencv  
--pip install opencv-contrib-python  
--pip install matplotlib  
--pip install imutils  
--pip install pillow  
--pip install pymsql  
+-pip3 install numpy  
+-pip3 install opencv  
+-pip3 install opencv-contrib-python  
+-pip3 install matplotlib  
+-pip3 install imutils  
+-pip3 install pillow  
+-pip3 install pymsql
+-pip3 install moviepy
 - exe파일 실행  
 - Website에 가입된 ID, Password 입력
 - 분석할 영상 선택
