@@ -116,7 +116,7 @@
 
 - home.jsp -> 선수 모드로 들어가 개인 경기 데이터(MyData.jsp)와 개인 스탯, 팀 스탯 , 감독 피드백(CoachNote.jsp) , 경기 일정 조회(Calendar.jsp) 경기 영상 조회(myVideo.jsp)   
 
-- home_of_coach.jsp -> 감독모드로 들어가 선수단 정보(TeamData_Coach.jsp)와 팀 데이터, 경기 결과 및 데이터(MatchData_Coach.jsp), 선수 피드백(CoachNote.jsp), 경기 일정 조회(Calendar.jsp), 경기 영상 조회(myVideo.jsp)   
+- home_of_coach.jsp -> 감독모드로 들어가 선수단 정보(TeamData_Coach.jsp)와 팀 데이터, 경기 결과 및 데이터(MatchData_Coach.jsp), 선수 피드백(CoachNote.jsp), 경기 일정 조회(Calendar.jsp), 경기 영상 조회(myVideo.jsp) 
 
 
 
