@@ -34,7 +34,7 @@ def selectMultiROI(player_cnt, team_cnt, team) :
         print('Select the Player')
         
         cv2.putText(frame, str(team)+' Team  ', (50, 30), cv2.FONT_HERSHEY_COMPLEX, 1, (255,255,255), 2, cv2.LINE_AA) 
-        cv2.putText(frame, ' done: '+str(player_cnt)+' / total: '+str(team_cnt),(45, 60), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
+        cv2.putText(frame, ' done: '+str(player_cnt-1)+' / total: '+str(team_cnt),(45, 60), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
         #now = datetime.now()
         #curTime = now.strftime('%H:%M:%S')
         videoLen = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -50,7 +50,7 @@ def selectMultiROI(player_cnt, team_cnt, team) :
             minute = int(analTime / 60) # 분
             second = analTime % 60 # 초 
             
-        cv2.putText(frame, ' estimated time: '+str(minute)+'m '+str(second)+'s',(45, 85), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
+        cv2.putText(frame, ' Processing times: '+str(minute)+'m '+str(second)+'s',(45, 85), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
         
         #finishTime = 
         #cv2.putText(frame, ' current time: '+str(curTime),(45, 90), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,0,0), 1, cv2.LINE_AA)  #Multitracker_Window
@@ -187,7 +187,7 @@ if __name__ == '__main__':
         show_goal_frame = 0             # 골인 경우 화면에 fps 프레임수 동안 "골인입니다" 표시하기 위해
         ball_frame_cnt = 0              # 공을 인식한 프레임을 따로 저장 
         pre_frame_cnt =0 # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
-        ball_cnt = 0                    # roi로 선택한 선수가 공을 점유한 프레임 수를 카운팅함 
+        ball_touch = 0                    # roi로 선택한 선수가 공을 점유한 프레임 수(볼 터치 수)를 카운팅함 
         moving_weight = 0               # 움직인 거리의 비중을 저장
         top_speed = 0                   # 최고 속도를 저장
         accumulate_speed = 0            # 속도들의 누적값
@@ -202,7 +202,10 @@ if __name__ == '__main__':
         jog_cnt=0
         sprint_cnt = 0
         highlight_goal_point = 0        # 하이라이트 추출시 골인인 프레임을 중심으로 앞뒤로 6초동안 보여주기
-
+        is_pass = False                   # 패스인지 아닌지 판별 후 True, False 
+        pass_count = 0                    # 선수의 패스 횟수 실시간 카운팅
+   
+        
         coord_head=coord_tail= Point(x=0,y=0)
     
         ball_x,ball_y,ball_frame_cnt = readBallCoord() # 공의 좌표, 공이 인식된 프레임 읽어오기
@@ -266,11 +269,14 @@ if __name__ == '__main__':
                 # 공 점유 인식 (공이 roi로 지정해준 선수와 가까이 있을 경우)
                 if( player_x1 <ball_x[frame_cnt]< player_x2 and player_y1 <ball_y[frame_cnt]< player_y2) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
                     cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1) #파란색으로 roi 색 바꿔주기
-                    ball_cnt += 1
-                    
+                    ball_touch += 1
+                    is_pass = True # 곧 roi 박스가 파란색 -> 빨간색으로 바뀔 것임, 선수에게 공을 뺏기거나(패스실패) 패스 성공해서 공 점유 끝남
                                         
                 else :
                     cv2.rectangle(frame, p1, p2, (0,0,255), 2, 1) #그렇지 않으면 빨간색 
+                    if is_pass == True :   # 패스 인식 (roi 박스 파 -> 빨)
+                        pass_count += 1
+                        is_pass = False
             
                 ########################################################################################################
                 
@@ -476,10 +482,11 @@ if __name__ == '__main__':
                 # 누적 거리값을 레이더의 플레이어 머리위에 띄워줌
                 cv2.putText(radar, str(speed)+'km/h '+str(distance)+'m', (int(newbox[0]-60), int(newbox[1])-20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
                 # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
-                cv2.putText(radar, 'Speed : '+str(speed)+'km/h'+ ' | Top speed : '+str(top_speed)+ 'km/h',(55, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
-                cv2.putText(radar, 'Average speed : '+str(avg_speed)+'km/h'+' | Running Distance : '+str(distance)+'m', (55, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
-                cv2.putText(radar, 'Walk | Jog | Sprint Count: '+str(walk_cnt)+' | '+str(jog_cnt)+' | '+str(sprint_cnt), (55, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
-                cv2.putText(radar, 'Ball Touch Count: '+str(ball_cnt), (55, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Speed : '+str(speed)+'km/h'+ ', Top speed : '+str(top_speed)+ 'km/h',(55, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Average speed : '+str(avg_speed)+'km/h'+', Running Distance : '+str(distance)+'m', (55, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Walk / Jog / Sprint Count: '+str(walk_cnt)+' / '+str(jog_cnt)+' / '+str(sprint_cnt), (55, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Ball Touch Count: '+str(ball_touch), (55, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Pass Count: '+str(pass_count), (55, 120), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
                 
 
             # show all windows
@@ -509,12 +516,12 @@ if __name__ == '__main__':
         
         ########################## 공 점유율 계산 알고리즘 ###############################################
         if player >= flag + 1 : # A팀 3명, B팀 5명으로 경기할 경우 -> flag = 3 
-            ball_share_B.append(ball_cnt)   
+            ball_share_B.append(ball_touch)   
             print('B팀 ', player-flag, '번째 선수 개인의 공 점유 프레임 수 : ', ball_share_B[player-flag-1]) # 0, 1...
             sum_ball_B += ball_share_B[player-flag-1]
             print('B팀 공 점유 프레임 수 누적값: ', sum_ball_B)
         else :
-            ball_share_A.append(ball_cnt) 
+            ball_share_A.append(ball_touch) 
             print('A팀 ', player, '번째 선수 개인의 공 점유 프레임 수 : ', ball_share_A[player-1])
             sum_ball_A += ball_share_A[i]
             print('A팀 공 점유 프레임 수 누적값: ', sum_ball_A)
@@ -524,6 +531,8 @@ if __name__ == '__main__':
         print('총 뛴 거리 : ', distance,'m')
         print('최고 속도 : ', top_speed,'km/h')
         print('평균 속도 : ', avg_speed,'km/h')
+        print('볼 터치 횟수 : ', ball_touch)
+        print('패스 횟수 : ', pass_count,'개')
         #print('영상 총 프레임 수 : ', frame_cnt)
 
     
@@ -531,13 +540,13 @@ if __name__ == '__main__':
         walk_weight = round(walk_cnt / move_sum * 100,1)
         jog_weight = round(jog_cnt / move_sum * 100,1)
         sprint_weight = round(sprint_cnt / move_sum * 100,1)
-        print('걸음 : ', walk_weight,'% / 뜀 : ', jog_weight,'% / 스프린트 : ', sprint_weight,'%')
+        print('걸음 : ', walk_weight,'%, 뜀 : ', jog_weight,'%, 스프린트 : ', sprint_weight,'%')
 
 
         # 산소 소비량으로 측정하는 대략적인 칼로리 계산법   평균 속도 * (3.5 * 몸무게 * 시간(분) * 5 / 1000
         # 몸무게는 성인 남성 평균체중인 75kg로 가정
         cal = round(avg_speed * (3.5 * 75 *( 0.0167 * move_sum )) * 5 / 1000,1)
-        print('\n소모 칼로리 : ',cal)
+        print('소모 칼로리 : ',cal)
     
         player_file.write(str_coord)
         player_file.close()
