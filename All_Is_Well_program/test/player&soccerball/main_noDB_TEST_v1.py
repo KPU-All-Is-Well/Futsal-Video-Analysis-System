@@ -11,6 +11,8 @@ import collections
 import heatmap
 from datetime import datetime
 from PIL import ImageFont, ImageDraw, Image
+from moviepy.editor import *                                     # moviepy 라이브러리 :
+from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip # 하이라이트 영상 추출을 위해 구간 자르는 라이브러리 
 
 # 히트맵에 각기 다른 색상을 표현하기 위한 튜플로 된 리스트  12개를 정의
 colors12 = [(0,0,0),(255,255,255),(255,0,0),(0,255,0),(0,0,255),(255,255,0),(0,255,255),(255,0,255),(192,192,192),(244,164,96),(128,128,0),(240, 50, 230)]
@@ -199,6 +201,7 @@ if __name__ == '__main__':
         walk_cnt=0
         jog_cnt=0
         sprint_cnt = 0
+        highlight_goal_point = 0        # 하이라이트 추출시 골인인 프레임을 중심으로 앞뒤로 6초동안 보여주기
 
         coord_head=coord_tail= Point(x=0,y=0)
     
@@ -209,8 +212,10 @@ if __name__ == '__main__':
             multiTracker.add(tracker, frame, bbox)
             # multiTracker.add(tracker, fgMask, bbox)
 
-
-        # Process video and track objects
+        
+        ###################################################################################################################################################    
+        ###################################################################영상을 열음#########################################################################
+        
         while cap.isOpened():#비디오가 잘 열렸는지 확인하는 함수-길
             success, frame = cap.read()# cap.read() 는 동영상을 1프레임씩 읽어오는 것-길
 
@@ -258,11 +263,12 @@ if __name__ == '__main__':
                     player_y2 = frame.shape[0]
                 
                 
+                # 공 점유 인식 (공이 roi로 지정해준 선수와 가까이 있을 경우)
                 if( player_x1 <ball_x[frame_cnt]< player_x2 and player_y1 <ball_y[frame_cnt]< player_y2) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
                     cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1) #파란색으로 roi 색 바꿔주기
                     ball_cnt += 1
-                   
                     
+                                        
                 else :
                     cv2.rectangle(frame, p1, p2, (0,0,255), 2, 1) #그렇지 않으면 빨간색 
             
@@ -280,7 +286,6 @@ if __name__ == '__main__':
                             
                             isInGoalNet = False 
                             invisible = frame_cnt - pre_frame_cnt
-                            #fps = cap.get(cv2.CAP_PROP_FPS)
                                 
                             if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
                                 isInGoalNet = True
@@ -293,8 +298,9 @@ if __name__ == '__main__':
                                 
                                 cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
                                 show_goal_frame = 1
+                                highlight_goal_point = frame_cnt # 골인을 인식한 프레임을 하이라이트 기준으로 삼음 
                                 
-                                    
+       
                                 cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 228, 255), 2) # 노란색으로 표시
                                 pre_frame_cnt = frame_cnt
                                 
@@ -310,7 +316,7 @@ if __name__ == '__main__':
                             
                             isInGoalNet = False 
                             invisible = frame_cnt - pre_frame_cnt
-                            #fps = cap.get(cv2.CAP_PROP_FPS)
+                           
                                 
                             if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
                                 isInGoalNet = True
@@ -322,7 +328,7 @@ if __name__ == '__main__':
                                     
                                 cv2.circle(frame, (ball_x[frame_cnt], ball_y[frame_cnt]), 5, (0, 228, 255), 2) # 노란색으로 표시
                                 pre_frame_cnt = frame_cnt
-
+                                highlight_goal_point = frame_cnt # 골인을 인식한 프레임을 하이라이트 기준으로 삼음
                                 
              
                             else :
@@ -454,7 +460,6 @@ if __name__ == '__main__':
                 
                 
                 #골인 경우 2초 동안 화면에 보여주기 위함######################### 
-                #fps = cap.get(cv2.CAP_PROP_FPS)
                 
                 if 1 <=show_goal_frame <= fps * 2 :
                     if show_goal_frame != 1 :
@@ -464,19 +469,17 @@ if __name__ == '__main__':
                 
                 frame_cnt=frame_cnt+1   # 프레임 갯수를 세어줌
                 
-                
-                
-                
+  
                 
                 # print('거리 추정치 : ', distance, ' / 속도 추정치 : ',speed,' km/h')
             
                 # 누적 거리값을 레이더의 플레이어 머리위에 띄워줌
                 cv2.putText(radar, str(speed)+'km/h '+str(distance)+'m', (int(newbox[0]-60), int(newbox[1])-20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
                 # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
-                cv2.putText(radar, 'Speed : '+str(speed)+'km/h'+ ' | Top speed : '+str(top_speed)+ 'km/h',(55, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
-                cv2.putText(radar, 'Average speed : '+str(avg_speed)+'km/h'+' | Running Distance : '+str(distance)+'m', (55, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
-                cv2.putText(radar, 'Walk | Jog | Sprint Count: '+str(walk_cnt)+' | '+str(jog_cnt)+' | '+str(sprint_cnt), (55, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
-                cv2.putText(radar, 'Ball Touch Count: '+str(ball_cnt), (55, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Speed : '+str(speed)+'km/h'+ ' | Top speed : '+str(top_speed)+ 'km/h',(55, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Average speed : '+str(avg_speed)+'km/h'+' | Running Distance : '+str(distance)+'m', (55, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Walk | Jog | Sprint Count: '+str(walk_cnt)+' | '+str(jog_cnt)+' | '+str(sprint_cnt), (55, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+                cv2.putText(radar, 'Ball Touch Count: '+str(ball_cnt), (55, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
                 
 
             # show all windows
@@ -489,6 +492,9 @@ if __name__ == '__main__':
             if cv2.waitKey(1) & 0xFF == 27:  #incase Esc is pressed
                 cv2.destroyAllWindows() # 화면 종료해주기
                 break
+                
+            ################################################################영상 닫힘################################################################    
+            
     
         avg_speed = accumulate_speed / (frame_cnt/fps)
         avg_speed = round(avg_speed,1)
@@ -503,14 +509,12 @@ if __name__ == '__main__':
         
         ########################## 공 점유율 계산 알고리즘 ###############################################
         if player >= flag + 1 : # A팀 3명, B팀 5명으로 경기할 경우 -> flag = 3 
-            ball_share_B.append(ball_cnt)
-            #print(player-flag-1)
+            ball_share_B.append(ball_cnt)   
             print('B팀 ', player-flag, '번째 선수 개인의 공 점유 프레임 수 : ', ball_share_B[player-flag-1]) # 0, 1...
             sum_ball_B += ball_share_B[player-flag-1]
             print('B팀 공 점유 프레임 수 누적값: ', sum_ball_B)
         else :
-            ball_share_A.append(ball_cnt)
-            #print(player-1)
+            ball_share_A.append(ball_cnt) 
             print('A팀 ', player, '번째 선수 개인의 공 점유 프레임 수 : ', ball_share_A[player-1])
             sum_ball_A += ball_share_A[i]
             print('A팀 공 점유 프레임 수 누적값: ', sum_ball_A)
@@ -561,9 +565,33 @@ if __name__ == '__main__':
     print('---------------------------------------------------------------------------------------------------')
     print('A팀 공 점유율: ', sum_ball_A, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
+    print('---------------------------------------------------------------------------------------------------')
     
     ##########################################################################################################
 
+    ##########################################하이라이트 추출 알고리즘#################################################
+    
+    # 골을 인식한 프레임이 영상에서 몇 초쯤인지 계산
+    print('\n')
+    print('하이라이트 추출 시작.....')
+    
+    #videoLen = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) # 비디오 총 프레임 수 
+    videoFps = cap.get(cv2.CAP_PROP_FPS)   # 1초에 지나가는 프레임 수(fps)
+    #videoTime = int((videoLen / videoFps))  # 동영상 총 재생 시간(초)
+    point1 = int (highlight_goal_point / videoFps )
+    
+    # 골을 인식한 프레임 앞으로 3초, 뒤로 2초
+    start = point1 - 3
+    end = point1 + 2
+    
+    # 영상의 start부터 end까지 영역을 자름 (초 기준)
+    ffmpeg_extract_subclip("TEST.mov", start, end, targetname="Highlight.mov") 
+    
+    print('하이라이트 영상 생성 완료.....')
+    #test용 코드
+    #print(highlight_goal_point, ' ', start, ' ', end) 
+    
+    ##########################################################################################################
 
 
 
