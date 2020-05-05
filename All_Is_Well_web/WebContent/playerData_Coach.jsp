@@ -69,7 +69,9 @@
    %>
    
    <%   
-   
+      arrayName.clear();
+	  arrayId.clear();
+      arrayPosition.clear();
       request.setCharacterEncoding("utf-8");
       String id = (String)session.getAttribute("id"); // 사용자가 로그인 할 때, 적은 정보를 가져오겠다.
       
@@ -323,7 +325,7 @@
                <div class="col-sm-6 col-lg-3">
                   <div class="single_team_member single-home-blog">
                      <div class="card">
-                        <img  src="images/team/<%=arrId[i] %>.png"  class="card-img-top" alt="blog">
+                        <img  src="images/team/<%=arrId[i] %>.png"  class="card-img-top" alt="blog" style="width: auto; height: 400px">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
