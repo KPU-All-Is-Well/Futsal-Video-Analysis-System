@@ -334,13 +334,13 @@
                                 <div class="entry">
                                     <img src="images/team1_1.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="googleChart.html">
+                                        <a class="golink" href="highchart_BasicBar.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="googleChart.html">최고속도와 총 뛴 거리 선수간 비교</a></h4>
+                                    <h4><a href="highchart_BasicBar.jsp">최고속도와 총 뛴 거리 선수간 비교</a></h4>
                                     <p>다른 선수와 스피드 경쟁 !  </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -349,13 +349,13 @@
                                 <div class="entry">
                                     <img src="images/team2.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="googleChart2.html">
+                                        <a class="golink" href="highchart_Fixed.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="googleChart2.html">스프린트 비율, 최대속도, 평균 속도 선수별 비교 </a></h4>
+                                    <h4><a href="highchart_Fixed.jsp">스프린트 비율, 최대속도, 평균 속도 선수별 비교 </a></h4>
                                     <p>스피드가 궁금하다면?  </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -394,15 +394,15 @@
 
                             <div class="post-media pitem item-w1 item-h1 cat3">
                                 <div class="entry">
-                                    <img src="images/bubble.png" alt="" class="img-responsive">
+                                    <img src="images/allData.png" alt="" class="img-responsive">
                                     <div class="magnifier">
-                                        <a class="golink" href="highchart_Bubble.jsp">
+                                        <a class="golink" href="highchart_3D.jsp">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
                                 <div class="item-desc">
-                                    <h4><a href="highchart_Bubble.jsp">선수 전체 정보</a></h4>
+                                    <h4><a href="highchart_3D.jsp">선수 데이터 비교</a></h4>
                                     <p>전체 선수를 한눈에 보자 </p>
                                 </div>
                             </div><!-- end post-media -->
@@ -424,7 +424,7 @@
 
                             <div class="post-media pitem item-w1 item-h1 cat1">
                                 <div class="entry">
-                                    <img src="images/maxSpeed.png" alt="" class="img-responsive">
+                                    <img src="images/avgSpeed.png" alt="" class="img-responsive">
                                     <div class="magnifier">
                                         <a class="golink" href="highchart_Column_avg.jsp">
                                            <i class="fa fa-link"></i>

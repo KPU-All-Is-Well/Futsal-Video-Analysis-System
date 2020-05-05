@@ -210,10 +210,15 @@
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
-<!-- 구글차트 -->
+
 
 <div style="float: center;">
 <iframe name="f5" src="highchart_Distance_Rank.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
+
+<div style="float: center;">
+<iframe name="f6" src="highchart_3D.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
@@ -232,6 +237,11 @@
  </iframe>
 </div>
 
+
+<div style="float: center;">
+<iframe name="f6" src="highchart_BasicBar.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+ </iframe>
+</div>
 
 
 

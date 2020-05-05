@@ -34,7 +34,7 @@ def selectMultiROI(player_cnt, team_cnt, team) :
         print('Select the Player')
         
         cv2.putText(frame, str(team)+' Team  ', (50, 30), cv2.FONT_HERSHEY_COMPLEX, 1, (255,255,255), 2, cv2.LINE_AA) 
-        cv2.putText(frame, ' done: '+str(player_cnt-1)+' / total: '+str(team_cnt),(45, 60), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
+        cv2.putText(frame, ' Done: '+str(player_cnt-1)+' / Total: '+str(team_cnt),(45, 60), cv2.FONT_HERSHEY_COMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)  
         #now = datetime.now()
         #curTime = now.strftime('%H:%M:%S')
         videoLen = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
@@ -186,25 +186,29 @@ if __name__ == '__main__':
         frame_cnt = 0                   # 프레임을 카운팅함
         show_goal_frame = 0             # 골인 경우 화면에 fps 프레임수 동안 "골인입니다" 표시하기 위해
         ball_frame_cnt = 0              # 공을 인식한 프레임을 따로 저장 
-        pre_frame_cnt =0 # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
-        ball_touch = 0                    # roi로 선택한 선수가 공을 점유한 프레임 수(볼 터치 수)를 카운팅함 
+        pre_frame_cnt =0                # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
+        ball_touch = 0                  # roi로 선택한 선수가 공을 점유한 프레임 수(볼 터치 수)를 카운팅함 
         moving_weight = 0               # 움직인 거리의 비중을 저장
         top_speed = 0                   # 최고 속도를 저장
         accumulate_speed = 0            # 속도들의 누적값
         temp_distance = 0               # 뛴 거리를 임시저장
         temp_speed = 0                  # 뛴 속도를 임시저장
         interval = 30                   # 특정 시간(초)
-        interval_distance = 0            # 특정 시간마다의 뛴거리
-        interval_acc_speed = 0               # 특정 시간마다의 속도 누적값
-        interval_avg_speed = 0           # 특정 시간마다의 평균속도
+        interval_distance = 0           # 특정 시간마다의 뛴거리
+        interval_acc_speed = 0          # 특정 시간마다의 속도 누적값
+        interval_avg_speed = 0          # 특정 시간마다의 평균속도
         str_coord = ''
         walk_cnt=0
         jog_cnt=0
         sprint_cnt = 0
         highlight_goal_point = 0        # 하이라이트 추출시 골인인 프레임을 중심으로 앞뒤로 6초동안 보여주기
-        is_pass = False                   # 패스인지 아닌지 판별 후 True, False 
-        pass_count = 0                    # 선수의 패스 횟수 실시간 카운팅
-   
+        
+        blue_ROI = False                # ROI 색이 파란색으로 바뀐 경우 -> True
+        red_ROI_cnt = 0                 # roi가 파란색에서 빨간색으로 바뀐 경우 빨간색을 유지하는 프레임 수를 카운팅함
+        is_pass = False                 # roi 파 -> 빨 바뀌는 경우(1): 패스인 경우 
+        is_dribble = False              # roi 파 -> 빨 바뀌는 경우(2): 선수가 드리블하는 중인 경우 
+        pass_count = 0                  # 선수의 패스 횟수 실시간 카운팅
+        
         
         coord_head=coord_tail= Point(x=0,y=0)
     
@@ -247,7 +251,7 @@ if __name__ == '__main__':
                 p2 = (int(newbox[0] + newbox[2]), int(newbox[1] + newbox[3]))
                 
               
-                ###################################### 공 점유율 계산 알고리즘 ########################################################
+                ################################################### 공 점유율 계산 알고리즘 ########################################################
                 
                 # 예외처리 (사람이 경기장 끝으로 갔을 경우 -> out of index error 발생)
                 player_x1 = p1[0]-10 
@@ -266,17 +270,27 @@ if __name__ == '__main__':
                     player_y2 = frame.shape[0]
                 
                 
-                # 공 점유 인식 (공이 roi로 지정해준 선수와 가까이 있을 경우)
-                if( player_x1 <ball_x[frame_cnt]< player_x2 and player_y1 <ball_y[frame_cnt]< player_y2) : #공이 roi로 지정해준 선수와 가까이 있을 경우 
+                # 공 점유 인식 (공이 선수 roi 박스 안으로 들어올 경우지정해준 선수와 가까이 있을 경우)
+                # roi 파란색
+                if( player_x1 <ball_x[frame_cnt]< player_x2 and player_y1 <ball_y[frame_cnt]< player_y2) : 
                     cv2.rectangle(frame, p1, p2, (255,0,0), 2, 1) #파란색으로 roi 색 바꿔주기
                     ball_touch += 1
-                    is_pass = True # 곧 roi 박스가 파란색 -> 빨간색으로 바뀔 것임, 선수에게 공을 뺏기거나(패스실패) 패스 성공해서 공 점유 끝남
+                    blue_ROI = True 
+                    
                                         
-                else :
+                else : # roi 빨간색
                     cv2.rectangle(frame, p1, p2, (0,0,255), 2, 1) #그렇지 않으면 빨간색 
-                    if is_pass == True :   # 패스 인식 (roi 박스 파 -> 빨)
-                        pass_count += 1
-                        is_pass = False
+                    
+                    ########################패스 인식 알고리즘#############################
+                    if blue_ROI == True :
+                        red_ROI_cnt += 1 # ROI가 파란색에서 빨간색으로 바뀐 이후 빨간색 ROI를 유지하는 프레임 수 카운팅 
+                        
+                        if red_ROI_cnt > fps : # 일정 시간 이상동안 roi가 빨간색이라면 '선수의 드리블'이 아니라 '패스'임
+                           pass_count += 1 # 선수에게 공을 뺏기거나(패스실패) 패스 성공해서 공 점유 끝남
+                           red_ROI_cnt = 0 
+                           blue_ROI = False 
+              
+                    ##################################################################
             
                 ########################################################################################################
                 

@@ -9,6 +9,5 @@
 <body>
 	<jsp:forward page = "playerData_Coach.jsp" />
 
-
 </body>
 </html>
