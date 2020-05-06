@@ -553,7 +553,10 @@ if __name__ == '__main__':
     
     #for문이 다 돌은 뒤 공 점유율 계산
     ball_share_A_res = sum_ball_A / (sum_ball_A + sum_ball_B) * 100
+    ball_share_A_res = round(ball_share_A_res,1)
     ball_share_B_res = sum_ball_B / (sum_ball_A + sum_ball_B) * 100
+    ball_share_B_res = round(ball_share_B_res,1)
+
     
     print('\n')
     print('---------------------------------------------------------------------------------------------------')
@@ -570,7 +573,7 @@ if __name__ == '__main__':
     
     ########################Goal.mov영상 생성#######################
     # 골을 인식한 프레임이 영상에서 몇 초쯤인지 계산
-    videoFps = cap.get(cv2.CAP_PROP_FPS)   # 1초에 지나가는 프레임 수(fps)
+    videoFps = video_stream.get(cv2.CAP_PROP_FPS)   # 1초에 지나가는 프레임 수(fps)
     point1 = int (highlight_goal_point / videoFps )
     
     # 골을 인식한 프레임 앞으로 3초, 뒤로 2초
@@ -578,22 +581,22 @@ if __name__ == '__main__':
     end = point1 + 2
     
     # 영상의 start부터 end까지 영역을 자름 (초 기준)
-    ffmpeg_extract_subclip("../result/TEST.mov", start, end, targetname="../result/Goal.mov") 
+    ffmpeg_extract_subclip(video_path, start, end, targetname="../result/Goal.mov") 
     
     ####################Goal_zoom.mov 영상 생성######################
-    cap = cv2.VideoCapture('../result/Goal.mov')
+    video_stream = cv2.VideoCapture('../result/Goal.mov')
 
     #재생할 파일의 넓이와 높이
-    width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
-    height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+    width = video_stream.get(cv2.CAP_PROP_FRAME_WIDTH)
+    height = video_stream.get(cv2.CAP_PROP_FRAME_HEIGHT)
 
     #print("재생할 파일 넓이, 높이 : %d, %d"%(width, height))
 
     fourcc = cv2.VideoWriter_fourcc(*'DIVX')
     out = cv2.VideoWriter('../result/Goal_zoom.mov', fourcc, 30.0, (int(width), int(height)))
 
-    while(cap.isOpened()):
-        ret, frame = cap.read()
+    while(video_stream.isOpened()):
+        ret, frame = video_stream.read()
     
         if ret == False:
             break;
@@ -614,7 +617,7 @@ if __name__ == '__main__':
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     
-    cap.release()
+    video_stream.release()
     out.release()
     cv2.destroyAllWindows()
     ######################################Highlight.mov###################################
