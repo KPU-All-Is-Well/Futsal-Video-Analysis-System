@@ -79,11 +79,9 @@ if __name__ == '__main__':
    # 영상 파일 경로를 GUI로 입력받음
     video_object = filepath.OpenPath()
     video_path = video_object.video_path
+    print("비디오 경로 : ",video_path)
     # video_path = "../sample_videos/TEST.mov"
     
-    
-    
-   
     ######################################################
     player_number = selectGUI.PlayerNumber()
     home = player_number.home_int
@@ -124,7 +122,6 @@ if __name__ == '__main__':
         
         ############################################################
 
-        
         # 히트맵창의 배경이 될 이미지 지정
         pitch_image = cv2.imread('../image/heatmap2.png')
         pitch_image = cv2.resize(pitch_image,(width,height))
@@ -147,8 +144,6 @@ if __name__ == '__main__':
         # CSRT tracker 초기화
         tracker = cv2.TrackerCSRT_create()
         tracker.init(frame, bbox)
-        
-        
         
         accumulate_distance = 0           # 영상기반 추정거리값을 저장
         frame_count = 0                   # 프레임을 카운팅함                   
