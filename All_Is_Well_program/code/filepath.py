@@ -1,9 +1,9 @@
 import tkinter as tk
 from tkinter import filedialog
 
-def openfile():
-    path = tk.Tk()
-    path.withdraw()
+class OpenPath:
+    def __init__(self):
+        self.video_path = filedialog.askopenfilename(initialdir ="./")
 
-    video_path = filedialog.askopenfilename(initialdir ="./")
-    return video_path
+#path_root=OpenPath()
+#print(path_root.video_path)

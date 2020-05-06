@@ -1,4 +1,4 @@
-import LoginDB
+#import LoginDB
 import pymysql                              # Python에서 MySQL을 사용할 수 있도록 하는 모듈
 from io import BytesIO                      # Byte 형식의 파일을 다루기 위한 모듈
 from PIL import Image                       # PIL 모듈 Image를 다루기 위한 모듈
