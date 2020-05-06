@@ -77,9 +77,9 @@ def print_player_box(player_id, frame, box):
 if __name__ == '__main__':
 
    # 영상 파일 경로를 GUI로 입력받음
-    #video_object = filepath.OpenPath()
-    #video_path = video_object.video_path
-    video_path = "../sample_videos/TEST.mov"
+    video_object = filepath.OpenPath()
+    video_path = video_object.video_path
+    # video_path = "../sample_videos/TEST.mov"
     
     
     
