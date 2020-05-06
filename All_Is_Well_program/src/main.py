@@ -583,7 +583,7 @@ if __name__ == '__main__':
     # 영상의 start부터 end까지 영역을 자름 (초 기준)
     ffmpeg_extract_subclip(video_path, start, end, targetname="../result/Goal.mov") 
     
-    ####################Goal_zoom.mov 영상 생성######################
+    ####################Goal_zoom1.mov 영상 생성######################
     video_stream = cv2.VideoCapture('../result/Goal.mov')
 
     #재생할 파일의 넓이와 높이
@@ -593,15 +593,17 @@ if __name__ == '__main__':
     #print("재생할 파일 넓이, 높이 : %d, %d"%(width, height))
 
     fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-    out = cv2.VideoWriter('../result/Goal_zoom.mov', fourcc, 30.0, (int(width), int(height)))
+    out1 = cv2.VideoWriter('../result/Goal_zoom1.mov', fourcc, 30.0, (int(width), int(height)))
+    out2 = cv2.VideoWriter('../result/Goal_zoom2.mov', fourcc, 30.0, (int(width), int(height)))
+
 
     while(video_stream.isOpened()):
         ret, frame = video_stream.read()
     
         if ret == False:
             break;
-    
-        scale =40
+        # out1에 해당
+        scale =50
         height, width, channel = frame.shape
         centerX, centerY = int(height*0.5), int(width*0.75)  #골인시 줌 위치 
         radiusX, radiusY = int(scale*height/100), int(scale*width/100)
@@ -612,21 +614,37 @@ if __name__ == '__main__':
         cropped = frame[minX:maxX, minY:maxY]
         resized_cropped = cv2.resize(cropped, (width, height))    
         
-        out.write(resized_cropped)
+        out1.write(resized_cropped)
+        
+        # out2에 해당
+        scale2 = 40
+        height2, width2, channel2 = frame.shape
+        centerX2, centerY2 = int(height2*0.5), int(width2*0.75)  #골인시 줌 위치 
+        radiusX2, radiusY2 = int(scale2*height2/100), int(scale2*width2/100)
+    
+        minX2,maxX2=centerX2-radiusX2,centerX2+radiusX2
+        minY2,maxY2=centerY2-radiusY2,centerY2+radiusY2
+    
+        cropped2 = frame[minX2:maxX2, minY2:maxY2]
+        resized_cropped2 = cv2.resize(cropped2, (width2, height2))    
+        
+        out2.write(resized_cropped2)
 
         if cv2.waitKey(1) & 0xFF == ord('q'):
             break
     
     video_stream.release()
-    out.release()
+    out1.release()
+    out2.release()
     cv2.destroyAllWindows()
     ######################################Highlight.mov###################################
     
     # concat함수를 이용해 비디오를 합쳐주기
     clip1 = VideoFileClip('../result/Goal.mov')
-    clip2 = VideoFileClip('../result/Goal_zoom.mov')
-
-    final_clip = concatenate_videoclips([clip1, clip2])
+    clip2 = VideoFileClip('../result/Goal_zoom1.mov')
+    clip3 = VideoFileClip('../result/Goal_zoom2.mov')
+    
+    final_clip = concatenate_videoclips([clip1, clip2, clip3])
     final_clip.write_videofile('../result/Highlight.mov', codec='libx264') # 코텍 적어줘야
 
     

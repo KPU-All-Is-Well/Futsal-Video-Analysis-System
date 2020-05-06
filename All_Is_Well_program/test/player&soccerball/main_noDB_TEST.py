@@ -504,7 +504,7 @@ if __name__ == '__main__':
                 
 
             # show all windows
-            cv2.imshow('MultiTracker', frame)
+            cv2.imshow('frame', frame)
             # cv2.imshow('fgMask', fgMask)
             cv2.imshow('HeatMap',heatmap_background)
             cv2.imshow('Radar',radar)
@@ -590,17 +590,22 @@ if __name__ == '__main__':
     print('B팀 공 점유율: ', sum_ball_B, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     print('---------------------------------------------------------------------------------------------------')
     
+    print('DB에 분석데이터가 저장되었습니다.')
+    
+    
+    
     ##########################################################################################################
 
+    
     ##########################################하이라이트 추출 알고리즘#################################################
     
-    # 골을 인식한 프레임이 영상에서 몇 초쯤인지 계산
+    
     print('\n')
     print('하이라이트 추출 시작.....')
     
-    #videoLen = int(cap.get(cv2.CAP_PROP_FRAME_COUNT)) # 비디오 총 프레임 수 
+    ########################Goal.mov영상 생성#######################
+    # 골을 인식한 프레임이 영상에서 몇 초쯤인지 계산
     videoFps = cap.get(cv2.CAP_PROP_FPS)   # 1초에 지나가는 프레임 수(fps)
-    #videoTime = int((videoLen / videoFps))  # 동영상 총 재생 시간(초)
     point1 = int (highlight_goal_point / videoFps )
     
     # 골을 인식한 프레임 앞으로 3초, 뒤로 2초
@@ -608,7 +613,71 @@ if __name__ == '__main__':
     end = point1 + 2
     
     # 영상의 start부터 end까지 영역을 자름 (초 기준)
-    ffmpeg_extract_subclip("TEST.mov", start, end, targetname="Highlight.mov") 
+    ffmpeg_extract_subclip("TEST.mov", start, end, targetname="Goal.mov") 
+    
+    ####################Goal_zoom.mov 영상 생성######################
+    cap = cv2.VideoCapture('Goal.mov')
+
+    #재생할 파일의 넓이와 높이
+    width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+    height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+
+    #print("재생할 파일 넓이, 높이 : %d, %d"%(width, height))
+
+    fourcc = cv2.VideoWriter_fourcc(*'DIVX')
+    out1 = cv2.VideoWriter('Goal_zoom1.mov', fourcc, 30.0, (int(width), int(height)))
+    out2 = cv2.VideoWriter('Goal_zoom2.mov', fourcc, 30.0, (int(width), int(height)))
+    
+    while(cap.isOpened()):
+        ret, frame = cap.read()
+    
+        if ret == False:
+            break;
+        # out1에 해당
+        scale =50
+        height, width, channel = frame.shape
+        centerX, centerY = int(height*0.5), int(width*0.75)  #골인시 줌 위치 
+        radiusX, radiusY = int(scale*height/100), int(scale*width/100)
+    
+        minX,maxX=centerX-radiusX,centerX+radiusX
+        minY,maxY=centerY-radiusY,centerY+radiusY
+    
+        cropped = frame[minX:maxX, minY:maxY]
+        resized_cropped = cv2.resize(cropped, (width, height))    
+        
+        out1.write(resized_cropped)
+        
+        # out2에 해당
+        scale2 = 40
+        height2, width2, channel2 = frame.shape
+        centerX2, centerY2 = int(height2*0.5), int(width2*0.75)  #골인시 줌 위치 
+        radiusX2, radiusY2 = int(scale2*height2/100), int(scale2*width2/100)
+    
+        minX2,maxX2=centerX2-radiusX2,centerX2+radiusX2
+        minY2,maxY2=centerY2-radiusY2,centerY2+radiusY2
+    
+        cropped2 = frame[minX2:maxX2, minY2:maxY2]
+        resized_cropped2 = cv2.resize(cropped2, (width2, height2))    
+        
+        out2.write(resized_cropped2)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    
+    cap.release()
+    out1.release()
+    out2.release()
+    cv2.destroyAllWindows()
+    ######################################Highlight.mov###################################
+    
+    # concat함수를 이용해 비디오를 합쳐주기
+    clip1 = VideoFileClip('Goal.mov')
+    clip2 = VideoFileClip('Goal_zoom1.mov')
+    clip3 = VideoFileClip('Goal_zoom2.mov')
+    
+    final_clip = concatenate_videoclips([clip1, clip2, clip3])
+    final_clip.write_videofile('Highlight.mov', codec='libx264') # 코텍 적어줘야
+
     
     print('하이라이트 영상 생성 완료.....')
     #test용 코드
