@@ -9,7 +9,5 @@ class OpenPath:
         self.video_path = filedialog.askopenfilename(initialdir ="./")
         self.path.destroy()
 
-# OpenPath()
-
 #path_root=OpenPath()
 #print(path_root.video_path)

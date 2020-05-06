@@ -29,7 +29,7 @@ class PlayerNumber:
         self.away_box.grid(row=2, column=1,padx=5)
         self.away_box.current(0)
 
-        self.okButton=tk.Button(self.input_info, width=10, command=self.button_event, repeatdelay=1000, repeatinterval=100, text="SUMMIT")
+        self.okButton=tk.Button(self.input_info, width=10, command=self.button_event, repeatdelay=1000, repeatinterval=100, text="SUBMIT")
         self.okButton.grid(row=3 , column=1,pady=10)
 
         self.input_info.mainloop()
