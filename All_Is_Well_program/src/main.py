@@ -562,16 +562,15 @@ if __name__ == '__main__':
     print('---------------------------------------------------------------------------------------------------')
     
     ##########################################################################################################
-
     ##########################################하이라이트 추출 알고리즘#################################################
     
-    # 골을 인식한 프레임이 영상에서 몇 초쯤인지 계산
-    print('')
+    
+    print('\n')
     print('하이라이트 추출 시작.....')
     
-    #videoLen = int(video_stream.get(cv2.CAP_PROP_FRAME_COUNT)) # 비디오 총 프레임 수 
-    videoFps = video_stream.get(cv2.CAP_PROP_FPS)   # 1초에 지나가는 프레임 수(fps)
-    #videoTime = int((videoLen / videoFps))  # 동영상 총 재생 시간(초)
+    ########################Goal.mov영상 생성#######################
+    # 골을 인식한 프레임이 영상에서 몇 초쯤인지 계산
+    videoFps = cap.get(cv2.CAP_PROP_FPS)   # 1초에 지나가는 프레임 수(fps)
     point1 = int (highlight_goal_point / videoFps )
     
     # 골을 인식한 프레임 앞으로 3초, 뒤로 2초
@@ -579,7 +578,54 @@ if __name__ == '__main__':
     end = point1 + 2
     
     # 영상의 start부터 end까지 영역을 자름 (초 기준)
-    ffmpeg_extract_subclip(video_path, start, end, targetname="../result/Highlight.mov") 
+    ffmpeg_extract_subclip("../result/TEST.mov", start, end, targetname="../result/Goal.mov") 
+    
+    ####################Goal_zoom.mov 영상 생성######################
+    cap = cv2.VideoCapture('../result/Goal.mov')
+
+    #재생할 파일의 넓이와 높이
+    width = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+    height = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+
+    #print("재생할 파일 넓이, 높이 : %d, %d"%(width, height))
+
+    fourcc = cv2.VideoWriter_fourcc(*'DIVX')
+    out = cv2.VideoWriter('../result/Goal_zoom.mov', fourcc, 30.0, (int(width), int(height)))
+
+    while(cap.isOpened()):
+        ret, frame = cap.read()
+    
+        if ret == False:
+            break;
+    
+        scale =40
+        height, width, channel = frame.shape
+        centerX, centerY = int(height*0.5), int(width*0.75)  #골인시 줌 위치 
+        radiusX, radiusY = int(scale*height/100), int(scale*width/100)
+    
+        minX,maxX=centerX-radiusX,centerX+radiusX
+        minY,maxY=centerY-radiusY,centerY+radiusY
+    
+        cropped = frame[minX:maxX, minY:maxY]
+        resized_cropped = cv2.resize(cropped, (width, height))    
+        
+        out.write(resized_cropped)
+
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+    
+    cap.release()
+    out.release()
+    cv2.destroyAllWindows()
+    ######################################Highlight.mov###################################
+    
+    # concat함수를 이용해 비디오를 합쳐주기
+    clip1 = VideoFileClip('../result/Goal.mov')
+    clip2 = VideoFileClip('../result/Goal_zoom.mov')
+
+    final_clip = concatenate_videoclips([clip1, clip2])
+    final_clip.write_videofile('../result/Highlight.mov', codec='libx264') # 코텍 적어줘야
+
     
     print('하이라이트 영상 생성 완료.....')
     #test용 코드
@@ -587,6 +633,8 @@ if __name__ == '__main__':
     
     ##########################################################################################################
 
+
+  
 
 
 # 사각형의 중심 좌표
