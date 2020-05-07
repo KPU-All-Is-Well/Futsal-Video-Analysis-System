@@ -163,7 +163,7 @@
                                 
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coach Note</a>
+                                <a href="Feedback_coach.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coach Note</a>
                                 
                             </li>
                             <li><a href="#">Contact</a></li>
@@ -209,7 +209,7 @@
 						<li><a href="#">Calendar</a></li>
 
 						<!--Coach Note ëª©ì°¨ -->	
-						<li><a href="#">Coach Note</a></li>
+						<li><a href="Feedback_coach.jsp">Coach Note</a></li>
 						
 						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->  
                         <li><a href="#">Contact</a></li>

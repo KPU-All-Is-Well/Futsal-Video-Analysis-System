@@ -20,5 +20,14 @@ delete from playerSignUpInfo where id = 'DBtest2';
 
 select team from coachSignUpInfo where id = 'kwon';
 
-desc ki;
+desc playerSignUpInfo;
+
+create table 'feedback'(
+	'num'  int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	'title' varchar(50),
+	'memo' varchar(500),
+	'time' datetime comment,
+	foreign key 'name' references playerSignUpInfo 'name'
+
+)
 
