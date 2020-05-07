@@ -167,7 +167,7 @@ if __name__ == '__main__':
                 box_p1 = (int(boxinfo[0]), int(boxinfo[1]))
                 box_p2 = (int(boxinfo[0] + boxinfo[2]), int(boxinfo[1] + boxinfo[3]))
                 cv2.rectangle(frame, box_p1, box_p2, (0,0,0), 2, 1) 
-                cv2.putText(frame, boxinfo[4]+' '+boxinfo[5], (int(boxinfo[0])-27, int(boxinfo[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.8, (255,255,255), 2, cv2.LINE_AA)  #Multitracker_Window
+                cv2.putText(frame, boxinfo[4]+' '+boxinfo[5], (int(boxinfo[0])-27, int(boxinfo[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (30,30,30), 2, cv2.LINE_AA)  #Multitracker_Window
         ###################################################################################################################################
 
         

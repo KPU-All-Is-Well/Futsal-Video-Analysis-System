@@ -7,7 +7,7 @@ import collections
 import math
 
 #videoPath = 'yellowBall.mp4'   # 비디오를 읽어옴
-videoPath = 'TEST.mov'   # 비디오를 읽어옴
+videoPath = '../sample_videos/TEST.mov'   # 비디오를 읽어옴
 #videoPath = 'full.mp4'   # 비디오를 읽어옴
 
 # Create a video capture object to read videos 
@@ -22,7 +22,7 @@ white = 233
 
 str_coord = ''
 ball_x=ball_y=-1
-file = open( 'ball_coord_TEST.txt', 'w' )  # 좌표값을 저장할 파일
+file = open( '../result/ball_coord_TEST.txt', 'w' )  # 좌표값을 저장할 파일
 
 
 #213, 192
@@ -252,8 +252,8 @@ while(1):
     #str_coord = str_coord+str(ball_y)+','+str(ball_x)+'\n'  # str_coord 스트링에 좌표값을 누적시킴
     str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(ball_frame_cnt)+'\n'  # str_coord 스트링에 좌표값을 누적시킴
     
-    #cv2.imshow('frame',frame)
-    #cv2.imshow('gray',gray)
+    cv2.imshow('frame',frame)
+    cv2.imshow('gray',gray)
     
     #if frame_cnt == 0 : # 첫 프레임인 경우
     #    cv2.waitKey(0)     # 화면 정지하고 키 입력을 기다리도록 
