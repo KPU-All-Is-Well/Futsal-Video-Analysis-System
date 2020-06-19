@@ -27,12 +27,17 @@ from moviepy.editor import *                                     # moviepy 라�
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip # 하이라이트 영상 추출을 위해 구간 자르는 라이브러리 
 
 
-
-def calculate_moving_distance(player_coord, last_coord):
-    weight = 4
+def calculate_moving_distance(stadium_width, stadium_height, width, height, player_coord, last_coord):
+    
+    width_weight = stadium_width / width
+    height_weight = stadium_height / height
     # 초당 프레임간 발생한 거리차이를 a, b에 누적시킴 
     x = player_coord.x - last_coord.x
     y = player_coord.y - last_coord.y
+    
+    # 경기장 크기와 영상크기에 따른 가중치를 곱해줌
+    x = x*width_weight
+    y = y*height_weight
     
     moving_value=math.sqrt(math.pow(x,2) + math.pow(y,2)) # 초당 움직인 거리(즉 속도) - 유클리디안 거리측정 사용
     
@@ -40,7 +45,7 @@ def calculate_moving_distance(player_coord, last_coord):
     if(moving_value < 2) :
         moving_value=0
     
-    moving_distance = weight * moving_value / 100     # 경기장 크기에따른 가중치를 통해 m단위로 변환 
+    moving_distance = moving_value / 100     # cm -> m 단위로 변환 
     moving_distance = round(moving_distance,2)                # 반올림 처리
 
     return moving_distance
@@ -219,6 +224,10 @@ if __name__ == '__main__':
         arrow_tail= Point(x=0,y=0)
         
         ball_x,ball_y,ball_frame_count = readBallCoord() # 공의 좌표, 공이 인식된 프레임 읽어오기
+        
+        # 일단 하드코딩 GUI로 구현예정
+        stadium_width = 4000
+        stadium_height = 2000
 
 
 
@@ -260,13 +269,13 @@ if __name__ == '__main__':
             
             if player_x1 < 0 :
                 player_x1 = 0 
-            if player_x2 > frame.shape[1] :  # 가로 길이를 초과할 경우 
-                player_x2 = frame.shape[1]
+            if player_x2 > width :  # 가로 길이를 초과할 경우 
+                player_x2 = width
             
             if player_y1 < 0 :
                 player_y1 = 0 
-            if player_y2 > frame.shape[0] :  # 세로 길이를 초과할 경우
-                player_y2 = frame.shape[0]
+            if player_y2 > height :  # 세로 길이를 초과할 경우
+                player_y2 = height
                 
             # 공 점유 인식 (공이 선수 roi 박스 안으로 들어올 경우지정해준 선수와 가까이 있을 경우)
             # roi 파란색
@@ -372,7 +381,7 @@ if __name__ == '__main__':
                 #distance = 거리
                 #walk_weight = 걷기 비중, jog_weight = 조깅 비중, sprint_weight = 스프린트 비중
             
-                moving_distance = calculate_moving_distance(player_coord, last_coord)
+                moving_distance = calculate_moving_distance(stadium_width, stadium_height, width, height, player_coord, last_coord)
                 
                 accumulate_distance = accumulate_distance + moving_distance   # 추정거리값을 누적시킴
                 accumulate_distance = round(accumulate_distance,2)
