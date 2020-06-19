@@ -7,7 +7,7 @@ import collections
 import math
 
 # 테스트 영상들
-videoPath = 'TEST.mp4'   # 연수체육관에서 찍은 영상
+videoPath = '1분.avi'   # 연수체육관에서 찍은 영상
 #videoPath = 'TEST.mov'   # 3차 데모에서 사용한 영상
                            # 학교 풋살장에서 찍은 영상
 
@@ -70,7 +70,7 @@ while(1):
             
             
             # 흰색 라인 밖 왼쪽 하단 공 제외  
-            if( 532 <= y <= 540 and 20 <=x <= 36) : # 연수체육관에서 찍은 영상에만 해당 
+            if( 481 <= y <= 486 and 1 <=x <= 13) : # 연수체육관에서 찍은 영상에만 해당 
                 exception = True
                 
             # 검은색 정수리 제외(제약 사항: 검은 공 사용 금지)

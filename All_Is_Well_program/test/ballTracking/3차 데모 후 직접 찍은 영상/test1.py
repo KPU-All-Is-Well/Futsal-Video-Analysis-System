@@ -6,7 +6,7 @@ import imutils                          # image utils 이미지 관련된 유틸
 import collections
 
 
-videoPath = 'TEST.mp4'   # 연수체육관에서 찍은 영상
+videoPath = '1분.avi'   # 연수체육관에서 찍은 영상
 #videoPath = 'TEST.mov'   # 3차 데모에서 사용한 영상
 # 학교 풋살장에서 찍은 영상
 
