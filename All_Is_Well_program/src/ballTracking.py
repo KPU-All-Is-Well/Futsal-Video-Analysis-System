@@ -7,7 +7,7 @@ import collections
 import math
 
 # 테스트 영상들
-videoPath = '1분.avi'   # 연수체육관에서 찍은 영상
+videoPath = '../sample_videos/YEONSU_44s.avi'   # 연수체육관에서 찍은 영상
 #videoPath = 'TEST.mov'   # 3차 데모에서 사용한 영상
                            # 학교 풋살장에서 찍은 영상
 
@@ -26,8 +26,8 @@ white = 213
 str_coord = ''
 check = True
 ball_x=ball_y=0
-file = open( 'ball_coord.txt', 'w' )  # 좌표값을 저장할 파일
-#file = open( '../result/ball_coord_TEST.txt', 'w' )  # 좌표값을 저장할 파일
+file = open( '../result/ball_coord.txt', 'w' )  # 좌표값을 저장할 파일
+
 
 
 def get_circle_dist(a, b) :
@@ -154,7 +154,8 @@ while(1):
                 str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(frame_cnt)+'\n'
             # 두번째 프레임부터
             else :
-                str_coord = str_coord+'\n' # 전 좌표 저장
+                #str_coord = str_coord+'\n' 
+                str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(frame_cnt)+'\n' # 전 좌표 저장
             
        
        
