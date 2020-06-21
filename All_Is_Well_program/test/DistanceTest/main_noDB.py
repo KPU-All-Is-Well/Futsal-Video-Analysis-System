@@ -252,7 +252,6 @@ if __name__ == '__main__':
                         b = (int)(((newbox[1]) - lastPoint.y) *2.83)
                     
                         moving_weight=math.sqrt(math.pow(a,2) + math.pow(b,2)) # 초당 움직인 거리(즉 속도) - 유클리디안 거리측정 사용
-                        print(moving_weight)
                         # 트레커 추적중 발생하는 진동을 최소화하기위한 코드
                         if(moving_weight < 2) :
                             moving_weight=0
@@ -324,7 +323,7 @@ if __name__ == '__main__':
                         # interval_distance = 30초마다 뛴 거리
                         # interval_avg_speed = 30초마다 뛴 속도
                         ##########################################################################################
-                        print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
+                       # print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
                     #f.write(str(int(newbox[1]))+','+str(int(newbox[0]))+'\n')
                     str_coord = str_coord+str(int(newbox[1]))+','+str(int(newbox[0]))+'\n'  # str_coord 스트링에 좌표값을 누적시킴
                     frame_cnt=frame_cnt+1   # 프레임 갯수를 세어줌

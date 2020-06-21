@@ -74,9 +74,6 @@ while(1):
             if( 481 <= y <= 486 and 1 <=x <= 13) : # 연수체육관에서 찍은 영상에만 해당 
                 exception = True
             
-            #if( y >= 510) : # 데모에서 찍은 영상에만 해당 
-            #    exception = True
-            
                 
             # 검은색 정수리 제외(제약 사항: 검은 공 사용 금지)
             if(frame[y][x][0] > black and exception == False) :  
@@ -121,31 +118,40 @@ while(1):
                     min_dist = circles_list[i][1]
                     min_idx = i
                 
-                        
+
+            # 원이 박스 내에서 상하좌우 10미만으로 움직였을 경우
+            #if (ball_x -10 <= circles_list[min_idx][0][0] <= ball_x +10) and (ball_y -10 <= circles_list[min_idx][0][1] <= ball_y +10) : 
+            #    # 공의 좌표 저장
+            #    ball_x = int(circles_list[min_idx][0][0])
+            #    ball_y = int(circles_list[min_idx][0][1])
+            #    print(circles_list[min_idx][1], '\n')  # Test 
+            #    check = True
+            #else :
+            #    str_coord = str_coord+'\n' # 전 좌표 저장
+            #    check = False
+                
             # 공의 좌표 저장
             ball_x = int(circles_list[min_idx][0][0])
             ball_y = int(circles_list[min_idx][0][1])
             print(circles_list[min_idx][1], '\n')  # Test 
-            #r = circles_list[min_idx][0][2]
-            minD = int(circles_list[min_idx][1])
             check = True
-            
             
             
             
         
         # 후보 공이 1개인 프레임만
         elif (circle_cnt == 1) : 
-            check = True
-            
+     
             # 공의 좌표 저장
             if( frame_cnt != 0) :
                 # 원이 박스 내에서 상하좌우 10미만으로 움직였을 경우
                 if (ball_x -10 <= circles_list[0][0][0] <= ball_x +10) and (ball_y -10 <= circles_list[0][0][1] <= ball_y +10) : 
                     ball_x = int(circles_list[0][0][0])
                     ball_y = int(circles_list[0][0][1])
+                    check = True
                 else :
                     str_coord = str_coord+'\n' # 전 좌표 저장
+                    check = False
 
         # 후보 공이 0개인 프레임만 
         elif (circle_cnt == 0) :

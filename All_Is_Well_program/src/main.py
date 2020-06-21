@@ -90,7 +90,7 @@ def print_player_box(en_name, frame, box, has_ball):
     cv2.putText(frame, en_name, (point_start[0]-5, point_start[1]-10), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 1, cv2.LINE_AA)
 
 def readBallCoord() : # ball_coord.txt 파일에서 공 좌표 읽어오는 함수 
-    y, x, z = np.genfromtxt('../result/ball_coord_TEST.txt', delimiter=',', unpack=True,dtype=int)
+    y, x, z = np.genfromtxt('../result/ball_coord.txt', delimiter=',', unpack=True,dtype=int)
     return (x,y, z)
 
 if __name__ == '__main__':
