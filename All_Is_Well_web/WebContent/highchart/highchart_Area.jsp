@@ -46,7 +46,7 @@ body{
 </style>
 
 
-<%@ include file="dbconn.jsp" %>
+<%@ include file="../dbconn.jsp" %>
 
    <%! 
    float fDistance_5; String distance_5; 
@@ -65,32 +65,19 @@ body{
    float stamina_15; 
    float stamina_20; 
    
-   String id;
-   
    %>
    
    <%   
    
       request.setCharacterEncoding("utf-8");
-   	  String name = request.getParameter("name"); //이전 페이지에서 name이라는 변수에서 값 전달받음
+      String id = (String)session.getAttribute("id");
       
       ResultSet rs = null;
       Statement stmt =null;
       
-      ResultSet rs1 = null;
-      Statement stmt1 =null;
-      
       try{
-    	  //첫 번째 쿼리문 
-    	  String sql1="select id from playerSignUpInfo where name = '"+name+"'";
-    	  stmt1 = conn.createStatement();
-          rs1 = stmt1.executeQuery(sql1);
     	  
-          while(rs1.next()){
-        	  id = rs1.getString("id");
-          }
-          
-    	  //두 번째 쿼리문
+    
           // 이 파일은 영상 끝까지 돌려야 그래프 제대로 출려됨, 그래야 4번 단위로 체크한 값이 데이터로 들어감, 너무 짧게 파이썬 프로그램 돌리면 null 값이 다 들어가서 NullPointerException 뜸    
          String sql="select speed_5, speed_10, speed_15, speed_20, distance_5, distance_10, distance_15, distance_20 from " + id + " where play_id = '1'";
          stmt = conn.createStatement();
@@ -226,11 +213,11 @@ body{
 Highcharts.chart('container', {
 
     title: {
-        text: '선수 체력 변화 '
+        text: 'Change of Stamina'
     },
 
     subtitle: {
-        text: ''
+        text: 'Source: thesolarfoundation.com'
     },
 
     yAxis: {
@@ -262,13 +249,13 @@ Highcharts.chart('container', {
     },
 
     series: [{
-        name: '체력 ',
+        name: 'Stamina',
         data: [100, <%= stamina_5 %>, <%= stamina_10 %>, <%= stamina_15 %>, <%= stamina_20 %>]
     }, {
-        name: '5분당 활동량 ',
+        name: 'Amount of Activity per 5 minutes',
         data: [0, <%= fDistance_5 %>, <%= fDistance_10 %>, <%= fDistance_15 %>, <%= fDistance_20 %>]
     }, {
-        name: '5분당 평균 속도 ',
+        name: 'Amount of Speed per 5 minutes',
         data: [0, <%= fSpeed_5 %>, <%= fSpeed_10 %>, <%= fSpeed_15 %>, <%= fSpeed_20 %>]
     }],
 

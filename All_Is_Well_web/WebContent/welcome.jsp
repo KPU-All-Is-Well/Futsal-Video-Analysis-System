@@ -1,9 +1,7 @@
 <!-- welcome.jsp -->
 <%@ page contentType="text/html; charset=utf-8" %>
 <html>
-
 <head>
-
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,8 +20,6 @@
     <!-- Site Icons -->
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-	
-	
 
 	<!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
@@ -34,16 +30,9 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
-
-	<!--[if lt IE 9]>
-		<script src="js/vendor/html5shiv.min.js"></script>
-		<script src="js/vendor/respond.min.js"></script>
-	<![endif]-->
 	
 </head> 
 <body>
-	
-	
         <div id="home" class="video-section js-height-full">
             <div class="overlay"></div>
             <div class="home-text-wrapper relative container">
@@ -60,15 +49,6 @@
             </div>
         </div>
         
-        <!--  
-		<frameset rows="100%,0%" frameborder=0 frame=0 border=0>
-  		<frame src="welcome.jsp" marginwidth=0>
-  		<frame align=left src="videos/video.mp4">
-		</frameset>
-		-->
-
-
-     
         
      <!-- -----------------------------------------------jQuery Files ------------------------------------------------------------------>
     <script src="js/jquery.min.js"></script>

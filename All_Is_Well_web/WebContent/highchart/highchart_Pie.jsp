@@ -51,7 +51,7 @@ body{
 </style>
 
 
-	<%@ include file="dbconn.jsp" %>
+	<%@ include file="../dbconn.jsp" %>
 	<%! 
    String rWalk;
    String rJog;

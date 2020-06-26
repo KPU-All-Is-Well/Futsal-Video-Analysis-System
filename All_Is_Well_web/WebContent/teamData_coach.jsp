@@ -219,33 +219,33 @@
 <section class="section parallax" data-stellar-background-ratio="0.1 ">
 
 <div style="float: center;">
-<iframe name="f6" src="highchart_3D.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_3D.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float: center;">
-<iframe name="f5" src="highchart_Distance_Rank.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f5" src="highchart/highchart_Distance_Rank.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float: center;">
-<iframe name="f6" src="highchart_Column.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_Column.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float: center;">
-<iframe name="f6" src="highchart_Column_avg.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_Column_avg.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 
 <div style="float: center;">
-<iframe name="f6" src="highchart_BasicBar.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_BasicBar.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float: center;">
-<iframe name="f6" src="highchart_Fixed.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_Fixed.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 

@@ -45,7 +45,7 @@
 </style>
 
 
-<%@ include file="dbconn.jsp" %>
+<%@ include file="../dbconn.jsp" %>
 
    <%! 
    String rTotalDistance;

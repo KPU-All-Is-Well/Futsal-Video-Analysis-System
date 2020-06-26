@@ -214,24 +214,24 @@
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
 <div class= "relative" style="float: center;">
-<iframe name="f3" src="highchart_Spyder.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f3" src="highchart/highchart_Spyder.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 
 <div style="float: center;">
-<iframe name="f2" src="highchart_Gauge.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f2" src="higchart/highchart_Gauge.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 	
 	
 <div style="float: center;">
-<iframe name="f3" src="highchart_Pie.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f3" src="higchart/highchart_Pie.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float:center;">
-<iframe name="f1" src="highchart_Area.jsp" width="1300" height="500" scrolling="no" frameborder="no">
+<iframe name="f1" src="higchart/highchart_Area.jsp" width="1300" height="500" scrolling="no" frameborder="no">
 </iframe>
 </div>
 

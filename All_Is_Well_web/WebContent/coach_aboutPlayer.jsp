@@ -3,8 +3,7 @@
 
 
 <!doctype html>
-<!--[if IE 9]> <html class="no-js ie9 fixed-layout" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js " lang="en"> <!--<![endif]-->
+<html class="no-js " lang="en">
 <head>
 
     <!-- Basic -->
@@ -20,7 +19,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-	
     <!-- Site Icons --> <!-- 브라우저 창 위에 보이는 아이콘 -->
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -36,11 +34,6 @@
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
 
-	<!--[if lt IE 9]>
-		<script src="js/vendor/html5shiv.min.js"></script>
-		<script src="js/vendor/respond.min.js"></script>
-	<![endif]-->
-
 </head> 
 
 <style>
@@ -50,8 +43,6 @@
 </style>
 
 <body class="left-menu"  >
-
-    
     <div class="menu-wrapper">
         <div class="mobile-menu">
             <nav class="navbar navbar-inverse">
@@ -140,28 +131,10 @@
                     
                     <div class="margin-block"></div>
 					
-					<!--
-                    <div class="menu-search">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="What you are looking?">
-                                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
+				
 					--> <!-- end menu-search -->
 
                     <div class="margin-block"></div>
-
-					<!--
-                    <div class="menu-social">
-                        <ul class="list-inline text-center">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                    </div>--><!-- end menu -->
 
                 </nav><!-- end nav-menu -->
             </div><!-- end vertical-header-wrapper -->
@@ -232,7 +205,7 @@
  %>
 
 <div class="relative">
-<iframe name="f1" src="highchart_Spyder_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width="550" height="500" scrolling="no" frameborder="no">
+<iframe name="f1" src="highchart/highchart_Spyder_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width="550" height="500" scrolling="no" frameborder="no">
 </iframe>
 </div>
 
@@ -242,51 +215,51 @@
 
 <!-- 선수들 간 데이터 비교 -->
 <div style="float:left;">
-<iframe name="f6" src="highchart_3D.jsp" width="370" height="420" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_3D.jsp" width="370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float: left;">
-<iframe name="f5" src="highchart_Distance_Rank.jsp" width="370" height="420" scrolling="no" frameborder="no">
+<iframe name="f5" src="highchart/highchart_Distance_Rank.jsp" width="370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float: left;">
-<iframe name="f6" src="highchart_Column.jsp" width="370" height="420" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_Column.jsp" width="370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float: left;">
-<iframe name="f6" src="highchart_Column_avg.jsp" width="370" height="420" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_Column_avg.jsp" width="370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 
 
 <div style="float: left;">
-<iframe name="f6" src="highchart_BasicBar.jsp" width="370" height="420" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_BasicBar.jsp" width="370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float: left;">
-<iframe name="f6" src="highchart_Fixed.jsp" width=370" height="420" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_Fixed.jsp" width=370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <!-- 개인 데이터  -->
 <div style="float: left;">
-<iframe name="f6" src="highchart_Area_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_Area_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
 </iframe>
 </div>
 
 
 <div style="float: left;">
-<iframe name="f6" src="highchart_Gauge_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart/highchart/highchart_Gauge_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float: left;">
-<iframe name="f6" src="highchart_Pie_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_Pie_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
 

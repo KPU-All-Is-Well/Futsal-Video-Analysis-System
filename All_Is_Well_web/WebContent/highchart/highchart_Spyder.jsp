@@ -48,7 +48,7 @@ body{
 }
 
 </style>
-	<%@ include file="dbconn.jsp" %>
+	<%@ include file="../dbconn.jsp" %>
 	<%! 
    String rspeed; float fSpeed;
    String rpower; float fPower;

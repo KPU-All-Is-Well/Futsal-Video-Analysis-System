@@ -14,7 +14,7 @@
  String driverName="com.mysql.jdbc.Driver";
  String url = "jdbc:mysql://localhost:3306/AIWUserDB";
 	String id = "root";
-	String pass = "zlzl153214@";
+	String pass = "1234";
 	int total = 0;
 	
 	try {
