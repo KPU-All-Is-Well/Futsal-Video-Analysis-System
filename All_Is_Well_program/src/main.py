@@ -123,7 +123,9 @@ if __name__ == '__main__':
     
     past_box = []
 
-
+    # 일단 하드코딩 GUI로 구현예정
+    stadium_width = 3068
+    stadium_height = 1590
     
     ######################################################
     
@@ -243,6 +245,7 @@ if __name__ == '__main__':
 
             # 영상의 크기를 리사이징 해줌
             frame = imutils.resize(frame, width=1000)
+            
             
             # 성공여부(버림)와 box좌표를 반환
             _, box = tracker.update(frame)
@@ -487,6 +490,17 @@ if __name__ == '__main__':
             cv2.imshow('MainWindow', frame)
             #cv2.imshow('PathMap',pathmap)
             cv2.imshow('Radar',radar)
+            
+            if cv2.waitKey(1) & 0xFF == ord('p'):  #incase Esc is pressed
+                cv2.putText(frame, 'drow new box!!',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
+                cv2.imshow('MainWindow', frame)
+                #cv2.waitKey(0)
+                if player <= flag : 
+                    bbox = createBBox.select_bbox(player_num, home, player_team, video_stream, frame);
+                else :
+                    bbox = createBBox.select_bbox(player_num, away, player_team, video_stream, frame);
+                tracker = cv2.TrackerCSRT_create()
+                tracker.init(frame, bbox)
             
             # quit on ESC button
             if cv2.waitKey(1) & 0xFF == 27:  #incase Esc is pressed
