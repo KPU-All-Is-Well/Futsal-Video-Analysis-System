@@ -6,12 +6,11 @@ import imutils                          # image utils 이미지 관련된 유틸
 import collections
 import math
 
-# 테스트 영상들
+# 테스트 영상들 
 videoPath = '../sample_videos/YEONSU_44s.avi'   # 연수체육관에서 찍은 영상
 #videoPath = 'TEST.mov'   # 3차 데모에서 사용한 영상
-                           # 학교 풋살장에서 찍은 영상
+                  
 
-# Create a video capture object to read videos 
 cap = cv2.VideoCapture(videoPath)  #비디오를 읽는 함수-길
 
 pre_frame_cnt = 0
@@ -22,6 +21,7 @@ white = 213
 
 str_coord = ''
 check = True
+r=0
 ball_x=ball_y=0
 file = open( '../result/ball_coord.txt', 'w' )  # 좌표값을 저장할 파일
 
@@ -43,8 +43,7 @@ while(1):
     
     height = frame.shape[0] # 세로    
     width = frame.shape[1] # 가로
-    
-    #print(height, '\n') # test
+   
     
     # 공 크기 2.4
     if(cv2.HoughCircles(gray, cv2.HOUGH_GRADIENT, 1, 5, param1=200, param2=10, minRadius=2,maxRadius=3) is not None):
@@ -66,13 +65,15 @@ while(1):
             # 현재 원의 좌표
             x = int(c[0]) 
             y = int(c[1])
+            r = c[2]
             
             
             # 흰색 라인 밖 왼쪽 하단 공 제외  
             if( 481 <= y <= 486 and 1 <=x <= 13) : # 연수체육관에서 찍은 영상에만 해당 
                 exception = True
             
-            #if( y >= 510) : # 데모에서 찍은 영상에만 해당 
+            # 흰색 라인 밖 왼쪽 하단 공 제외
+            #if( 175 <= x <= 182 and 543 <= y <= 546) : # 3차 데모에서 사용한 영상에만 해당 
             #    exception = True
             
                 
@@ -90,8 +91,7 @@ while(1):
                     # 1번째 프레임
                     if (frame_cnt == 0) : 
                         ball_x = x
-                        ball_y = y
-                        r = c[2] 
+                        ball_y = y                        
                         circle_cnt += 1
                         
                     # 2번째 프레임부터
@@ -124,7 +124,7 @@ while(1):
             ball_x = int(circles_list[min_idx][0][0])
             ball_y = int(circles_list[min_idx][0][1])
             print(circles_list[min_idx][1], '\n')  # Test 
-            #r = circles_list[min_idx][0][2]
+            r = circles_list[min_idx][0][2]
             minD = int(circles_list[min_idx][1])
             check = True
             
@@ -152,7 +152,6 @@ while(1):
                 pre_frame_cnt = frame_cnt
             # 두번째 프레임부터
             else :
-                #str_coord = str_coord+'\n' 
                 str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(pre_frame_cnt)+'\n' # 전 좌표 저장
             
        
@@ -186,6 +185,7 @@ while(1):
 file.write(str_coord)
 file.close()
 
+print(frame_cnt, '\n') #test
 print(succes_rate, '\n') #test
 
 cv2.destroyAllWindows()
