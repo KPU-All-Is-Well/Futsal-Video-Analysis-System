@@ -80,9 +80,11 @@ class PlayerSelect:
 
     def buttonOK_team(self):
         self.pickTeam.destroy() #pickTeam
-
+        print('destroy 함')
+        
     def buttonOK_player(self):
         self.pickPlayer.destroy()
+        
         
     def team_combobox(self):
         self.pickTeam = tk.Tk()

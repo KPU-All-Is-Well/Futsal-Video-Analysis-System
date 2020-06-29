@@ -50,22 +50,6 @@ def calculate_moving_distance(stadium_width, stadium_height, width, height, play
 
     return moving_distance
 
-# 국제 규격 골대 사이즈에 기반하여 프레임 속 사이즈 계산    
-def calculate_goalnet_size(stadium_width, stadium_height, width, height, flag) : 
-    
-    if flag == 1 : 
-        # 국제 규격의 골대 너비: 100
-        width_rate = 100 / stadium_width 
-        frame_goalnet_width = width * width_rate
-        return frame_goalnet_width
-        
-    if flag == 0 :
-        # 국제 규격의 골대 높이: 300
-        height_rate = 300 / stadium_height
-        frame_goalnet_height = height * height_rate 
-        return frame_goalnet_height
-    
-
 def init_video(video_stream):   
     # 비디오 성공 여부와 첫 프레임(형식 변환)
     success, frame = video_stream.read()
@@ -246,14 +230,9 @@ if __name__ == '__main__':
         # 일단 하드코딩 GUI로 구현예정
         stadium_width = 4000
         stadium_height = 2000
-        
-        # 프레임 속 골대의 너비, 높이 계산 
-        goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
-        goalnet_height = calculate_goalnet_size(stadium_width, stadium_height, width, height, 0)
-        print(goalnet_width, '\n')
-        print(goalnet_height, '\n')
-        
-        
+
+
+
         # 영상이 동작하는 동안 반복
         while True:
             
@@ -325,35 +304,63 @@ if __name__ == '__main__':
                 # 공이 슬로우모션으로 쫓아가는 현상 해결(현재 프레임과 공이 인식된 프레임 번호가 같을 경우만 화면에 공 출력)
                 if ball_frame_count[frame_count] == frame_count :
                 
-                    # Home 팀의 골인 경우
-                    if ball_x[frame_count] >= width - goalnet_width :  
-                        if height * 0.5 - (goalnet_height/2) <= ball_y[frame_count] <= height * 0.5 + (goalnet_height/2) : # 국제 규격에 맞춤
+                    # Home팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
+                    if ball_x[frame_count] >= width * 0.9 : 
+                        
+                        is_in_goalnet = False 
+                        invisible = frame_count - pre_frame_count
                             
+                        if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
+                            is_in_goalnet = True
+                    
+                        # '골'인 경우 노란색으로 표시
+                        if is_in_goalnet == True  :         #if ball_x == 947 and ball_y ==289 :
                             print('Home팀 골인입니다!!!!!', frame_count)
+                            print('invisible term: ', invisible)
+                            #cv2.waitKey(0)     # 화면 정지하고 키 입력을 기다리도록 
                             
                             cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
                             show_goal_frame = 1
                             highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음 
-                    
+                            
+   
                             cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) # 노란색으로 표시
                             pre_frame_count = frame_count
                             
                             
-                    # Away팀의 골인 경우 
-                    elif ball_x[frame_count] <= goalnet_width : 
-                        if height * 0.5 - (goalnet_height/2) <= ball_y[frame_count] <= height * 0.5 + (goalnet_height/2) : # 국제 규격에 맞춤
+
+                        else :
+                            print("Home팀 골에어리어에 공이 진입했습니다.", frame_count)                      
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (22, 219, 29), 2) # 초록색으로 표시
+                            pre_frame_count = frame_count
+                
+                    # Away팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
+                    elif ball_x[frame_count] <= width * 0.1 : 
+                        
+                        is_in_goalnet = False 
+                        invisible = frame_count - pre_frame_count
+                       
                             
+                        if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
+                            is_in_goalnet = True
+                    
+                        # '골'인 경우 노란색으로 표시
+                        if is_in_goalnet == True  :         #if ball_x == 947 and ball_y ==289 :
                             print('Away팀 골인입니다!!!!!', frame_count)
-                            
-                            cv2.putText(frame, 'Away team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
-                            show_goal_frame = 1
+                            print('invisible term: ', invisible)
+                                
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) # 노란색으로 표시
+                            pre_frame_count = frame_count
                             highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음
                             
-                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) # 노란색으로 표시
+         
+                        else :
+                            print("Away팀 골에어리어에 공이 진입했습니다.", frame_count)
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (22, 219, 29), 2) # 초록색으로 표시
                             pre_frame_count = frame_count
                     
                 
-                    # '골'이 아닌 경우
+                    # 골에어리어에 공이 진입하지도 않았고, '골'도 아닌 경우
                     else : 
                 
                         cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 255), 2)
@@ -455,8 +462,7 @@ if __name__ == '__main__':
                 print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
                 
             coords_string = coords_string+str(int(box[1]))+','+str(int(box[0]))+'\n'  # coords_string 스트링에 좌표값을 누적시킴
-            
-            #골인 경우 2초 동안 화면에 출력해주기 위함
+            #골인 경우 2초 동안 화면에 보여주기 위함######################### 
             if 1 <=show_goal_frame <= fps * 2 :
                 if show_goal_frame != 1 :
                     cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
@@ -585,7 +591,8 @@ if __name__ == '__main__':
     
     ##########################################################################################################
     ##########################################하이라이트 추출 알고리즘#################################################
-
+    
+    
     print('\n')
     print('하이라이트 추출 시작.....')
     
