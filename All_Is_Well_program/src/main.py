@@ -315,9 +315,7 @@ if __name__ == '__main__':
             ############################################################################################
             
             
-            ############################################# 공 인식 출력 알고리즘 #############################
-            
-            
+            ############################################# 공 좌표 읽어오는 부분 #############################
             if(ball_x[frame_count] > -1):
             
                 ###################################################골 인식 알고리즘 #############################################################                          
@@ -484,22 +482,34 @@ if __name__ == '__main__':
             cv2.imshow('MainWindow', frame)
             #cv2.imshow('PathMap',pathmap)
             cv2.imshow('Radar',radar)
+         
+            # 영상 일시 정지
+            key = cv2.waitKey(1) & 0xFF
+            if key == 32: # space 키   
+                cv2.waitKey(0)
+                
+            # 종료 
+            if key == 27:  # esc키 
+                cv2.destroyAllWindows() # 화면 종료해주기
+                break    
             
-            if cv2.waitKey(1) & 0xFF == ord('p'):  #incase Esc is pressed
-                cv2.putText(frame, 'drow new box!!',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
+            ################################################ 트래커가 선수객체 놓쳤을 경우###########################################
+            
+            if key == ord('p'):  # 'p' 키
+                cv2.putText(frame, 'Draw new box!!',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
                 cv2.imshow('MainWindow', frame)
-                #cv2.waitKey(0)
+                
                 if player <= flag : 
                     bbox = createBBox.select_bbox(player_num, home, player_team, video_stream, frame);
                 else :
                     bbox = createBBox.select_bbox(player_num, away, player_team, video_stream, frame);
                 tracker = cv2.TrackerCSRT_create()
                 tracker.init(frame, bbox)
+                
+            ##################################################################################################################
             
-            # quit on ESC button
-            if cv2.waitKey(1) & 0xFF == 27:  #incase Esc is pressed
-                cv2.destroyAllWindows() # 화면 종료해주기
-                break
+            
+             
         
         avg_speed = accumulate_speed / (frame_count/fps)
         avg_speed = round(avg_speed,1)
@@ -529,7 +539,7 @@ if __name__ == '__main__':
         if(not(coords_string=='')) :
             heatmap.printHeatMap(height,width)
             
-         ########################## 공 점유율 계산 알고리즘 ###############################################
+        ################################ 공 점유율 계산 알고리즘 ###############################################
         if player >= flag + 1 : # A팀 3명, B팀 5명으로 경기할 경우 -> flag = 3 
             ball_share_B.append(ball_touch)   
             print('B팀 ', player-flag, '번째 선수 개인의 공 점유 프레임 수 : ', ball_share_B[player-flag-1]) # 0, 1...
@@ -583,13 +593,13 @@ if __name__ == '__main__':
     print('B팀 공 점유율: ', sum_ball_B, '  (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     print('---------------------------------------------------------------------------------------------------')
     
-    ##########################################################################################################
+    
     ##########################################하이라이트 추출 알고리즘#################################################
-
     print('\n')
     print('하이라이트 추출 시작.....')
     
     ########################Goal.mov영상 생성#######################
+    
     # 골을 인식한 프레임이 영상에서 몇 초쯤인지 계산
     videoFps = video_stream.get(cv2.CAP_PROP_FPS)   # 1초에 지나가는 프레임 수(fps)
     point1 = int (highlight_goal_point / videoFps )
@@ -601,7 +611,7 @@ if __name__ == '__main__':
     # 영상의 start부터 end까지 영역을 자름 (초 기준)
     ffmpeg_extract_subclip(video_path, start, end, targetname="../result/Goal.mov") 
     
-    ####################Goal_zoom1.mov 영상 생성######################
+    ####################Goal_zoom1.mov, Goal_zoom2.mov 영상 생성######################
     video_stream = cv2.VideoCapture('../result/Goal.mov')
 
     #재생할 파일의 넓이와 높이
@@ -648,8 +658,8 @@ if __name__ == '__main__':
         
         out2.write(resized_cropped2)
 
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
+        #if cv2.waitKey(1) & 0xFF == ord('q'):
+        #    break
     
     video_stream.release()
     out1.release()
