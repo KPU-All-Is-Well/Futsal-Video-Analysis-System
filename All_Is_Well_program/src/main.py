@@ -257,6 +257,13 @@ if __name__ == '__main__':
         pitch_image = cv2.imread('../image/pitch.png')
         pitch_image = cv2.resize(pitch_image,(width,height))
         
+        # 결과창의 배경이 될 이미지 지정
+        result_image = cv2.imread('../image/result_background_small.png')
+
+        
+        #result_image = cv2.resize(pitch_image,(width,height))
+        
+        
         # 선수 좌표값을 저장할 파일
         player_coords_text = open( '../result/player_coord.txt', 'w' )
         
@@ -305,6 +312,7 @@ if __name__ == '__main__':
         distance_value = 0
         pathmap=pitch_image.copy()
         
+        result_window=result_image.copy()
         
         ball_touch = 0                  # roi로 선택한 선수가 공을 점유한 프레임 수(볼 터치 수)를 카운팅함 
         show_goal_frame = 0             # 골인 경우 화면에 fps 프레임수 동안 "골인입니다" 표시하기 위해
@@ -535,7 +543,7 @@ if __name__ == '__main__':
             # 누적 거리값을 레이더의 플레이어 머리위에 띄워줌
             cv2.putText(radar, str(speed)+'km/h '+str(accumulate_distance)+'m', (int(box[0]-60), int(box[1])-20), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)  #tracker_Window
             
-             # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
+            # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
             cv2.putText(radar, 'Speed : '+str(speed)+'km/h'+ ', Top speed : '+str(top_speed)+ 'km/h',(55, 40), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
             cv2.putText(radar, 'Average speed : '+str(avg_speed)+'km/h'+', Running Distance : '+str(accumulate_distance)+'m', (55, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
             cv2.putText(radar, 'Walk / Jog / Sprint Count: '+str(walk_count)+' / '+str(jog_count)+' / '+str(sprint_count), (55, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
@@ -546,14 +554,38 @@ if __name__ == '__main__':
             
             frame_count=frame_count+1   # 프레임 갯수를 세어줌
             
+            ######################################################################################
+            # 모듈화 예정
             
-                    
+           
+            result_window=result_image.copy()
+            # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
+            cv2.putText(result_window, str(en_name),(65, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(accumulate_distance)+'m',(263, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(ball_touch),(485, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            
+            cv2.putText(result_window, str(speed) +'km/h',(65, 95), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(top_speed) +'km/h',(263, 95), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(avg_speed) +'km/h',(485, 95), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            
+            cv2.putText(result_window, str(walk_count),(65, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(jog_count),(263, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(sprint_count),(485, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            # +'km/h'
+            #
+            #cv2.putText(result_window, 'Average speed : '+str(avg_speed)+'km/h'+', Running Distance : '+str(accumulate_distance)+'m', (55, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+            #cv2.putText(result_window, 'Walk / Jog / Sprint Count: '+str(walk_count)+' / '+str(jog_count)+' / '+str(sprint_count), (55, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+            #cv2.putText(result_window, 'Ball Touch Count: '+str(ball_touch), (55, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
+            
+            ######################################################################################
 
             # show all windows
             cv2.imshow('MainWindow', frame)
             #cv2.imshow('PathMap',pathmap)
             cv2.imshow('Radar',radar)
-         
+            # show result window
+            cv2.imshow('result', result_window)
+            
             # 영상 일시 정지
             key = cv2.waitKey(1) & 0xFF
             if key == 32: # space 키   
