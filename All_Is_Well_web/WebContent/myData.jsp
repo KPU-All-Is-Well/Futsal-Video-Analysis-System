@@ -1,12 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-
 <!doctype html>
-<!--[if IE 9]> <html class="no-js ie9 fixed-layout" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js " lang="en"> <!--<![endif]-->
+<html class="no-js " lang="en">
 <head>
-
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -20,12 +17,10 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-	
     <!-- Site Icons --> <!-- 브라우저 창 위에 보이는 아이콘 -->
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 	
-
 	<!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet"> 
@@ -36,13 +31,7 @@
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
 
-	<!--[if lt IE 9]>
-		<script src="js/vendor/html5shiv.min.js"></script>
-		<script src="js/vendor/respond.min.js"></script>
-	<![endif]-->
-
 </head> 
-<!--ì¼ìª½ ëª©ì°¨ -->
 <style>
 	body{
 		background-color: #000000;
@@ -52,49 +41,7 @@
 <body class="left-menu"  >
     
     <div class="menu-wrapper">
-        <div class="mobile-menu">
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="index.html"><img src="images/logo-normal.png" alt=""></a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="home.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
-                               
-                            </li>
-                            <li class="dropdown">
-                                <a href="myData.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Data </a>
-                              
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Video</a>
-                                
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar</a>
-                                
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coach Note</a>
-                                
-                            </li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                         
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div><!--/.container-fluid -->
-            </nav>
-        </div><!-- end mobile-menu --------------------------------------------------------------------->
+      
 
         <header class="vertical-header">
             <div class="vertical-header-wrapper">
@@ -107,60 +54,37 @@
 
                     <ul class="primary-menu">
 
-						<!--Home ëª©ì°¨ -->
+						<!--Home -->
                         <li class="child-menu"><a href="home.jsp">Home</a>
                             
                         </li>
 
-						 <!--My Data ëª©ì°¨ -->
+						 <!--My Data  -->
                         <li class="myData.jsp"><a href="#">My Data </a>
                           
                         </li>
 
-						<!--My Data ëª©ì°¨ -->
+						<!--My Data-->
                         <li class="child-menu"><a href="#">My Video </a>
-                            
-                         
-                        </li>
+                         </li>
 
-	      
-					
-						<!--Calendar ëª©ì°¨ -->	
+						<!--Calendar¨ -->	
 						<li><a href="#">Calendar</a></li>
 
-						<!--Coach Note ëª©ì°¨ -->	
+						<!--Coach Note  -->	
 						<li><a href="#">Coach Note</a></li>
 						
-						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->  
+						<!--Contact  -->  
                         <li><a href="#">Contact</a></li>
 
-                        <!--<li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li> -->
                     </ul>
                     
                     <div class="margin-block"></div>
-					
-					<!--
-                    <div class="menu-search">
-                        <form>
-                            <div class="form-group">
-                                <input type="text" class="form-control" placeholder="What you are looking?">
-                                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
-                            </div>
-                        </form>
-                    </div>
-					--> <!-- end menu-search -->
+				
+					<!-- end menu-search -->
 
                     <div class="margin-block"></div>
 
-					<!--
-                    <div class="menu-social">
-                        <ul class="list-inline text-center">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
-                        </ul>
-                    </div>--><!-- end menu -->
 
                 </nav><!-- end nav-menu -->
             </div><!-- end vertical-header-wrapper -->
@@ -168,9 +92,6 @@
     </div><!-- end menu-wrapper -->
 	
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
-	
-	
-    
 
 <style> 	
 #test_btn1
@@ -200,7 +121,6 @@
         left:70px;
         top: 50px;
       }        
-  
 </style>
 
  <div id="wrapper"> 
@@ -220,18 +140,18 @@
 
 
 <div style="float: center;">
-<iframe name="f2" src="higchart/highchart_Gauge.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f2" src="highchart/highchart_Gauge.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 	
 	
 <div style="float: center;">
-<iframe name="f3" src="higchart/highchart_Pie.jsp" width="1200" height="500" scrolling="no" frameborder="no">
+<iframe name="f5" src="highchart/highchart_Pie.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
 <div style="float:center;">
-<iframe name="f1" src="higchart/highchart_Area.jsp" width="1300" height="500" scrolling="no" frameborder="no">
+<iframe name="f1" src="highchart/highchart_Area.jsp" width="1300" height="500" scrolling="no" frameborder="no">
 </iframe>
 </div>
 

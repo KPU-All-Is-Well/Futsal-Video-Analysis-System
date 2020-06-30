@@ -1,11 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-
 <!doctype html>
 <html class="no-js " lang="en">
 <head>
-
     <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -23,7 +20,6 @@
 	<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
 	
-
 	<!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet"> 
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet"> 
@@ -44,50 +40,6 @@
 
 <body class="left-menu"  >
     <div class="menu-wrapper">
-        <div class="mobile-menu">
-            <nav class="navbar navbar-inverse">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="index.html"><img src="images/logo-normal.png" alt=""></a>
-                    </div>
-                    <div id="navbar" class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav">
-                            <li class="dropdown">
-                                <a href="home_of_Coach.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home </a>
-                               
-                            </li>
-                            <li class="dropdown">
-                                <a href="teamDate_coach.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Data </a>
-                              
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Video</a>
-                                
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar</a>
-                                
-                            </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Coach Note</a>
-                                
-                            </li>
-                            <li><a href="#">Contact</a></li>
-                        </ul>
-                        <ul class="nav navbar-nav navbar-right">
-                         
-                        </ul>
-                    </div><!--/.nav-collapse -->
-                </div><!--/.container-fluid -->
-            </nav>
-        </div><!-- end mobile-menu --------------------------------------------------------------------->
-
         <header class="vertical-header">
             <div class="vertical-header-wrapper">
                 <nav class="nav-menu">
@@ -99,17 +51,17 @@
 
                     <ul class="primary-menu">
 
-						<!--Home ëª©ì°¨ -->
+						<!--Home  -->
                         <li class="child-menu"><a href="home_of_Coach.jsp">Home</a>
                             
                         </li>
 
-						 <!--My Data ëª©ì°¨ -->
+						 <!--My Data-->
                         <li class="teamData_coach.jsp"><a href="teamData_coach.jsp">Team Data </a>
                           
                         </li>
 
-						<!--My Data ëª©ì°¨ -->
+						<!--My Data -->
                         <li class="child-menu"><a href="#">My Video </a>
                             
                          
@@ -117,16 +69,15 @@
 
 	      
 					
-						<!--Calendar ëª©ì°¨ -->	
+						<!--Calendar-->	
 						<li><a href="#">Calendar</a></li>
 
-						<!--Coach Note ëª©ì°¨ -->	
+						<!--Coach Note-->	
 						<li><a href="#">Coach Note</a></li>
 						
-						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->  
+						<!--Contact-->  
                         <li><a href="#">Contact</a></li>
 
-                        <!--<li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li> -->
                     </ul>
                     
                     <div class="margin-block"></div>
@@ -142,7 +93,6 @@
     </div><!-- end menu-wrapper -->
 	
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
-	
 
 <style> 	
 #test_btn1
@@ -183,36 +133,25 @@
         left:600px;
         top: -500px;
       }        
-  
-  
-  
+
 </style>
- 
-  
 <div id="wrapper">  
 <div id="btn_group" style="text-align:center"  >
 <a href="playerData_Coach.jsp"> <button id="test_btn1">Player</button></a> 
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
 <a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
 </div>
-
  <img src="images/player.png" class="relative">
- 
  <%@ page import="java.net.URLEncoder" %>
  <%
  	request.setCharacterEncoding("UTF-8");
  	String name = request.getParameter("name");
  %>
-
 <div class="relative">
 <iframe name="f1" src="highchart/highchart_Spyder_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width="550" height="500" scrolling="no" frameborder="no">
 </iframe>
 </div>
-
-
-
 <section class="section parallax" data-stellar-background-ratio="0.1 ">
-
 <!-- 선수들 간 데이터 비교 -->
 <div style="float:left;">
 <iframe name="f6" src="highchart/highchart_3D.jsp" width="370" height="420" scrolling="no" frameborder="no">
@@ -254,7 +193,7 @@
 
 
 <div style="float: left;">
-<iframe name="f6" src="highchart/highchart/highchart/highchart_Gauge_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
+<iframe name="f6" src="highchart/highchart_Gauge_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
 
@@ -262,24 +201,12 @@
 <iframe name="f6" src="highchart/highchart_Pie_Coach.jsp?name=<%=URLEncoder.encode(name, "UTF-8") %>" width=370" height="420" scrolling="no" frameborder="no">
  </iframe>
 </div>
-
-
-
-
  </section>          
  </div>
- 
- 
  </html>                
  
 <!--------------------------------------------------- end Content ------------------------------------------------------------------>
-
-
-
 </div>
-
-
-
     <!-- -----------------------------------------------jQuery Files ------------------------------------------------------------------>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
