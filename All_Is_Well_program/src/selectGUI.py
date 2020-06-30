@@ -40,10 +40,8 @@ class PlayerNumber:
     def button_event(self):
         self.input_info.destroy()
 
-class PlayerSelect:
-    def __init__(self):
-        # print("객체 생성") # Test Line 1
-        ### 연결 MySQL 과 Tkinter GUI
+class TeamSelect:
+    def __init__(self) :
         self.connect = pymysql.connect(host='15.164.30.158', user='sk', password='1234', db='AIWUserDB',charset='UTF8MB4')
         self.cursor = self.connect.cursor()
 
@@ -60,9 +58,41 @@ class PlayerSelect:
             self.team_list.append(self.i[0])
 
         self.selected_team = self.team_combobox()
-        # print("TEST 1 "+self.selected_team) # Test Line 2
 
-        self.sql_syntax='SELECT en_name FROM playersignupinfo WHERE team = "{0}"'.format(self.selected_team)
+    def buttonOK_team(self):
+        self.pick_team.quit()
+        self.pick_team.destroy() #pickTeam
+        
+    def team_combobox(self):
+        self.pick_team = tk.Tk()
+        self.pick_team.geometry('230x60+50+50')
+        self.pick_team.title("Team")
+        self.pick_team.resizable(0,0)
+
+        self.team_name = tk.StringVar(self.pick_team)
+
+        self.top_label = tk.Label(self.pick_team, text ="Choose your Team")
+        self.top_label.pack(anchor="w",padx=5,pady=5)
+
+        self.team_box = ttk.Combobox(self.pick_team, height=10,width = 20, values=self.team_list, state="readonly",textvariable=self.team_name)
+        self.team_box.pack(side="left",padx=5)
+        self.team_box.current(0)
+
+        self.button_ok=tk.Button(self.pick_team, width=5, command=self.buttonOK_team, repeatdelay=1000, repeatinterval=100, text="OK")
+        self.button_ok.pack(side="left", padx=5)
+
+        self.pick_team.mainloop() #### 여기가 이상함. 원래 팀 선택한 다음에 선수 선택하는 창이 떠야 하는데 안 뜸. 
+
+        return self.team_name.get()
+
+class PlayerSelect:
+    def __init__(self, team):
+        # print("객체 생성") # Test Line 1
+        ### 연결 MySQL 과 Tkinter GUI
+        self.connect = pymysql.connect(host='15.164.30.158', user='sk', password='1234', db='AIWUserDB',charset='UTF8MB4')
+        self.cursor = self.connect.cursor()
+
+        self.sql_syntax='SELECT en_name FROM playersignupinfo WHERE team = "{0}"'.format(team)
 
         self.cursor.execute(self.sql_syntax)
         self.fetch_data=self.cursor.fetchall()
@@ -75,33 +105,11 @@ class PlayerSelect:
         self.selected_player = self.player_combobox()
         # print("TEST 2 "+self.selected_player) # Test Line 3
 
-    def buttonOK_team(self):
-        self.pick_team.destroy()
-
+    
     def buttonOK_player(self):
+        self.pick_player.quit()
         self.pick_player.destroy()
         
-    def team_combobox(self):
-        self.pick_team = tk.Tk()
-        self.pick_team.geometry('230x60+50+50')
-        self.pick_team.title("Team")
-        self.pick_team.resizable(0,0)
-
-        self.team_name = tk.StringVar()
-
-        self.top_label = tk.Label(self.pick_team, text ="Choose your Team")
-        self.top_label.pack(anchor="w",padx=5,pady=5)
-
-        self.team_box = ttk.Combobox(self.pick_team, height=10,width = 20, values=self.team_list, state="readonly",textvariable=self.team_name)
-        self.team_box.pack(side="left",padx=5)
-        self.team_box.current(0)
-
-        self.button_ok=tk.Button(self.pick_team, width=5, command=self.buttonOK_team, repeatdelay=1000, repeatinterval=100, text="OK")
-        self.button_ok.pack(side="left", padx=5)
-
-        self.pick_team.mainloop()
-
-        return self.team_name.get()
     
     def player_combobox(self):
         self.pick_player = tk.Tk() 
@@ -109,7 +117,7 @@ class PlayerSelect:
         self.pick_player.title("Player")
         self.pick_player.resizable(0,0)
 
-        self.player_name = tk.StringVar()
+        self.player_name = tk.StringVar(self.pick_player)
 
         self.top_label = tk.Label(self.pick_player, text ="Choose your Player")
         self.top_label.pack(anchor="w",padx=5,pady=5)

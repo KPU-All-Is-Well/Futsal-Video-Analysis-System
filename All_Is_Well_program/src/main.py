@@ -10,18 +10,15 @@ import math
 import collections
 #from datetime import datetime
 
-import heatmap
-
+import heatmap                              # Heatmap 생성 모듈
 import filepath                             # Video File Open GUI 모듈
 #import LoginDB                              # MySQL Connector & MySQL Login 모듈
 import executeSQL                           # SQL 쿼리문을 실행하는 모듈
-
-
-
-
 import pymysql                              # python에서 MySQL을 사용할 수 있게 하는 모듈
-import createBBox                         # 관심구역 지정 모듈     
-import selectGUI           
+import createBBox                           # 관심구역 지정 모듈     
+import selectGUI                            # GUI 생성 모듈
+import highlight                            # 하이라이트 추출 모듈
+import ballTracking                         # 공 인식 및 추적 모듈
 
 from moviepy.editor import *                                     # moviepy 라이브러리 :
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip # 하이라이트 영상 추출을 위해 구간 자르는 라이브러리 
@@ -49,6 +46,22 @@ def calculate_moving_distance(stadium_width, stadium_height, width, height, play
     moving_distance = round(moving_distance,2)                # 반올림 처리
 
     return moving_distance
+
+# 국제 규격 골대 사이즈에 기반하여 프레임 속 사이즈 계산    
+def calculate_goalnet_size(stadium_width, stadium_height, width, height, flag) : 
+    
+    if flag == 1 : 
+        # 국제 규격의 골대 너비: 100
+        width_rate = 100 / stadium_width 
+        frame_goalnet_width = width * width_rate
+        return frame_goalnet_width
+        
+    if flag == 0 :
+        # 국제 규격의 골대 높이: 300
+        height_rate = 300 / stadium_height
+        frame_goalnet_height = height * height_rate 
+        return frame_goalnet_height
+    
 
 def init_video(video_stream):   
     # 비디오 성공 여부와 첫 프레임(형식 변환)
@@ -93,15 +106,77 @@ def readBallCoord() : # ball_coord.txt 파일에서 공 좌표 읽어오는 함�
     y, x, z = np.genfromtxt('../result/ball_coord.txt', delimiter=',', unpack=True,dtype=int)
     return (x,y, z)
 
+def ball_is_in_penalty_area(ball_x, ball_y, stadium_width, goalnet_width, goalnet_height, width, height) : 
+    
+    # 국제 규격의 패널티 거리 : 600cm 
+    width_rate = 600 / stadium_width 
+    frame_600 = width * width_rate
+       
+       
+    # 왼쪽 페널티 영역    
+    left_center_x1 = goalnet_width
+    left_center_y1 = height/2 - goalnet_height/2
+    x1 = left_center_x1 - ball_x
+    y1 = left_center_y1 - ball_y
+    
+    left_center_x2 = goalnet_width
+    left_center_y2 = height/2 + goalnet_height/2
+    x2 = left_center_x2 - ball_x
+    y2 = left_center_y2 - ball_y
+    
+    left_rect_width = goalnet_width + frame_600
+    left_rect_height1 = height/2 - goalnet_height/2 
+    left_rect_height2 = height/2 + goalnet_height/2
+    
+    if (math.sqrt(math.pow(x1,2) + math.pow(y1,2)) <= frame_600  or
+            math.sqrt(math.pow(x2,2) + math.pow(y2,2)) <= frame_600 or
+            (ball_x <= left_rect_width and left_rect_height1 <= ball_y <= left_rect_height2) ) :
+        return True 
+   
+    
+    #오른쪽 페널티 영역
+    right_center_x3 = width - goalnet_width
+    right_center_y3 = height/2 - goalnet_height/2   
+    x3 = right_center_x3 - ball_x
+    y3 = right_center_y3 - ball_y
+    
+    right_center_x4 = width - goalnet_width
+    right_center_y4 = height/2 + goalnet_height/2
+    x4 = right_center_x4 - ball_x
+    y4 = right_center_y4 - ball_y
+    
+    right_rect_width = width - (goalnet_width + frame_600)
+    right_rect_height1 = height/2 - goalnet_height/2 
+    right_rect_height2 = height/2 + goalnet_height/2
+    
+    if (math.sqrt(math.pow(x3,2) + math.pow(y3,2)) <= frame_600  or
+            math.sqrt(math.pow(x4,2) + math.pow(y4,2)) <= frame_600 or
+            (right_rect_width <= ball_x  and right_rect_height1 <= ball_y <= right_rect_height2) ) :
+        return True 
+    else :
+        return False
+
+
+
 if __name__ == '__main__':
 
     # 영상 파일 경로를 GUI로 입력받음
     video_object = filepath.OpenPath()
     video_path = video_object.video_path
-    #video_path = "../sample_videos/TEST.mov"
+            
+    # 영상 파일 경로를 통해 video_stream을 읽어옴
+    video_stream = cv2.VideoCapture(video_path)  
+ 
+    # 영상의 헤드, 성공여부, 프레임값, 높이, 너비, 영상 fps, 4분기 간격 반환
+    success, frame, height, width, fps, interval = init_video(video_stream) 
     
+    # kpu 풋살장 3068*1590 / 연수풋살장 3800*1800 / 평균 4000 * 2000
+    # 일단 하드코딩 GUI로 구현예정
+    stadium_width = 3800
+    stadium_height = 1800
     
-    
+    # 공을 추적하고 결과를 텍스트로 저장함 // 시간 오래걸릴땐 주석처리
+    #ballTracking.track_ball(video_path)
    
     ######################################################
     player_number = selectGUI.PlayerNumber()
@@ -123,29 +198,48 @@ if __name__ == '__main__':
     
     past_box = []
 
-    # 일단 하드코딩 GUI로 구현예정
-    stadium_width = 3068
-    stadium_height = 1590
+    # 프레임 속 골대의 너비, 높이 계산 
+    goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
+    goalnet_height = calculate_goalnet_size(stadium_width, stadium_height, width, height, 0)
+    print('실제 골대 크기에서 프레임 크기로 반환 \n')
+    print('골대 너비 : ', goalnet_width, '\n')
+    print('골대 높이 : ', goalnet_height, '\n')
+
+
+
     
     ######################################################
     
     for player in range(1, total_player+1): # 선수 1부터 total_player까지 반복문
+       
         
         # 영상 파일 경로를 통해 video_stream을 읽어옴
-        video_stream = cv2.VideoCapture(video_path)  
-     
+        video_stream = cv2.VideoCapture(video_path) 
+        
         # 영상의 헤드, 성공여부, 프레임값, 높이, 너비, 영상 fps, 4분기 간격 반환
         success, frame, height, width, fps, interval = init_video(video_stream) 
-        
         
         
         ############################################################
         # 초기 로그인 모듈을 활용해 로그인을 진행하고 사용자의 아이디를 받아옴
         #player_id = LoginDB.login_function()
-        player_object = selectGUI.PlayerSelect()
-        player_id = player_object.selected_player
-        player_team = player_object.selected_team
-
+        
+        
+        # 팀선택과 플레이어선택을 나눌것임 
+        ###################################################
+        #기존코드
+        #player_object = selectGUI.PlayerSelect()
+        #player_id = player_object.selected_player
+        #player_team = player_object.selected_team
+        ###################################################
+        
+        if(player == 1 or (player==flag+1)) :
+            player_team = selectGUI.TeamSelect().selected_team
+        player_id = selectGUI.PlayerSelect(player_team).selected_player
+        
+        
+        
+        
         # 사용자 아이디를 바탕으로 PlayerTable을 생성하거나 접속함
         executeSQL.CreatePlayerTable(player_id)
         
@@ -158,10 +252,9 @@ if __name__ == '__main__':
         en_name = str(executeSQL.EngName(player_id))
 
         ############################################################
-
         
         # 히트맵창의 배경이 될 이미지 지정
-        pitch_image = cv2.imread('../image/heatmap2.png')
+        pitch_image = cv2.imread('../image/pitch.png')
         pitch_image = cv2.resize(pitch_image,(width,height))
         
         # 선수 좌표값을 저장할 파일
@@ -215,8 +308,8 @@ if __name__ == '__main__':
         
         ball_touch = 0                  # roi로 선택한 선수가 공을 점유한 프레임 수(볼 터치 수)를 카운팅함 
         show_goal_frame = 0             # 골인 경우 화면에 fps 프레임수 동안 "골인입니다" 표시하기 위해
-        pre_frame_count =0                # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
         highlight_goal_point = 0        # 하이라이트 추출시 골인인 프레임을 중심으로 앞뒤로 6초동안 보여주기
+        highlight_goal_fail_point = 0   # 하이라이트 추출시 골 시도했지만 실패인 프레임을 중심으로 앞뒤로 6초동안 보여주기
 
 
 
@@ -227,12 +320,6 @@ if __name__ == '__main__':
         
         ball_x,ball_y,ball_frame_count = readBallCoord() # 공의 좌표, 공이 인식된 프레임 읽어오기
         
-        # 일단 하드코딩 GUI로 구현예정
-        stadium_width = 4000
-        stadium_height = 2000
-
-
-
         # 영상이 동작하는 동안 반복
         while True:
             
@@ -294,9 +381,7 @@ if __name__ == '__main__':
             ############################################################################################
             
             
-            ############################################# 공 인식 출력 알고리즘 #############################
-            
-            
+            ############################################# 공 좌표 읽어오는 부분 #############################
             if(ball_x[frame_count] > -1):
             
                 ###################################################골 인식 알고리즘 #############################################################                          
@@ -304,67 +389,44 @@ if __name__ == '__main__':
                 # 공이 슬로우모션으로 쫓아가는 현상 해결(현재 프레임과 공이 인식된 프레임 번호가 같을 경우만 화면에 공 출력)
                 if ball_frame_count[frame_count] == frame_count :
                 
-                    # Home팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
-                    if ball_x[frame_count] >= width * 0.9 : 
-                        
-                        is_in_goalnet = False 
-                        invisible = frame_count - pre_frame_count
+                    # Home 팀의 골인 경우
+                    if ball_x[frame_count] >= width - goalnet_width + 5 : # 골대(국제 규격)에 공이 진입시 (오차 5감안)
+                        if height * 0.5 - (goalnet_height/2) <= ball_y[frame_count] <= height * 0.5 + (goalnet_height/2) : # 국제 규격에 맞춤
                             
-                        if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
-                            is_in_goalnet = True
-                    
-                        # '골'인 경우 노란색으로 표시
-                        if is_in_goalnet == True  :         #if ball_x == 947 and ball_y ==289 :
                             print('Home팀 골인입니다!!!!!', frame_count)
-                            print('invisible term: ', invisible)
-                            #cv2.waitKey(0)     # 화면 정지하고 키 입력을 기다리도록 
                             
                             cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
                             show_goal_frame = 1
                             highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음 
-                            
-   
-                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) # 노란색으로 표시
-                            pre_frame_count = frame_count
-                            
-                            
-
-                        else :
-                            print("Home팀 골에어리어에 공이 진입했습니다.", frame_count)                      
-                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (22, 219, 29), 2) # 초록색으로 표시
-                            pre_frame_count = frame_count
-                
-                    # Away팀의 '골 에어리어'에 공이 진입한 경우 초록색으로 표시 (가로 1000일 경우: 100이하, 900이상)
-                    elif ball_x[frame_count] <= width * 0.1 : 
-                        
-                        is_in_goalnet = False 
-                        invisible = frame_count - pre_frame_count
-                       
-                            
-                        if invisible > fps :# '골 에어리어' 영역에서 영상의 '프레임률(fps)' 이상 보이지 않는다면 공은 골 안에 있음 
-                            is_in_goalnet = True
                     
-                        # '골'인 경우 노란색으로 표시
-                        if is_in_goalnet == True  :         #if ball_x == 947 and ball_y ==289 :
-                            print('Away팀 골인입니다!!!!!', frame_count)
-                            print('invisible term: ', invisible)
-                                
-                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) # 노란색으로 표시
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 255), 2) # 빨간색으로 표시
                             pre_frame_count = frame_count
+                            
+                            
+                    # Away팀의 골인 경우 
+                    elif ball_x[frame_count] <= goalnet_width-5 : 
+                        if height * 0.5 - (goalnet_height/2) <= ball_y[frame_count] <= height * 0.5 + (goalnet_height/2) : # 국제 규격에 맞춤
+                            
+                            print('Away팀 골인입니다!!!!!', frame_count)
+                            
+                            cv2.putText(frame, 'Away team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
+                            show_goal_frame = 1
                             highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음
                             
-         
-                        else :
-                            print("Away팀 골에어리어에 공이 진입했습니다.", frame_count)
-                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (22, 219, 29), 2) # 초록색으로 표시
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 255), 2) # 빨간색으로 표시
                             pre_frame_count = frame_count
                     
                 
-                    # 골에어리어에 공이 진입하지도 않았고, '골'도 아닌 경우
+                    # '골'이 아닌 경우
                     else : 
-                
-                        cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 255), 2)
-                        pre_frame_count = frame_count
+                        # 패널티 에어리어에 진입시
+                        if ball_is_in_penalty_area(ball_x[frame_count], ball_y[frame_count], stadium_width, goalnet_width, goalnet_height, width, height) == True : 
+                            highlight_goal_fail_point = frame_count
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) #노란색 
+                            
+                        else :
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 0), 2) # 검은색
+                            
 
                         # rectangle(): 직사각형을 그리는 함수-길
                         #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길
@@ -462,7 +524,8 @@ if __name__ == '__main__':
                 print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
                 
             coords_string = coords_string+str(int(box[1]))+','+str(int(box[0]))+'\n'  # coords_string 스트링에 좌표값을 누적시킴
-            #골인 경우 2초 동안 화면에 보여주기 위함######################### 
+            
+            #골인 경우 2초 동안 화면에 출력해주기 위함
             if 1 <=show_goal_frame <= fps * 2 :
                 if show_goal_frame != 1 :
                     cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
@@ -490,22 +553,34 @@ if __name__ == '__main__':
             cv2.imshow('MainWindow', frame)
             #cv2.imshow('PathMap',pathmap)
             cv2.imshow('Radar',radar)
+         
+            # 영상 일시 정지
+            key = cv2.waitKey(1) & 0xFF
+            if key == 32: # space 키   
+                cv2.waitKey(0)
+                
+            # 종료 
+            if key == 27:  # esc키 
+                cv2.destroyAllWindows() # 화면 종료해주기
+                break    
             
-            if cv2.waitKey(1) & 0xFF == ord('p'):  #incase Esc is pressed
-                cv2.putText(frame, 'drow new box!!',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
+            ################################################ 트래커가 선수객체 놓쳤을 경우###########################################
+            
+            if key == ord('p'):  # 'p' 키
+                cv2.putText(frame, 'Draw new box!!',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
                 cv2.imshow('MainWindow', frame)
-                #cv2.waitKey(0)
+                
                 if player <= flag : 
                     bbox = createBBox.select_bbox(player_num, home, player_team, video_stream, frame);
                 else :
                     bbox = createBBox.select_bbox(player_num, away, player_team, video_stream, frame);
                 tracker = cv2.TrackerCSRT_create()
                 tracker.init(frame, bbox)
+                
+            ##################################################################################################################
             
-            # quit on ESC button
-            if cv2.waitKey(1) & 0xFF == 27:  #incase Esc is pressed
-                cv2.destroyAllWindows() # 화면 종료해주기
-                break
+            
+             
         
         avg_speed = accumulate_speed / (frame_count/fps)
         avg_speed = round(avg_speed,1)
@@ -535,7 +610,7 @@ if __name__ == '__main__':
         if(not(coords_string=='')) :
             heatmap.printHeatMap(height,width)
             
-         ########################## 공 점유율 계산 알고리즘 ###############################################
+        ################################ 공 점유율 계산 알고리즘 ###############################################
         if player >= flag + 1 : # A팀 3명, B팀 5명으로 경기할 경우 -> flag = 3 
             ball_share_B.append(ball_touch)   
             print('B팀 ', player-flag, '번째 선수 개인의 공 점유 프레임 수 : ', ball_share_B[player-flag-1]) # 0, 1...
@@ -548,7 +623,7 @@ if __name__ == '__main__':
             print('A팀 공 점유 프레임 수 누적값: ', sum_ball_A)
             
         #############################################################################################
-
+        
     
 
     # 최종 데이터를 DB로 전송할 부분
@@ -587,98 +662,15 @@ if __name__ == '__main__':
     print('B팀 공 점유율: ', sum_ball_B, '  (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     print('---------------------------------------------------------------------------------------------------')
     
-    ##########################################################################################################
-    ##########################################하이라이트 추출 알고리즘#################################################
     
-    
-    print('\n')
-    print('하이라이트 추출 시작.....')
-    
-    ########################Goal.mov영상 생성#######################
-    # 골을 인식한 프레임이 영상에서 몇 초쯤인지 계산
-    videoFps = video_stream.get(cv2.CAP_PROP_FPS)   # 1초에 지나가는 프레임 수(fps)
-    point1 = int (highlight_goal_point / videoFps )
-    
-    # 골을 인식한 프레임 앞으로 3초, 뒤로 2초
-    start = point1 - 3
-    end = point1 + 2
-    
-    # 영상의 start부터 end까지 영역을 자름 (초 기준)
-    ffmpeg_extract_subclip(video_path, start, end, targetname="../result/Goal.mov") 
-    
-    ####################Goal_zoom1.mov 영상 생성######################
-    video_stream = cv2.VideoCapture('../result/Goal.mov')
-
-    #재생할 파일의 넓이와 높이
-    width = video_stream.get(cv2.CAP_PROP_FRAME_WIDTH)
-    height = video_stream.get(cv2.CAP_PROP_FRAME_HEIGHT)
-
-    #print("재생할 파일 넓이, 높이 : %d, %d"%(width, height))
-
-    fourcc = cv2.VideoWriter_fourcc(*'DIVX')
-    out1 = cv2.VideoWriter('../result/Goal_zoom1.mov', fourcc, 30.0, (int(width), int(height)))
-    out2 = cv2.VideoWriter('../result/Goal_zoom2.mov', fourcc, 30.0, (int(width), int(height)))
-
-
-    while(video_stream.isOpened()):
-        ret, frame = video_stream.read()
-    
-        if ret == False:
-            break;
-        # out1에 해당
-        scale =50
-        height, width, channel = frame.shape
-        centerX, centerY = int(height*0.5), int(width*0.75)  #골인시 줌 위치 
-        radiusX, radiusY = int(scale*height/100), int(scale*width/100)
-    
-        minX,maxX=centerX-radiusX,centerX+radiusX
-        minY,maxY=centerY-radiusY,centerY+radiusY
-    
-        cropped = frame[minX:maxX, minY:maxY]
-        resized_cropped = cv2.resize(cropped, (width, height))    
+    #하이라이트 추출
+    if highlight_goal_point != 0: 
+        print('\n')
+        print('하이라이트 추출 시작.....')
+        highlight.makeHighlight(video_stream, video_path, highlight_goal_point) # 모듈 호출
         
-        out1.write(resized_cropped)
-        
-        # out2에 해당
-        scale2 = 40
-        height2, width2, channel2 = frame.shape
-        centerX2, centerY2 = int(height2*0.5), int(width2*0.75)  #골인시 줌 위치 
-        radiusX2, radiusY2 = int(scale2*height2/100), int(scale2*width2/100)
-    
-        minX2,maxX2=centerX2-radiusX2,centerX2+radiusX2
-        minY2,maxY2=centerY2-radiusY2,centerY2+radiusY2
-    
-        cropped2 = frame[minX2:maxX2, minY2:maxY2]
-        resized_cropped2 = cv2.resize(cropped2, (width2, height2))    
-        
-        out2.write(resized_cropped2)
-
-        if cv2.waitKey(1) & 0xFF == ord('q'):
-            break
-    
-    video_stream.release()
-    out1.release()
-    out2.release()
-    cv2.destroyAllWindows()
-    ######################################Highlight.mov###################################
-    
-    # concat함수를 이용해 비디오를 합쳐주기
-    clip1 = VideoFileClip('../result/Goal.mov')
-    clip2 = VideoFileClip('../result/Goal_zoom1.mov')
-    clip3 = VideoFileClip('../result/Goal_zoom2.mov')
-    
-    final_clip = concatenate_videoclips([clip1, clip2, clip3])
-    final_clip.write_videofile('../result/Highlight.mov', codec='libx264') # 코텍 적어줘야
 
     
-    print('하이라이트 영상 생성 완료.....')
-    #test용 코드
-    #print(highlight_goal_point, ' ', start, ' ', end) 
-    
-    ##########################################################################################################
-
-
-  
 
 
 # 사각형의 중심 좌표

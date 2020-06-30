@@ -14,12 +14,9 @@ videoPath = '1분.avi'   # 연수체육관에서 찍은 영상
 # Create a video capture object to read videos 
 cap = cv2.VideoCapture(videoPath)  #비디오를 읽는 함수-길
 
+pre_frame_cnt = 0
 frame_cnt =0
 succes_rate = 0 # test
-##################################
-#pre_frame_cnt =0 # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
-#ball_frame_cnt = 0 # 공을 인식한 프레임만 저장
-##################################
 black = 106
 white = 213
 
@@ -152,19 +149,21 @@ while(1):
             # 첫 프레임
             if(frame_cnt == 0) : 
                 str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(frame_cnt)+'\n'
+                pre_frame_cnt = frame_cnt
             # 두번째 프레임부터
             else :
                 #str_coord = str_coord+'\n' # 전 좌표 저장
-                str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(frame_cnt)+'\n'
+                str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(pre_frame_cnt)+'\n'
+                
             
-       
        
         
         # 화면에 출력 및 좌표 저장
         if(check) :                 
             print('r = ', r, '     frame_cnt = ', frame_cnt, '          ',' x = ', ball_x,'      y = ', ball_y,'    ', (frame[ball_y][ball_x][0]), (frame[ball_y][ball_x][1]), (frame[ball_y][ball_x][2]))                          
             str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(frame_cnt)+'\n'  # str_coord 스트링에 좌표값을 누적시킴
-        
+            pre_frame_cnt = frame_cnt
+            
             cv2.circle(frame, (ball_x, ball_y), 7, (0, 0, 255), 2)
             cv2.circle(gray, (ball_x, ball_y), 7, (0, 0, 255), 2)
             succes_rate+= 1 #testss
@@ -189,5 +188,7 @@ file.write(str_coord)
 file.close()
 
 print(succes_rate, '\n') #test
+print(frame_cnt, '\n')
+
 
 cv2.destroyAllWindows()

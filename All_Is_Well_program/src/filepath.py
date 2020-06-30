@@ -5,7 +5,7 @@ class OpenPath:
     def __init__(self):
         self.path = tk.Tk()
         self.path.withdraw()
-        self.video_path = filedialog.askopenfilename(initialdir ="./")
+        self.video_path = filedialog.askopenfilename(initialdir ="../sample_videos")
         self.path.destroy()
 
 #path_root=OpenPath()
