@@ -29,7 +29,7 @@ class PlayerNumber:
         self.away_box.grid(row=2, column=1,padx=5)
         self.away_box.current(0)
 
-        self.okButton=tk.Button(self.input_info, width=10, command=self.button_event, repeatdelay=1000, repeatinterval=100, text="SUBMIT")
+        self.okButton=tk.Button(self.input_info, width=10, command=self.button_event, repeatdelay=1000, repeatinterval=100, text="SUMBIT")
         self.okButton.grid(row=3 , column=1,pady=10)
 
         self.input_info.mainloop()
@@ -74,64 +74,55 @@ class PlayerSelect:
 
         self.selected_player = self.player_combobox()
         # print("TEST 2 "+self.selected_player) # Test Line 3
-        
-    def __del__(self):
-        print('PlayerSelect 객체 소멸자 호출 \n')
 
     def buttonOK_team(self):
-        self.pickTeam.destroy() #pickTeam
-        print('destroy 함')
-        
+        self.pick_team.destroy()
+
     def buttonOK_player(self):
-        self.pickPlayer.destroy()
-        
+        self.pick_player.destroy()
         
     def team_combobox(self):
-        self.pickTeam = tk.Tk()
-        self.pickTeam.geometry('230x60+50+50')
-        self.pickTeam.title("Team")
-        self.pickTeam.resizable(0,0)
+        self.pick_team = tk.Tk()
+        self.pick_team.geometry('230x60+50+50')
+        self.pick_team.title("Team")
+        self.pick_team.resizable(0,0)
 
         self.team_name = tk.StringVar()
 
-        self.top_label = tk.Label(self.pickTeam, text ="Choose your Team")
+        self.top_label = tk.Label(self.pick_team, text ="Choose your Team")
         self.top_label.pack(anchor="w",padx=5,pady=5)
 
-        self.team_box = ttk.Combobox(self.pickTeam, height=10,width = 20, values=self.team_list, state="readonly",textvariable=self.team_name)
+        self.team_box = ttk.Combobox(self.pick_team, height=10,width = 20, values=self.team_list, state="readonly",textvariable=self.team_name)
         self.team_box.pack(side="left",padx=5)
         self.team_box.current(0)
 
-        self.button_ok=tk.Button(self.pickTeam, width=5, command=self.buttonOK_team, repeatdelay=1000, repeatinterval=100, text="OK")
+        self.button_ok=tk.Button(self.pick_team, width=5, command=self.buttonOK_team, repeatdelay=1000, repeatinterval=100, text="OK")
         self.button_ok.pack(side="left", padx=5)
-        
-        print('before team_combobox \n')
-        self.pickTeam.mainloop() #### 여기가 이상함. 원래 팀 선택한 다음에 선수 선택하는 창이 떠야 하는데 안 뜸. 
-        print('after team_combobox \n')
-        
+
+        self.pick_team.mainloop()
+
         return self.team_name.get()
     
     def player_combobox(self):
-        self.pickPlayer = tk.Tk() 
-        self.pickPlayer.geometry('230x60+50+50')
-        self.pickPlayer.title("Player")
-        self.pickPlayer.resizable(0,0)
+        self.pick_player = tk.Tk() 
+        self.pick_player.geometry('230x60+50+50')
+        self.pick_player.title("Player")
+        self.pick_player.resizable(0,0)
 
         self.player_name = tk.StringVar()
 
-        self.top_label = tk.Label(self.pickPlayer, text ="Choose your Player")
+        self.top_label = tk.Label(self.pick_player, text ="Choose your Player")
         self.top_label.pack(anchor="w",padx=5,pady=5)
 
-        self.player_box = ttk.Combobox(self.pickPlayer, height=10,width = 20, values=self.player_list, state="readonly",textvariable=self.player_name)
+        self.player_box = ttk.Combobox(self.pick_player, height=10,width = 20, values=self.player_list, state="readonly",textvariable=self.player_name)
         self.player_box.pack(side="left",padx=5)
         self.player_box.current(0)
 
-        self.button_ok=tk.Button(self.pickPlayer, width=5, command=self.buttonOK_player, repeatdelay=1000, repeatinterval=100, text="OK")
+        self.button_ok=tk.Button(self.pick_player, width=5, command=self.buttonOK_player, repeatdelay=1000, repeatinterval=100, text="OK")
         self.button_ok.pack(side="left", padx=5)
 
-        print('before player_combobox \n')
-        self.pickPlayer.mainloop()
-        print('after player_combobox \n')
-        
+        self.pick_player.mainloop()
+
         return self.player_name.get()
 
 
