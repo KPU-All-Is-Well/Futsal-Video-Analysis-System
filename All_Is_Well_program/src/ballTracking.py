@@ -7,8 +7,8 @@ import collections
 import math
 
 # 테스트 영상들 
-videoPath = '../sample_videos/YEONSU_44s.avi'   # 연수체육관에서 찍은 영상
-#videoPath = '../sample_videos/22s.mov'   # 연수체육관에서 찍은 영상
+#videoPath = '../sample_videos/YEONSU_44s.avi'   # 연수체육관에서 찍은 영상
+videoPath = '../sample_videos/22s.mov'   # 3차 데모에서 사용한 영상 22초짜리 
 #videoPath = '../sample_videos/3rd_demo.mov'   # 3차 데모에서 사용한 영상
                   
 

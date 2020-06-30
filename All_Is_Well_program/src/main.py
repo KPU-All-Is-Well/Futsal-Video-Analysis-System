@@ -169,7 +169,6 @@ if __name__ == '__main__':
         en_name = str(executeSQL.EngName(player_id))
 
         ############################################################
-
         
         # 히트맵창의 배경이 될 이미지 지정
         pitch_image = cv2.imread('../image/heatmap2.png')
@@ -245,7 +244,7 @@ if __name__ == '__main__':
         # 프레임 속 골대의 너비, 높이 계산 
         goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
         goalnet_height = calculate_goalnet_size(stadium_width, stadium_height, width, height, 0)
-        printf('실제 골대 크기에서 프레임 크기로 반환 \n')
+        print('실제 골대 크기에서 프레임 크기로 반환 \n')
         print('골대 너비 : ', goalnet_width, '\n')
         print('골대 높이 : ', goalnet_height, '\n')
         
