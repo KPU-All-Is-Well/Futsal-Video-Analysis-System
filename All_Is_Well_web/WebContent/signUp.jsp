@@ -33,10 +33,6 @@
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
 
-	<!--[if lt IE 9]>
-		<script src="js/vendor/html5shiv.min.js"></script>
-		<script src="js/vendor/respond.min.js"></script>
-	<![endif]-->
 	
 </head>
  
@@ -62,16 +58,7 @@
 			</div>
         </div>
         
-        <!--  배경음악 끊기지 않게...
-		<frameset rows="100%,0%" frameborder=0 frame=0 border=0>
-  		<frame src="welcome.jsp" marginwidth=0>
-  		<frame align=left src="videos/video.mp4">
-		</frameset>
-		-->
 
-
-     
-        
      <!-- -----------------------------------------------jQuery Files ------------------------------------------------------------------>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>

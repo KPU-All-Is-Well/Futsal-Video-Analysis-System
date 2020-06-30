@@ -10,8 +10,8 @@
 <body>
 	<%
 		Connection conn = null;
-		
-		 String url = "jdbc:mysql://15.164.30.158: 3306/AIWUserDB"; 
+	/* 15.164.30.158 */
+		 String url = "jdbc:mysql://localhost:AIWUserDB"; 
 		
 		String user = "sk";
 		String password = "1234";
