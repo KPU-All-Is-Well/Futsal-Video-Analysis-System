@@ -18,6 +18,7 @@ import pymysql                              # python에서 MySQL을 사용할 �
 import createBBox                           # 관심구역 지정 모듈     
 import selectGUI                            # GUI 생성 모듈
 import highlight                            # 하이라이트 추출 모듈
+import ballTracking                         # 공 인식 및 추적 모듈
 
 from moviepy.editor import *                                     # moviepy 라이브러리 :
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip # 하이라이트 영상 추출을 위해 구간 자르는 라이브러리 
@@ -111,6 +112,9 @@ if __name__ == '__main__':
     video_object = filepath.OpenPath()
     video_path = video_object.video_path
     
+    # 공을 추적하고 결과를 텍스트로 저장함 // 시간 오래걸릴땐 주석처리
+    ballTracking.track_ball(video_path)
+    
    
     ######################################################
     player_number = selectGUI.PlayerNumber()
@@ -132,9 +136,10 @@ if __name__ == '__main__':
     
     past_box = []
 
+    # kpu 풋살장 3068*1590 / 연수풋살장 3800*1800 / 평균 4000 * 2000
     # 일단 하드코딩 GUI로 구현예정
-    stadium_width = 3068
-    stadium_height = 1590
+    stadium_width = 3800
+    stadium_height = 1800
     
     ######################################################
     
@@ -236,10 +241,6 @@ if __name__ == '__main__':
         arrow_tail= Point(x=0,y=0)
         
         ball_x,ball_y,ball_frame_count = readBallCoord() # 공의 좌표, 공이 인식된 프레임 읽어오기
-        
-        # 일단 하드코딩 GUI로 구현예정
-        stadium_width = 4000
-        stadium_height = 2000
         
         # 프레임 속 골대의 너비, 높이 계산 
         goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
