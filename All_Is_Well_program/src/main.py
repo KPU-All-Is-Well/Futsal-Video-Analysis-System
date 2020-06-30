@@ -106,6 +106,58 @@ def readBallCoord() : # ball_coord.txt 파일에서 공 좌표 읽어오는 함�
     y, x, z = np.genfromtxt('../result/ball_coord.txt', delimiter=',', unpack=True,dtype=int)
     return (x,y, z)
 
+def ball_is_in_penalty_area(ball_x, ball_y, stadium_width, goalnet_width, goalnet_height, width, height) : 
+    
+    # 국제 규격의 패널티 거리 : 600cm 
+    width_rate = 600 / stadium_width 
+    frame_600 = width * width_rate
+       
+       
+    # 왼쪽 페널티 영역    
+    left_center_x1 = goalnet_width
+    left_center_y1 = height/2 - goalnet_height/2
+    x1 = left_center_x1 - ball_x
+    y1 = left_center_y1 - ball_y
+    
+    left_center_x2 = goalnet_width
+    left_center_y2 = height/2 + goalnet_height/2
+    x2 = left_center_x2 - ball_x
+    y2 = left_center_y2 - ball_y
+    
+    left_rect_width = goalnet_width + frame_600
+    left_rect_height1 = height/2 - goalnet_height/2 
+    left_rect_height2 = height/2 + goalnet_height/2
+    
+    if (math.sqrt(math.pow(x1,2) + math.pow(y1,2)) <= frame_600  or
+            math.sqrt(math.pow(x2,2) + math.pow(y2,2)) <= frame_600 or
+            (ball_x <= left_rect_width and left_rect_height1 <= ball_y <= left_rect_height2) ) :
+        return True 
+   
+    
+    #오른쪽 페널티 영역
+    right_center_x3 = width - goalnet_width
+    right_center_y3 = height/2 - goalnet_height/2   
+    x3 = right_center_x3 - ball_x
+    y3 = right_center_y3 - ball_y
+    
+    right_center_x4 = width - goalnet_width
+    right_center_y4 = height/2 + goalnet_height/2
+    x4 = right_center_x4 - ball_x
+    y4 = right_center_y4 - ball_y
+    
+    right_rect_width = width - (goalnet_width + frame_600)
+    right_rect_height1 = height/2 - goalnet_height/2 
+    right_rect_height2 = height/2 + goalnet_height/2
+    
+    if (math.sqrt(math.pow(x3,2) + math.pow(y3,2)) <= frame_600  or
+            math.sqrt(math.pow(x4,2) + math.pow(y4,2)) <= frame_600 or
+            (right_rect_width <= ball_x  and right_rect_height1 <= ball_y <= right_rect_height2) ) :
+        return True 
+    else :
+        return False
+
+
+
 if __name__ == '__main__':
 
     # 영상 파일 경로를 GUI로 입력받음
@@ -118,8 +170,13 @@ if __name__ == '__main__':
     # 영상의 헤드, 성공여부, 프레임값, 높이, 너비, 영상 fps, 4분기 간격 반환
     success, frame, height, width, fps, interval = init_video(video_stream) 
     
+    # kpu 풋살장 3068*1590 / 연수풋살장 3800*1800 / 평균 4000 * 2000
+    # 일단 하드코딩 GUI로 구현예정
+    stadium_width = 3800
+    stadium_height = 1800
+    
     # 공을 추적하고 결과를 텍스트로 저장함 // 시간 오래걸릴땐 주석처리
-    ballTracking.track_ball(video_path)
+    #ballTracking.track_ball(video_path)
    
     ######################################################
     player_number = selectGUI.PlayerNumber()
@@ -141,10 +198,15 @@ if __name__ == '__main__':
     
     past_box = []
 
-    # kpu 풋살장 3068*1590 / 연수풋살장 3800*1800 / 평균 4000 * 2000
-    # 일단 하드코딩 GUI로 구현예정
-    stadium_width = 3800
-    stadium_height = 1800
+    # 프레임 속 골대의 너비, 높이 계산 
+    goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
+    goalnet_height = calculate_goalnet_size(stadium_width, stadium_height, width, height, 0)
+    print('실제 골대 크기에서 프레임 크기로 반환 \n')
+    print('골대 너비 : ', goalnet_width, '\n')
+    print('골대 높이 : ', goalnet_height, '\n')
+
+
+
     
     ######################################################
     
@@ -153,6 +215,9 @@ if __name__ == '__main__':
         
         # 영상 파일 경로를 통해 video_stream을 읽어옴
         video_stream = cv2.VideoCapture(video_path) 
+        
+        # 영상의 헤드, 성공여부, 프레임값, 높이, 너비, 영상 fps, 4분기 간격 반환
+        success, frame, height, width, fps, interval = init_video(video_stream) 
         
         
         ############################################################
@@ -243,8 +308,8 @@ if __name__ == '__main__':
         
         ball_touch = 0                  # roi로 선택한 선수가 공을 점유한 프레임 수(볼 터치 수)를 카운팅함 
         show_goal_frame = 0             # 골인 경우 화면에 fps 프레임수 동안 "골인입니다" 표시하기 위해
-        pre_frame_count =0                # 목적: 공이 인식된 현 프레임과 이전 프레임의 '차'를 계산
         highlight_goal_point = 0        # 하이라이트 추출시 골인인 프레임을 중심으로 앞뒤로 6초동안 보여주기
+        highlight_goal_fail_point = 0   # 하이라이트 추출시 골 시도했지만 실패인 프레임을 중심으로 앞뒤로 6초동안 보여주기
 
 
 
@@ -254,14 +319,6 @@ if __name__ == '__main__':
         arrow_tail= Point(x=0,y=0)
         
         ball_x,ball_y,ball_frame_count = readBallCoord() # 공의 좌표, 공이 인식된 프레임 읽어오기
-        
-        # 프레임 속 골대의 너비, 높이 계산 
-        goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
-        goalnet_height = calculate_goalnet_size(stadium_width, stadium_height, width, height, 0)
-        print('실제 골대 크기에서 프레임 크기로 반환 \n')
-        print('골대 너비 : ', goalnet_width, '\n')
-        print('골대 높이 : ', goalnet_height, '\n')
-        
         
         # 영상이 동작하는 동안 반복
         while True:
@@ -333,7 +390,7 @@ if __name__ == '__main__':
                 if ball_frame_count[frame_count] == frame_count :
                 
                     # Home 팀의 골인 경우
-                    if ball_x[frame_count] >= width - goalnet_width :  
+                    if ball_x[frame_count] >= width - goalnet_width + 5 : # 골대(국제 규격)에 공이 진입시 (오차 5감안)
                         if height * 0.5 - (goalnet_height/2) <= ball_y[frame_count] <= height * 0.5 + (goalnet_height/2) : # 국제 규격에 맞춤
                             
                             print('Home팀 골인입니다!!!!!', frame_count)
@@ -342,12 +399,12 @@ if __name__ == '__main__':
                             show_goal_frame = 1
                             highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음 
                     
-                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) # 노란색으로 표시
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 255), 2) # 빨간색으로 표시
                             pre_frame_count = frame_count
                             
                             
                     # Away팀의 골인 경우 
-                    elif ball_x[frame_count] <= goalnet_width : 
+                    elif ball_x[frame_count] <= goalnet_width-5 : 
                         if height * 0.5 - (goalnet_height/2) <= ball_y[frame_count] <= height * 0.5 + (goalnet_height/2) : # 국제 규격에 맞춤
                             
                             print('Away팀 골인입니다!!!!!', frame_count)
@@ -356,15 +413,20 @@ if __name__ == '__main__':
                             show_goal_frame = 1
                             highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음
                             
-                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) # 노란색으로 표시
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 255), 2) # 빨간색으로 표시
                             pre_frame_count = frame_count
                     
                 
                     # '골'이 아닌 경우
                     else : 
-                
-                        cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 0), 2)
-                        pre_frame_count = frame_count
+                        # 패널티 에어리어에 진입시
+                        if ball_is_in_penalty_area(ball_x[frame_count], ball_y[frame_count], stadium_width, goalnet_width, goalnet_height, width, height) == True : 
+                            highlight_goal_fail_point = frame_count
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) #노란색 
+                            
+                        else :
+                            cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 0), 2) # 검은색
+                            
 
                         # rectangle(): 직사각형을 그리는 함수-길
                         #파라미터 (이미지, 왼쪽 위 좌표, 오른쪽 아래 좌표, 사각형 색깔, 사각형의 두께, ?? ) -길

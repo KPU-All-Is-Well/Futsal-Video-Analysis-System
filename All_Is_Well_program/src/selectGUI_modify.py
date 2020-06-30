@@ -5,7 +5,7 @@ import pymysql
 class PlayerNumber:
     def __init__(self):
         self.input_info = tk.Tk()
-        self.input_info.geometry('250x120+50+50')
+        self.input_info.geometry('300x240+580+280')
         self.input_info.title("Team")
         self.input_info.resizable(0,0)
 
@@ -22,15 +22,22 @@ class PlayerNumber:
         self.home_player=tk.StringVar()
         self.away_player=tk.StringVar()
 
-        self.home_box = ttk.Combobox(self.input_info, height=10,width = 20, values=self.number_list, state="readonly",textvariable=self.home_player)
-        self.home_box.grid(row=1, column=1,padx=5)
+        self.home_box = ttk.Combobox(self.input_info, height=10,width = 30, values=self.number_list, state="readonly",textvariable=self.home_player)
+        self.home_box.grid(row=1, column=1,padx=5, pady=5)
         self.home_box.current(0)
-        self.away_box = ttk.Combobox(self.input_info, height=10,width = 20, values=self.number_list, state="readonly",textvariable=self.away_player)
-        self.away_box.grid(row=2, column=1,padx=5)
+        self.away_box = ttk.Combobox(self.input_info, height=10,width = 30, values=self.number_list, state="readonly",textvariable=self.away_player)
+        self.away_box.grid(row=2, column=1,padx=5, pady=5)
+        self.away_box.current(0)
+        
+        self.away_box = ttk.Combobox(self.input_info, height=10,width = 30, values=self.number_list, state="readonly",textvariable=self.away_player)
+        self.away_box.grid(row=2, column=1,padx=5, pady=5)
+        self.away_box.current(0)
+        self.away_box = ttk.Combobox(self.input_info, height=10,width = 30, values=self.number_list, state="readonly",textvariable=self.away_player)
+        self.away_box.grid(row=2, column=1,padx=5, pady=5)
         self.away_box.current(0)
 
         self.okButton=tk.Button(self.input_info, width=10, command=self.button_event, repeatdelay=1000, repeatinterval=100, text="SUBMIT")
-        self.okButton.grid(row=3 , column=1,pady=10)
+        self.okButton.grid(row=5 , column=1,pady=10)
 
         self.input_info.mainloop()
 
@@ -133,6 +140,12 @@ class PlayerSelect:
 
         return self.player_name.get()
 
+
+if __name__ == "__main__":
+    player_number = PlayerNumber()
+    home = player_number.home_int
+    away = player_number.away_int
+    print("home : ",home, " / away : ", away)
 
 #player_number=PlayerNumber()
 #print(player_number.home_int, player_number.away_int)
