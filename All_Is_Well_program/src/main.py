@@ -270,11 +270,18 @@ if __name__ == '__main__':
         ##################################################이미 분석한 선수 박스 쳐 주는 부분 #########################################################
         if(player>1) :
             print(past_box)
+            i = 0
             for boxinfo in past_box:
                 box_p1 = (int(boxinfo[0]), int(boxinfo[1]))
                 box_p2 = (int(boxinfo[0] + boxinfo[2]), int(boxinfo[1] + boxinfo[3]))
-                cv2.rectangle(frame, box_p1, box_p2, (0,0,0), 2, 1) 
-                cv2.putText(frame, boxinfo[4]+' '+boxinfo[5], (int(boxinfo[0])-27, int(boxinfo[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (30,30,30), 2, cv2.LINE_AA)  #Multitracker_Window
+                i += 1
+                if i <= flag : # A팀 
+                    cv2.rectangle(frame, box_p1, box_p2, (0,0,255), 2, 1) #빨강
+                    cv2.putText(frame, boxinfo[4]+' '+boxinfo[5], (int(boxinfo[0])-27, int(boxinfo[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,255), 1, cv2.LINE_AA)  #Multitracker_Window
+                else : # B팀
+                    cv2.rectangle(frame, box_p1, box_p2, (255,0,1), 2, 1) #파랑
+                    cv2.putText(frame, boxinfo[4]+' '+boxinfo[5], (int(boxinfo[0])-27, int(boxinfo[1])-5), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (255,0,1), 1, cv2.LINE_AA)  #Multitracker_Window
+                
         ###################################################################################################################################
 
         
