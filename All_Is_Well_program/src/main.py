@@ -171,7 +171,7 @@ if __name__ == '__main__':
         ############################################################
         
         # 히트맵창의 배경이 될 이미지 지정
-        pitch_image = cv2.imread('../image/heatmap2.png')
+        pitch_image = cv2.imread('../image/pitch.png')
         pitch_image = cv2.resize(pitch_image,(width,height))
         
         # 선수 좌표값을 저장할 파일

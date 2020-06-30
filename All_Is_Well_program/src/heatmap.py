@@ -32,7 +32,7 @@ def printHeatMap(image_x, image_y) :
     ext = ax.get_window_extent().transformed(plt.gcf().dpi_scale_trans.inverted())
 
     # 미리 지정한 pitch에 덮어씌우기
-    im = plt.imread('../image/heatmap2.png')
+    im = plt.imread('../image/pitch.png')
     ax.imshow(im, extent=[0, image_y, image_x,0 ])
 
     fig.savefig('../result/result_heatmap.png', bbox_inches=ext)
