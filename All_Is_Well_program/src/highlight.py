@@ -84,6 +84,7 @@ def makeHighlight(video_stream, video_path, highlight_goal_point) :
     cv2.destroyAllWindows()
     
     
+    
     ######################################Highlight.mov###################################
     
     # concat함수를 이용해 비디오를 합쳐주기

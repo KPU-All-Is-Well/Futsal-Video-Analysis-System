@@ -29,7 +29,7 @@ class PlayerNumber:
         self.away_box.grid(row=2, column=1,padx=5)
         self.away_box.current(0)
 
-        self.okButton=tk.Button(self.input_info, width=10, command=self.button_event, repeatdelay=1000, repeatinterval=100, text="SUMBIT")
+        self.okButton=tk.Button(self.input_info, width=10, command=self.button_event, repeatdelay=1000, repeatinterval=100, text="SUBMIT")
         self.okButton.grid(row=3 , column=1,pady=10)
 
         self.input_info.mainloop()
@@ -76,9 +76,11 @@ class PlayerSelect:
         # print("TEST 2 "+self.selected_player) # Test Line 3
 
     def buttonOK_team(self):
-        self.pick_team.destroy()
+        self.pick_team.quit()
+        self.pick_team.destroy() #pickTeam
 
     def buttonOK_player(self):
+        self.pick_player.quit()
         self.pick_player.destroy()
         
     def team_combobox(self):
@@ -99,7 +101,7 @@ class PlayerSelect:
         self.button_ok=tk.Button(self.pick_team, width=5, command=self.buttonOK_team, repeatdelay=1000, repeatinterval=100, text="OK")
         self.button_ok.pack(side="left", padx=5)
 
-        self.pick_team.mainloop()
+        self.pick_team.mainloop() #### 여기가 이상함. 원래 팀 선택한 다음에 선수 선택하는 창이 떠야 하는데 안 뜸. 
 
         return self.team_name.get()
     
