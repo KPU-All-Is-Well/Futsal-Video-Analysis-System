@@ -111,10 +111,15 @@ if __name__ == '__main__':
     # 영상 파일 경로를 GUI로 입력받음
     video_object = filepath.OpenPath()
     video_path = video_object.video_path
+            
+    # 영상 파일 경로를 통해 video_stream을 읽어옴
+    video_stream = cv2.VideoCapture(video_path)  
+ 
+    # 영상의 헤드, 성공여부, 프레임값, 높이, 너비, 영상 fps, 4분기 간격 반환
+    success, frame, height, width, fps, interval = init_video(video_stream) 
     
     # 공을 추적하고 결과를 텍스트로 저장함 // 시간 오래걸릴땐 주석처리
     ballTracking.track_ball(video_path)
-    
    
     ######################################################
     player_number = selectGUI.PlayerNumber()
@@ -144,24 +149,32 @@ if __name__ == '__main__':
     ######################################################
     
     for player in range(1, total_player+1): # 선수 1부터 total_player까지 반복문
-        
-        
+       
         
         # 영상 파일 경로를 통해 video_stream을 읽어옴
-        video_stream = cv2.VideoCapture(video_path)  
-     
-        # 영상의 헤드, 성공여부, 프레임값, 높이, 너비, 영상 fps, 4분기 간격 반환
-        success, frame, height, width, fps, interval = init_video(video_stream) 
-        
+        video_stream = cv2.VideoCapture(video_path) 
         
         
         ############################################################
         # 초기 로그인 모듈을 활용해 로그인을 진행하고 사용자의 아이디를 받아옴
         #player_id = LoginDB.login_function()
-        player_object = selectGUI.PlayerSelect()
-        player_id = player_object.selected_player
-        player_team = player_object.selected_team
-
+        
+        
+        # 팀선택과 플레이어선택을 나눌것임 
+        ###################################################
+        #기존코드
+        #player_object = selectGUI.PlayerSelect()
+        #player_id = player_object.selected_player
+        #player_team = player_object.selected_team
+        ###################################################
+        
+        if(player == 1 or (player==flag+1)) :
+            player_team = selectGUI.TeamSelect().selected_team
+        player_id = selectGUI.PlayerSelect(player_team).selected_player
+        
+        
+        
+        
         # 사용자 아이디를 바탕으로 PlayerTable을 생성하거나 접속함
         executeSQL.CreatePlayerTable(player_id)
         
@@ -350,7 +363,7 @@ if __name__ == '__main__':
                     # '골'이 아닌 경우
                     else : 
                 
-                        cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 255), 2)
+                        cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 0), 2)
                         pre_frame_count = frame_count
 
                         # rectangle(): 직사각형을 그리는 함수-길

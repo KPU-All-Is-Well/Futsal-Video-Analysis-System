@@ -164,7 +164,7 @@ def track_ball(video_path) :
                 str_coord = str_coord+str(ball_y)+','+str(ball_x)+','+str(frame_cnt)+'\n'  # str_coord 스트링에 좌표값을 누적시킴
                 pre_frame_cnt = frame_cnt
                 
-                cv2.circle(frame, (ball_x, ball_y), 7, (0, 0, 255), 2)
+                cv2.circle(frame, (ball_x, ball_y), 7, (0, 0, 0), 2)
                 cv2.circle(gray, (ball_x, ball_y), 7, (0, 0, 255), 2)
                 succes_rate+= 1 #test
             
