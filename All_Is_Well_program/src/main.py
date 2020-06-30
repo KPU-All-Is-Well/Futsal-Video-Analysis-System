@@ -575,9 +575,19 @@ if __name__ == '__main__':
             cv2.putText(result_window, str(top_speed) +'km/h',(263, 95), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
             cv2.putText(result_window, str(avg_speed) +'km/h',(485, 95), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
             
-            cv2.putText(result_window, str(walk_count),(65, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-            cv2.putText(result_window, str(jog_count),(263, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-            cv2.putText(result_window, str(sprint_count),(485, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            
+            if walk_count + jog_count + sprint_count == 0 :
+                walk_percent = 0
+                jog_percent = 0
+                sprint_percent = 0
+            else : 
+                walk_percent = round(walk_count / (walk_count + jog_count + sprint_count) * 100, 1)
+                jog_percent = round(jog_count / (walk_count + jog_count + sprint_count) * 100, 1)
+                sprint_percent = round(sprint_count / (walk_count + jog_count + sprint_count) * 100, 1)
+            
+            cv2.putText(result_window, str(walk_percent) + '%',(65, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(jog_percent)+ '%',(263, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(sprint_percent)+ '%',(485, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
             # +'km/h'
             #
             #cv2.putText(result_window, 'Average speed : '+str(avg_speed)+'km/h'+', Running Distance : '+str(accumulate_distance)+'m', (55, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
