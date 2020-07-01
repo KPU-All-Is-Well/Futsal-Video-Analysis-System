@@ -65,7 +65,7 @@ def makeHighlight(video_stream, video_path, highlight_goal_point) :
         # out2에 해당
         scale2 = 40
         height2, width2, channel2 = frame.shape
-        centerX2, centerY2 = int(height2*0.5), int(width2*0.75)  #골인식 줌 위치 
+        centerX2, centerY2 = int(height2*0.5), int(width2*0.8)  #골인식 줌 위치 
         radiusX2, radiusY2 = int(scale2*height2/100), int(scale2*width2/100)
     
         minX2,maxX2=centerX2-radiusX2,centerX2+radiusX2
