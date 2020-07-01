@@ -695,6 +695,8 @@ if __name__ == '__main__':
     # distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
     ##########################################################################################
         
+    end_window = np.ones((350,650,3), np.uint8)
+    end_window = end_window*240
     
     ########################################공 점유율 계산 알고리즘################################################
     #모듈화 예정
@@ -710,13 +712,20 @@ if __name__ == '__main__':
     print('A팀 공 점유율: ', sum_ball_A, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     
+    result_str = '-----------------------------------\n' \
+    +'  A Team Ball share : ' + str(sum_ball_A) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_A_res)+ '%\n' \
+    +'  B Team Ball share : ' + str(sum_ball_B) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_B_res) + '%\n' \
+    + '------------------------------------'
+    
          
     # A팀 선수 개인의 기여도 %
     print('\nA팀 선수 개인의 기여도')
+    result_str += '\nA Team player contribution rate\n  '
     j = 0
     for i in ball_share_A :   
         contribution_rate = round(i / sum_ball_A * 100, 1)
         print(past_box[j][5], ' : ', contribution_rate, '%')
+        result_str += past_box[j][5] + ' : ' + str(contribution_rate) + '%\n  '
         j += 1
         
     print('\n')
@@ -724,10 +733,15 @@ if __name__ == '__main__':
     # B팀 선수 개인의 기여도 % 
     j = 0
     print('B팀 선수 개인의 기여도')
+    result_str += '\nB Team player contribution rate\n  '
+
     for i in ball_share_B :
         contribution_rate = (round)(i / sum_ball_B * 100, 1)
         print(past_box[j+flag][5], ' : ', contribution_rate, '%')
+        result_str += past_box[j+flag][5] + ' : ' + str(contribution_rate) + '%\n  '
         j += 1
+    
+    
     
     
     print('---------------------------------------------------------------------------------------------------')
@@ -739,8 +753,15 @@ if __name__ == '__main__':
         print('하이라이트 추출 시작.....')
         highlight.makeHighlight(video_stream, video_path, highlight_goal_point) # 모듈 호출
         
-
     
+    y0, dy = 50, 30
+    for i, line in enumerate(result_str.split('\n')):
+           y = y0 + i*dy
+           cv2.putText(end_window, line, (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+           
+    #cv2.putText(end_window, result_str,(30, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+    cv2.imshow('end', end_window)
+    cv2.waitKey(0)    
 
 
 # 사각형의 중심 좌표

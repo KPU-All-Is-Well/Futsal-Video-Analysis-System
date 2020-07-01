@@ -5,7 +5,7 @@ import pymysql
 class PlayerNumber:
     def __init__(self):
         self.input_info = tk.Tk()
-        self.input_info.geometry('250x120+50+50')
+        self.input_info.geometry('250x120+650+330')
         self.input_info.title("Team")
         self.input_info.resizable(0,0)
 
@@ -65,7 +65,7 @@ class TeamSelect:
         
     def team_combobox(self):
         self.pick_team = tk.Tk()
-        self.pick_team.geometry('230x60+50+50')
+        self.pick_team.geometry('230x60+650+330')
         self.pick_team.title("Team")
         self.pick_team.resizable(0,0)
 
@@ -113,7 +113,7 @@ class PlayerSelect:
     
     def player_combobox(self):
         self.pick_player = tk.Tk() 
-        self.pick_player.geometry('230x60+50+50')
+        self.pick_player.geometry('230x60+650+330')
         self.pick_player.title("Player")
         self.pick_player.resizable(0,0)
 
