@@ -49,7 +49,7 @@ def makeHighlight(video_stream, video_path, highlight_goal_point) :
         if ret == False:
             break;
         # out1에 해당
-        scale =50
+        scale =45
         height, width, channel = frame.shape
         centerX, centerY = int(height*0.5), int(width*0.75)  #골인시 줌 위치 
         radiusX, radiusY = int(scale*height/100), int(scale*width/100)
@@ -63,9 +63,9 @@ def makeHighlight(video_stream, video_path, highlight_goal_point) :
         out1.write(resized_cropped)
         
         # out2에 해당
-        scale2 = 40
+        scale2 = 35
         height2, width2, channel2 = frame.shape
-        centerX2, centerY2 = int(height2*0.5), int(width2*0.8)  #골인식 줌 위치 
+        centerX2, centerY2 = int(height2*0.5), int(width2*0.75)  #골인식 줌 위치 
         radiusX2, radiusY2 = int(scale2*height2/100), int(scale2*width2/100)
     
         minX2,maxX2=centerX2-radiusX2,centerX2+radiusX2
