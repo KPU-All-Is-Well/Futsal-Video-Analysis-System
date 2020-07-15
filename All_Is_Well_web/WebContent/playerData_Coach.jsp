@@ -302,22 +302,10 @@
       <div class="container">
             <div class="row">
             
-				 <jsp:useBean id="counter" class="count.CounterBean" scope ="application"/>
-				<jsp:setProperty name ="counter" property="newVisit" value="1" /> 
-               <% 
-               
-               int count = counter.getVisitCount();
-               boolean flag = false; 
-               if (count == 1){
-            	   flag = true;
-               }
-               
-            %>
-  
+				 
+   
                
                <%
-               
-               //if(flag == true){
                for(int i=0; i <arrId.length ; i++){
             	%>   
  

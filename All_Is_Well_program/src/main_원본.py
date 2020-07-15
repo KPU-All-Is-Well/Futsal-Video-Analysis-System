@@ -197,10 +197,7 @@ if __name__ == '__main__':
     sum_ball_B = 0
     
     past_box = []
-    
-    #하이라이트 포인트의 프레임 위치를 저장할 리스트
-    highlight_point = []
-    
+
     # 프레임 속 골대의 너비, 높이 계산 
     goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
     goalnet_height = calculate_goalnet_size(stadium_width, stadium_height, width, height, 0)
@@ -326,9 +323,9 @@ if __name__ == '__main__':
         
         ball_touch = 0                  # roi로 선택한 선수가 공을 점유한 프레임 수(볼 터치 수)를 카운팅함 
         show_goal_frame = 0             # 골인 경우 화면에 fps 프레임수 동안 "골인입니다" 표시하기 위해
-        #highlight_goal_point = 0        # 하이라이트 추출시 골인인 프레임을 중심으로 앞뒤로 6초동안 보여주기
-        #highlight_goal_fail_point = 0   # 하이라이트 추출시 골 시도했지만 실패인 프레임을 중심으로 앞뒤로 6초동안 보여주기
-        
+        highlight_goal_point = 0        # 하이라이트 추출시 골인인 프레임을 중심으로 앞뒤로 6초동안 보여주기
+        highlight_goal_fail_point = 0   # 하이라이트 추출시 골 시도했지만 실패인 프레임을 중심으로 앞뒤로 6초동안 보여주기
+
 
 
         #좌표를 표현할 이름있는 튜플
@@ -415,9 +412,8 @@ if __name__ == '__main__':
                             
                             cv2.putText(frame, 'Home team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
                             show_goal_frame = 1
-                            #highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음 
-                            highlight_point.append((frame_count, 'goal'))
-                            
+                            highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음 
+                    
                             cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 255), 2) # 빨간색으로 표시
                             pre_frame_count = frame_count
                             
@@ -430,8 +426,7 @@ if __name__ == '__main__':
                             
                             cv2.putText(frame, 'Away team Goal!! ',(250, 276), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0,0,255), 2, cv2.LINE_AA)
                             show_goal_frame = 1
-                            #highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음
-                            highlight_point.append((frame_count, 'goal'))
+                            highlight_goal_point = frame_count # 골인을 인식한 프레임을 하이라이트 기준으로 삼음
                             
                             cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 0, 255), 2) # 빨간색으로 표시
                             pre_frame_count = frame_count
@@ -441,8 +436,7 @@ if __name__ == '__main__':
                     else : 
                         # 패널티 에어리어에 진입시
                         if ball_is_in_penalty_area(ball_x[frame_count], ball_y[frame_count], stadium_width, goalnet_width, goalnet_height, width, height) == True : 
-                            #highlight_goal_fail_point = frame_count
-                            highlight_point.append((frame_count, 'fail'))
+                            highlight_goal_fail_point = frame_count
                             cv2.circle(frame, (ball_x[frame_count], ball_y[frame_count]), 5, (0, 228, 255), 2) #노란색 
                             
                         else :
@@ -701,6 +695,8 @@ if __name__ == '__main__':
     # distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
     ##########################################################################################
         
+    end_window = np.ones((350,710,3), np.uint8)
+    end_window = end_window*240
     
     ########################################공 점유율 계산 알고리즘################################################
     #모듈화 예정
@@ -716,13 +712,20 @@ if __name__ == '__main__':
     print('A팀 공 점유율: ', sum_ball_A, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     
+    result_str = '-----------------------------------\n' \
+    +'  A Team Ball share : ' + str(sum_ball_A) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_A_res)+ '%\n' \
+    +'  B Team Ball share : ' + str(sum_ball_B) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_B_res) + '%\n' \
+    + '------------------------------------'
+    
          
     # A팀 선수 개인의 기여도 %
     print('\nA팀 선수 개인의 기여도')
+    result_str += '\nA Team player contribution rate\n  '
     j = 0
     for i in ball_share_A :   
         contribution_rate = round(i / sum_ball_A * 100, 1)
         print(past_box[j][5], ' : ', contribution_rate, '%')
+        result_str += past_box[j][5] + ' : ' + str(contribution_rate) + '%\n  '
         j += 1
         
     print('\n')
@@ -730,21 +733,36 @@ if __name__ == '__main__':
     # B팀 선수 개인의 기여도 % 
     j = 0
     print('B팀 선수 개인의 기여도')
+    result_str += '\nB Team player contribution rate\n  '
+
     for i in ball_share_B :
         contribution_rate = (round)(i / sum_ball_B * 100, 1)
         print(past_box[j+flag][5], ' : ', contribution_rate, '%')
+        result_str += past_box[j+flag][5] + ' : ' + str(contribution_rate) + '%\n  '
         j += 1
+    
+    
     
     
     print('---------------------------------------------------------------------------------------------------')
     
     
     #하이라이트 추출
-    if len(highlight_point) != 0: 
+    if highlight_goal_point != 0: 
         print('\n')
         print('하이라이트 추출 시작.....')
-        highlight.makeHighlight(video_stream, video_path, highlight_point) # 모듈 호출
+        highlight.makeHighlight(video_stream, video_path, highlight_goal_point) # 모듈 호출
         
+    
+    y0, dy = 50, 30
+    for i, line in enumerate(result_str.split('\n')):
+           y = y0 + i*dy
+           cv2.putText(end_window, line, (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+           
+    #cv2.putText(end_window, result_str,(30, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+    cv2.imshow('end', end_window)
+    cv2.waitKey(0)    
+
 
 # 사각형의 중심 좌표
 # center_x = left+w / 2
