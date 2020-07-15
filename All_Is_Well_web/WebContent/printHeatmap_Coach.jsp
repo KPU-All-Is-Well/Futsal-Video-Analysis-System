@@ -337,6 +337,7 @@ try{
     	  String mainPosition = rs.getString("mainPosition"); //메인 포지션
     	  String name = rs.getString("name"); //이름
           String id = rs.getString("id"); //id
+         // String team = rs.getString("team"); //team
           
           
           
