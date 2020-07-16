@@ -138,4 +138,5 @@ def CommitResult(player_id, avg_speed, top_speed, distance, cal, walk_weight, jo
     cursor.execute(insert_data,insert_image)
     connect.commit()
 
+def CloseConnect():
     connect.close()
