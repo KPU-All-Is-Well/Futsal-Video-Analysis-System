@@ -36,6 +36,7 @@ def printHeatMap(image_x, image_y) :
     ax.imshow(im, extent=[0, image_y, image_x,0 ])
 
     fig.savefig('../result/result_heatmap.png', bbox_inches=ext)
+    plt.close(fig)
 
 if __name__ == "__main__":
     printHeatMap(337,600)   # 테스트용 하드코딩

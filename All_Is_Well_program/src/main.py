@@ -19,6 +19,7 @@ import createBBox                           # 관심구역 지정 모듈
 import selectGUI                            # GUI 생성 모듈
 import highlight                            # 하이라이트 추출 모듈
 import ballTracking                         # 공 인식 및 추적 모듈
+import graph                                # 그래프 생성 모듈
 
 from moviepy.editor import *                                     # moviepy 라이브러리 :
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip # 하이라이트 영상 추출을 위해 구간 자르는 라이브러리 
@@ -316,6 +317,9 @@ if __name__ == '__main__':
         walk_count=0
         jog_count=0
         sprint_count = 0
+        walk_percent = 0
+        jog_percent = 0
+        sprint_percent = 0
         distance_value = 0
         pathmap=pitch_image.copy()
         
@@ -326,6 +330,9 @@ if __name__ == '__main__':
         highlight_goal_point = 0        # 하이라이트 추출시 골인인 프레임을 중심으로 앞뒤로 6초동안 보여주기
         highlight_goal_fail_point = 0   # 하이라이트 추출시 골 시도했지만 실패인 프레임을 중심으로 앞뒤로 6초동안 보여주기
 
+        secs=0
+        sec_list=[]
+        speed_list=[]
 
 
         #좌표를 표현할 이름있는 튜플
@@ -486,8 +493,23 @@ if __name__ == '__main__':
                     avg_speed = round(avg_speed,1)
                 else :
                     avg_speed = 0
+                    
+                #속도 비율 계산    
+                if (walk_count + jog_count + sprint_count != 0) :
+                    walk_percent = round(walk_count / (walk_count + jog_count + sprint_count) * 100, 1)
+                    jog_percent = round(jog_count / (walk_count + jog_count + sprint_count) * 100, 1)
+                    sprint_percent = round(sprint_count / (walk_count + jog_count + sprint_count) * 100, 1)
+                
                 
                 last_coord = player_coord   # 과거 좌표 갱신
+                
+                secs+=1
+                sec_list.append(secs)
+                speed_list.append(speed)
+                
+                move_ratio=[walk_percent,jog_percent,sprint_percent]
+                
+                graph.drow_graph(sec_list,speed_list,move_ratio,en_name)
                 
                 #txt 로그로 남겨주는 부분
                 # f.write( 'Player '+str(i)+' x,y: '+str(int(box[0]))+','+str(int(box[1])) + '\n' )
@@ -501,7 +523,7 @@ if __name__ == '__main__':
                 arrow_tail = player_coord
 
 
-
+            ''' 속도 개선을 위해 잠시 pathmap을 넘기는 부분을 지움
             if((frame_count % (fps*10))==0) :     # 프레임기반 10초(fps)마다 동작하는 코드
                 if(frame_count==0) : 
                     pathmap_filename = '../result/pathmap_0secs.png'
@@ -512,7 +534,7 @@ if __name__ == '__main__':
 
                 # image를 base64형식으로 바꾸고 데이터 베이스에 저장
                 executeSQL.CommitPathmap(pathmap_filename,pathmap_table,play_id)
-
+            '''
 
             if((frame_count % interval)==0 and frame_count != 0) :     # 프레임기반 interval[현재는 30초(fps)]마다 동작하는 코드
                 interval_distance = accumulate_distance - temp_distance
@@ -537,7 +559,7 @@ if __name__ == '__main__':
                     executeSQL.CommitInterval(player_id, distance_colum, interval_distance, speed_colum, interval_avg_speed, play_id)
                 ##########################################################################################
                 print('5분 뛴 거리 추정치 : ', interval_distance, ' / 5분 뛴 속도 추정치 : ',interval_avg_speed,' km/h')
-                
+            
             coords_string = coords_string+str(int(box[1]))+','+str(int(box[0]))+'\n'  # coords_string 스트링에 좌표값을 누적시킴
             
             #골인 경우 2초 동안 화면에 출력해주기 위함
@@ -576,23 +598,9 @@ if __name__ == '__main__':
             cv2.putText(result_window, str(avg_speed) +'km/h',(485, 95), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
             
             
-            if walk_count + jog_count + sprint_count == 0 :
-                walk_percent = 0
-                jog_percent = 0
-                sprint_percent = 0
-            else : 
-                walk_percent = round(walk_count / (walk_count + jog_count + sprint_count) * 100, 1)
-                jog_percent = round(jog_count / (walk_count + jog_count + sprint_count) * 100, 1)
-                sprint_percent = round(sprint_count / (walk_count + jog_count + sprint_count) * 100, 1)
-            
             cv2.putText(result_window, str(walk_percent) + '%',(65, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
             cv2.putText(result_window, str(jog_percent)+ '%',(263, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
             cv2.putText(result_window, str(sprint_percent)+ '%',(485, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-            # +'km/h'
-            #
-            #cv2.putText(result_window, 'Average speed : '+str(avg_speed)+'km/h'+', Running Distance : '+str(accumulate_distance)+'m', (55, 60), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
-            #cv2.putText(result_window, 'Walk / Jog / Sprint Count: '+str(walk_count)+' / '+str(jog_count)+' / '+str(sprint_count), (55, 80), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
-            #cv2.putText(result_window, 'Ball Touch Count: '+str(ball_touch), (55, 100), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,255), 1, cv2.LINE_AA)
             
             ######################################################################################
 
@@ -611,6 +619,7 @@ if __name__ == '__main__':
             # 종료 
             if key == 27:  # esc키 
                 cv2.destroyAllWindows() # 화면 종료해주기
+                graph.destroy_graph()
                 break    
             
             ################################################ 트래커가 선수객체 놓쳤을 경우###########################################
@@ -673,6 +682,8 @@ if __name__ == '__main__':
             
         #############################################################################################
         
+        cv2.destroyAllWindows() # 화면 종료해주기
+        graph.destroy_graph()
     
 
         # 최종 데이터를 DB로 전송할 부분
@@ -694,7 +705,7 @@ if __name__ == '__main__':
         ##########################################################################################
         # distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
         ##########################################################################################
-            
+        
     end_window = np.ones((350,710,3), np.uint8)
     end_window = end_window*240
     
@@ -709,8 +720,8 @@ if __name__ == '__main__':
     
     print('\n')
     print('---------------------------------------------------------------------------------------------------')
-    print('A팀 공 점유율: ', sum_ball_A, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
-    print('B팀 공 점유율: ', sum_ball_B, ' % (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
+    print('A팀 공 점유율: ', sum_ball_A, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
+    print('B팀 공 점유율: ', sum_ball_B, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     
     result_str = '-----------------------------------\n' \
     +'  A Team Ball share : ' + str(sum_ball_A) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_A_res)+ '%\n' \
@@ -762,8 +773,9 @@ if __name__ == '__main__':
     #cv2.putText(end_window, result_str,(30, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
     cv2.imshow('end', end_window)
     cv2.waitKey(0)    
-
+    
     executeSQL.CloseConnect()
+
 
 # 사각형의 중심 좌표
 # center_x = left+w / 2
