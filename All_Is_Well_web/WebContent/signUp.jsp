@@ -45,13 +45,24 @@
 			<div class="text-center">
 				<div id="contents"> 
                 	<form method="post" action="signUp_Process.jsp"> 
-                		<div id="A"><p>이름: <input type="text" name="name"> </div>
-                		<div id="B"><p>메일: <input type="text" name="email"> </div>
-                		<div id="C"><p>팀명: <input type="text" name="team"> </div>
-                		<div id="D"><p>아이디: <input type="text" name="id"> </div>
-                		<div id="E"><p>비밀번호: <input type="password" name="passwd">
+                		
+                		<div style="padding-right:225px"><p>Name</div>
+                		<div id="A"> <input type="text" name="name" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
+                		
+                		<div style="margin-top:12px;padding-right:220px"><p>E-mail</div>
+                		<div id="B"><input type="text" name="email" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
+                		
+                		<div style="margin-top:12px;padding-right:228px"><p>Team</div>
+                		<div id="C"><input type="text" name="team" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
+                		
+                		<div style="margin-top:12px;padding-right:252px"><p>ID</div>
+                		<div id="D"><input type="text" name="id" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
+                		
+                		<div style="margin-top:12px;padding-right:200px"><p>Password</div>
+                		<div id="E"><input type="password" name="passwd" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"></div>
+         				
          				<div class="form-group">
-              				<p><input type="submit" value="확인">
+              				<div style="margin-top:25px;"><p><input type="submit" value="Next" style="margin-top:20px; width:290px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></div>
                			</div>
              		</form> 
 				</div>
