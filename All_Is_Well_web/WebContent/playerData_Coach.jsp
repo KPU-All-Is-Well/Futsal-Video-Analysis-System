@@ -274,9 +274,9 @@
  <div id="wrapper">  
  <div id="btn_group" style="text-align:center; "   >
 
-<a href="move2Profile.jsp"><button id="test_btn1" >Player </button>
-<a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
-<a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
+<a href="move2Profile.jsp"><button>Player </button>
+<a href="matchData_Coach.jsp"> <button >Match </button></a>
+<a href="printHeatmap_Coach.jsp"> <button >Position </button></a>
 </div>
  
  </html>

@@ -30,28 +30,20 @@
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
 <style> 	
-#test_btn1
-{ border-top-left-radius: 5px;
- border-bottom-left-radius: 5px;
-  margin-right:-4px;   
-  } 
-#test_btn2
-{ 
-  margin-left:-3px; 
-  }
-  #test_btn3
-{ border-top-right-radius: 5px;
- border-bottom-right-radius: 5px;
-  margin-left:-3px; 
-  }
-  
- #btn_group button
- {
-  border: 1px solid skyblue;
-  background-color: rgba(0,0,0,0);
+#btn_group button
+ {    
+ border: 1px solid black;
+  background-color: #090823;
    color: skyblue;
-    padding: 15px; 
-    } 
+    padding: 18px; 
+    margin-left: 8px;
+    width:380px; font-size:large; font-weight:bold; font-family: sans-serif;
+    border-top-left-radius: 10px;
+ border-bottom-left-radius: 10px; 
+  border-top-right-radius: 10px;
+ border-bottom-right-radius: 10px;       
+    
+ } 
  #btn_group button:hover
  { color:white; 
  background-color: skyblue;
