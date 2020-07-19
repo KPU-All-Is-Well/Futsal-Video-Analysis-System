@@ -41,10 +41,6 @@
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
 
-	<!--[if lt IE 9]>
-		<script src="js/vendor/html5shiv.min.js"></script>
-		<script src="js/vendor/respond.min.js"></script>
-	<![endif]-->
 
 </head> 
 
@@ -252,28 +248,22 @@
 	
 
 <style> 	
-#test_btn1
-{ border-top-left-radius: 5px;
- border-bottom-left-radius: 5px;
-  margin-right:-4px;   
-  } 
-#test_btn2
-{ 
-  margin-left:-3px; 
-  }
-  #test_btn3
-{ border-top-right-radius: 5px;
- border-bottom-right-radius: 5px;
-  margin-left:-3px; 
-  }
-  
- #btn_group button
- {
-  border: 1px solid skyblue;
-  background-color: rgba(0,0,0,0);
+
+#btn_group button
+ {    
+ border: 1px solid black;
+  background-color: #090823;
    color: skyblue;
-    padding: 15px; 
-    } 
+    padding: 18px; 
+    margin-left: 8px;
+    width:380px; font-size:large; font-weight:bold; font-family: sans-serif;
+    border-top-left-radius: 10px;
+ border-bottom-left-radius: 10px; 
+  border-top-right-radius: 10px;
+ border-bottom-right-radius: 10px;       
+    
+ } 
+
  #btn_group button:hover
  { color:white; 
  background-color: skyblue;
@@ -282,9 +272,9 @@
   
 
  <div id="wrapper">  
- <div id="btn_group" style="text-align:center; background-color:#090823"   >
+ <div id="btn_group" style="text-align:center; "   >
 
-<a href="move2Profile.jsp"><button id="test_btn1">Player </button>
+<a href="move2Profile.jsp"><button id="test_btn1" >Player </button>
 <a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
 <a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
 </div>
@@ -294,16 +284,12 @@
 <!----------------------------------------------선수들의 개인 프로필 출력 ---------------------------------------------------->
 
   <%@ page import="java.net.URLEncoder" %>
-<!-- conflict 해결
-  <section class="team_member section_padding padding_less_40">
-         <div class="container">
-          --> 
-<section class="section parallax" data-stellar-background-ratio="0.1 " >     
-      <div class="container">
+
+	
+	 <div id = "tmp"></div>	
+      <div class="container" style="margin-top:100px;">
             <div class="row">
-            
-				 
-   
+           
                
                <%
                for(int i=0; i <arrId.length ; i++){
@@ -384,8 +370,7 @@
                </div>
             </div>
          </div>
-      </section>
-      
+
 
 
 

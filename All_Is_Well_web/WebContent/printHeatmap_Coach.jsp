@@ -47,7 +47,7 @@
 <style>
 	body{
     background-color: #000000; 
-}
+	}
         .shadow{
             width:50%;
             height:50%;
@@ -122,11 +122,7 @@
     background: #f1f7ff;
 }
 
-	
-	
-	body{
-		background-color: #000000;
-	}
+
 </style>
 
 <body class="left-menu"  >
@@ -251,28 +247,21 @@
 	
 
 <style> 	
-#test_btn1
-{ border-top-left-radius: 5px;
- border-bottom-left-radius: 5px;
-  margin-right:-4px;   
-  } 
-#test_btn2
-{ 
-  margin-left:-3px; 
-  }
-#test_btn3
-{ border-top-right-radius: 5px;
- border-bottom-right-radius: 5px;
-  margin-left:-3px; 
-  }
-  
+
 #btn_group button
- {
-  border: 1px solid skyblue;
-  background-color: rgba(0,0,0,0);
+ {    
+ border: 1px solid black;
+  background-color: #090823;
    color: skyblue;
-    padding: 15px; 
-    } 
+    padding: 18px; 
+    margin-left: 8px;
+    width:380px; font-size:large; font-weight:bold; font-family: sans-serif;
+    border-top-left-radius: 10px;
+ border-bottom-left-radius: 10px; 
+  border-top-right-radius: 10px;
+ border-bottom-right-radius: 10px;       
+    
+ } 
  #btn_group button:hover
  { color:white; 
  background-color: skyblue;
@@ -280,10 +269,11 @@
 </style>
  
  <div id="wrapper"> 
- <div id="btn_group" style="text-align:center; background-color:#090823"   >
-<a href="move2Profile.jsp"><button id="test_btn1">Player </button> 
-<a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
-<a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
+ <div id= "temp"></div>
+ <div id="btn_group" style="text-align:center;"   >
+<a href="move2Profile.jsp"><button >Player </button> 
+<a href="matchData_Coach.jsp"> <button>Match </button></a>
+<a href="printHeatmap_Coach.jsp"> <button>Position </button></a>
 </div>
  
  </html>
@@ -291,7 +281,7 @@
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
  
         
-<section class="section parallax" data-stellar-background-ratio="0.1 " >
+
 <body>
 <%!
 	String src="data:image/png;base64,"; 
@@ -394,8 +384,8 @@ try{
     
 %>
 
-
-<div  style = text-align:center >
+<div id ="tmp"></div>
+<div  style = "text-align:center; margin-top:70px" >
 <div  style=color:white>
  <!-- 포지션별로 정렬해서 출력하는 알고리즘 -->
  
@@ -409,7 +399,7 @@ try{
 			if(i !=  listSrc.size() && arrPosition[i] != null){	//null일 경우는 이미 출력했다는 경우
 	%>
 			<div > <!-- 포지션은 파란색으로 강조 -->
-				<h2 style=color:skyblue><br><%=arrPosition[i]%></h2>
+				<h2 style="color:skyblue; margin-top : 50px"><br><%=arrPosition[i]%></h2>
 			</div>
 				<h3 style=color:white><br><%=arrName[i]%></h3>
 				<img src=<%=arrSrc[i]%>>
@@ -419,8 +409,8 @@ try{
 						if(arrPosition[i].equals(arrPosition[j])){ 
 	%>					
 							 <!-- 포지션 같다면 포지션명은 출력 생략 -->
-							<h3 style=color:white><br><%=arrName[j]%></h3>
-							<img src=<%=arrSrc[j]%>>	
+							<h3 style="color:white; margin-top : 50px"><br ><%=arrName[j]%></h3>
+							<img src=<%=arrSrc[j]%>>
 						
 	<% 				
 							// 동일한 string 값을 갖는 인덱스를 찾으면 null로 초기화
@@ -438,7 +428,7 @@ try{
 </div>
 </div>
 </body>
-</section>
+<!-- </section> -->
 
 
  

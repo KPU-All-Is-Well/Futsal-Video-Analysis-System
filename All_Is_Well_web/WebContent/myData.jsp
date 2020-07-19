@@ -94,23 +94,21 @@
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
 
 <style> 	
-#test_btn1
-{ border-top-left-radius: 5px;
- border-bottom-left-radius: 5px;
-  margin-right:-4px; 
-  } 
-#test_btn2
-{ border-top-right-radius: 5px;
- border-bottom-right-radius: 5px;
-  margin-left:-3px; 
-  }
- #btn_group button
- {
-  border: 1px solid skyblue;
-  background-color: rgba(0,0,0,0);
+
+#btn_group button
+ {    
+ border: 1px solid black;
+  background-color: #090823;
    color: skyblue;
-    padding: 5px; 
-    } 
+    padding: 18px; 
+    margin-left: 8px;
+    width:380px; font-size:large; font-weight:bold; font-family: sans-serif;
+    border-top-left-radius: 10px;
+ border-bottom-left-radius: 10px; 
+  border-top-right-radius: 10px;
+ border-bottom-right-radius: 10px;       
+    
+ } 
  #btn_group button:hover
  { color:white; 
  background-color: skyblue;
@@ -124,16 +122,18 @@
 </style>
 
  <div id="wrapper"> 
- <div id="btn_group" style="text-align:center">
- <a href="playerData.jsp"> <button id="test_btn1">Player Data </button></a> 
-<a href="teamData.jsp"> <button id="test_btn2">Team Data </button></a>
+ <div id="btn_group" style="text-align:center; ">
+ <a href="playerData.jsp"> <button>My Data </button></a> 
+<a href="teamData.jsp"> <button>Team Data </button></a>
 </div>
  
  </html>
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
-<div class= "relative" style="float: center;">
+ <div id = "tmp"></div>
+
+<div class= "relative" style="float: center;margin-top:100px;">
 <iframe name="f3" src="highchart/highchart_Spyder.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>

@@ -175,28 +175,21 @@
 		
 
 <style> 	
-#test_btn1
-{ border-top-left-radius: 5px;
- border-bottom-left-radius: 5px;
-  margin-right:-4px;   
-  } 
-#test_btn2
-{ 
-  margin-left:-3px; 
-  }
-#test_btn3
-{ border-top-right-radius: 5px;
- border-bottom-right-radius: 5px;
-  margin-left:-3px; 
-  }
   
-#btn_group button
- {
-  border: 1px solid skyblue;
-  background-color: rgba(0,0,0,0);
+ #btn_group button
+ {    
+ border: 1px solid black;
+  background-color: #090823;
    color: skyblue;
-    padding: 15px; 
-    } 
+    padding: 18px; 
+    margin-left: 8px;
+    width:380px; font-size:large; font-weight:bold; font-family: sans-serif;
+    border-top-left-radius: 10px;
+ border-bottom-left-radius: 10px; 
+  border-top-right-radius: 10px;
+ border-bottom-right-radius: 10px;       
+    
+ } 
  #btn_group button:hover
  { color:white; 
  background-color: skyblue;
@@ -204,20 +197,18 @@
 </style>
 
 <div id="wrapper">  
- <div id="btn_group" style="text-align:center; background-color:#090823"   >
-<a href="move2Profile.jsp"> <button id="test_btn1">Player </button></a> 
-<a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
-<a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
+ <div id="btn_group" style="text-align:center;"   >
+<a href="move2Profile.jsp"> <button>Player </button></a> 
+<a href="matchData_Coach.jsp"> <button>Match </button></a>
+<a href="printHeatmap_Coach.jsp"> <button>Position </button></a>
 </div>
  
  </html>
 
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
  
-        
-<section class="section parallax" data-stellar-background-ratio="0.1 ">
-
-			<div class="contatiner">
+			<div id ="tmp"></div>
+			<div class="contatiner" style = "margin-top:120px">
 				<div class="row">
 					<div class="col-md-8">
 	          <div class="section-title light-color text-center">
@@ -452,11 +443,6 @@
 					</div>
 				</div>
 			</div>
-		</section>
-
-
-
-
 
 
                       

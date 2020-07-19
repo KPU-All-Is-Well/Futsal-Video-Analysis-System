@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
@@ -45,6 +44,7 @@
 
 </head> 
 <!--ì¼ìª½ ëª©ì°¨ -->
+
 <style>
 	body{
 		background-color: #000000;
@@ -133,7 +133,7 @@
 						<!--Coach Note ëª©ì°¨ -->	
 						<li><a href="Feedback_coach.jsp">Coach Note</a></li>
 						
-						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->  
+						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->  
                         <li><a href="#">Contact</a></li>
 
                         <!--<li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li> -->
@@ -180,45 +180,42 @@
 <!-------------------------------------------------------------------- 버튼 팀, 선수, 포지션 -------------------------------------------------------------------------->
 
 <style> 	
-#test_btn1
-{ border-top-left-radius: 5px;
- border-bottom-left-radius: 5px;
-  margin-right:-4px; 
-  } 
-#test_btn2
-{ 
-  margin-left:-3px; 
-  }
-#test_btn3
-{ border-top-right-radius: 5px;
- border-bottom-right-radius: 5px;
-  margin-left:-3px; 
-  }
+
  #btn_group button
- {
-  border: 1px solid skyblue;
-  background-color: rgba(0,0,0,0);
+ {    
+ border: 1px solid black;
+  background-color: #090823;
    color: skyblue;
-    padding: 15px; 
-    } 
- #btn_group button:hover
+    padding: 18px; 
+    margin-left: 8px;
+    width:380px; font-size:large; font-weight:bold; font-family: sans-serif;
+    border-top-left-radius: 10px;
+ border-bottom-left-radius: 10px; 
+  border-top-right-radius: 10px;
+ border-bottom-right-radius: 10px;       
+    
+ }  
+  <!--버튼 눌렸을 때-->    
+#btn_group button:hover
  { color:white; 
  background-color: skyblue;
   } 
 </style>
+ 
   
-<div id="btn_group" style="text-align:center; background-color:#090823"  >
-<a href="move2Profile.jsp"><button id="test_btn1">Player </button>
-<a href="matchData_Coach.jsp"> <button id="test_btn2">Match </button></a>
-<a href="printHeatmap_Coach.jsp"> <button id="test_btn3">Position </button></a>
+<div id="btn_group" style="text-align:center; "  >
+	<a href="move2Profile.jsp"><button>Player </button>
+	<a href="matchData_Coach.jsp"> <button >Match </button></a>
+	<a href="printHeatmap_Coach.jsp"> <button>Position </button></a>
 </div>
  
  </html>
 
 <!----------------------------------------------------------------------- DB에서 읽은 그래프 --------------------------------------------------------->
-<section class="section parallax" data-stellar-background-ratio="0.1 ">
 
-<div style="float: center;">
+<div id ="temp"></div>
+
+<div style="float: center;margin-top:100px">
 <iframe name="f6" src="highchart/highchart_3D.jsp" width="1200" height="500" scrolling="no" frameborder="no">
  </iframe>
 </div>
@@ -253,7 +250,7 @@
 
                       
  </div>
- </section>
+
  
 <!--------------------------------------------------- end Content ------------------------------------------------------------------>
 
