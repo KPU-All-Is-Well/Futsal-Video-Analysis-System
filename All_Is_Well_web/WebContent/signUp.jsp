@@ -33,6 +33,34 @@
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
 
+	 <style>
+ #wrap{
+            width:530px;
+            margin-left:auto; 
+            margin-right:auto;
+            text-align:center;
+        }
+        
+        table{
+            margin-left:auto; 
+            margin-right:auto;
+            border:3px solid skywhite
+        }
+        
+        td,tr{
+            border:1px solid skywhite;
+            padding:5;
+      	  }
+        input{
+        margin-left:50px;
+        }
+        select
+        {
+          margin-left:50px;
+          
+        }
+
+</style>
 	
 </head>
  
@@ -41,29 +69,36 @@
 
            <!-- 감독 모드: 아이디, 이름, 비밀번호, 메일, 팀명 -->     
 		<div id="main">
-			
-			<div class="text-center">
+		 <div class="text-center">
 				<div id="contents"> 
                 	<form method="post" action="signUp_Process.jsp"> 
+                		<table>
+                		<tr>
+                		<td>ID</td>
+                		<td><input type="text" name="id" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </td>
+                		</tr>
+                		<tr>
+                		<td>Password</td>
+                		<td><input type="password" name="passwd" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"></td>
+         				</tr>
+                		<tr>
+                		<td>Name</td>
+                		<td><input type="text" name="name" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </td>
+                		</tr>
+                		<tr>
+                		<td>E-mail</td>
                 		
-                		<div style="padding-right:225px"><p>Name</div>
-                		<div id="A"> <input type="text" name="name" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
+                		<td><input type="text" name="email" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </td>
+                		<tr>
+                		<td>Team</td>
+                	    <td><input type="text" name="team" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </td>
                 		
-                		<div style="margin-top:12px;padding-right:220px"><p>E-mail</div>
-                		<div id="B"><input type="text" name="email" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
-                		
-                		<div style="margin-top:12px;padding-right:228px"><p>Team</div>
-                		<div id="C"><input type="text" name="team" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
-                		
-                		<div style="margin-top:12px;padding-right:252px"><p>ID</div>
-                		<div id="D"><input type="text" name="id" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
-                		
-                		<div style="margin-top:12px;padding-right:200px"><p>Password</div>
-                		<div id="E"><input type="password" name="passwd" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"></div>
-         				
+         				<tr>
          				<div class="form-group">
-              				<div style="margin-top:25px;"><p><input type="submit" value="Next" style="margin-top:20px; width:290px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></div>
+              				<td colspan="3"><div style="margin-top:25px;"><p><input type="submit" value="Next" style="margin-top:20px; width:250px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></td>
                			</div>
+               			</tr>
+               			</table>
              		</form> 
 				</div>
 			</div>

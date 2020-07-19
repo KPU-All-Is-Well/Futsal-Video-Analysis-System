@@ -49,10 +49,12 @@
         margin-left:auto; 
             margin-right:auto;
             border:3px solid skywhite
+            
         }
         
-        td{
-            border:1px solid skywhite
+        td,tr{
+            border:1px solid skywhite;
+          padding:5;
             
         }
         input{
@@ -75,35 +77,46 @@
          <div class="text-center">
             <div id="contents"> 
                    <form method="post" action="signUpPlayer_Process.jsp"> 
-                   	
-                   		<div style="padding-right:150px">
-                        <div><p>Name</div>
-                  	    <div id="A"> <input type="text" name="name" style="width:140px;border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
- 						</div>
-						
-						<div> 				
-                        <div><p>English Name</div>            
-                        <div id="B"> <input type="text" name="en_name" style="width:140px; border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
-						</div>
-          
+                   	<table>
+                   		
+                   		   <tr>
+                      <td>ID</td>
+                	  <td><input type="text" name="id" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </td>
+                		</tr>
+                	  <tr>
+                	  <td>Password</td>
+                	  <td><input type="password" name="passwd" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"></td>
+                	  </tr>
+                       <tr>
+                       
+						<tr>
+						<td>English Name</td>            
+                        <td><input type="text" name="en_name" style="  border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div></td>
+					
+          				</tr>
                     
-                      <div style="margin-top:12px;padding-right:228px"><p>Team</div>
-                	  <div id="C"><input type="text" name="team" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
-						
-						<div style="margin-top:12px;padding-right:200px"><p>Age</div>
-                		<div id="E"><input type="text" name="age" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"></div>
-         				 
-						<div style="margin-top:12px;padding-right:252px"><p>Height</div>
-                	   <div id="D"><input type="text" name="height" style="width:140px;border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
-                		
-                		<div style="margin-top:12px;padding-right:200px"><p>Weight</div>
-                		<div id="E"><input type="text" name="weight" style="width:140px;border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"></div>
+                    <tr>
+                    <td>Team</td>
+                	  <td><input type="text" name="team" style="  border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </td>
+						<tr>
+						<td>Age</td>
+                		<td><input type="text" name="age" style=" border: 1px solid; border-radius: 8px; background:rgba(140,140,140,0.5)"></td>
+         				 </tr>
+						<tr>
+						<td>Height</td>
+                	   <td><input type="text" name="height" style=" border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </td>
+                		</tr>
+                		<tr>
+                		<td>Weight</td>
+                		<td><input type="text" name="weight" style=" border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"></td>
+                		</tr>
          				
          				
-         				<div style="margin-top:12px;padding-right:200px"><p>Main Position</div>
-                		
+         				<tr>
+         				<td>Main Position</td>
+                		<td>
 						<div id = "mp">                		
-                          <select name = "mainPosition"  style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)">
+                          <select name = "mainPosition"  style="width:175px; border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)">
                             <option value = "골키퍼">골키퍼(GK)</option>
                             <option value = "센터백">센터백(CB)</option>
                             <option value = "스위퍼">스위퍼(SW)</option>
@@ -118,11 +131,13 @@
                         <option value = "윙어">윙어(LW/RW)</option>                         
                          </select>
                           </div>      
+                          </td>
+                          
                       
-                      
-                         <div style="margin-top:12px;padding-right:200px"><p>Sub Position</div>
-                       		<div id="sp">
-                          <select name = "subPosition" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)">
+                      <tr>
+                        <td><p>Sub Position</td>
+                       	<td>	<div id="sp">
+                          <select name = "subPosition" style="width:175px;border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)">
                          
                             <option value = "골키퍼">골키퍼(GK)</option>
                             <option value = "센터백">센터백(CB)</option>
@@ -138,20 +153,19 @@
                         <option value = "윙어">윙어(LW/RW)</option>                         
                          </select>
                       	</div>
-         				
-						
-                      <div style="margin-top:12px;padding-right:252px"><p>ID</div>
-                	  <div id="D"><input type="text" name="id" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
-                		
-                	  <div style="margin-top:12px;padding-right:200px"><p>Password</div>
-                	  <div id="E"><input type="password" name="passwd" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"></div>
+         				</td>
+						</tr>
+                   
                 	  
-                	    <div style="margin-top:12px;padding-right:220px"><p>E-mail</div>
-                      <div id="B"> <input type="text" name="email" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </div>
-                      
+                	  <tr>
+                	  <td>E-mail</td>
+                      <td><input type="text" name="email" style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"> </td>
+                      </tr>
 
-                        <div style="margin-top:25px;"><p><input type="submit" value="Next" style="margin-top:20px; width:290px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></div>
-    
+                     <tr>
+                     <td colspan="3"><input type="submit" value="Next" style="margin-top:20px; width:220px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></td>
+                     </tr>
+   						 </table>
                    </form> 
             </div>
          </div>
