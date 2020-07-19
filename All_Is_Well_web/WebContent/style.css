@@ -14328,7 +14328,7 @@ fieldset[disabled] .btn-default:focus,
 fieldset[disabled] .btn-default.focus,
 .btn-default {
     background-color: #c2d82e !important;
-    border-color: #c2d82e !important;
+    border-color: #8c8c8c !important;
     color: #ffffff !important;
 }
 

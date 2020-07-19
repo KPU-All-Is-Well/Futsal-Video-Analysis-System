@@ -52,15 +52,23 @@
 	<div id="main">
 		<div id="contents" > 
 			<form action="signIn_Coach_Process.jsp" method = "get">
-               	<p>&nbsp;&nbsp;&nbsp;&nbsp;Id &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  name="id"  style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)">            
-               	<div style="margin-top:10px;"><p>&nbsp;&nbsp;&nbsp;Password&nbsp;&nbsp;<input type="password"  name="passwd" style="border: 1px solid; border-radius: 8px; background:rgba(140,140,140,0.5)"></div>     
-               	
+			<table>
+             <tr>
+             <td>Id</td> <td><input type="text"  name="id"  style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)"></td>            
+               	</tr>
+               	<tr>
+               	<td>Password</td>
+               	<td><input type="password"  name="passwd" style="border: 1px solid; border-radius: 8px; background:rgba(140,140,140,0.5)"></td>
+               	     
+               	<tr>
                	<div class="form-group">
                		<div class="text-center">
-               			<div style="margin-top:25px;"><p><input type="submit" value="Next" style=" width:270px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></div>   
+               		<td colspan="2">	<div style="margin-top:25px;"><p><input type="submit" value="Next" style=" width:270px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></div></td>
+              
                		</div>
                	</div>
-               	   
+               	</tr>
+               	   </table>
              </form> 
 		</div> 
 	
