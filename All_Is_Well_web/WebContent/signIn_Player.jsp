@@ -53,12 +53,12 @@
 	<div id="main">
 		<div id="contents" > 
 			<form action="signIn_Player_Process.jsp" method = "get">
-               	<p>Id <input type="text"  name="id"  style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)">            
-               	<div style="margin-top:10px;"><p>Password<input type="password"  name="passwd" style="border: 1px solid; border-radius: 8px; background:rgba(140,140,140,0.5)"></div>     
+               	<p>&nbsp;&nbsp;&nbsp;&nbsp;Id &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="text"  name="id"  style="border: 1px solid; border-radius: 8px;background:rgba(140,140,140,0.5)">            
+               	<div style="margin-top:10px;"><p>&nbsp;&nbsp;&nbsp;Password&nbsp;&nbsp;<input type="password"  name="passwd" style="border: 1px solid; border-radius: 8px; background:rgba(140,140,140,0.5)"></div>     
                	
                	<div class="form-group">
                		<div class="text-center">
-               			<div style="margin-top:25px;"><p><input type="submit" value="Next" style=" width:290px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></div>   
+               			<div style="margin-top:25px;"><p><input type="submit" value="Next" style=" width:270px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></div>   
                		</div>
                	</div>
                	   
