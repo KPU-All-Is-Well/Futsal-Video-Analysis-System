@@ -44,6 +44,9 @@
 		margin: 0 auto;
 		width: 250px;
 	}
+	td,tr{
+padding:8;
+}
 </style>
 
 
@@ -63,7 +66,7 @@
                	<tr>
                	<div class="form-group">
                		<div class="text-center">
-               		<td colspan="2">	<div style="margin-top:25px;"><p><input type="submit" value="Next" style=" width:270px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></div></td>
+               		<td colspan="2"><input type="submit" value="Next" style=" width:270px; border: 1px solid; border-radius: 8px;  background:rgba(140,140,140,0.5)"></div></td>
               
                		</div>
                	</div>
