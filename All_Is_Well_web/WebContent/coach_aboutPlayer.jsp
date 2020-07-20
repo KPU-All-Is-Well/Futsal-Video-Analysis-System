@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
 <style> 	
+
 #btn_group button
  {    
  border: 1px solid black;

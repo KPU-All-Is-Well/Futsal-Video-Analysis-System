@@ -268,6 +268,17 @@
  { color:white; 
  background-color: skyblue;
   } 
+  
+  .card{
+    	border-top-left-radius: 10px;
+ 	border-bottom-left-radius: 10px; 
+  	border-top-right-radius: 10px;
+ 	border-bottom-right-radius: 10px; 
+ 	border:1px solid black;
+  
+  }
+  
+  
 </style>
   
 
@@ -293,22 +304,30 @@
                
                <%
                for(int i=0; i <arrId.length ; i++){
+            	   
+            	   if(i%3 == 1 && i != 1){
             	%>   
- 
-            	
-               <div class="col-sm-6 col-lg-3">
+            			<div id = "tmp"></div>
+ 						<div class="col-sm-6 col-lg-3" style="margin-top : 60px;" >
+            		<%
+            	   	}else{
+            	%>	
+               			<div class="col-sm-6 col-lg-3">
+               <%
+            	   }
+               %>
                   <div class="single_team_member single-home-blog">
-                     <div class="card">
-                        <img  src="images/team/<%=arrId[i] %>.png"  class="card-img-top" alt="blog" style="width: auto; height: 400px">
+                     <div class="card" >
+                        <img  src="images/team/<%=arrId[i] %>.png"  class="card-img-top" alt="blog" style="width: auto; height: 400px;">
                         <div class="card-body">
                            <div class="tean_content">
                               <a href="#" class="blog_item_date">
                                  
                               </a>
                               <a href="coach_aboutPlayer.jsp?name=<%=URLEncoder.encode(arrName[i], "UTF-8") %> ">                            
-                                 <h5 class="card-title"><%=arrName[i] %></h5>
+                                 <h5 class="card-title" ><%=arrName[i] %></h5>
                               </a>
-                              <p><%=arrPosition[i] %></p>
+                              <p style = "font-weight:bold; font-family: sans-serif;"><%=arrPosition[i] %></p>
                            </div>
                            <div class="tean_right_content">
                               <div class="header_social_icon">
