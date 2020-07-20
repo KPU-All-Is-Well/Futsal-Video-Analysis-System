@@ -402,7 +402,7 @@ try{
 				<h2 style="color:skyblue; margin-top : 50px"><br><%=arrPosition[i]%></h2>
 			</div>
 				<h3 style=color:white><br><%=arrName[i]%></h3>
-				<img src=<%=arrSrc[i]%>>
+				<img src=<%=arrSrc[i]%> style="width:400px">
 	<% 
 				for(int j=i+1; j < listSrc.size() ; j++){
 							
@@ -410,7 +410,7 @@ try{
 	%>					
 							 <!-- 포지션 같다면 포지션명은 출력 생략 -->
 							<h3 style="color:white; margin-top : 50px"><br ><%=arrName[j]%></h3>
-							<img src=<%=arrSrc[j]%>>
+							<img src=<%=arrSrc[j]%> style="width:400px" >
 						
 	<% 				
 							// 동일한 string 값을 갖는 인덱스를 찾으면 null로 초기화
