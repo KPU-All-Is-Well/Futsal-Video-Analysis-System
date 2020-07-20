@@ -234,8 +234,13 @@ if __name__ == '__main__':
         #player_team = player_object.selected_team
         ###################################################
         
-        if(player == 1 or (player==flag+1)) :
+        if(player == 1) :
             player_team = selectGUI.TeamSelect().selected_team
+            home_team = player_team
+        if (player==flag+1) :
+            player_team = selectGUI.TeamSelect().selected_team
+            away_team = player_team
+         
         player_id = selectGUI.PlayerSelect(player_team).selected_player
         
         
@@ -677,13 +682,12 @@ if __name__ == '__main__':
         else :
             ball_share_A.append(ball_touch) 
             print('A팀 ', player, '번째 선수 개인의 공 점유 프레임 수 : ', ball_share_A[player-1])
-            sum_ball_A += ball_share_A[player-1]
+            sum_ball_A += ball_share_A[player-1] 
             print('A팀 공 점유 프레임 수 누적값: ', sum_ball_A)
             
         #############################################################################################
-        
-        cv2.destroyAllWindows() # 화면 종료해주기
         graph.destroy_graph()
+        cv2.destroyAllWindows() # 화면 종료해주기
     
 
         # 최종 데이터를 DB로 전송할 부분
@@ -706,9 +710,9 @@ if __name__ == '__main__':
         # distance = 최종 뛴 거리, avg_speed = 평균속도, top_speed = 최고 속도
         ##########################################################################################
         
-    end_window = np.ones((350,710,3), np.uint8)
-    end_window = end_window*240
-    
+    #end_window = np.ones((350,710,3), np.uint8)
+    #end_window = end_window*240
+        
     ########################################공 점유율 계산 알고리즘################################################
     #모듈화 예정
     #for문이 다 돌은 뒤 공 점유율 계산
@@ -723,36 +727,54 @@ if __name__ == '__main__':
     print('A팀 공 점유율: ', sum_ball_A, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
     
-    result_str = '-----------------------------------\n' \
-    +'  A Team Ball share : ' + str(sum_ball_A) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_A_res)+ '%\n' \
-    +'  B Team Ball share : ' + str(sum_ball_B) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_B_res) + '%\n' \
-    + '------------------------------------'
+    # 결과창 주석처리(삭제예정)
+    #result_str = '-----------------------------------\n' \
+    #+'  A Team Ball share : ' + str(sum_ball_A) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_A_res)+ '%\n' \
+    #+'  B Team Ball share : ' + str(sum_ball_B) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_B_res) + '%\n' \
+    #+ '------------------------------------'
+    if(home_team is not None and away_team is not None) :
+        graph.drow_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res)
+        
+
     
-         
+    
+    home_contribution_rate_list=[]
+    home_en_name_list=[]
     # A팀 선수 개인의 기여도 %
     print('\nA팀 선수 개인의 기여도')
-    result_str += '\nA Team player contribution rate\n  '
+    #result_str += '\nA Team player contribution rate\n  '
     j = 0
     for i in ball_share_A :   
         contribution_rate = round(i / sum_ball_A * 100, 1)
         print(past_box[j][5], ' : ', contribution_rate, '%')
-        result_str += past_box[j][5] + ' : ' + str(contribution_rate) + '%\n  '
+        #result_str += past_box[j][5] + ' : ' + str(contribution_rate) + '%\n  '
+        home_en_name_list.append(past_box[j][5])
+        home_contribution_rate_list.append(contribution_rate)
         j += 1
         
     print('\n')
 
-    # B팀 선수 개인의 기여도 % 
+    # B팀 선수 개인의 기여도 % 출력
+    away_contribution_rate_list=[]
+    away_en_name_list=[]
     j = 0
     print('B팀 선수 개인의 기여도')
-    result_str += '\nB Team player contribution rate\n  '
+    #result_str += '\nB Team player contribution rate\n  '
 
     for i in ball_share_B :
         contribution_rate = (round)(i / sum_ball_B * 100, 1)
         print(past_box[j+flag][5], ' : ', contribution_rate, '%')
-        result_str += past_box[j+flag][5] + ' : ' + str(contribution_rate) + '%\n  '
+        #result_str += past_box[j+flag][5] + ' : ' + str(contribution_rate) + '%\n  '
+        away_en_name_list.append(past_box[j+flag][5])
+        away_contribution_rate_list.append(contribution_rate)
         j += 1
     
-    
+    if(ball_share_A is not None):
+        is_home = True
+        graph.drow_contribution_graph(is_home,home_team,home_en_name_list,home_contribution_rate_list)
+    if(ball_share_B is not None):
+        is_home = False
+        graph.drow_contribution_graph(is_home,away_team,away_en_name_list,away_contribution_rate_list)
     
     
     print('---------------------------------------------------------------------------------------------------')
@@ -764,14 +786,14 @@ if __name__ == '__main__':
         print('하이라이트 추출 시작.....')
         highlight.makeHighlight(video_stream, video_path, highlight_goal_point) # 모듈 호출
         
-    
-    y0, dy = 50, 30
-    for i, line in enumerate(result_str.split('\n')):
-           y = y0 + i*dy
-           cv2.putText(end_window, line, (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+    # 결과창 주석처리(삭제예정)
+    # y0, dy = 50, 30
+    # for i, line in enumerate(result_str.split('\n')):
+           # y = y0 + i*dy
+           # cv2.putText(end_window, line, (50, y ), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
            
     #cv2.putText(end_window, result_str,(30, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-    cv2.imshow('end', end_window)
+    #cv2.imshow('end', end_window)
     cv2.waitKey(0)    
     
     executeSQL.CloseConnect()
