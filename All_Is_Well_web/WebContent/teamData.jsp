@@ -208,39 +208,30 @@
 <!---------------------------------------------- DB에서 읽은 그래프 ---------------------------------------------------->
 
 
-<div id ="temp"></div>
-
 <div style="float: center;margin-top:100px">
-<iframe name="f5" src="highchart/highchart_Distance_Rank.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
+		<iframe name="f6" src="highchart/highchart_3D.jsp" width="1200" height="500" scrolling="no" frameborder="no"></iframe>
+	</div>
 
-<div style="float: center;">
-<iframe name="f6" src="highchart/highchart_3D.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
+	<div style="margin-top:80px">
+		<iframe name="f5" src="highchart/highchart_Distance_Rank.jsp" width="1000" height="400" scrolling="no" frameborder="no" style = "padding-left:300px;" ></iframe>
+	</div>
 
-<div style="float: center;">
-<iframe name="f6" src="highchart/highchart_Column.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
+	<div style="margin-top:100px">
+		<iframe name="f6" src="highchart/highchart_Column.jsp" width="1000" height="400" scrolling="no" frameborder="no" style = "padding-left:300px;"></iframe>
+	</div>
 
-<div style="float: center;">
-<iframe name="f6" src="highchart/highchart_Column_avg.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
-
-<div style="float: center;">
-<iframe name="f6" src="highchart/highchart_Fixed.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
+	<div style="margin-top:100px">
+		<iframe name="f6" src="highchart/highchart_Column_avg.jsp" width="1000" height="400" scrolling="no" frameborder="no" style = "padding-left:300px;"></iframe>
+	</div>
 
 
-<div style="float: center;">
-<iframe name="f6" src="highchart/highchart_BasicBar.jsp" width="1200" height="500" scrolling="no" frameborder="no">
- </iframe>
-</div>
+	<div style="margin-top:100px">
+		<iframe name="f6" src="highchart/highchart_BasicBar.jsp" width="1000" height="400" scrolling="no" frameborder="no" style = "padding-left:300px;"></iframe>
+	</div>
 
+	<div style="margin-top:100px">
+		<iframe name="f6" src="highchart/highchart_Fixed.jsp" width="1000" height="400" scrolling="no" frameborder="no" style = "padding-left:300px;"></iframe>
+	</div>
 
 
 
