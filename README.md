@@ -2,7 +2,7 @@
 
 ## Introduction
 
-**아마추어 풋살 분석 시스템**은 드론으로 촬영한 풋살 경기 영상을 영상처리 기술과 **All Is Well** 팀원들이 개발한 분석 알고리즘을 통해 선수와 팀 경기를 분석한다. 시스템은 크게 파이썬 분석 프로그램과 웹 서비스로 구성되어 있다. 파이썬 분석 프로그램을 통해 선수 개인의 데이터부터 경기 데이터까지 다음과 같은 다양하고 의미 있는 데이터를 추출한다.
+**아마추어 풋살 분석 시스템**은 드론으로 촬영한 풋살 경기 영상을 영상처리 기술과 **All Is Well** 팀원들이 개발한 분석 알고리즘을 통해 선수와 팀 경기를 분석한다. 시스템은 크게 **파이썬 분석 프로그램**과 **웹 서비스**로 구성되어 있다. 파이썬 분석 프로그램을 통해 선수 개인의 데이터부터 경기 데이터까지 아래와 같은 다양하고 의미 있는 데이터를 추출한다. 사용자는 [All Is Well](http://15.164.30.158:8080/All_Is_Well_Web/index.html) 웹 서비스 통해 분석된 데이터를 시각화된  그래프로 제공받는다. 웹은 감독 UI와 선수 UI를 분리하여 선수들은 개인의 역량을 분석 받고, 감독은 팀 운용과 전술을 세울 때 도움받을 수 있다.
 
   - **선수 개인의 최고 속도**
   - **평균 속도**
@@ -16,8 +16,9 @@
   - **선수 스탯**
   - **하이라이트 영상 자동 추출**
 
+## System Scenario
+![시나리오](https://user-images.githubusercontent.com/50011528/89124482-3b586d80-d512-11ea-8253-490af23f31fc.png)
 
-사용자는 [All Is Well](http://15.164.30.158:8080/All_Is_Well_Web/index.html) 웹 서비스 통해 분석된 데이터를 시각화된  그래프로 제공받는다. 웹은 감독 UI와 선수 UI를 분리하여 선수들은 개인의 역량을 분석 받고, 감독은 팀 운용과 전술을 세울 때 도움받을 수 있다.
 
 
 ## Purpose
@@ -39,8 +40,7 @@
 기존의 서비스는 선수와 팀 분석을 위해 무거운 GPS 장치를 부착하거나 고가의 고화질 카메라 혹은 축구 분석 전문가를 사용한다. 하지만 오직 영상 분석 시스템으로 다양한 데이터를 분석해서 제공한다.
 
 
-## System Scenario
-![시나리오](https://user-images.githubusercontent.com/50011528/89124482-3b586d80-d512-11ea-8253-490af23f31fc.png)
+
 
 
 ## Installation
@@ -114,7 +114,7 @@ python main.py
 
 ## Development Environment
 
-### Programming Language
+**Programming Language**
 
   - Web: HTML, CSS, Java Script, JSP   
   
@@ -122,7 +122,7 @@ python main.py
   
   - Python3     
 
-### Development Tool  
+**Development Tool**  
   
   - OS : Windows 10  
 
@@ -132,7 +132,7 @@ python main.py
 
   - Software Development Process : Agile, Scrums
 
-### Server
+**Server**
 
   - Cloud Server : Amazone Web Service
 
@@ -142,7 +142,7 @@ python main.py
   
   - Library : OpenCV, Highchart
 
-### Client
+**Client**
 
   - Browser : Chrome
   
@@ -151,24 +151,27 @@ python main.py
 
 ## Contributors
 
-#### [권한길](https://github.com/navigator515)  
+**[권한길](https://github.com/navigator515)**  
   - 웹 선수UI와 감독UI 개발
   - 웹 데이터 시각화 모듈 개발
   - 풋살 경기 영상 제작  
   - 선수 트래킹 모듈 개발   
-#### [이길형](https://github.com/2Gily)   
+  
+**[이길형](https://github.com/2Gily)**   
   - 파이썬 영상 분석 프로그램 GUI 개발  
   - 파이썬 프로그램 DB 연동 모듈 개발   
   - 선수 트래킹 모듈 개발  
   - DB 설계 및 구축       
-#### [정수경](https://github.com/Soogyung1106)  
+  
+**[정수경](https://github.com/Soogyung1106)**  
   - 웹 서버 및 DB 구축
   - 웹 선수UI와 감독UI 개발
   - 웹 데이터 시각화 모듈 개발    
   - 공 트래킹 모듈 개발
   - 하이라이트 추출 모듈 개발
   - 데이터 분석 알고리즘 개발 : 공 점유율, 선수의 팀 기여도
-#### [정하림](https://github.com/LightLamp1101)  
+  
+**[정하림](https://github.com/LightLamp1101)**  
   - 웹 서버 및 DB 구축
   - 선수 트래킹 모듈 개발  
   - 공 트래킹 모듈 개발      
