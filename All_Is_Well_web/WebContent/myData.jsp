@@ -72,7 +72,7 @@
 						<li><a href="#">Calendar</a></li>
 
 						<!--Coach Note  -->	
-						<li><a href="#">Coach Note</a></li>
+						<li><a href="player_coach_note.jsp">Coach Note</a></li>
 						
 						<!--Contact  -->  
                         <li><a href="#">Contact</a></li>

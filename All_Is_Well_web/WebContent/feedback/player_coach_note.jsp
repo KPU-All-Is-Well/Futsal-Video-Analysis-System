@@ -1,53 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<script language = "javascript"> // 자바 스크립트 시작
-
-
-/* function writeCheck()
-  {
-   var form = document.writeform;
-   
-   if( !form.match_name.value )   // form 에 있는 name 값이 없을 때
-   {
-    alert( "이름을 적어주세요" ); // 경고창 띄움
-    form.match_name.focus();   // form 에 있는 name 위치로 이동
-    return;
-   }
-   
-   if( !form.passwd.value )
-   {
-    alert( "비밀번호를 적어주세요" );
-    form.passwd.focus();
-    return;
-    
-   }
-   
-  if( !form.player.value )
-   {
-    alert( "선수 이름을  적어주세요" );
-    form.player.focus();
-    return;
-   }
- 
-  if( !form.feedback.value )
-   {
-    alert( "내용을 적어주세요" );
-    form.feedback.focus();
-    return;
-   }
- 
-  form.submit();
-  } */
- </script>
-
-
-
-<!doctype html>
-<!--[if IE 9]> <html class="no-js ie9 fixed-layout" lang="en"> <![endif]-->
-<!--[if gt IE 9]><!--> <html class="no-js " lang="en"> <!--<![endif]-->
+      <%@page import="java.sql.*" %>
+    <%@page import="java.util.*" %>
+<!DOCTYPE html>
+<html>
 <head>
 
-    <!-- Basic -->
+<title>Insert title here</title>
+ <!-- Basic -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
@@ -76,14 +36,13 @@
     <link rel="stylesheet" href="css/font-awesome.min.css">
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="style.css">
+</head>
 
-</head> 
 <style>
 	body{
 		background-color: #000000;
 	}
 </style>
-
 <body class="left-menu"  >
     <%@ include file="../dbconn.jsp" %>
     <div class="menu-wrapper">
@@ -142,80 +101,106 @@
 	
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
 	
+	<%!
+	//이름
+	String match_title;
+	String feed_name;
+	String memo;
+	
+	String[] arr_match_title;
+	String[] arr_feed_name;
+	String[] arr_memo;
+%>
+ <%
+ ArrayList<String> list_match_title = new ArrayList<>(); //각 이미지마다 src를 담을 ArrayList  (지역변수)
+ ArrayList<String> list_feed_name = new ArrayList<>(); //각 이미지마다 name를 담을 ArrayList  (지역변수)
+ ArrayList<String> list_memo = new ArrayList<>();
+ Statement stmt3=null;
+ 
+ 	request.setCharacterEncoding("UTF-8");
+ 
+	 String name = request.getParameter("name"); 
+	 
+	
+	 Connection con = null;
+	 ResultSet rs = null;
+	 ResultSet rs2 = null;
+	 
+	   
+	   
+       try {
+        //드라이버 호출, 커넥션 연결
+        Class.forName("com.mysql.jdbc.Driver").newInstance();
+        
+     
+        con = DriverManager.getConnection(
+                "jdbc:mysql://15.164.30.158:3306/AIWUserDB", "sk", "1234");
+        
+        String query = "select feed_name, match_title, memo from feed_table where feed_name = '"+ feed_name+"'"; //get data from ID table      
+        
+        PreparedStatement pstm = con.prepareStatement(query);
+        
+        rs = pstm.executeQuery();
+
+	   feed_name = (String)session.getAttribute("id");//로그인한 선수 id 받아와서 저장 
+	     
+	   while(rs.next()){
+           
+       	match_title=rs.getString("match_title");
+       	feed_name=rs.getString("feed_name");
+       	memo=rs.getString("memo");
+       	
+          try{
+          
+       	   list_match_title.add(match_title);
+       	   list_feed_name.add(feed_name);
+       	   list_memo.add(memo);
+       	 
+       	}catch(Exception e){ //Null Pointer Exception 발생시 ArrayList에 추가 안 함(→  null인 곳을 참조하게 되므로)
+     	  	//아무것도 x 
+       	}finally{
+       
+       	}	
+           
+       }//end while
+        
+
+ 
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        if (con != null) {
+            try {
+                con.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+ 
+    }
+    
+    
+    
+    
+ %>
+	
+	
 	
     <div id="wrapper">
 
-	
-            
-
-<!-------------------------------------------------------------------- 버튼 팀, 선수, 포지션 -------------------------------------------------------------------------->
-
-<style> 	
-
-</style>
-  
-
- 
- </html>
-
-<!----------------------------------------------------------------------- DB에서 읽은 그래프 --------------------------------------------------------->
 <section class="section parallax" data-stellar-background-ratio="0.1 ">
 
  
 <table>
-<form name=writeform method=post action="Feedback_coach_Process.jsp">
-  <tr>
-   <td>
-    <table width="100%" cellpadding="0" cellspacing="0" border="0">
-     <tr style="text-align:center; font-size:20px;">
-      <td>경기 피드백 </td>
-       </tr>
-    </table>
-   <table>
-     <tr>
-      <td>&nbsp;</td>
-      <td align="center">경기</td>
-      <td><input name="match_title" size="50" maxlength="100"></td>
-      <td>&nbsp;</td>
-     </tr>
-     <tr height="1" ><td colspan="4"></td></tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td align="center">선수</td>
-      <td><input name="feed_name" size="50" maxlength="50"></td>
-      <td>&nbsp;</td>
-     </tr>
-      
-     <tr height="1" ><td colspan="4"></td></tr>
-     <tr>
-      <td>&nbsp;</td>
-      <td align="center">피드백 </td>
-      <td><textarea name="memo" cols="51" rows="13"></textarea></td>
-      <td>&nbsp;</td>
-     </tr>
-     <tr height="1"><td colspan="4"></td></tr>
-     <tr height="1" ><td colspan="4"></td></tr>
-     <tr height="1" ><td colspan="4"></td></tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td align="center">비밀번호</td>
-      <td><input type="password" name="feed_passwd" size="50" maxlength="50"></td>
-      <td>&nbsp;</td>
-     </tr>
-     <tr align="center">
-      <td>&nbsp;</td>
-      <td colspan="2">
-      <input type=submit value="확인 " > 
-	<input type=button value="취소" OnClick="javascript:history.back(-1)">
-      <td>&nbsp;</td>
-      </tr>
-     
-    </table>
-    
-    
-   </td>
-  </tr>
-  </form>
+		  <tr>
+		    <th>NUM</th><th>DATE</th><th>MATCH</th><th>PLAYER</th><!-- <th>CONTENT</th> --><th>WRITER</th><th>HitCnt</th><th>SELECT</th>
+		  </tr>
+		 <tr>
+			<td><%= feed_name%></td> <td><%= match_title%></td><td><%= memo%></td>
+		</tr>
+		
+		
+
  </table>
  
 

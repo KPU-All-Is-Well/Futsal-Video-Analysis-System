@@ -104,29 +104,29 @@
 
                     <ul class="primary-menu">
 
-						<!--Home ëª©ì°¨ -->
+						<!--Home -->
                         <li class="child-menu"><a href="home.jsp">Home </a>
                           
 
-						<!--My Data ëª©ì°¨ -->
+						<!--My Data -->
                         <li class="child-menu"><a href="myData.jsp">My Data</a>
                           
                         </li>
 
-						<!--My Data ëª©ì°¨ -->
+						<!--My Video -->
                         <li class="child-menu"><a href="#">My Video</a>
                            
                                 
                         </li>
 
 					
-						<!--Calendar ëª©ì°¨ -->	
+						<!--Calendar -->	
 						<li><a href="#">Calendar</a></li>
 
-						<!--Coach Note ëª©ì°¨ -->	
-						<li><a href="#">Coach Note</a></li>
+						<!--Coach Note-->	
+						<li><a href="player_coach_note.jsp">Coach Note</a></li>
 						
-						<!--Contact ëª©ì°¨: ëë¥´ë©´ íì ì ë³´ -->  
+						<!--Contact  -->  
                         <li><a href="#">Contact</a></li>
 
                         <!--<li><a href="https://html.design">Download <i class="fa fa-shopping-bag"></i></a></li> -->

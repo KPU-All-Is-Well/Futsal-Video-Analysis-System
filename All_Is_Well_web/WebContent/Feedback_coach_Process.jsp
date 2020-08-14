@@ -10,7 +10,7 @@
 </head>
 
 <body>
-	<%@ include file="dbconn.jsp" %>
+	<%@ include file="../dbconn.jsp" %>
 	
 	<%
 		request.setCharacterEncoding("utf-8");
