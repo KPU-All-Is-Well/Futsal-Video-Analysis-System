@@ -288,11 +288,13 @@
 	Connection conn = null;
 	ResultSet rs = null;
     ResultSet rs2 = null;
+    ResultSet rs3 = null;
     
   	//List를 배열로 바꿔 담을 공간
     String[] arrSrc; 
     String[] arrName;
     String[] arrPosition;
+    String team; 
 
 %>
 
@@ -300,6 +302,7 @@
 ArrayList<String> listSrc = new ArrayList<>(); //각 이미지마다 src를 담을 ArrayList  (지역변수)
 ArrayList<String> listName = new ArrayList<>(); //각 이미지마다 name를 담을 ArrayList  (지역변수)
 ArrayList<String> listPosition = new ArrayList<>(); //각 이미지마다 main position를 담을 ArrayList  (지역변수)
+Statement stmt3 =null;
 
 try{
 	 //드라이버 호출, 커넥션 연결
@@ -311,11 +314,22 @@ try{
 
       request.setCharacterEncoding("utf-8");
       
-
-     //쿼리 1차, 2차로 나누어야 함 
-     
+	  // 감독이 속한 팀 정보 가져오기
+	  String coach_id = (String)session.getAttribute("id"); // 사용자가 로그인 할 때, 적은 정보를 가져오겠다.
+      String sql3 =  "select team from coachSignUpInfo where id = '" + coach_id + "'";
+ 	  stmt3 = conn.createStatement();
+      rs3 = stmt3.executeQuery(sql3); 
+      
+      
+      while(rs3.next()){
+     	team = rs3.getString("team");
+      }
+      
+      
+      
      //1차 쿼리 -> id와, name을 얻기 위한 
-      String query = "select mainPosition, id, name from playerSignUpInfo"; //get data from ID table
+     
+     String query = "select mainPosition, id, name from playerSignUpInfo where team = '"+team+"'"; //get data from ID table
     
       PreparedStatement pstm = conn.prepareStatement(query);
         
