@@ -751,7 +751,10 @@ if __name__ == '__main__':
     #result_str += '\nA Team player contribution rate\n  '
     j = 0
     for i in ball_share_A :   
-        contribution_rate = round(i / sum_ball_A * 100, 1)
+        if(sum_ball_A==0) : 
+            contribution_rate = 0
+        else :
+            contribution_rate = round(i / sum_ball_A * 100, 1)
         print(past_box[j][5], ' : ', contribution_rate, '%')
         #result_str += past_box[j][5] + ' : ' + str(contribution_rate) + '%\n  '
         home_en_name_list.append(past_box[j][5])
@@ -768,7 +771,10 @@ if __name__ == '__main__':
     #result_str += '\nB Team player contribution rate\n  '
 
     for i in ball_share_B :
-        contribution_rate = (round)(i / sum_ball_B * 100, 1)
+        if(sum_ball_B==0) :
+            contribution_rate = 0
+        else :
+            contribution_rate = (round)(i / sum_ball_B * 100, 1)
         print(past_box[j+flag][5], ' : ', contribution_rate, '%')
         #result_str += past_box[j+flag][5] + ' : ' + str(contribution_rate) + '%\n  '
         away_en_name_list.append(past_box[j+flag][5])
