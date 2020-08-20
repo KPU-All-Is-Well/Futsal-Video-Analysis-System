@@ -117,7 +117,7 @@
 	      
 					
 						<!--Calendar -->	
-						<li><a href="#">Calendar</a></li>
+						<li><a href="calendar/schedule_list.jsp">Calendar</a></li>
 
 						<!--Coach Note ¨ -->	
 						<li><a href="Feedback_coach.jsp">Coach Note</a></li>

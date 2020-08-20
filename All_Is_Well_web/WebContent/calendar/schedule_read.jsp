@@ -48,7 +48,7 @@
             <div class="vertical-header-wrapper">
                 <nav class="nav-menu">
                     <div class="logo">
-                        <a href="index.html"><img src="../images/rsz_1logo.png" alt=""> </a>
+                        <a href="../index.html"><img src="../images/rsz_1logo.png" alt=""> </a>
                     </div><!-- end logo -->
 
                     <div class="margin-block"></div>

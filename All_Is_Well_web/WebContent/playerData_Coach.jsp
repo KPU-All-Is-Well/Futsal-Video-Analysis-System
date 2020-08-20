@@ -156,7 +156,7 @@
                                 
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar</a>
+                                <a href="calendar/schedule_list.jsp" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Calendar</a>
                                 
                             </li>
                             <li class="dropdown">
@@ -203,7 +203,7 @@
 	      
 					
 						<!--Calendar ëª©ì°¨ -->	
-						<li><a href="#">Calendar</a></li>
+						<li><a href="calendar/schedule_list.jsp">Calendar</a></li>
 
 						<!--Coach Note ëª©ì°¨ -->	
 						<li><a href="Feedback_coach.jsp">Coach Note</a></li>
