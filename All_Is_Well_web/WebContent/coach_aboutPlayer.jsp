@@ -323,7 +323,7 @@
     <script src="videos/libs/modernizr.video.js"></script> 
     <script src="videos/libs/video_background.js"></script> 
     <script>
-        jQuery(document).ready(function {
+        jQuery(document).ready(function) {
             var Video_back = new video_background($("#home"), { 
                 "position": "absolute", //Follow page scroll
                 "z-index": "-1",        //Behind everything
