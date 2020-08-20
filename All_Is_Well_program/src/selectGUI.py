@@ -41,7 +41,9 @@ class PlayerNumber:
         self.input_info.destroy()
 
 class TeamSelect:
-    def __init__(self) :
+    def __init__(self, done_list) :
+        self.done_list = done_list
+
         self.connect = pymysql.connect(host='15.164.30.158', user='sk', password='1234', db='AIWUserDB',charset='UTF8MB4')
         self.cursor = self.connect.cursor()
 
@@ -55,7 +57,8 @@ class TeamSelect:
         self.team_list=[]
 
         for self.i in self.fetch_data:
-            self.team_list.append(self.i[0])
+            if self.i[0] not in done_list :
+                self.team_list.append(self.i[0])
 
         self.selected_team = self.team_combobox()
 
@@ -86,11 +89,14 @@ class TeamSelect:
         return self.team_name.get()
 
 class PlayerSelect:
-    def __init__(self, team):
+    def __init__(self, team, done_list):
+        self.done_list = done_list
+        
         # print("객체 생성") # Test Line 1
         ### 연결 MySQL 과 Tkinter GUI
         self.connect = pymysql.connect(host='15.164.30.158', user='sk', password='1234', db='AIWUserDB',charset='UTF8MB4')
         self.cursor = self.connect.cursor()
+
 
         self.sql_syntax='SELECT en_name FROM playersignupinfo WHERE team = "{0}"'.format(team)
 
@@ -99,11 +105,12 @@ class PlayerSelect:
 
         self.player_list=[]
 
+        
         for self.i in self.fetch_data:
-            self.player_list.append(self.i[0])
-
+            if self.i[0] not in done_list :
+                self.player_list.append(self.i[0])
+            
         self.selected_player = self.player_combobox()
-        # print("TEST 2 "+self.selected_player) # Test Line 3
 
     
     def buttonOK_player(self):

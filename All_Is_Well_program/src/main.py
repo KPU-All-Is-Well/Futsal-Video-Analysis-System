@@ -199,6 +199,9 @@ if __name__ == '__main__':
     
     past_box = []
 
+    done_player_list = []
+    done_team_list = []
+
     # 프레임 속 골대의 너비, 높이 계산 
     goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
     goalnet_height = calculate_goalnet_size(stadium_width, stadium_height, width, height, 0)
@@ -235,13 +238,14 @@ if __name__ == '__main__':
         ###################################################
         
         if(player == 1) :
-            player_team = selectGUI.TeamSelect().selected_team
+            player_team = selectGUI.TeamSelect(done_team_list).selected_team
             home_team = player_team
+            done_team_list.append(player_team)
         if (player==flag+1) :
-            player_team = selectGUI.TeamSelect().selected_team
+            player_team = selectGUI.TeamSelect(done_team_list).selected_team
             away_team = player_team
          
-        player_id = selectGUI.PlayerSelect(player_team).selected_player
+        player_id = selectGUI.PlayerSelect(player_team, done_player_list).selected_player
         
         
         
@@ -256,6 +260,8 @@ if __name__ == '__main__':
         play_id = executeSQL.PlayID(player_id)
         
         en_name = str(executeSQL.EngName(player_id))
+
+        done_player_list.append(en_name)
 
         ############################################################
         
@@ -745,7 +751,10 @@ if __name__ == '__main__':
     #result_str += '\nA Team player contribution rate\n  '
     j = 0
     for i in ball_share_A :   
-        contribution_rate = round(i / sum_ball_A * 100, 1)
+        if(sum_ball_A==0) : 
+            contribution_rate = 0
+        else :
+            contribution_rate = round(i / sum_ball_A * 100, 1)
         print(past_box[j][5], ' : ', contribution_rate, '%')
         #result_str += past_box[j][5] + ' : ' + str(contribution_rate) + '%\n  '
         home_en_name_list.append(past_box[j][5])
@@ -762,7 +771,10 @@ if __name__ == '__main__':
     #result_str += '\nB Team player contribution rate\n  '
 
     for i in ball_share_B :
-        contribution_rate = (round)(i / sum_ball_B * 100, 1)
+        if(sum_ball_B==0) :
+            contribution_rate = 0
+        else :
+            contribution_rate = (round)(i / sum_ball_B * 100, 1)
         print(past_box[j+flag][5], ' : ', contribution_rate, '%')
         #result_str += past_box[j+flag][5] + ' : ' + str(contribution_rate) + '%\n  '
         away_en_name_list.append(past_box[j+flag][5])
