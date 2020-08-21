@@ -353,6 +353,8 @@ if __name__ == '__main__':
         
         ball_x,ball_y,ball_frame_count = readBallCoord() # 공의 좌표, 공이 인식된 프레임 읽어오기
         
+        
+        
         # 영상이 동작하는 동안 반복
         while True:
             
@@ -380,6 +382,19 @@ if __name__ == '__main__':
             radar = pitch_image.copy()        
             cv2.circle(radar, player_coord, 10, (0,0,255), -1)
             
+            # 창 위치 지정
+            cv2.namedWindow("MainWindow")
+            cv2.namedWindow("Radar")
+            cv2.namedWindow("result")
+
+            # cv2.resizeWindow('Radar',width,400)
+            cv2.moveWindow("MainWindow", 0, 0)
+            cv2.moveWindow("Radar", 0, 546)
+            cv2.moveWindow("result", 1002, 546)
+            cv2.resizeWindow("result",920,500)
+            
+            
+
             
             #####################################공 점유율 알고리즘##########################################
             #모듈화 예정
@@ -520,7 +535,7 @@ if __name__ == '__main__':
                 
                 move_ratio=[walk_percent,jog_percent,sprint_percent]
                 
-                graph.drow_graph(sec_list,speed_list,move_ratio,en_name)
+                graph.draw_graph(sec_list,speed_list,move_ratio,en_name)
                 
                 #txt 로그로 남겨주는 부분
                 # f.write( 'Player '+str(i)+' x,y: '+str(int(box[0]))+','+str(int(box[1])) + '\n' )
@@ -722,10 +737,14 @@ if __name__ == '__main__':
     ########################################공 점유율 계산 알고리즘################################################
     #모듈화 예정
     #for문이 다 돌은 뒤 공 점유율 계산
-    ball_share_A_res = sum_ball_A / (sum_ball_A + sum_ball_B) * 100
-    ball_share_A_res = round(ball_share_A_res,1)
-    ball_share_B_res = sum_ball_B / (sum_ball_A + sum_ball_B) * 100
-    ball_share_B_res = round(ball_share_B_res,1)
+    if(sum_ball_A + sum_ball_B == 0):
+        ball_share_A_res = 0
+        ball_share_B_res = 0
+    else :
+        ball_share_A_res = sum_ball_A / (sum_ball_A + sum_ball_B) * 100
+        ball_share_A_res = round(ball_share_A_res,1)
+        ball_share_B_res = sum_ball_B / (sum_ball_A + sum_ball_B) * 100
+        ball_share_B_res = round(ball_share_B_res,1)
 
     
     print('\n')
@@ -738,8 +757,8 @@ if __name__ == '__main__':
     #+'  A Team Ball share : ' + str(sum_ball_A) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_A_res)+ '%\n' \
     #+'  B Team Ball share : ' + str(sum_ball_B) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_B_res) + '%\n' \
     #+ '------------------------------------'
-    if(home_team is not None and away_team is not None) :
-        graph.drow_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res)
+    if(home>0 and away>0) :
+        graph.draw_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res)
         
 
     
@@ -781,12 +800,12 @@ if __name__ == '__main__':
         away_contribution_rate_list.append(contribution_rate)
         j += 1
     
-    if(ball_share_A is not None):
+    if(home>0):
         is_home = True
-        graph.drow_contribution_graph(is_home,home_team,home_en_name_list,home_contribution_rate_list)
-    if(ball_share_B is not None):
+        graph.draw_contribution_graph(is_home,home_team,home_en_name_list,home_contribution_rate_list)
+    if(away>0):
         is_home = False
-        graph.drow_contribution_graph(is_home,away_team,away_en_name_list,away_contribution_rate_list)
+        graph.draw_contribution_graph(is_home,away_team,away_en_name_list,away_contribution_rate_list)
     
     
     print('---------------------------------------------------------------------------------------------------')
