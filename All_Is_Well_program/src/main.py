@@ -202,6 +202,8 @@ if __name__ == '__main__':
     done_player_list = []
     done_team_list = []
 
+    play_id_list=[]
+
     # 프레임 속 골대의 너비, 높이 계산 
     goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
     goalnet_height = calculate_goalnet_size(stadium_width, stadium_height, width, height, 0)
@@ -262,6 +264,8 @@ if __name__ == '__main__':
         en_name = str(executeSQL.EngName(player_id))
 
         done_player_list.append(en_name)
+
+        play_id_list.append(play_id)
 
         ############################################################
         
@@ -344,7 +348,6 @@ if __name__ == '__main__':
         secs=0
         sec_list=[]
         speed_list=[]
-
 
         #좌표를 표현할 이름있는 튜플
         Point = collections.namedtuple('Point',['x','y'])
@@ -751,6 +754,9 @@ if __name__ == '__main__':
     print('---------------------------------------------------------------------------------------------------')
     print('A팀 공 점유율: ', sum_ball_A, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
+
+    # DB game 테이블 데이터 커밋
+    executeSQL.CommitGameResult(home_team,away_team,ball_share_A_res,ball_share_B_res)
     
     # 결과창 주석처리(삭제예정)
     #result_str = '-----------------------------------\n' \
@@ -760,9 +766,6 @@ if __name__ == '__main__':
     if(home>0 and away>0) :
         graph.draw_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res)
         
-
-    
-    
     home_contribution_rate_list=[]
     home_en_name_list=[]
     # A팀 선수 개인의 기여도 %
@@ -779,7 +782,11 @@ if __name__ == '__main__':
         home_en_name_list.append(past_box[j][5])
         home_contribution_rate_list.append(contribution_rate)
         j += 1
-        
+
+    # DB 선수 테이블 contribution UPDATE Away TEAM
+    for i in range(home):
+        executeSQL.CommitPlayerContribution(home_en_name_list[i],home_contribution_rate_list[i],play_id_list[i])
+
     print('\n')
 
     # B팀 선수 개인의 기여도 % 출력
@@ -799,6 +806,10 @@ if __name__ == '__main__':
         away_en_name_list.append(past_box[j+flag][5])
         away_contribution_rate_list.append(contribution_rate)
         j += 1
+
+    # DB 선수 테이블 contribution UPDATE Away TEAM
+    for i in range(away):
+        executeSQL.CommitPlayerContribution(away_en_name_list[i],away_contribution_rate_list[i],play_id_list[home+i])
     
     if(home>0):
         is_home = True

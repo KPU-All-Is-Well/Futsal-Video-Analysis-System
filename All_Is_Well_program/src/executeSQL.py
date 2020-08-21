@@ -34,7 +34,8 @@ def CreatePlayerTable(player_id):
     calorie FLOAT NULL,
     walk FLOAT NULL,
     jog FLOAT NULL,
-    sprint FLOAT NULL, 
+    sprint FLOAT NULL,
+    contribution FLOAT NULL,
     video_length FLOAT NULL,
     result_heatmap mediumblob NULL,
     PRIMARY KEY(play_id)
@@ -136,6 +137,25 @@ def CommitResult(player_id, avg_speed, top_speed, distance, cal, walk_weight, jo
     # INSERT INTO {0} (avgSpeed, maxSpeed, distance_5, distance_10, distance_15, distance_20, totalDistance) SQL문법 나중에 적용
 
     cursor.execute(insert_data,insert_image)
+    connect.commit()
+
+def CommitGameResult(home_team,away_team,home_possession,away_possession):
+    sql='''
+    INSERT INTO game(home,away,home_possession,away_possession)
+    VALUES("{0}","{1}",{2},{3});
+    '''.format(home_team,away_team,home_possession,away_possession)
+
+    cursor.execute(sql)
+    connect.commit()
+
+def CommitPlayerContribution(en_name,contribution,play_id):
+    sql='''
+    UPDATE {0}
+    SET contribution = {1}
+    WHERE play_id = {2}
+    '''.format(en_name,contribution,play_id)
+    
+    cursor.execute(sql)
     connect.commit()
 
 def CloseConnect():
