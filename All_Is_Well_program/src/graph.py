@@ -14,7 +14,7 @@ def drow_graph(time, speed, move_ratio, playername) :
         fig=plt.figure()
         
     plt.subplot(1,2,1) # plt.subplot(2,1,1) 세로
-    plt.ion()
+    plt.ion() # 
     plt.plot(time, speed,linewidth=1,color='dodgerblue')
     
 
@@ -71,7 +71,8 @@ def drow_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_re
     explode = (0.05, 0.05)
     ball_possession= [ball_share_A_res, ball_share_B_res]
     
-    plt.title(home_team+' team VS '+away_team+' team\nBall possession in the game',fontsize=15,  fontweight= 'bold')
+    #plt.title(home_team+' team VS '+away_team+' team\nBall possession in the game',fontsize=15,  fontweight= 'bold')
+    plt.title('Ball possession in the game',fontsize=15,  fontweight= 'bold')
     pie=plt.pie(ball_possession, labels=labels, colors=colors, autopct='%1.1f%%', shadow=True, explode=explode, startangle=90, textprops={'fontsize': 11,'fontweight':'bold'})
     #plt.legend(pie[0],legends,loc='lower right')
     plt.legend(pie[0],legends)
