@@ -79,6 +79,8 @@ def draw_graph(time, speed, move_ratio, playername) :
 def draw_ballshare_contribution(home_team, away_team, ball_share_A_res, ball_share_B_res, home_en_name_list, home_contribution_rate_list, away_en_name_list, away_contribution_rate_list) :
     # 공 점유율 그래프 
     fig2 = plt.figure(2)
+    mngr = plt.get_current_fig_manager()
+    mngr.window.setGeometry(600,50,520, 460) #x좌표, y좌표, 가로, 세로
     labels = home_team, away_team
     legends = home_team+' \'s Ball Possession', away_team+' \'s Ball Possession'
     colors= 'lightcoral', 'lightskyblue'
@@ -95,6 +97,8 @@ def draw_ballshare_contribution(home_team, away_team, ball_share_A_res, ball_sha
 
     # home team 선수 기여도 그래프  
     fig3=plt.figure(3)
+    mngr = plt.get_current_fig_manager()
+    mngr.window.setGeometry(150,500,870, 470)
     color='lightcoral'
     plt.title(home_team+' team member\'s contribution\n', fontsize=15,  fontweight= 'bold')
     
@@ -112,7 +116,9 @@ def draw_ballshare_contribution(home_team, away_team, ball_share_A_res, ball_sha
     
     
     # away team 선수 기여도 그래프
-    fig4=plt.figure(4)   
+    fig4=plt.figure(4)
+    mngr = plt.get_current_fig_manager()
+    mngr.window.setGeometry(1000,500,870, 470)    
     color='lightskyblue'    
     plt.title(away_team+' team member\'s contribution\n', fontsize=15,  fontweight= 'bold')
     
