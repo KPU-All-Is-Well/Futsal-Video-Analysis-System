@@ -20,8 +20,6 @@ import selectGUI                            # GUI 생성 모듈
 import highlight                            # 하이라이트 추출 모듈
 import ballTracking                         # 공 인식 및 추적 모듈
 import graph                                # 그래프 생성 모듈
-#import pyautogui # 파이썬 키보드 제어 라이브러리
-import keyboard 
 
 from moviepy.editor import *                                     # moviepy 라이브러리 :
 from moviepy.video.io.ffmpeg_tools import ffmpeg_extract_subclip # 하이라이트 영상 추출을 위해 구간 자르는 라이브러리 
@@ -649,13 +647,6 @@ if __name__ == '__main__':
             if key == 32: # space 키   
                 cv2.waitKey(0)
  
-            """
-            s = input()
-            if(s == "a") : 
-                cv2.waitKey(0)
-            """
-            if keyboard.is_pressed('a'):
-                cv2.waitKey(0)
             
             # 종료 
             if key == 27:  # esc키 
