@@ -5,18 +5,31 @@ from matplotlib import pyplot as plt
 is_window_open = False
 fig=None
 
-def drow_graph(time, speed, move_ratio, playername) :
+"""
+def init_figure() :
+    fig=plt.figure()
+    wm = plt.get_current_fig_manager()
+    wm.window.wm_geometry("920x500+1000+0")
+    plt.close(fig)
+"""
+
+def draw_graph(time, speed, move_ratio, playername) :
     global is_window_open
     global fig
 
     if (is_window_open == False) :
         is_window_open = True
         fig=plt.figure()
+        #fig=plt.figure(figsize=(9,4.2))
+        #fig.canvas.manager.window.Move(1000,0)
+        #wm = plt.get_current_fig_manager()
+        #wm.window.wm_geometry("920x500+1000+0")
         
     plt.subplot(1,2,1) # plt.subplot(2,1,1) 세로
     plt.ion() # 
     plt.plot(time, speed,linewidth=1,color='dodgerblue')
-    
+    mngr = plt.get_current_fig_manager()
+    mngr.window.setGeometry(1011,38,920, 503)
 
     plt.xlabel('Play Time(sec)',fontsize=10)
     plt.ylabel('Speed(km/h)',fontsize=10)
@@ -63,7 +76,7 @@ def drow_graph(time, speed, move_ratio, playername) :
     
     plt.show()
 
-def drow_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res) :
+def draw_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res) :
     
     labels = home_team, away_team
     legends = home_team+' \'s Ball Possession', away_team+' \'s Ball Possession'
@@ -80,7 +93,7 @@ def drow_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_re
     plt.ioff()
     plt.show()
 
-def drow_contribution_graph(is_home,team_name,member_en_name_list,member_contribution_rate_list) :
+def draw_contribution_graph(is_home,team_name,member_en_name_list,member_contribution_rate_list) :
     if(is_home is True) :
         color='lightcoral'
     else :
@@ -100,7 +113,7 @@ def drow_contribution_graph(is_home,team_name,member_en_name_list,member_contrib
     for i,v in enumerate(member_en_name_list):
         str_val= str(member_contribution_rate_list[i])+' %'
         plt.text(v,member_contribution_rate_list[i],str_val,fontsize=10,horizontalalignment='center',verticalalignment='bottom')
-    
+    plt.ioff()
     plt.show()
 
 
@@ -112,7 +125,7 @@ def destroy_graph() :
     plt.close()
     
 '''
-def drow_graph(time, speed, move_ratio, playername) :
+def draw_graph(time, speed, move_ratio, playername) :
     
     x_values = [0, 1, 2, 3, 4]
     y_values = [0, 1, 4, 9, 16]

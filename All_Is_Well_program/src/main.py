@@ -204,6 +204,8 @@ if __name__ == '__main__':
     done_player_list = []
     done_team_list = []
 
+    play_id_list=[]
+
     # 프레임 속 골대의 너비, 높이 계산 
     goalnet_width = calculate_goalnet_size(stadium_width, stadium_height, width, height, 1)
     goalnet_height = calculate_goalnet_size(stadium_width, stadium_height, width, height, 0)
@@ -264,6 +266,8 @@ if __name__ == '__main__':
         en_name = str(executeSQL.EngName(player_id))
 
         done_player_list.append(en_name)
+
+        play_id_list.append(play_id)
 
         ############################################################
         
@@ -347,13 +351,14 @@ if __name__ == '__main__':
         sec_list=[]
         speed_list=[]
 
-
         #좌표를 표현할 이름있는 튜플
         Point = collections.namedtuple('Point',['x','y'])
         last_coord = Point(x=0, y=0)   # 과거의 좌표값을 저장할 튜플, -1로 초기화
         arrow_tail= Point(x=0,y=0)
         
         ball_x,ball_y,ball_frame_count = readBallCoord() # 공의 좌표, 공이 인식된 프레임 읽어오기
+        
+        
         
         # 영상이 동작하는 동안 반복
         while True:
@@ -382,6 +387,19 @@ if __name__ == '__main__':
             radar = pitch_image.copy()        
             cv2.circle(radar, player_coord, 10, (0,0,255), -1)
             
+            # 창 위치 지정
+            cv2.namedWindow("MainWindow")
+            cv2.namedWindow("Radar")
+            cv2.namedWindow("result")
+
+            # cv2.resizeWindow('Radar',width,400)
+            cv2.moveWindow("MainWindow", 0, 0)
+            cv2.moveWindow("Radar", 0, 546)
+            cv2.moveWindow("result", 1002, 546)
+            cv2.resizeWindow("result",920,500)
+            
+            
+
             
             #####################################공 점유율 알고리즘##########################################
             #모듈화 예정
@@ -522,7 +540,7 @@ if __name__ == '__main__':
                 
                 move_ratio=[walk_percent,jog_percent,sprint_percent]
                 
-                graph.drow_graph(sec_list,speed_list,move_ratio,en_name)
+                graph.draw_graph(sec_list,speed_list,move_ratio,en_name)
                 
                 #txt 로그로 남겨주는 부분
                 # f.write( 'Player '+str(i)+' x,y: '+str(int(box[0]))+','+str(int(box[1])) + '\n' )
@@ -734,28 +752,32 @@ if __name__ == '__main__':
     ########################################공 점유율 계산 알고리즘################################################
     #모듈화 예정
     #for문이 다 돌은 뒤 공 점유율 계산
-    ball_share_A_res = sum_ball_A / (sum_ball_A + sum_ball_B) * 100
-    ball_share_A_res = round(ball_share_A_res,1)
-    ball_share_B_res = sum_ball_B / (sum_ball_A + sum_ball_B) * 100
-    ball_share_B_res = round(ball_share_B_res,1)
+    if(sum_ball_A + sum_ball_B == 0):
+        ball_share_A_res = 0
+        ball_share_B_res = 0
+    else :
+        ball_share_A_res = sum_ball_A / (sum_ball_A + sum_ball_B) * 100
+        ball_share_A_res = round(ball_share_A_res,1)
+        ball_share_B_res = sum_ball_B / (sum_ball_A + sum_ball_B) * 100
+        ball_share_B_res = round(ball_share_B_res,1)
 
     
     print('\n')
     print('---------------------------------------------------------------------------------------------------')
     print('A팀 공 점유율: ', sum_ball_A, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
+
+    # DB game 테이블 데이터 커밋
+    executeSQL.CommitGameResult(home_team,away_team,ball_share_A_res,ball_share_B_res)
     
     # 결과창 주석처리(삭제예정)
     #result_str = '-----------------------------------\n' \
     #+'  A Team Ball share : ' + str(sum_ball_A) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_A_res)+ '%\n' \
     #+'  B Team Ball share : ' + str(sum_ball_B) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_B_res) + '%\n' \
     #+ '------------------------------------'
-    if(home_team is not None and away_team is not None) :
-        graph.drow_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res)
+    if(home>0 and away>0) :
+        graph.draw_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res)
         
-
-    
-    
     home_contribution_rate_list=[]
     home_en_name_list=[]
     # A팀 선수 개인의 기여도 %
@@ -772,7 +794,11 @@ if __name__ == '__main__':
         home_en_name_list.append(past_box[j][5])
         home_contribution_rate_list.append(contribution_rate)
         j += 1
-        
+
+    # DB 선수 테이블 contribution UPDATE Away TEAM
+    for i in range(home):
+        executeSQL.CommitPlayerContribution(home_en_name_list[i],home_contribution_rate_list[i],play_id_list[i])
+
     print('\n')
 
     # B팀 선수 개인의 기여도 % 출력
@@ -792,13 +818,17 @@ if __name__ == '__main__':
         away_en_name_list.append(past_box[j+flag][5])
         away_contribution_rate_list.append(contribution_rate)
         j += 1
+
+    # DB 선수 테이블 contribution UPDATE Away TEAM
+    for i in range(away):
+        executeSQL.CommitPlayerContribution(away_en_name_list[i],away_contribution_rate_list[i],play_id_list[home+i])
     
-    if(ball_share_A is not None):
+    if(home>0):
         is_home = True
-        graph.drow_contribution_graph(is_home,home_team,home_en_name_list,home_contribution_rate_list)
-    if(ball_share_B is not None):
+        graph.draw_contribution_graph(is_home,home_team,home_en_name_list,home_contribution_rate_list)
+    if(away>0):
         is_home = False
-        graph.drow_contribution_graph(is_home,away_team,away_en_name_list,away_contribution_rate_list)
+        graph.draw_contribution_graph(is_home,away_team,away_en_name_list,away_contribution_rate_list)
     
     
     print('---------------------------------------------------------------------------------------------------')
