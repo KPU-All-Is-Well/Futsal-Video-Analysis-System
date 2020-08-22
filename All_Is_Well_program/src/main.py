@@ -702,7 +702,7 @@ if __name__ == '__main__':
         cal = round(avg_speed * (3.5 * 75 *( 0.0167 * move_sum )) * 5 / 1000,1)
         print('\n소모 칼로리 : ',cal)
 
-        # Video Time Calcurator
+        # Video Time Calculator
         video_time= round((frame_count / fps),2)
         
         
@@ -776,10 +776,16 @@ if __name__ == '__main__':
     #+'  A Team Ball share : ' + str(sum_ball_A) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_A_res)+ '%\n' \
     #+'  B Team Ball share : ' + str(sum_ball_B) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_B_res) + '%\n' \
     #+ '------------------------------------'
+<<<<<<< HEAD
     if(home>0 and away>0) :
         # DB game 테이블 데이터 커밋
         executeSQL.CommitGameResult(home_team,away_team,ball_share_A_res,ball_share_B_res)
         graph.draw_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res)
+=======
+    
+    #if(home>0 and away>0) :
+    #    graph.draw_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res)
+>>>>>>> b2d83e617b7ca4d576cfe4722925f09ee74bb2a9
         
     home_contribution_rate_list=[]
     home_en_name_list=[]
@@ -826,13 +832,20 @@ if __name__ == '__main__':
     for i in range(away):
         executeSQL.CommitPlayerContribution(away_en_name_list[i],away_contribution_rate_list[i],play_id_list[home+i])
     
+    # 그래프 3개 띄우기()  
+    if(home>0 and away>0) :
+        is_home = True
+        graph.draw_ballshare_contribution(home_team, away_team, ball_share_A_res, ball_share_B_res, home_en_name_list, home_contribution_rate_list, away_en_name_list, away_contribution_rate_list)    
+    
+    """
     if(home>0):
         is_home = True
         graph.draw_contribution_graph(is_home,home_team,home_en_name_list,home_contribution_rate_list)
+    
     if(away>0):
         is_home = False
         graph.draw_contribution_graph(is_home,away_team,away_en_name_list,away_contribution_rate_list)
-    
+    """
     
     print('---------------------------------------------------------------------------------------------------')
     
