@@ -92,6 +92,16 @@ def EngName(player_id):
 
     return Player_EngName[0]
 
+def DefaultData(player_id):
+
+    sql = 'SELECT team, mainPosition, age, height, weight FROM playersignupinfo WHERE id = "{0}"'.format(player_id)
+
+    cursor.execute(sql)
+    user_default_data = cursor.fetchall()
+
+    return user_default_data[0]
+
+
 
 def CommitPathmap(pathmap_filename,pathmap_table,play_id):
     buffer = BytesIO()

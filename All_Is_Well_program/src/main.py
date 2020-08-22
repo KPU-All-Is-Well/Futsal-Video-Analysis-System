@@ -263,6 +263,9 @@ if __name__ == '__main__':
         
         en_name = str(executeSQL.EngName(player_id))
 
+        # 사용자 정보를 가져옴 user_default_data[0] == team, mainPosition, age, height, weight 순서
+        user_default_data = executeSQL.DefaultData(player_id)
+
         done_player_list.append(en_name)
 
         play_id_list.append(play_id)
@@ -274,7 +277,7 @@ if __name__ == '__main__':
         pitch_image = cv2.resize(pitch_image,(width,height))
         
         # 결과창의 배경이 될 이미지 지정
-        result_image = cv2.imread('../image/result_background_small.png')
+        result_image = cv2.imread('../image/result_background.png')
 
         
         #result_image = cv2.resize(pitch_image,(width,height))
@@ -615,21 +618,29 @@ if __name__ == '__main__':
             ######################################################################################
             # 모듈화 예정
             
-           
+
+            # user_default_data[0] == team, mainPosition, age, height, weight 순서
+
             result_window=result_image.copy()
             # 레이더창에 실시간으로 선수의 볼터치 비율 보여주기 
-            cv2.putText(result_window, str(en_name),(65, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-            cv2.putText(result_window, str(accumulate_distance)+'m',(263, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-            cv2.putText(result_window, str(ball_touch),(485, 32), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(en_name),(115, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, user_default_data[0],(407, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, user_default_data[1],(739, 50), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+
+            cv2.putText(result_window, str(user_default_data[2]), (115, 142), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(user_default_data[3]), (407, 142), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(user_default_data[4]), (739, 142), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+
+            cv2.putText(result_window, str(accumulate_distance)+'m',(115, 234), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(ball_touch),(407, 234), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
             
-            cv2.putText(result_window, str(speed) +'km/h',(65, 95), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-            cv2.putText(result_window, str(top_speed) +'km/h',(263, 95), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-            cv2.putText(result_window, str(avg_speed) +'km/h',(485, 95), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(speed) +'km/h',(115, 326), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(top_speed) +'km/h',(407, 326), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(avg_speed) +'km/h',(739, 326), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
             
-            
-            cv2.putText(result_window, str(walk_percent) + '%',(65, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-            cv2.putText(result_window, str(jog_percent)+ '%',(263, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
-            cv2.putText(result_window, str(sprint_percent)+ '%',(485, 160), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(walk_percent) + '%',(115, 420), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(jog_percent)+ '%',(407, 420), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
+            cv2.putText(result_window, str(sprint_percent)+ '%',(739, 420), cv2.FONT_HERSHEY_SIMPLEX, 0.6, (0,0,0), 1, cv2.LINE_AA)
             
             ######################################################################################
 
@@ -758,8 +769,7 @@ if __name__ == '__main__':
     print('A팀 공 점유율: ', sum_ball_A, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_A_res, '%')
     print('B팀 공 점유율: ', sum_ball_B, ' / (', sum_ball_A, '+', sum_ball_B, ') x 100 = ', ball_share_B_res, '%')
 
-    # DB game 테이블 데이터 커밋
-    executeSQL.CommitGameResult(home_team,away_team,ball_share_A_res,ball_share_B_res)
+
     
     # 결과창 주석처리(삭제예정)
     #result_str = '-----------------------------------\n' \
@@ -767,6 +777,8 @@ if __name__ == '__main__':
     #+'  B Team Ball share : ' + str(sum_ball_B) + ' % (' + str(sum_ball_A) + '+' + str(sum_ball_B) + ') x 100 = ' + str(ball_share_B_res) + '%\n' \
     #+ '------------------------------------'
     if(home>0 and away>0) :
+        # DB game 테이블 데이터 커밋
+        executeSQL.CommitGameResult(home_team,away_team,ball_share_A_res,ball_share_B_res)
         graph.draw_ballshare_graph(home_team, away_team, ball_share_A_res, ball_share_B_res)
         
     home_contribution_rate_list=[]
