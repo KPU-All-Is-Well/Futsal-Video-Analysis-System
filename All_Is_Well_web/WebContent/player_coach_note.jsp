@@ -40,28 +40,40 @@
 
 
 <style>
-	body{
-		background-color: #000000;
-	}
-	  table {
-    width: 100%;
-    border: 1px solid #444444;
-  }
-	/* table{
-	margin-left:auto;
-	margin-right:auto;
-	top:100px;
-	font-size:20px"
-	width:400px;
-	height: 200px;
-	border:1px solid;
-	}  */
+	/*<link rel="stylesheet" href="feedback.css" type="text/css"></link>*/
 	
-	table,tr,td{
-	border:1px solid;
+
+	body {
+	    color: #87CEEB;
+	    font-family: 'Times New Roman', 'Times New Roman', 'Times New Roman';
+	    background-color: #090823; 
 	}
+
+	
+	table,tr{
+		border-collapse: collapse;
+		padding:10px;
+		background-color: #003246;
+	}
+	
+	th, td {
+		font-size: 10pt;
+		border: 1.5px solid #090823;
+		height: 40px;
+		padding: 5px;
+		color: white;
+		background-color: #003246;
+		
+	}
+	head{
+	font-family:"Times New Roman","Times New Roman";
+	}
+	
+	
+	
 </style>
 </head>
+
 <body class="left-menu"  >
     <%@ include file="dbconn.jsp" %>
     <div class="menu-wrapper">
@@ -209,20 +221,21 @@
 	
 	
 	
-    <div id="wrapper">
 
-<section class="section parallax" data-stellar-background-ratio="0.1 "style="padding:300px">
 
- <div >
-<table style="border:1px solid; width:600px; height:200px; border:1px solid; font-size:px">
-		  <tr style="font-size:30px; border:1px solid; text-align:center">
-		    <th style="border:1px solid">player</th> <th style="border:1px solid">match</th><th style="border:1px solid">feedback</th>
+
+ <div align=center  style = "margin-top:150px; margin-left:220px">
+ 
+ <header style = "font-size: x-large; font-weight: bold; color: white;text-align:center; letter-spacing:5px; "><%= feed_name%></header>
+<table style="border:1px solid; width:700px; height:200px; border:1px solid; font-size:px; margin-top:30px;">
+		  <tr style="font-size:20px; border:1px solid; text-align:center">
+		     <th style = "width: 150px;">match</th><th >feedback</th>
 		  </tr>
 		  
 <% 		  for(int i=0;i<list_feed_name.size();i++){
 %>
 		 <tr style="border:1px solid">
-			<td style="font-size:20px"><%= arr_feed_name[i]%></td> <td style="font-size:13px"><%= arr_match_title[i]%></td><td><%= arr_memo[i]%></td>
+			<td ><%= arr_match_title[i]%></td><td style = "padding:10px;"><%= arr_memo[i]%></td>
 		</tr>
 		<%} %>
 		
@@ -230,7 +243,7 @@
  </table>
  </div>
 
- </section>
+
 
 <!--------------------------------------------------- end Content ------------------------------------------------------------------>
 
