@@ -101,12 +101,12 @@
 <div ></div>
 
 	<div align=center  style = "margin-top:150px; margin-left:200px; background-color: #000000;">
-		<header 	style = "text-align:center;">일정 등록</header>
+		<header 	style = "font-size: xx-large; font-weight: bold; 	text-align:center; letter-spacing:5px;">일정등록</header>
 		<form method="post" action="register_Process.jsp"> 	
 		<table>	
 			<tr><th>날짜</th><td><input type="text" name="schedule_date"  placeholder="YYYY-MM-DD" style ="height:20px; width:295px;"></td></tr>
 			<tr><th>일정</th><td><input type="text" name="schedule_subject" autofocus placeholder="입력하세요" style ="height:20px; width:295px;"></td></tr>
-			<tr><th>설명</th><td><input type="text" name="schedule_desc" placeholder="입력하세요"  style ="height:100px; width:295px;" ></td></tr>
+			<tr><th>설명</th><td><input type="text" name="schedule_desc" placeholder="입력하세요"  style ="height:170px; width:295px;" ></td></tr>
 			
 		</table><br>
 	

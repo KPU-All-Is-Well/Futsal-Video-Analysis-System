@@ -23,7 +23,7 @@
 	th, td {
 		font-size: 10pt;
 		border: 1.5px solid #090823;
-		height: 30px;
+		height: 40px;
 		padding: 5px;
 		color: white;
 		background-color: #003246;
@@ -35,6 +35,7 @@
 	}
 	td{
 		width:300px;
+		padding:5px;
 	}
 	
 	button{
