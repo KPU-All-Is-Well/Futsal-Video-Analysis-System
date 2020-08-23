@@ -65,7 +65,7 @@
                         </li>
 
 						 <!--My Data  -->
-                        <li class="myData.jsp"><a href="../myData.jsp">My Data </a>
+                        <li class="myData.jsp"><a href="../teamData_coach.jsp">Team Data </a>
                           
                         </li>
 
