@@ -5,18 +5,19 @@
 		margin:20px 10px 40px 10px; 
 		font-family:"Times New Roman","Times New Roman";
 		font-size:50px;
-		text-shadow:3px 3px 8px gray;
-		text-align:center;
+		color:white;
 	}
 
 	body {
 	    color: #87CEEB;
 	    font-family: 'Times New Roman', 'Times New Roman', 'Times New Roman';
-	    background-color: #090823;
+	    background-color: #090823; 
 	}
+	
 
 	table {
 		border-collapse: collapse;
+		
 	}
 
 	th, td {
@@ -26,4 +27,22 @@
 		padding: 5px;
 		color: white;
 		background-color: #003246;
+		
 	}
+	th{
+		width:100px;
+		text-align:center;
+	}
+	td{
+		width:300px;
+	}
+	
+	button{
+		margin-top: 30px;
+		margin-right:10px;
+		font-weight:bold;
+	}
+	
+	
+	
+	

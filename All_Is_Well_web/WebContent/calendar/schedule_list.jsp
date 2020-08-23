@@ -104,7 +104,7 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
        <style TYPE="text/css">
 	
              body {
-			 background-color: #090823;
+			 background-color: #000000;
 			 
              scrollbar-face-color: #F6F6F6;
 
@@ -213,23 +213,24 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
             </div><!-- end vertical-header-wrapper -->
         </header><!-- end header -->
     </div><!-- end menu-wrapper -->
-	
+
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
 
-<div></div>
-<div align=center style = "margin-top:100px;">
+
+<div ></div >
+<div align=center style = "margin-top:100px; margin-left:200px;">
 <form name="calendarFrm" id="calendarFrm" action="" method="post">
 
 <DIV id="content" style="width:712px;">
 
  
 
-<table width="100%" border="0" cellspacing="1" cellpadding="1">
+<table width="110%" border="0" cellspacing="1" cellpadding="1" >
 
 <tr>
-
+		
        <td align ="right">
-     		<a href="schedule_register.jsp" style = "font-weight: bolder">일정 등록</a>
+     		<a href="schedule_register.jsp" style = "font-weight: bolder; ">일정 등록</a>
        </td>
 
 
@@ -240,7 +241,7 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 
 <!--날짜 네비게이션  -->
 
-<table width="100%" border="0" cellspacing="1" cellpadding="1" id="KOO" bgcolor="#193349" style="border:1px solid #193349; font-weight: bold;">
+<table width="110%" border="0" cellspacing="1" cellpadding="1" id="KOO" bgcolor="#193349" style="border:1px solid #193349; font-weight: bold;margin-top: 10px; ">
 
 <tr>
 
@@ -259,11 +260,11 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 
 
        <tr>
-             <td align="center" >
+             <td align="center" style = "font-size:large;">
 
                     <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year-1%>&amp;month=<%=month%>" target="_self" style="color: white; font-weight: bolder">
 
-                           <b>&lt;&lt;</b><!-- 이전해 -->
+                           <!-- <b>&lt;&lt;</b>이전해 -->
 
                     </a>
 
@@ -295,7 +296,7 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 
                     <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year%>&amp;month=<%=month+1%>" target="_self" style="color: white; font-weight: bolder">
 
-                           <!-- 다음달 --><b>&gt;</b>
+                            <b>&gt;</b><!-- 다음달-->
 
                     </a>
 
@@ -307,7 +308,7 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 
                     <a href="<c:url value='/CalendarExam2.jsp' />?year=<%=year+1%>&amp;month=<%=month%>" target="_self" style="color: white; font-weight: bolder">
 
-                           <!-- 다음해 --><b>&gt;&gt;</b>
+                           <!-- 다음해<b>&gt;&gt;</b> -->
 
                     </a>
 
@@ -327,43 +328,43 @@ int intToday = Integer.parseInt(sdf.format(todayCal.getTime()));
 
 <br>
 
-<table border="0" cellspacing="1" cellpadding="1" bgcolor="090823">
+<table border="0" cellspacing="1" cellpadding="1" bgcolor="000000" width = "110%">
 
 <THEAD>
 
-<TR bgcolor="#003246">
+<TR bgcolor="#003246" height = "25px">
 
-       <TD width='100px'>
+       <TD width='120px'>
 
        <DIV align="center"><font color="red">일</font></DIV>
 
        </TD>
 
-       <TD width='100px'>
+       <TD width='120px'>
 
        <DIV align="center">월</DIV>
 
        </TD>
 
-       <TD width='100px'>
+       <TD width='120px'>
 
        <DIV align="center">화</DIV>
 
        </TD>
 
-       <TD width='100px'>
+       <TD width='120px'>
 
        <DIV align="center">수</DIV>
 
        </TD>
 
-       <TD width='100px'>
+       <TD width='120px'>
 
        <DIV align="center">목</DIV>
 
        </TD>
 
-       <TD width='100px'>
+       <TD width='120px'>
 
        <DIV align="center">금</DIV>
 
@@ -574,6 +575,7 @@ while(newLine > 0 && newLine < 7)
 
 </form>
 </div>
+
 </body>
 
 </HTML>

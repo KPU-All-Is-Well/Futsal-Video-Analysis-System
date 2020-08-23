@@ -6,7 +6,7 @@
     
 <html>
 <head>
-   <title>signUpPlayer_Process.jsp</title>
+ 
 </head>
 
 <body>

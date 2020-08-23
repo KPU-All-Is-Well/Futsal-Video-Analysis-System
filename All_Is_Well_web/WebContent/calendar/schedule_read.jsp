@@ -39,7 +39,17 @@
 	<meta charset="UTF-8">
 	<title>일정 정보</title>
 	<link rel="stylesheet" href="schedule.css" type="text/css"></link>
-
+	<style>
+	
+		 body {
+		 
+			 background-color: #000000;
+		}
+		
+	</style>
+	
+	
+	
 </head>
 <body class="left-menu"  >
 
@@ -174,11 +184,12 @@
 		
 	%>
 		
-		
-		<table>
+	<div align=center  style = "margin-top:150px; margin-left:200px">
+		<header style = "font-size: x-large; font-weight: bold; 	text-align:center; letter-spacing:5px;"><%= date%></header>
+		<table class >
 			<tr><th> 날짜 </th><td><%= date%></td></tr>
 		    <tr><th> 제목 </th><td><%= subject%></td></tr>
-			<tr><th style ="height:50px"> 설명 </th><td><%= desc%></td></tr>
+			<tr><th style ="height:50px"> 설명 </th><td style = "height:150px;"><%= desc%></td></tr>
 			<tr><th> 조회수 </th><td><%= count%></td></tr>
 		</table><br>
 		
@@ -186,7 +197,7 @@
 		<a href="schedule_modify.jsp?idx=<%=URLEncoder.encode(idx, "UTF-8") %>"><button id="test_btn1">수정</button> </a>
 		<a href="schedule_delete.jsp?idx=<%=URLEncoder.encode(idx, "UTF-8") %>"><button id="test_btn1">삭제</button> </a>
 		<a href="schedule_list.jsp" ><button id="test_btn1">캘린더</button> </a>
-		
+	</div>
 		
 	</div>
 </body>

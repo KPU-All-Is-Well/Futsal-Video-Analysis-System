@@ -36,40 +36,11 @@
 	<meta charset="UTF-8">
 	<title>스케줄 등록</title>
 	<link rel="stylesheet" href="schedule.css" type="text/css"></link>
-	
 	<style>
-	header
-	{
-		margin:20px 10px 40px 10px; 
-		font-family:"Times New Roman","Times New Roman";
-		font-size:50px;
-		text-shadow:3px 3px 8px gray;
-		text-align:center;
-	}
-
 	body {
-	    color: #87CEEB;
-	    font-family: 'Times New Roman', 'Times New Roman', 'Times New Roman';
-	    background-color: #090823;
+			 background-color: #000000;
 	}
-
-	table {
-		border-collapse: collapse;
-	}
-
-	th, td {
-		font-size: 10pt;
-		border: 1.5px solid #090823;
-		height: 30px;
-		padding: 5px;
-		color: white;
-		background-color: #003246;
-	}
-		
-	
 	</style>
-	
-	
 	
 </head>
 <body class="left-menu">
@@ -127,20 +98,20 @@
 	
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
 
-<div></div>
+<div ></div>
 
-	<div align=center  style = "margin-top:100px;">
-		<header>일정 등록</header>
+	<div align=center  style = "margin-top:150px; margin-left:200px; background-color: #000000;">
+		<header 	style = "text-align:center;">일정 등록</header>
 		<form method="post" action="register_Process.jsp"> 	
 		<table>	
-			<tr><th>날짜</th><td><input type="text" name="schedule_date"  placeholder="YYYY-MM-DD"></td></tr>
-			<tr><th>일정</th><td><input type="text" name="schedule_subject" autofocus placeholder="입력하세요"></td></tr>
-			<tr><th>설명</th><td><input type="text" name="schedule_desc" placeholder="입력하세요"  style ="height:50px" ></td></tr>
+			<tr><th>날짜</th><td><input type="text" name="schedule_date"  placeholder="YYYY-MM-DD" style ="height:20px; width:295px;"></td></tr>
+			<tr><th>일정</th><td><input type="text" name="schedule_subject" autofocus placeholder="입력하세요" style ="height:20px; width:295px;"></td></tr>
+			<tr><th>설명</th><td><input type="text" name="schedule_desc" placeholder="입력하세요"  style ="height:100px; width:295px;" ></td></tr>
 			
 		</table><br>
-		
-			<input type="submit" name="submit" value="완료" >
-			<input type="reset" name="reset" value="초기화" >
+	
+			<input type="submit" name="submit" value="완료" style = "margin-top:30px;margin-right:10px;font-weight:bold;">
+			<input type="reset" name="reset" value="초기화" style = "font-weight:bold;">
 		
 		</form>
 	</div>

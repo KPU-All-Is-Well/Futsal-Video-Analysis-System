@@ -36,7 +36,15 @@
 
 	<meta charset="UTF-8">
 	<title>정보 수정</title>
-
+	
+	<style>
+		body {
+			 background-color: #000000;
+		}
+	</style>
+	</style>
+	
+	
 </head>
 <body  class="left-menu">
 	
@@ -94,7 +102,7 @@
 <!------------------------------------------------------------- end left menu ------------------------------------------------------------------------->
 	
 	<div></div>
-	<div align=center style = "margin-top:100px;">
+	<div  align = center style = "margin-top:150px; margin-left:200px; ">
 		<header>일정 수정</header>
 		<%
 			request.setCharacterEncoding("UTF-8");
@@ -108,13 +116,13 @@
 		<!-- <input type="hidden" name="schedule_count" readonly value="${schedule.schedule_count}" >  -->
 		
 		<table>
-			<tr><th>날짜</th><td><input type="text" name="schedule_date" placeholder="YYYY-MM-DD"></td></tr>
-			<tr><th>제목</th><td><input type="text" name="schedule_subject" autofocus placeholder="입력하세요"></td></tr>
-			<tr><th>설명</th><td><input type="text" name="schedule_desc" placeholder="입력하세요"  style ="height:50px"></td></tr>
+			<tr><th>날짜</th><td><input type="text" name="schedule_date" placeholder="YYYY-MM-DD" style ="height:20px; width:295px;"></td></tr>
+			<tr><th>제목</th><td><input type="text" name="schedule_subject" autofocus placeholder="입력하세요" style ="height:20px; width:295px;"></td></tr>
+			<tr><th>설명</th><td><input type="text" name="schedule_desc" placeholder="입력하세요"  style ="height:100px; width:295px;"></td></tr>
 			
 		</table><br>
-			<input type="submit" name="submit" value="완료">
-			<input type="reset" name="reset" value="초기화">
+			<input type="submit" name="submit" value="완료" style = "margin-top:30px;margin-right:10px;font-weight:bold;">
+			<input type="reset" name="reset" value="초기화" style = "font-weight:bold;">
 		</form>
 	</div>
 </body>
