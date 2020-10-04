@@ -46,6 +46,11 @@
 기존의 축구 분석 서비스는 선수와 팀 분석을 위해 많은 물리적 비용과 인적 비용을 필요로한다. 하지만 영상처리기술과 드론만을 활용하여 다양한 데이터를 분석해서 제공하는 것을 목표로한다.
   
 
+## Demo
+[![s](https://user-images.githubusercontent.com/50011528/95008354-26a06f00-0654-11eb-8c14-4f847da6d879.png)](https://youtu.be/ZSLYVTvtLcE)
+
+
+
 
 
 
