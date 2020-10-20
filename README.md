@@ -4,12 +4,12 @@
 
 - **[Introduction](#Introduction)**
 - **[System Scenario](#System-Scenario)**
-[Purpose](#Purpose)
-[4. Demo](#Demo)
-[5. Installation](#Installation)
-[6. Using Futsal Video Analysis System](#Using-Futsal-Video-Analysis-System)
-[7. Development Environment](#Development-Environment)
-[8. Contributors](#Contributors)
+- **[Purpose](#Purpose)**
+- **[Demo](#Demo)**
+- **[Installation](#Installation)**
+- **[Using Futsal Video Analysis System](#Using-Futsal-Video-Analysis-System)**
+- **[Development Environment](#Development-Environment)**
+- **[Contributors](#Contributors)**
 
 
 
@@ -104,7 +104,7 @@ pip3 install moviepy
 
 ## Using Futsal Video Analysis System
 
-### Web
+**Web**
 
 1. [All Is Well](http://15.164.30.158:8080/All_Is_Well_Web/index.html) 웹 접속
 
@@ -113,7 +113,7 @@ pip3 install moviepy
 3. 로그인 (선수 or 감독)
  
 
-### Python Analysis Program
+**Python Analysis Program**
 
 1. main.py 파일이 있는 디렉토리로 이동:
 
